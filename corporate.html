@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Film de marque &amp; reportage photo pour entreprises | Qualimatic Production</title>
+<meta name="description" content="Films corporate et identité de marque cinématographiques. Portraits d'artisans, films institutionnels, marques d'exception. Vallée de la Loire." />
+<meta name="keywords" content="film corporate, film de marque, reportage photo entreprise, vidéaste entreprise haut de gamme, portrait artisan, savoir-faire" />
+<meta name="author" content="Charly Coulardot — Qualimatic Production" />
+<meta name="robots" content="index, follow" />
+
+<link rel="canonical" href="https://www.qualimaticproduction.fr/corporate.html" />
+<link rel="alternate" hreflang="fr" href="https://www.qualimaticproduction.fr/corporate.html" />
+<link rel="alternate" hreflang="x-default" href="https://www.qualimaticproduction.fr/corporate.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="Film de marque &amp; reportage photo pour entreprises | Qualimatic" />
+<meta property="og:description" content="Votre savoir-faire, raconté en image. Films de marque cinématographiques et reportages photo haut de gamme." />
+<meta property="og:url" content="https://www.qualimaticproduction.fr/corporate.html" />
+<meta property="og:image" content="https://www.qualimaticproduction.fr/assets/og-cover.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://www.qualimaticproduction.fr/assets/og-cover.jpg" />
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="apple-touch-icon" href="assets/montagne-noir.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Allura&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-mariage.css" />
+<link rel="stylesheet" href="styles-geo.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.qualimaticproduction.fr/corporate.html#service",
+      "name": "Film de marque & reportage photo",
+      "serviceType": "Corporate Filmmaking & Brand Photography",
+      "provider": { "@id": "https://www.qualimaticproduction.fr/#business" },
+      "areaServed": [
+        { "@type": "Country", "name": "France" },
+        { "@type": "Place", "name": "Vallée de la Loire" }
+      ],
+      "description": "Films de marque cinématographiques et reportages photo pour entreprises, artisans et maisons d'exception. Portraits, savoir-faire, événementiel.",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.qualimaticproduction.fr/contact.html",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "valueAddedTaxIncluded": true,
+          "description": "Tarif sur devis personnalisé"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
+        { "@type": "ListItem", "position": 2, "name": "Corporate", "item": "https://www.qualimaticproduction.fr/corporate.html" }
+      ]
+    }
+  ]
+}
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9P3DYBQH5F"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9P3DYBQH5F');</script>
+
+<style>
+  /* ============================================
+     CORPORATE — styles spécifiques
+     ============================================ */
+
+  /* Hero — letterbox mobile (object-fit contain, fond noir) */
+  @media (max-width: 768px) {
+    .hero-video { min-height: auto; max-height: 62vh; background: #0e0e0e; }
+    .hero-video video { object-fit: contain; background: #0e0e0e; }
+    .hero-video .sound-toggle, .hero-video .scroll-cue { display: none; }
+  }
+
+  /* Hero band */
+  .corp-intro-band {
+    background: var(--cream);
+    padding: clamp(56px, 8vw, 96px) 0 clamp(28px, 4vw, 48px);
+    text-align: center;
+  }
+  .corp-intro-band__inner { max-width: 880px; margin: 0 auto; padding: 0 var(--gutter); }
+  .corp-intro-band__eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    margin-bottom: 18px;
+  }
+  .corp-intro-band__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5.6vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .corp-intro-band__title em { font-style: italic; color: var(--taupe); }
+  .corp-intro-band__title .end-bordeaux { color: var(--bordeaux); font-style: italic; }
+  .corp-intro-band__sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(14px, 1.4vw, 17px);
+    color: var(--ink);
+    opacity: 0.72;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* Two-column section with parallax image */
+  .corp-section {
+    padding: clamp(72px, 9vw, 120px) 0;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .corp-section--soft { background: var(--cream-soft); }
+  .corp-section--dark { background: var(--ink); color: var(--cream); }
+
+  .corp-section__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
+  }
+  .corp-section__grid--reverse > .corp-section__media { order: 2; }
+  .corp-section__copy { display: flex; flex-direction: column; gap: 18px; }
+
+  .corp-section__eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .corp-section__eyebrow::before {
+    content: "✻";
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  .corp-section__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(30px, 4.2vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .corp-section__title em { font-style: italic; color: var(--taupe); }
+  .corp-section__title .end-bordeaux { color: var(--bordeaux); font-style: italic; }
+
+  .corp-section__text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.75;
+    color: var(--ink);
+    opacity: 0.85;
+    margin: 0;
+    max-width: 48ch;
+    text-wrap: pretty;
+  }
+  .corp-section__text em { font-style: italic; color: var(--taupe); font-family: 'Playfair Display', serif; }
+
+  .corp-section__sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--bordeaux);
+    margin: 18px 0 4px;
+  }
+
+  .corp-section__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--cream-soft);
+  }
+  .corp-section__media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .corp-section__media-tag {
+    position: absolute;
+    left: 18px; bottom: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: rgba(0,0,0,0.35);
+    padding: 5px 10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* Three formules cards */
+  .corp-formules {
+    padding: clamp(80px, 11vw, 140px) 0;
+    background: var(--cream-soft);
+  }
+  .corp-formules__head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
+  .corp-formules__head .corp-section__eyebrow { justify-content: center; }
+  .corp-formules__head h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.6vw, 58px);
+    line-height: 1.08;
+    color: var(--ink);
+    margin: 12px 0 14px;
+    text-wrap: balance;
+  }
+  .corp-formules__head h2 em { font-style: italic; color: var(--taupe); }
+  .corp-formules__head h2 .end-bordeaux { color: var(--bordeaux); font-style: italic; }
+  .corp-formules__head p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(15px, 1.4vw, 18px);
+    color: var(--taupe);
+    margin: 0;
+  }
+
+  .corp-formules__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.4vw, 32px);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .corp-card {
+    background: var(--cream);
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    padding: clamp(32px, 3.6vw, 44px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
+  }
+  .corp-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--bordeaux);
+    box-shadow: 0 30px 60px -30px rgba(26, 26, 26, 0.22);
+  }
+  .corp-card--featured {
+    background: linear-gradient(180deg, rgba(92, 23, 33, 0.05), var(--cream));
+    border-color: var(--bordeaux);
+  }
+  .corp-card__num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--bordeaux);
+  }
+  .corp-card__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(22px, 2.2vw, 28px);
+    color: var(--ink);
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+  }
+  .corp-card__text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink);
+    opacity: 0.82;
+    margin: 0;
+    flex: 1;
+  }
+  .corp-formules__note {
+    text-align: center;
+    margin-top: clamp(28px, 4vw, 48px);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--taupe);
+  }
+
+  /* "Ce que je filme" 2x2 dark grid */
+  .corp-types {
+    padding: clamp(80px, 11vw, 140px) 0;
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .corp-types__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.18;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(60%) brightness(0.55);
+  }
+  .corp-types__inner { position: relative; z-index: 1; }
+  .corp-types__head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
+  .corp-types__head .corp-section__eyebrow { color: #FFFFFF; justify-content: center; }
+  .corp-types__head .corp-section__eyebrow::before { color: #FFFFFF; }
+  .corp-types__head h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.6vw, 58px);
+    line-height: 1.08;
+    color: var(--cream);
+    margin: 12px 0 0;
+    text-wrap: balance;
+  }
+  .corp-types__head h2 em { font-style: italic; color: var(--taupe-soft); }
+  .corp-types__head h2 .end-bordeaux { color: #FFFFFF; font-style: italic; }
+
+  .corp-types__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(20px, 2.4vw, 32px);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .corp-block {
+    background: rgba(245, 239, 232, 0.04);
+    border: 1px solid rgba(245, 239, 232, 0.14);
+    padding: clamp(28px, 3.2vw, 40px);
+    transition: transform 0.5s var(--ease-out), border-color 0.5s var(--ease-out), background 0.5s var(--ease-out);
+  }
+  .corp-block:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(245, 239, 232, 0.06);
+  }
+  .corp-block__num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .corp-block__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 26px);
+    color: var(--cream);
+    margin: 0 0 14px;
+    line-height: 1.2;
+  }
+  .corp-block__text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: rgba(245, 239, 232, 0.82);
+    margin: 0;
+  }
+
+  /* Method (centered single-column) */
+  .corp-method {
+    padding: clamp(80px, 11vw, 140px) 0;
+    background: var(--cream-soft);
+    text-align: center;
+  }
+  .corp-method__inner { max-width: 720px; margin: 0 auto; padding: 0 var(--gutter); }
+  .corp-method__inner .corp-section__eyebrow { justify-content: center; }
+  .corp-method__inner h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.6vw, 58px);
+    line-height: 1.08;
+    color: var(--ink);
+    margin: 12px 0 28px;
+    text-wrap: balance;
+  }
+  .corp-method__inner h2 em { font-style: italic; color: var(--taupe); }
+  .corp-method__text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.55;
+    color: var(--ink);
+    opacity: 0.88;
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .corp-method__text em { color: var(--bordeaux); }
+
+  /* Final CTA */
+  .corp-cta {
+    padding: clamp(80px, 11vw, 140px) 0;
+    background: var(--cream);
+    text-align: center;
+  }
+  .corp-cta__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(34px, 5vw, 64px);
+    line-height: 1.06;
+    color: var(--ink);
+    margin: 0 0 24px;
+    text-wrap: balance;
+    max-width: 20ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .corp-cta__title em { font-style: italic; color: var(--taupe); }
+  .corp-cta__title .end-bordeaux { color: var(--bordeaux); font-style: italic; }
+  .corp-cta__sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--ink);
+    opacity: 0.78;
+    max-width: 54ch;
+    margin: 0 auto 36px;
+  }
+  .corp-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+  .corp-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 34px;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    transition: color 0.4s var(--ease-out);
+    background: var(--bordeaux);
+    color: var(--cream);
+    border: 1px solid var(--bordeaux);
+  }
+  .corp-cta__btn::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out);
+    z-index: -1;
+  }
+  .corp-cta__btn:hover::before { transform: scaleX(1); }
+  .corp-cta__btn--wa { background: #25D366; border-color: #25D366; }
+  .corp-cta__btn--wa::before { background: #1FAE54; }
+  .corp-cta__btn .arrow { transition: transform 0.4s var(--ease-out); }
+  .corp-cta__btn:hover .arrow { transform: translate(3px, -3px); }
+
+  /* Reveal */
+  .corp-reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease-out), transform 1s var(--ease-out); }
+  .corp-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 1024px) {
+    .corp-section__grid { grid-template-columns: 1fr; gap: 40px; }
+    .corp-section__grid--reverse > .corp-section__media { order: -1; }
+    .corp-section__media { aspect-ratio: 4 / 3; max-height: 480px; }
+    .corp-formules__grid { grid-template-columns: 1fr; max-width: 540px; }
+  }
+  @media (max-width: 700px) {
+    .corp-types__grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="header" role="banner">
+  <a href="index.html" class="header__logo" aria-label="Qualimatic Production — Accueil">
+    <img src="assets/logo-noir.png" alt="Qualimatic Production" />
+  </a>
+  <nav class="header__nav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <a href="about.html">À PROPOS</a>
+    <a href="mariage.html">MARIAGE</a>
+    <a href="culinaire.html">CULINAIRE</a>
+    <a href="corporate.html" class="active">CORPORATE</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <div class="header__right">
+    <div class="lang" aria-label="Sélecteur de langue">
+      <a href="corporate.html" class="lang-link active" data-lang="fr" aria-current="page"><span class="flag">🇫🇷</span>FR</a>
+      <span class="lang__sep">·</span>
+      <a href="en/index.html" class="lang-link" data-lang="en"><span class="flag">🇬🇧</span>EN</a>
+    </div>
+    <a href="contact.html" class="btn-pill"><span>DEMANDER UN DEVIS</span><span class="arrow">↗</span></a>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<aside class="mobile-menu" aria-hidden="true">
+  <a href="index.html">Accueil</a>
+  <a href="about.html">À propos</a>
+  <a href="mariage.html">Mariage</a>
+  <a href="culinaire.html">Culinaire</a>
+  <a href="corporate.html">Corporate</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="btn-pill"><span>DEMANDER UN DEVIS</span><span class="arrow">↗</span></a>
+</aside>
+
+<main>
+
+<!-- ========== 1. HERO VIDEO ========== -->
+<section class="hero-video" aria-label="Film de marque — introduction vidéo">
+  <video autoplay loop muted playsinline poster="assets/corporate-hero-poster.jpg">
+    <source src="assets/corporate-hero.mp4" type="video/mp4" />
+  </video>
+
+  <button type="button" class="sound-toggle" data-sound-toggle aria-label="Activer le son">
+    <span data-icon>🔊</span>
+    <span data-state>ACTIVER LE SON</span>
+  </button>
+
+  <a href="#concept" class="scroll-cue" aria-label="Faire défiler">
+    <span class="scroll-cue__label">DÉFILER</span>
+    <span class="scroll-cue__line" aria-hidden="true"></span>
+  </a>
+</section>
+
+<!-- ========== HERO INTRO BAND ========== -->
+<section class="corp-intro-band" aria-label="Film de marque — introduction">
+  <div class="corp-intro-band__inner">
+    <div class="corp-intro-band__eyebrow">✻ CORPORATE — FILMS DE MARQUE</div>
+    <h1 class="corp-intro-band__title">FILM DE <em>MARQUE</em><span class="end-bordeaux">.</span></h1>
+    <p class="corp-intro-band__sub">Votre savoir-faire, raconté en image.</p>
+  </div>
+</section>
+
+<!-- ========== 2. CONCEPT ========== -->
+<section class="corp-section" id="concept" aria-label="Le concept">
+  <div class="container">
+    <div class="corp-section__grid">
+      <div class="corp-section__copy corp-reveal">
+        <span class="corp-section__eyebrow">Le concept</span>
+        <h2 class="corp-section__title">Le <em>concept</em><span class="end-bordeaux">.</span></h2>
+        <p class="corp-section__text">Votre savoir-faire mérite mieux qu'une vidéo d'entreprise. Il mérite un <em>film.</em></p>
+        <p class="corp-section__text">Là où la communication classique explique, le cinéma fait <em>ressentir.</em> Chaque geste, chaque matière, chaque visage devient une image qui raconte qui vous êtes — sans discours, sans artifice.</p>
+      </div>
+      <figure class="corp-section__media corp-reveal" data-parallax="0.04">
+        <img src="assets/corporate-concept.jpg" alt="Concept — film de marque cinématographique" />
+        <figcaption class="corp-section__media-tag">CONCEPT</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3. POUR QUI ========== -->
+<section class="corp-section corp-section--soft" id="pour-qui" aria-label="Pour qui">
+  <div class="container">
+    <div class="corp-section__grid corp-section__grid--reverse">
+      <div class="corp-section__copy corp-reveal">
+        <span class="corp-section__eyebrow">Pour qui</span>
+        <h2 class="corp-section__title">Pour <em>qui</em><span class="end-bordeaux">.</span></h2>
+        <p class="corp-section__text">Artisans, maisons d'exception, PME, industries, créateurs. Toute entreprise qui a un <em>vrai savoir-faire</em> à transmettre et qui veut l'incarner avec une image à la hauteur de son exigence.</p>
+        <p class="corp-section__text">Que vous soyez un atelier d'une personne ou une entreprise établie, le film s'adapte à votre univers.</p>
+      </div>
+      <figure class="corp-section__media corp-reveal" data-parallax="0.04">
+        <img src="assets/corporate-pourqui.jpg" alt="Pour qui — artisans, maisons d'exception, PME" />
+        <figcaption class="corp-section__media-tag">POUR QUI</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. FORMULES (3 cards) ========== -->
+<section class="corp-formules" id="formules" aria-label="Trois formules">
+  <div class="container">
+    <header class="corp-formules__head corp-reveal">
+      <span class="corp-section__eyebrow">Formules</span>
+      <h2>Trois <em>formules</em><span class="end-bordeaux">.</span></h2>
+      <p>Selon vos besoins et votre projet, trois approches possibles.</p>
+    </header>
+
+    <div class="corp-formules__grid">
+      <article class="corp-card corp-card--featured corp-reveal">
+        <span class="corp-card__num">01</span>
+        <h3 class="corp-card__title">Film de marque</h3>
+        <p class="corp-card__text">Un film cinématographique qui capture votre savoir-faire, vos gestes, votre équipe. Pensé pour votre site, vos réseaux et votre communication.</p>
+      </article>
+
+      <article class="corp-card corp-reveal" data-delay="100">
+        <span class="corp-card__num">02</span>
+        <h3 class="corp-card__title">Reportage photo</h3>
+        <p class="corp-card__text">Une série d'images haut de gamme&nbsp;: portraits, savoir-faire, lieux, ambiance. Des photos prêtes à diffuser, fidèles à votre identité.</p>
+      </article>
+
+      <article class="corp-card corp-reveal" data-delay="200">
+        <span class="corp-card__num">03</span>
+        <h3 class="corp-card__title">Pack Film + Photo</h3>
+        <p class="corp-card__text">L'ensemble cohérent&nbsp;: le film et le reportage photo réalisés dans la même direction artistique, pour une communication complète et homogène.</p>
+      </article>
+    </div>
+
+    <p class="corp-formules__note corp-reveal" data-delay="300">Chaque projet est unique — tarif sur <em style="color:var(--bordeaux)">devis personnalisé</em>.</p>
+  </div>
+</section>
+
+<!-- ========== 5. INTENTION VISUELLE ========== -->
+<section class="corp-section" id="intention" aria-label="Intention visuelle">
+  <div class="container">
+    <div class="corp-section__grid">
+      <div class="corp-section__copy corp-reveal">
+        <span class="corp-section__eyebrow">Intention</span>
+        <h2 class="corp-section__title">Intention <em>visuelle</em><span class="end-bordeaux">.</span></h2>
+        <p class="corp-section__text">La lumière sculpte la matière. Le geste devient précis et élégant. L'humain reste au <em>centre.</em></p>
+        <p class="corp-section__text">Une esthétique cinématographique qui élève immédiatement la perception de votre travail et de votre marque.</p>
+      </div>
+      <figure class="corp-section__media corp-reveal" data-parallax="0.04">
+        <img src="assets/corporate-intention.jpg" alt="Intention visuelle — lumière et matière" />
+        <figcaption class="corp-section__media-tag">INTENTION</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6. CE QUE JE FILME (2x2 dark) ========== -->
+<section class="corp-types" id="types" aria-label="Ce que je filme">
+  <div class="corp-types__bg" style="background-image: url('assets/corporate-types.jpg');"></div>
+  <div class="container corp-types__inner">
+    <header class="corp-types__head corp-reveal">
+      <span class="corp-section__eyebrow">Ce que je filme</span>
+      <h2>Ce que je <em>filme</em><span class="end-bordeaux">.</span></h2>
+    </header>
+
+    <div class="corp-types__grid">
+      <article class="corp-block corp-reveal">
+        <span class="corp-block__num">01</span>
+        <h3 class="corp-block__title">Le film de marque</h3>
+        <p class="corp-block__text">L'identité de votre entreprise condensée en un film fort et cohérent.</p>
+      </article>
+      <article class="corp-block corp-reveal" data-delay="80">
+        <span class="corp-block__num">02</span>
+        <h3 class="corp-block__title">Le portrait</h3>
+        <p class="corp-block__text">Dirigeant, artisan, équipe. Donner un visage et une voix à votre savoir-faire.</p>
+      </article>
+      <article class="corp-block corp-reveal" data-delay="160">
+        <span class="corp-block__num">03</span>
+        <h3 class="corp-block__title">Le savoir-faire</h3>
+        <p class="corp-block__text">Le geste, le process, la fabrication. Filmer ce que vous faites de mieux, en détail.</p>
+      </article>
+      <article class="corp-block corp-reveal" data-delay="240">
+        <span class="corp-block__num">04</span>
+        <h3 class="corp-block__title">L'événementiel</h3>
+        <p class="corp-block__text">Inaugurations, salons, temps forts. Garder une trace cinématographique de vos moments clés.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. LE RENDU & LIVRABLE ========== -->
+<section class="corp-section corp-section--soft" id="rendu" aria-label="Le rendu et le livrable">
+  <div class="container">
+    <div class="corp-section__grid corp-section__grid--reverse">
+      <div class="corp-section__copy corp-reveal">
+        <span class="corp-section__eyebrow">Le rendu</span>
+        <h2 class="corp-section__title">Le <em>rendu</em><span class="end-bordeaux">.</span></h2>
+        <p class="corp-section__text">Le montage donne du rythme. Le son renforce l'immersion. L'image valorise chaque détail.</p>
+        <p class="corp-section__text">Résultat&nbsp;: une communication qui <em>marque les esprits.</em></p>
+
+        <p class="corp-section__sub">Livrable</p>
+        <p class="corp-section__text">Vous recevez un film et/ou des photos prêts à être diffusés, pensés pour votre site, vos réseaux et votre communication globale.</p>
+      </div>
+      <figure class="corp-section__media corp-reveal" data-parallax="0.04">
+        <img src="assets/corporate-rendu.jpg" alt="Rendu final — film de marque monté et étalonné" />
+        <figcaption class="corp-section__media-tag">RENDU</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8. MÉTHODE ========== -->
+<section class="corp-method" id="methode" aria-label="Méthode">
+  <div class="corp-method__inner corp-reveal">
+    <span class="corp-section__eyebrow">Méthode</span>
+    <h2>Comment ça <em>se passe</em><span class="end-bordeaux">.</span></h2>
+    <p class="corp-method__text">
+      Un échange pour comprendre votre univers et vos objectifs. Un repérage si nécessaire. Le tournage, guidé de bout en bout — vous n'avez rien à préparer. Puis le montage et la livraison. <em>Simple, fluide, sans jargon.</em>
+    </p>
+  </div>
+</section>
+
+<!-- ========== 9. CTA FINAL ========== -->
+<section class="corp-cta" aria-label="Appel à l'action">
+  <div class="container">
+    <h2 class="corp-cta__title corp-reveal">Parlons de <em>votre projet</em><span class="end-bordeaux">.</span></h2>
+    <p class="corp-cta__sub corp-reveal" data-delay="80">
+      Chaque entreprise est unique. Contactez-moi pour un devis personnalisé adapté à votre savoir-faire.
+    </p>
+    <div class="corp-cta__buttons corp-reveal" data-delay="160">
+      <a href="contact.html?type=corporate" class="corp-cta__btn">
+        <span>Demander un devis</span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://wa.me/33771063218?text=Bonjour%20Charly%2C%20je%20vous%20contacte%20pour%20un%20film%20de%20marque%20%2F%20reportage" target="_blank" rel="noopener" class="corp-cta__btn corp-cta__btn--wa">
+        <span>WhatsApp</span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer" role="contentinfo" style="background-color: rgb(71, 12, 21)">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="assets/logo-blanc.png" alt="Qualimatic Production" class="footer-logo" />
+        <p class="footer__tagline">Discret derrière l'objectif. Présent dans chaque image.</p>
+      </div>
+      <div class="footer__col">
+        <h5>COORDONNÉES</h5>
+        <ul>
+          <li><a href="mailto:qualimatic.production@gmail.com">qualimatic.production@gmail.com</a></li>
+          <li><a href="tel:+33771063218">07 71 06 32 18</a></li>
+          <li><p>BP 20<br/>41200 Romorantin-Lanthenay<br/>France</p></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>NAVIGUER</h5>
+        <ul>
+          <li><a href="about.html">À propos</a></li>
+          <li><a href="mariage.html">Mariage</a></li>
+          <li><a href="culinaire.html">Culinaire</a></li>
+          <li><a href="corporate.html">Corporate</a></li>
+          <li><a href="zones-intervention.html">Zones d'intervention</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>RÉSEAUX</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/qualimatic_production" target="_blank" rel="noopener">Instagram ↗<br/><small style="opacity:0.6">@qualimatic_production</small></a></li>
+          <li><a href="https://www.youtube.com/@qualimatic9324" target="_blank" rel="noopener">YouTube ↗<br/><small style="opacity:0.6">@qualimatic9324</small></a></li>
+        </ul>
+      </div>
+      <div class="footer__col footer__col--zones">
+        <h5>ZONES D'INTERVENTION</h5>
+        <h6>Vallée de la Loire</h6>
+        <ul>
+          <li><a href="videaste-mariage-tours.html">Tours</a></li>
+          <li><a href="videaste-mariage-blois.html">Blois</a></li>
+          <li><a href="videaste-mariage-orleans.html">Orléans</a></li>
+          <li><a href="videaste-mariage-romorantin.html">Romorantin</a></li>
+        </ul>
+        <h6>Châteaux iconiques</h6>
+        <ul>
+          <li><a href="videaste-mariage-chambord.html">Chambord</a></li>
+          <li><a href="videaste-mariage-chenonceau.html">Chenonceau</a></li>
+          <li><a href="videaste-mariage-vaux-le-vicomte.html">Vaux-le-Vicomte</a></li>
+          <li><a href="videaste-mariage-versailles.html">Versailles</a></li>
+        </ul>
+        <h6>Destinations</h6>
+        <ul>
+          <li><a href="videaste-mariage-provence.html">Provence</a></li>
+          <li><a href="videaste-mariage-bordeaux.html">Bordeaux</a></li>
+          <li><a href="videaste-mariage-cote-azur.html">Côte d'Azur</a></li>
+          <li><a href="videaste-mariage-bourgogne.html">Bourgogne</a></li>
+        </ul>
+        <a href="zones-intervention.html" class="footer__col--zones__more">Voir toutes les zones ↗</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 Qualimatic Production — Tous droits réservés</p>
+      <div class="footer__legal">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <span aria-hidden="true">·</span>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+        <span aria-hidden="true">·</span>
+        <a href="cgv.html">CGV</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-fab" href="https://wa.me/33771063218?text=Bonjour%20Charly%2C%20je%20vous%20contacte%20pour%20un%20film%20de%20marque" target="_blank" rel="noopener" aria-label="Contacter via WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+    <path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.27.62 4.49 1.79 6.42L4 29l7.71-2.02a12.04 12.04 0 0 0 4.33.81H16.05c6.64 0 12.04-5.4 12.04-12.04C28.09 8.4 22.69 3 16.04 3zm0 21.94h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-4.55 1.19 1.21-4.43-.24-.38a9.96 9.96 0 0 1-1.51-5.29c0-5.51 4.49-10 10-10 5.51 0 10 4.49 10 10 0 5.51-4.49 10-10 10z"/>
+  </svg>
+</a>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Reveal
+    const els = document.querySelectorAll('.corp-reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('is-visible')); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const d = parseInt(e.target.dataset.delay || '0', 10);
+          setTimeout(() => e.target.classList.add('is-visible'), d);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(el => io.observe(el));
+
+    // Sound toggle
+    const sBtn = document.querySelector('[data-sound-toggle]');
+    const sVid = document.querySelector('.hero-video video');
+    if (sBtn && sVid) {
+      sBtn.addEventListener('click', () => {
+        sVid.muted = !sVid.muted;
+        const muted = sVid.muted;
+        sBtn.querySelector('[data-state]').textContent = muted ? 'ACTIVER LE SON' : 'COUPER LE SON';
+        sBtn.querySelector('[data-icon]').innerHTML = muted ? '🔇' : '🔊';
+      });
+    }
+  });
+</script>
+<script src="main.js"></script>
+</body>
+</html>
