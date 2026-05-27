@@ -1965,3 +1965,28 @@
     padding: 32px 24px;
   }
 }
+
+/* ============================================================
+   FIX — la règle .form-row input { width: 100% } s'appliquait 
+   aussi aux checkboxes (RGPD), les déformant en gros carrés et 
+   écrasant le label. On les remet à taille normale.
+   ============================================================ */
+.form-row input[type="checkbox"],
+.form-row input[type="radio"] {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--bordeaux);
+}
+
+.form-rgpd input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+
+.form-rgpd > span {
+  flex: 1;
+  min-width: 0;
+}
