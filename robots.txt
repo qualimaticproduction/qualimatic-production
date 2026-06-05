@@ -1,6 +1,6 @@
 # ============================================
 # robots.txt — Qualimatic Production
-# https://www.qualimaticproduction.fr
+# https://qualimaticproduction.fr
 # ============================================
 
 User-agent: *
@@ -40,4 +40,4 @@ User-agent: ClaudeBot
 Allow: /
 
 # Sitemap
-Sitemap: https://www.qualimaticproduction.fr/sitemap.xml
+Sitemap: https://qualimaticproduction.fr/sitemap.xml
