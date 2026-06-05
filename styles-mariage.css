@@ -1907,3 +1907,45 @@
     background-attachment: scroll;
   }
 }
+
+
+/* ============================================================
+   CORRECTIFS RESPONSIVE MOBILE / TABLETTE
+   Ajout — n'affecte QUE ≤1024px. Le layout desktop reste inchangé.
+   Sections : Formules · Contact · Partenaires · Portfolio
+   ============================================================ */
+
+/* ----- Tablette ≤1024px : on commence à dégrouper ----- */
+@media (max-width: 1024px) {
+  .formules__grid     { grid-template-columns: 1fr; gap: 24px; }
+  .partners__grid     { grid-template-columns: 1fr; gap: 24px; }
+  .form-section__grid { grid-template-columns: 1fr; gap: clamp(32px, 6vw, 56px); }
+  .portfolio__grid    { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ----- Mobile ≤767px : tout en 1 colonne, zéro débordement ----- */
+@media (max-width: 767px) {
+  /* sécurité box-model sur les sections concernées */
+  .formules *, .partners *, .form-section *, .portfolio * { box-sizing: border-box; }
+
+  /* 1. FORMULES — cartes empilées, pleine largeur */
+  .formules__grid { grid-template-columns: 1fr; gap: 20px; }
+  .formule-card   { width: 100%; max-width: 100%; }
+
+  /* 2. CONTACT — formulaire puis bloc coordonnées, empilés */
+  .form-section__grid { grid-template-columns: 1fr; gap: 32px; }
+  .form-grid          { grid-template-columns: 1fr; gap: 16px; }
+  .form-row.full      { grid-column: auto; }
+  .contact-side       { width: 100%; max-width: 100%; position: static; }
+
+  /* 3. PARTENAIRES — cartes empilées, pleine largeur */
+  .partners__grid { grid-template-columns: 1fr; gap: 20px; }
+  .partner-card   { width: 100%; max-width: 100%; }
+
+  /* 4. PORTFOLIO — vignettes 1 par ligne, play recentré, titre contenu */
+  .portfolio__grid     { grid-template-columns: 1fr; gap: 16px; }
+  .video-card          { width: 100%; max-width: 100%; }
+  .video-card__play           { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .video-card:hover .video-card__play { transform: translate(-50%, -50%) scale(1.06); }
+  .video-card__caption { left: 14px; right: 14px; bottom: 14px; }
+}
