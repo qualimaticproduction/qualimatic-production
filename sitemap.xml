@@ -152,7 +152,27 @@
   <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-provence.html</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-bordeaux.html</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-cote-azur.html</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+
+  <!-- ============================================
+       CLUSTER TOURAINE (Indre-et-Loire)
+       ============================================ -->
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-touraine.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-amboise.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-azay-le-rideau.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-villandry.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-loches.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- ============================================
+       CLUSTER ALPES / RHÔNE-ALPES (destination)
+       ============================================ -->
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-alpes.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-megeve.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-annecy.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
 
   <!-- ============================================
        HUB ZONES D'INTERVENTION
