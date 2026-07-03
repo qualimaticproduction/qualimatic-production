@@ -210,6 +210,7 @@
     object-fit: cover;
     display: block;
   }
+  .corp-section__media--wide { aspect-ratio: 16 / 10; }
   .corp-section__media-tag {
     position: absolute;
     left: 18px; bottom: 16px;
@@ -227,7 +228,7 @@
   /* Three formules cards */
   .corp-formules {
     padding: clamp(80px, 11vw, 140px) 0;
-    background: var(--cream-soft);
+    background: var(--cream);
   }
   .corp-formules__head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
   .corp-formules__head .corp-section__eyebrow { justify-content: center; }
@@ -316,15 +317,6 @@
     color: var(--cream);
     position: relative;
     overflow: hidden;
-  }
-  .corp-types__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.18;
-    background-size: cover;
-    background-position: center;
-    filter: grayscale(60%) brightness(0.55);
   }
   .corp-types__inner { position: relative; z-index: 1; }
   .corp-types__head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
@@ -488,6 +480,221 @@
   .corp-cta__btn .arrow { transition: transform 0.4s var(--ease-out); }
   .corp-cta__btn:hover .arrow { transform: translate(3px, -3px); }
 
+  /* Galerie — extraits campagne : bande à défilement horizontal AUTONOME
+     (glisser / molette / snap). Aucune dépendance à position:sticky ni au scroll vertical. */
+  .corp-galerie {
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    padding: clamp(72px, 10vw, 120px) 0;
+    overflow: hidden;
+  }
+  .corp-galerie__head {
+    text-align: center;
+    padding: 0 var(--gutter);
+    margin: 0 auto clamp(32px, 5vh, 56px);
+    max-width: 880px;
+  }
+  .corp-galerie__head .corp-section__eyebrow { justify-content: center; color: #FFFFFF; }
+  .corp-galerie__head .corp-section__eyebrow::before { color: #FFFFFF; }
+  .corp-galerie__head h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.6vw, 58px);
+    line-height: 1.08;
+    color: var(--cream);
+    margin: 12px 0 0;
+    text-wrap: balance;
+  }
+  .corp-galerie__head h2 em { font-style: italic; color: var(--taupe-soft); }
+  .corp-galerie__head h2 .end-bordeaux { color: #FFFFFF; font-style: italic; }
+  .corp-galerie__lead {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(14px, 1.3vw, 16.5px);
+    line-height: 1.7;
+    color: rgba(245, 239, 232, 0.72);
+    max-width: 58ch;
+    margin: 16px auto 0;
+    text-wrap: pretty;
+  }
+  .corp-galerie__track {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(18px, 2.4vw, 40px);
+    padding: 0 max(8vw, var(--gutter));
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: 8vw;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+  }
+  .corp-galerie__track::-webkit-scrollbar { display: none; }
+  .corp-galerie__track.is-grabbing { cursor: grabbing; scroll-snap-type: none; }
+  .corp-galerie__item { flex: 0 0 auto; margin: 0; scroll-snap-align: center; }
+  .corp-galerie__frame {
+    height: clamp(320px, 56vh, 600px);
+    overflow: hidden;
+    background: rgba(245, 239, 232, 0.06);
+  }
+  .corp-galerie__frame img {
+    height: 100%;
+    width: auto;
+    max-width: none;
+    display: block;
+    transition: transform 1.4s var(--ease-out);
+  }
+  .corp-galerie__item:hover .corp-galerie__frame img { transform: scale(1.04); }
+  .corp-galerie__item figcaption {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .corp-galerie__num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #FFFFFF;
+  }
+  .corp-galerie__tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 232, 0.55);
+  }
+  .corp-galerie__foot {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 8vw;
+    margin-top: clamp(24px, 4vh, 44px);
+  }
+  .corp-galerie__progress {
+    flex: 1;
+    height: 1px;
+    background: rgba(245, 239, 232, 0.18);
+    position: relative;
+  }
+  .corp-galerie__progress span {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 0%;
+    background: var(--cream);
+  }
+  .corp-galerie__hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: rgba(245, 239, 232, 0.5);
+    white-space: nowrap;
+  }
+  @media (max-width: 700px) {
+    .corp-galerie__frame { height: clamp(280px, 46vh, 440px); }
+  }
+
+  /* ===== Rendu — le film (façade YouTube + révélation « rideau ») ===== */
+  .corp-rendu {
+    background: var(--cream);
+    padding: clamp(80px, 11vw, 140px) 0;
+    text-align: center;
+  }
+  .corp-rendu__head { margin-bottom: clamp(30px, 5vw, 54px); }
+  .corp-rendu__head .corp-section__eyebrow { justify-content: center; }
+  .corp-rendu__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.6vw, 58px);
+    line-height: 1.08;
+    color: var(--ink);
+    margin: 12px 0 0;
+    text-wrap: balance;
+  }
+  .corp-rendu__title em { font-style: italic; color: var(--taupe); }
+  .corp-rendu__title .end-bordeaux { color: var(--bordeaux); font-style: italic; }
+  .corp-rendu__frame {
+    position: relative;
+    width: min(100%, 1040px);
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    background: var(--ink);
+    overflow: hidden;
+    box-shadow: 0 44px 90px -44px rgba(26, 26, 26, 0.55);
+  }
+  .corp-rendu__play {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    margin: 0; padding: 0; border: 0;
+    background: var(--ink);
+    cursor: pointer;
+    display: block;
+  }
+  .corp-rendu__poster {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.84;
+    transition: opacity 0.6s var(--ease-out), transform 6s var(--ease-out);
+  }
+  .corp-rendu__play:hover .corp-rendu__poster { opacity: 0.72; transform: scale(1.05); }
+  .corp-rendu__playbtn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(64px, 7vw, 88px); height: clamp(64px, 7vw, 88px);
+    border-radius: 50%;
+    background: rgba(245, 239, 232, 0.14);
+    border: 1px solid rgba(245, 239, 232, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.4s var(--ease-out), transform 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+  }
+  .corp-rendu__play:hover .corp-rendu__playbtn {
+    background: var(--bordeaux);
+    border-color: var(--bordeaux);
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  .corp-rendu__playbtn svg { width: 26px; height: 26px; fill: var(--cream); margin-left: 5px; }
+  .corp-rendu__playbtn::after {
+    content: "";
+    position: absolute; inset: -1px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 239, 232, 0.55);
+    animation: rendu-pulse 2.8s var(--ease-out) infinite;
+  }
+  @keyframes rendu-pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    70% { transform: scale(1.55); opacity: 0; }
+    100% { opacity: 0; }
+  }
+  .corp-rendu__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .corp-rendu__cap { margin: 22px auto 0; display: flex; flex-direction: column; gap: 7px; }
+  .corp-rendu__capttl {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 24px);
+    color: var(--ink);
+  }
+  .corp-rendu__capmeta {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--taupe);
+  }
+  .corp-rendu__frame.corp-reveal {
+    clip-path: inset(0 46% 0 46%);
+    transition: opacity 1.1s var(--ease-out), transform 1.1s var(--ease-out), clip-path 1.2s var(--ease-out);
+  }
+  .corp-rendu__frame.corp-reveal.is-visible { clip-path: inset(0 0 0 0); }
+  @media (prefers-reduced-motion: reduce) {
+    .corp-rendu__frame.corp-reveal { clip-path: none; }
+    .corp-rendu__playbtn::after { animation: none; }
+  }
+
   /* Reveal */
   .corp-reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease-out), transform 1s var(--ease-out); }
   .corp-reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -544,8 +751,8 @@
 
 <!-- ========== 1. HERO VIDEO ========== -->
 <section class="hero-video" aria-label="Film de marque — introduction vidéo">
-  <video autoplay loop muted playsinline poster="assets/corporate-hero-poster.jpg">
-    <source src="assets/corporate-hero.mp4" type="video/mp4" />
+  <video autoplay loop muted playsinline poster="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1782985268/LLB_horizontal_HD_tdlog6.jpg">
+    <source src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1782985268/LLB_horizontal_HD_tdlog6.mp4" type="video/mp4" />
   </video>
 
   <button type="button" class="sound-toggle" data-sound-toggle aria-label="Activer le son">
@@ -575,36 +782,92 @@
       <div class="corp-section__copy corp-reveal">
         <span class="corp-section__eyebrow">Le concept</span>
         <h2 class="corp-section__title">Le <em>concept</em><span class="end-bordeaux">.</span></h2>
-        <p class="corp-section__text">Votre savoir-faire mérite mieux qu'une vidéo d'entreprise. Il mérite un <em>film.</em></p>
-        <p class="corp-section__text">Là où la communication classique explique, le cinéma fait <em>ressentir.</em> Chaque geste, chaque matière, chaque visage devient une image qui raconte qui vous êtes — sans discours, sans artifice.</p>
+        <p class="corp-section__text">Votre savoir-faire mérite mieux qu'une vidéo d'entreprise. Il mérite un film <em>utile</em>&nbsp;: un film qui part d'une problématique réelle et qui la règle.</p>
+        <p class="corp-section__text">Avant de parler d'images, je cherche donc à comprendre. Ce que le film doit résoudre. À qui il s'adresse, précisément. Sur quels écrans il sera vu, ce qui décide du format. La dynamique et le ton justes pour votre message.</p>
+        <p class="corp-section__text">Ensuite seulement, on filme. Là où la communication classique explique, le cinéma fait <em>ressentir.</em></p>
       </div>
-      <figure class="corp-section__media corp-reveal" data-parallax="0.04">
-        <img src="assets/corporate-concept.jpg" alt="Concept — film de marque cinématographique" />
-        <figcaption class="corp-section__media-tag">CONCEPT</figcaption>
+      <figure class="corp-section__media corp-section__media--wide corp-reveal" data-parallax="0.04">
+        <img src="assets/corporate-concept.png" alt="Opérateur au travail sur une plieuse industrielle, atelier en lumière bleutée" />
+        <figcaption class="corp-section__media-tag">SAVOIR-FAIRE</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
-<!-- ========== 3. POUR QUI ========== -->
+<!-- ========== 3. GALERIE — EXTRAITS ========== -->
+<section class="corp-galerie" id="extraits" aria-label="Extraits d'une campagne récente">
+    <header class="corp-galerie__head corp-reveal">
+      <span class="corp-section__eyebrow">Extraits</span>
+      <h2>Une campagne <em>lunetterie</em><span class="end-bordeaux">.</span></h2>
+      <p class="corp-galerie__lead">Le reportage photo d'une campagne récente. Le produit dans son décor, les visages qui le portent, la matière au plus près.</p>
+    </header>
+    <div class="corp-galerie__track" data-galerie-track>
+      <figure class="corp-galerie__item corp-reveal">
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-01.jpg" alt="Plan large dans une salle de musée, tableaux anciens et parquet" /></div>
+        <figcaption><span class="corp-galerie__num">01</span><span class="corp-galerie__tag">Le décor</span></figcaption>
+      </figure>
+      <figure class="corp-galerie__item corp-reveal" data-delay="80">
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-02.jpg" alt="Portrait — monture écaille et casquette orange, salle de musée" /></div>
+        <figcaption><span class="corp-galerie__num">02</span><span class="corp-galerie__tag">Le portrait</span></figcaption>
+      </figure>
+      <figure class="corp-galerie__item corp-reveal" data-delay="160">
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-03.jpg" alt="Montures posées sur un bloc de béton, ferraille rouillée sous un ciel d'orage" /></div>
+        <figcaption><span class="corp-galerie__num">03</span><span class="corp-galerie__tag">La matière</span></figcaption>
+      </figure>
+      <figure class="corp-galerie__item corp-reveal" data-delay="240">
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-04.jpg" alt="Silhouette dans un escalier de pierre, lumière rasante" /></div>
+        <figcaption><span class="corp-galerie__num">04</span><span class="corp-galerie__tag">La lumière</span></figcaption>
+      </figure>
+      <figure class="corp-galerie__item corp-reveal" data-delay="320">
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-05.jpg" alt="Regard derrière la monture — portrait noir et blanc" /></div>
+        <figcaption><span class="corp-galerie__num">05</span><span class="corp-galerie__tag">Le regard</span></figcaption>
+      </figure>
+    </div>
+    <div class="corp-galerie__foot">
+      <div class="corp-galerie__progress"><span data-galerie-progress></span></div>
+      <span class="corp-galerie__hint" data-galerie-hint>FAITES GLISSER →</span>
+    </div>
+</section>
+
+<!-- ========== 3b. RENDU — LE FILM ========== -->
+<section class="corp-rendu" id="film" aria-label="Un film récent — Handy Trolley">
+  <div class="container">
+    <header class="corp-rendu__head corp-reveal">
+      <span class="corp-section__eyebrow">Le film</span>
+      <h2 class="corp-rendu__title">En <em>mouvement</em><span class="end-bordeaux">.</span></h2>
+    </header>
+    <figure class="corp-rendu__frame corp-reveal" data-video="TB68JvXzhbw">
+      <button type="button" class="corp-rendu__play" data-video-play aria-label="Lire le film Handy Trolley">
+        <img class="corp-rendu__poster" src="https://i.ytimg.com/vi/TB68JvXzhbw/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/TB68JvXzhbw/hqdefault.jpg';" alt="Aperçu du film de marque Handy Trolley" loading="lazy" width="1280" height="720" />
+        <span class="corp-rendu__playbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </button>
+    </figure>
+    <div class="corp-rendu__cap corp-reveal" data-delay="120">
+      <span class="corp-rendu__capttl">« Handy Trolley »</span>
+      <span class="corp-rendu__capmeta">Film de marque · réalisation Qualimatic</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. POUR QUI ========== -->
 <section class="corp-section corp-section--soft" id="pour-qui" aria-label="Pour qui">
   <div class="container">
     <div class="corp-section__grid corp-section__grid--reverse">
       <div class="corp-section__copy corp-reveal">
         <span class="corp-section__eyebrow">Pour qui</span>
         <h2 class="corp-section__title">Pour <em>qui</em><span class="end-bordeaux">.</span></h2>
-        <p class="corp-section__text">Artisans, maisons d'exception, PME, industries, créateurs. Toute entreprise qui a un <em>vrai savoir-faire</em> à transmettre et qui veut l'incarner avec une image à la hauteur de son exigence.</p>
-        <p class="corp-section__text">Que vous soyez un atelier d'une personne ou une entreprise établie, le film s'adapte à votre univers.</p>
+        <p class="corp-section__text">Artisans, maisons d'exception, PME, industries, créateurs. Toute entreprise qui a un <em style="color:var(--bordeaux)">vrai savoir-faire</em> à transmettre et qui veut l'incarner avec une image à la hauteur de son exigence.</p>
+        <p class="corp-section__text">Un atelier d'une personne, une maison établie&nbsp;: l'échelle importe peu. Ce qui compte, c'est qu'il y ait quelque chose de <em>vrai</em> à filmer.</p>
       </div>
       <figure class="corp-section__media corp-reveal" data-parallax="0.04">
-        <img src="assets/corporate-pourqui.jpg" alt="Pour qui — artisans, maisons d'exception, PME" />
-        <figcaption class="corp-section__media-tag">POUR QUI</figcaption>
+        <img src="assets/corporate-pourqui.jpg" alt="Charly Coulardot en tournage, caméra en main" />
+        <figcaption class="corp-section__media-tag">SUR LE TERRAIN</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
-<!-- ========== 4. FORMULES (3 cards) ========== -->
+<!-- ========== 5. FORMULES (3 cards) ========== -->
 <section class="corp-formules" id="formules" aria-label="Trois formules">
   <div class="container">
     <header class="corp-formules__head corp-reveal">
@@ -628,7 +891,7 @@
 
       <article class="corp-card corp-reveal" data-delay="200">
         <span class="corp-card__num">03</span>
-        <h3 class="corp-card__title">Pack Film + Photo</h3>
+        <h3 class="corp-card__title">Film + Photo</h3>
         <p class="corp-card__text">L'ensemble cohérent&nbsp;: le film et le reportage photo réalisés dans la même direction artistique, pour une communication complète et homogène.</p>
       </article>
     </div>
@@ -637,27 +900,8 @@
   </div>
 </section>
 
-<!-- ========== 5. INTENTION VISUELLE ========== -->
-<section class="corp-section" id="intention" aria-label="Intention visuelle">
-  <div class="container">
-    <div class="corp-section__grid">
-      <div class="corp-section__copy corp-reveal">
-        <span class="corp-section__eyebrow">Intention</span>
-        <h2 class="corp-section__title">Intention <em>visuelle</em><span class="end-bordeaux">.</span></h2>
-        <p class="corp-section__text">La lumière sculpte la matière. Le geste devient précis et élégant. L'humain reste au <em>centre.</em></p>
-        <p class="corp-section__text">Une esthétique cinématographique qui élève immédiatement la perception de votre travail et de votre marque.</p>
-      </div>
-      <figure class="corp-section__media corp-reveal" data-parallax="0.04">
-        <img src="assets/corporate-intention.jpg" alt="Intention visuelle — lumière et matière" />
-        <figcaption class="corp-section__media-tag">INTENTION</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
 <!-- ========== 6. CE QUE JE FILME (2x2 dark) ========== -->
 <section class="corp-types" id="types" aria-label="Ce que je filme">
-  <div class="corp-types__bg" style="background-image: url('assets/corporate-types.jpg');"></div>
   <div class="container corp-types__inner">
     <header class="corp-types__head corp-reveal">
       <span class="corp-section__eyebrow">Ce que je filme</span>
@@ -689,39 +933,18 @@
   </div>
 </section>
 
-<!-- ========== 7. LE RENDU & LIVRABLE ========== -->
-<section class="corp-section corp-section--soft" id="rendu" aria-label="Le rendu et le livrable">
-  <div class="container">
-    <div class="corp-section__grid corp-section__grid--reverse">
-      <div class="corp-section__copy corp-reveal">
-        <span class="corp-section__eyebrow">Le rendu</span>
-        <h2 class="corp-section__title">Le <em>rendu</em><span class="end-bordeaux">.</span></h2>
-        <p class="corp-section__text">Le montage donne du rythme. Le son renforce l'immersion. L'image valorise chaque détail.</p>
-        <p class="corp-section__text">Résultat&nbsp;: une communication qui <em>marque les esprits.</em></p>
-
-        <p class="corp-section__sub">Livrable</p>
-        <p class="corp-section__text">Vous recevez un film et/ou des photos prêts à être diffusés, pensés pour votre site, vos réseaux et votre communication globale.</p>
-      </div>
-      <figure class="corp-section__media corp-reveal" data-parallax="0.04">
-        <img src="assets/corporate-rendu.jpg" alt="Rendu final — film de marque monté et étalonné" />
-        <figcaption class="corp-section__media-tag">RENDU</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 8. MÉTHODE ========== -->
+<!-- ========== 7. MÉTHODE ========== -->
 <section class="corp-method" id="methode" aria-label="Méthode">
   <div class="corp-method__inner corp-reveal">
     <span class="corp-section__eyebrow">Méthode</span>
     <h2>Comment ça <em>se passe</em><span class="end-bordeaux">.</span></h2>
     <p class="corp-method__text">
-      Un échange pour comprendre votre univers et vos objectifs. Un repérage si nécessaire. Le tournage, guidé de bout en bout — vous n'avez rien à préparer. Puis le montage et la livraison. <em>Simple, fluide, sans jargon.</em>
+      Un échange pour comprendre votre univers et vos objectifs. Un repérage si nécessaire. Le tournage, guidé de bout en bout. Vous n'avez rien à préparer. Puis l'étalonnage, le montage, et des fichiers livrés prêts à diffuser&nbsp;: site, réseaux, présentations. <em>Simple, fluide, sans jargon.</em>
     </p>
   </div>
 </section>
 
-<!-- ========== 9. CTA FINAL ========== -->
+<!-- ========== 8. CTA FINAL ========== -->
 <section class="corp-cta" aria-label="Appel à l'action">
   <div class="container">
     <h2 class="corp-cta__title corp-reveal">Parlons de <em>votre projet</em><span class="end-bordeaux">.</span></h2>
@@ -848,6 +1071,70 @@
         const muted = sVid.muted;
         sBtn.querySelector('[data-state]').textContent = muted ? 'ACTIVER LE SON' : 'COUPER LE SON';
         sBtn.querySelector('[data-icon]').innerHTML = muted ? '🔇' : '🔊';
+      });
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- Galerie : bande horizontale autonome (progression + molette + glisser) ---
+    const track = document.querySelector('[data-galerie-track]');
+    if (track) {
+      const bar = document.querySelector('[data-galerie-progress]');
+      const updateBar = () => {
+        const m = track.scrollWidth - track.clientWidth;
+        if (bar) bar.style.width = (m > 0 ? (track.scrollLeft / m) * 100 : 0) + '%';
+      };
+      track.addEventListener('scroll', updateBar, { passive: true });
+      window.addEventListener('resize', updateBar);
+      updateBar();
+
+      // Molette verticale -> défilement horizontal quand le curseur survole la bande.
+      // On relâche aux extrémités pour que la page reprenne son défilement normal.
+      track.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        const m = track.scrollWidth - track.clientWidth;
+        const atStart = track.scrollLeft <= 0;
+        const atEnd = track.scrollLeft >= m - 1;
+        if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
+        e.preventDefault();
+        track.scrollLeft += e.deltaY;
+        updateBar();
+      }, { passive: false });
+
+      // Glisser à la souris (pointer)
+      let down = false, startX = 0, startLeft = 0, moved = false;
+      track.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'touch') return;
+        down = true; moved = false; startX = e.clientX; startLeft = track.scrollLeft;
+        track.classList.add('is-grabbing');
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (!down) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 4) moved = true;
+        track.scrollLeft = startLeft - dx;
+        updateBar();
+      });
+      const release = () => { down = false; track.classList.remove('is-grabbing'); };
+      window.addEventListener('pointerup', release);
+      window.addEventListener('pointercancel', release);
+      // Empêche le clic « fantôme » après un glisser
+      track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+    }
+
+    // --- Rendu : lecture du film au clic (façade YouTube, chargée à la demande) ---
+    const vframe = document.querySelector('[data-video]');
+    if (vframe) {
+      const vbtn = vframe.querySelector('[data-video-play]');
+      if (vbtn) vbtn.addEventListener('click', () => {
+        const id = vframe.getAttribute('data-video');
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        iframe.title = 'Handy Trolley — film de marque Qualimatic';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.setAttribute('allowfullscreen', '');
+        vbtn.replaceWith(iframe);
       });
     }
   });

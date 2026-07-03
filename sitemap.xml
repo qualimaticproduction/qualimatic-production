@@ -61,6 +61,12 @@
   </url>
 
   <!-- ============================================
+       PAGES ÉDITORIALES / COMMERCIALES — FR
+       ============================================ -->
+  <url><loc>https://www.qualimaticproduction.fr/tarif-videaste-mariage.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- ============================================
        PAGES PRINCIPALES — EN
        ============================================ -->
 
@@ -220,8 +226,17 @@
   <url><loc>https://www.qualimaticproduction.fr/zones-intervention.html</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- ============================================
-       JOURNAL — GUIDES LIEUX
+       GRANDES VILLES DE FRANCE
+       ============================================ -->
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-paris.html</loc><lastmod>2026-07-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-lyon.html</loc><lastmod>2026-07-02</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html</loc><lastmod>2026-07-02</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/videaste-mariage-rennes.html</loc><lastmod>2026-07-02</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- ============================================
+       JOURNAL — GUIDES &amp; INSPIRATION
        ============================================ -->
   <url><loc>https://www.qualimaticproduction.fr/guide-mariage-chambord.html</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.qualimaticproduction.fr/guide-idees-video-mariage.html</loc><lastmod>2026-07-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
 </urlset>

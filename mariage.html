@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Mariage — Films cinématographiques | Qualimatic Production</title>
-<meta name="description" content="Films de mariage cinématographiques par Charly Coulardot. Discrétion, lumière naturelle, drone certifié. Vallée de la Loire &amp; France. À partir de 3 300€." />
-<meta name="keywords" content="vidéaste mariage haut de gamme, vidéaste mariage cinématographique France, vidéaste mariage Vallée de la Loire" />
+<title>Vidéaste de mariage en Vallée de la Loire — films d'auteur | Qualimatic</title>
+<meta name="description" content="Vidéaste de mariage en Vallée de la Loire et partout en France. Films d'auteur cinématographiques, discrétion, lumière naturelle, drone certifié. À partir de 3 300 €." />
+<meta name="keywords" content="vidéaste de mariage, vidéaste pour mariage, vidéaste mariage, film de mariage, vidéaste mariage haut de gamme, vidéaste mariage Vallée de la Loire, vidéaste mariage cinématographique France" />
 <link rel="canonical" href="https://www.qualimaticproduction.fr/mariage.html" />
 <link rel="alternate" hreflang="fr" href="https://www.qualimaticproduction.fr/mariage.html" />
 <link rel="alternate" hreflang="en" href="https://www.qualimaticproduction.fr/en/wedding.html" />
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="fr_FR" />
 <meta property="og:locale:alternate" content="en_US" />
-<meta property="og:title" content="Mariage — Films cinématographiques | Qualimatic Production" />
+<meta property="og:title" content="Vidéaste de mariage en Vallée de la Loire — films d'auteur | Qualimatic" />
 <meta property="og:description" content="Films de mariage cinématographiques. Discret derrière l'objectif. Présent dans chaque image." />
 <meta property="og:url" content="https://www.qualimaticproduction.fr/mariage.html" />
 <meta property="og:image" content="https://www.qualimaticproduction.fr/assets/og-cover.jpg" />
@@ -157,6 +157,34 @@
 }
 </script>
 
+<style>
+  /* « Où je filme » — maillage interne replié (bouton + panneau déroulant) */
+  .geo-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 14px 28px;
+    background: transparent;
+    border: 1px solid rgba(26, 26, 26, 0.28);
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.4s var(--ease-out), color 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+  }
+  .geo-toggle:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .geo-toggle__icon { font-size: 13px; line-height: 1; transition: transform 0.45s var(--ease-out); }
+  .geo-toggle[aria-expanded="true"] .geo-toggle__icon { transform: rotate(180deg); }
+  .geo-collapse { display: none; }
+  .geo-collapse.is-shown { display: block; }
+  .geo-collapse__inner { padding-top: 14px; }
+  @media (prefers-reduced-motion: reduce) { .geo-toggle__icon { transition: none; } }
+</style>
 </head>
 
 <body style="background-color: rgb(49, 4, 10)">
@@ -660,7 +688,7 @@
     <div class="faq__list fade-in" data-delay="80">
       <div class="faq-item">
         <button class="faq-item__btn"><span><span class="asterisk">✻</span>Vous déplacez-vous partout en France&nbsp;?</span><span class="faq-item__icon"></span></button>
-        <div class="faq-item__panel"><div class="faq-item__answer">Oui, partout en France métropolitaine, sans aucun frais de déplacement supplémentaire. Je tiens à ce que votre expérience soit simple et globale, <em style="color:#000">sans surprise</em> sur la facture finale. Pour les mariages hors France métropolitaine, les frais de déplacement et d'hébergement sont pris en charge par les mariés et calculés au plus juste.</div></div>
+        <div class="faq-item__panel"><div class="faq-item__answer">Oui. En Centre-Val de Loire, aucun frais de déplacement — j'y suis déjà. Au-delà (reste de la France, Île-de-France, Alpes, à l'étranger), les frais de déplacement et d'hébergement sont annoncés en amont, au coût réel — <em style="color:#000">jamais de surprise</em> sur la facture finale.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-item__btn"><span><span class="asterisk">✻</span>Comment réserver la date&nbsp;?</span><span class="faq-item__icon"></span></button>
@@ -700,11 +728,18 @@
     <div class="geo-section">
       <span class="geo-section__eyebrow">Zones d'intervention</span>
       <h2>Où je <em>filme</em><span class="end-bordeaux">.</span></h2>
-      <p>Basé à Romorantin, au cœur de la Vallée de la Loire — et je me déplace partout en France et pour les mariages de destination. Choisissez un lieu pour le détail&nbsp;:</p>
+      <p>Basé à Romorantin, au cœur de la Vallée de la Loire — et je me déplace partout en France et pour les mariages de destination.</p>
+      <button type="button" class="geo-toggle" data-geo-toggle aria-expanded="false" aria-controls="geo-lieux">
+        <span class="geo-toggle__label">Découvrir tous les lieux</span>
+        <span class="geo-toggle__icon" aria-hidden="true">↓</span>
+      </button>
     </div>
+    <div class="geo-collapse" id="geo-lieux" data-geo-panel>
+      <div class="geo-collapse__inner">
     <div class="geo-related">
       <h2><em>Vallée de la Loire</em></h2>
       <div class="geo-related__grid">
+        <a class="geo-related__link" href="videaste-mariage-centre-val-de-loire.html"><span>Tout le Centre-Val de Loire</span><span aria-hidden="true">↗</span></a>
         <a class="geo-related__link" href="videaste-mariage-tours.html"><span>Tours</span><span aria-hidden="true">↗</span></a>
         <a class="geo-related__link" href="videaste-mariage-blois.html"><span>Blois</span><span aria-hidden="true">↗</span></a>
         <a class="geo-related__link" href="videaste-mariage-orleans.html"><span>Orléans</span><span aria-hidden="true">↗</span></a>
@@ -740,6 +775,12 @@
         <a class="geo-related__link" href="videaste-mariage-annecy.html"><span>Annecy</span><span aria-hidden="true">↗</span></a>
         <a class="geo-related__link" href="videaste-mariage-chamonix.html"><span>Chamonix</span><span aria-hidden="true">↗</span></a>
         <a class="geo-related__link" href="videaste-mariage-val-d-isere.html"><span>Val d'Isère</span><span aria-hidden="true">↗</span></a>
+        <a class="geo-related__link" href="videaste-mariage-paris.html"><span>Paris · Île-de-France</span><span aria-hidden="true">↗</span></a>
+        <a class="geo-related__link" href="videaste-mariage-lyon.html"><span>Lyon</span><span aria-hidden="true">↗</span></a>
+        <a class="geo-related__link" href="videaste-mariage-toulouse.html"><span>Toulouse</span><span aria-hidden="true">↗</span></a>
+        <a class="geo-related__link" href="videaste-mariage-rennes.html"><span>Rennes</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
       </div>
     </div>
   </div>
@@ -1025,5 +1066,20 @@
 </script>
 <script src="main.js"></script>
 <script src="mariage.js"></script>
+<script>
+  // Repli du maillage « Où je filme »
+  (function () {
+    var btn = document.querySelector('[data-geo-toggle]');
+    var panel = document.querySelector('[data-geo-panel]');
+    if (!btn || !panel) return;
+    var label = btn.querySelector('.geo-toggle__label');
+    btn.addEventListener('click', function () {
+      var willOpen = btn.getAttribute('aria-expanded') !== 'true';
+      panel.classList.toggle('is-shown', willOpen);
+      btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      if (label) label.textContent = willOpen ? 'Masquer les lieux' : 'Découvrir tous les lieux';
+    });
+  })();
+</script>
 </body>
 </html>
