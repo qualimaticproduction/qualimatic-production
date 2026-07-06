@@ -81,10 +81,20 @@
      CORPORATE — styles spécifiques
      ============================================ */
 
-  /* Hero — letterbox mobile (object-fit contain, fond noir) */
+  /* Hero — letterbox mobile : vidéo 16:9 horizontale sous le header (jamais zoomée) */
   @media (max-width: 768px) {
-    .hero-video { min-height: auto; max-height: 62vh; background: #0e0e0e; }
-    .hero-video video { object-fit: contain; background: #0e0e0e; }
+    .hero-video {
+      min-height: 0;
+      height: calc(80px + 56.25vw); /* header mobile + vidéo 16:9 pleine largeur */
+      background: #0e0e0e;
+    }
+    .hero-video video {
+      top: 80px; left: 0; right: 0; bottom: 0;
+      width: 100%; height: auto;
+      object-fit: contain;
+      background: #0e0e0e;
+    }
+    .hero-video::after { display: none; }
     .hero-video .sound-toggle, .hero-video .scroll-cue { display: none; }
   }
 
@@ -685,13 +695,7 @@
     text-transform: uppercase;
     color: var(--taupe);
   }
-  .corp-rendu__frame.corp-reveal {
-    clip-path: inset(0 46% 0 46%);
-    transition: opacity 1.1s var(--ease-out), transform 1.1s var(--ease-out), clip-path 1.2s var(--ease-out);
-  }
-  .corp-rendu__frame.corp-reveal.is-visible { clip-path: inset(0 0 0 0); }
   @media (prefers-reduced-motion: reduce) {
-    .corp-rendu__frame.corp-reveal { clip-path: none; }
     .corp-rendu__playbtn::after { animation: none; }
   }
 
@@ -803,23 +807,23 @@
     </header>
     <div class="corp-galerie__track" data-galerie-track>
       <figure class="corp-galerie__item corp-reveal">
-        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-01.jpg" alt="Plan large dans une salle de musée, tableaux anciens et parquet" /></div>
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-01.jpg" alt="Plan large dans une salle de musée, tableaux anciens et parquet" width="1850" height="2200" loading="lazy" /></div>
         <figcaption><span class="corp-galerie__num">01</span><span class="corp-galerie__tag">Le décor</span></figcaption>
       </figure>
       <figure class="corp-galerie__item corp-reveal" data-delay="80">
-        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-02.jpg" alt="Portrait — monture écaille et casquette orange, salle de musée" /></div>
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-02.jpg" alt="Portrait — monture écaille et casquette orange, salle de musée" width="2832" height="4240" loading="lazy" /></div>
         <figcaption><span class="corp-galerie__num">02</span><span class="corp-galerie__tag">Le portrait</span></figcaption>
       </figure>
       <figure class="corp-galerie__item corp-reveal" data-delay="160">
-        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-03.jpg" alt="Montures posées sur un bloc de béton, ferraille rouillée sous un ciel d'orage" /></div>
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-03.jpg" alt="Montures posées sur un bloc de béton, ferraille rouillée sous un ciel d'orage" width="4240" height="2832" loading="lazy" /></div>
         <figcaption><span class="corp-galerie__num">03</span><span class="corp-galerie__tag">La matière</span></figcaption>
       </figure>
       <figure class="corp-galerie__item corp-reveal" data-delay="240">
-        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-04.jpg" alt="Silhouette dans un escalier de pierre, lumière rasante" /></div>
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-04.jpg" alt="Silhouette dans un escalier de pierre, lumière rasante" width="1470" height="2200" loading="lazy" /></div>
         <figcaption><span class="corp-galerie__num">04</span><span class="corp-galerie__tag">La lumière</span></figcaption>
       </figure>
       <figure class="corp-galerie__item corp-reveal" data-delay="320">
-        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-05.jpg" alt="Regard derrière la monture — portrait noir et blanc" /></div>
+        <div class="corp-galerie__frame"><img src="assets/corpo-galerie-05.jpg" alt="Regard derrière la monture — portrait noir et blanc" width="2832" height="4240" loading="lazy" /></div>
         <figcaption><span class="corp-galerie__num">05</span><span class="corp-galerie__tag">Le regard</span></figcaption>
       </figure>
     </div>
@@ -836,7 +840,7 @@
       <span class="corp-section__eyebrow">Le film</span>
       <h2 class="corp-rendu__title">En <em>mouvement</em><span class="end-bordeaux">.</span></h2>
     </header>
-    <figure class="corp-rendu__frame corp-reveal" data-video="TB68JvXzhbw">
+    <figure class="corp-rendu__frame" data-video="TB68JvXzhbw">
       <button type="button" class="corp-rendu__play" data-video-play aria-label="Lire le film Handy Trolley">
         <img class="corp-rendu__poster" src="https://i.ytimg.com/vi/TB68JvXzhbw/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/TB68JvXzhbw/hqdefault.jpg';" alt="Aperçu du film de marque Handy Trolley" loading="lazy" width="1280" height="720" />
         <span class="corp-rendu__playbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
@@ -1089,20 +1093,8 @@
       window.addEventListener('resize', updateBar);
       updateBar();
 
-      // Molette verticale -> défilement horizontal quand le curseur survole la bande.
-      // On relâche aux extrémités pour que la page reprenne son défilement normal.
-      track.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-        const m = track.scrollWidth - track.clientWidth;
-        const atStart = track.scrollLeft <= 0;
-        const atEnd = track.scrollLeft >= m - 1;
-        if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
-        e.preventDefault();
-        track.scrollLeft += e.deltaY;
-        updateBar();
-      }, { passive: false });
-
-      // Glisser à la souris (pointer)
+      // Glisser à la souris (pointer) — la molette laisse défiler la page normalement
+      // (pas de détournement molette->horizontal, source de saccades)
       let down = false, startX = 0, startLeft = 0, moved = false;
       track.addEventListener('pointerdown', (e) => {
         if (e.pointerType === 'touch') return;

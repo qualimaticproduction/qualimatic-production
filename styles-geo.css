@@ -591,3 +591,28 @@
 .interventions-strip__link:hover { opacity: 0.7; }
 .interventions-strip__link .arrow { transition: transform 0.3s var(--ease-out); }
 .interventions-strip__link:hover .arrow { transform: translate(2px, -2px); }
+
+/* ── « Où je filme » : maillage de liens repliable (bouton injecté par main.js) ── */
+.geo-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 4px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid rgba(26, 26, 26, 0.28);
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.4s var(--ease-out), color 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+}
+.geo-toggle:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.geo-toggle__icon { font-size: 13px; line-height: 1; transition: transform 0.45s var(--ease-out); }
+.geo-toggle[aria-expanded="true"] .geo-toggle__icon { transform: rotate(180deg); }
+.geo-body.is-mesh-collapsed .geo-related { display: none; }
+@media (prefers-reduced-motion: reduce) { .geo-toggle__icon { transition: none; } }

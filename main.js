@@ -157,3 +157,39 @@ document.addEventListener('DOMContentLoaded', () => {
     initFooterZonesAccordion();
   });
 })();
+
+/* « Où je filme » — replie le maillage de liens (.geo-related) sur les pages géo/mariage.
+   Injecte un bouton « Découvrir tous les lieux » avant le premier .geo-related et masque
+   les blocs par défaut. Les liens restent dans le DOM (maillage SEO intact). */
+(function () {
+  function bindGeoToggle(btn, body) {
+    var label = btn.querySelector('.geo-toggle__label');
+    btn.addEventListener('click', function () {
+      var collapsed = body.classList.toggle('is-mesh-collapsed');
+      btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      if (label) label.textContent = collapsed ? 'Découvrir tous les lieux' : 'Masquer les lieux';
+    });
+  }
+  function initGeoMeshCollapse() {
+    var bodies = document.querySelectorAll('.geo-body');
+    for (var i = 0; i < bodies.length; i++) {
+      var body = bodies[i];
+      var relateds = body.querySelectorAll('.geo-related');
+      if (!relateds.length || body.querySelector('.geo-toggle')) continue;
+      body.classList.add('is-mesh-collapsed');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'geo-toggle';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML = '<span class="geo-toggle__label">Découvrir tous les lieux</span>' +
+                      '<span class="geo-toggle__icon" aria-hidden="true">↓</span>';
+      relateds[0].parentNode.insertBefore(btn, relateds[0]);
+      bindGeoToggle(btn, body);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGeoMeshCollapse);
+  } else {
+    initGeoMeshCollapse();
+  }
+})();

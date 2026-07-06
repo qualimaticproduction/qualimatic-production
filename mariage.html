@@ -158,32 +158,22 @@
 </script>
 
 <style>
-  /* « Où je filme » — maillage interne replié (bouton + panneau déroulant) */
-  .geo-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 24px;
-    padding: 14px 28px;
-    background: transparent;
-    border: 1px solid rgba(26, 26, 26, 0.28);
-    border-radius: 999px;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--ink);
-    cursor: pointer;
-    transition: background 0.4s var(--ease-out), color 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+  /* Hero mobile — vidéo 16:9 horizontale sous le header (jamais zoomée / rognée) */
+  @media (max-width: 768px) {
+    .hero-video {
+      min-height: 0;
+      height: calc(80px + 56.25vw); /* header mobile + vidéo 16:9 pleine largeur */
+      background: #0e0e0e;
+    }
+    .hero-video video {
+      top: 80px; left: 0; right: 0; bottom: 0;
+      width: 100%; height: auto;
+      object-fit: contain;
+      background: #0e0e0e;
+    }
+    .hero-video::after { display: none; }
+    .hero-video .sound-toggle, .hero-video .scroll-cue { display: none; }
   }
-  .geo-toggle:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-  .geo-toggle__icon { font-size: 13px; line-height: 1; transition: transform 0.45s var(--ease-out); }
-  .geo-toggle[aria-expanded="true"] .geo-toggle__icon { transform: rotate(180deg); }
-  .geo-collapse { display: none; }
-  .geo-collapse.is-shown { display: block; }
-  .geo-collapse__inner { padding-top: 14px; }
-  @media (prefers-reduced-motion: reduce) { .geo-toggle__icon { transition: none; } }
 </style>
 </head>
 
@@ -728,14 +718,8 @@
     <div class="geo-section">
       <span class="geo-section__eyebrow">Zones d'intervention</span>
       <h2>Où je <em>filme</em><span class="end-bordeaux">.</span></h2>
-      <p>Basé à Romorantin, au cœur de la Vallée de la Loire — et je me déplace partout en France et pour les mariages de destination.</p>
-      <button type="button" class="geo-toggle" data-geo-toggle aria-expanded="false" aria-controls="geo-lieux">
-        <span class="geo-toggle__label">Découvrir tous les lieux</span>
-        <span class="geo-toggle__icon" aria-hidden="true">↓</span>
-      </button>
+      <p>Basé à Romorantin, au cœur de la Vallée de la Loire, et je me déplace partout en France et pour les mariages de destination. Choisissez un lieu pour le détail&nbsp;:</p>
     </div>
-    <div class="geo-collapse" id="geo-lieux" data-geo-panel>
-      <div class="geo-collapse__inner">
     <div class="geo-related">
       <h2><em>Vallée de la Loire</em></h2>
       <div class="geo-related__grid">
@@ -779,8 +763,6 @@
         <a class="geo-related__link" href="videaste-mariage-lyon.html"><span>Lyon</span><span aria-hidden="true">↗</span></a>
         <a class="geo-related__link" href="videaste-mariage-toulouse.html"><span>Toulouse</span><span aria-hidden="true">↗</span></a>
         <a class="geo-related__link" href="videaste-mariage-rennes.html"><span>Rennes</span><span aria-hidden="true">↗</span></a>
-      </div>
-    </div>
       </div>
     </div>
   </div>

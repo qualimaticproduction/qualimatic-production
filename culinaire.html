@@ -120,8 +120,9 @@
   @media (max-width: 768px) {
     .hero-video {
       --hero-header-band: 80px; /* hauteur réelle du header mobile (logo 48 + padding 16*2) */
-      min-height: auto;
-      max-height: calc(62vh + var(--hero-header-band));
+      min-height: 0;
+      height: calc(var(--hero-header-band) + 56.25vw); /* header + vidéo 16:9 pleine largeur */
+      max-height: none;
       background: #FFFFFF;
     }
     .hero-video video { object-fit: contain; background: #FFFFFF; }
