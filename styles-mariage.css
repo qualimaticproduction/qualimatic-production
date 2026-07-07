@@ -1273,7 +1273,7 @@
 
 /* Consentement bien lisible : on repasse au-dessus de la règle générique
    « .form-row label { opacity: .7 } » qui l'emportait et rendait le texte pâle. */
-.form-row label.form-rgpd { opacity: 0.95; font-weight: 500; }
+.form-row label.form-rgpd { opacity: 1; font-weight: 500; }
 .form-rgpd span { flex: 1 1 auto; min-width: 0; }
 .form-rgpd input { margin-top: 3px; accent-color: var(--bordeaux); flex: 0 0 auto; width: 16px; height: 16px; }
 

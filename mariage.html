@@ -163,13 +163,13 @@
     .hero-video {
       min-height: 0;
       height: calc(80px + 56.25vw); /* header mobile + vidéo 16:9 pleine largeur */
-      background: #0e0e0e;
+      background: var(--cream); /* bandeau haut crème pour que le header (logo/menu foncés) reste visible */
     }
     .hero-video video {
       top: 80px; left: 0; right: 0; bottom: 0;
       width: 100%; height: auto;
       object-fit: contain;
-      background: #0e0e0e;
+      background: var(--cream);
     }
     .hero-video::after { display: none; }
     .hero-video .sound-toggle, .hero-video .scroll-cue { display: none; }

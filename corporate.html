@@ -86,13 +86,13 @@
     .hero-video {
       min-height: 0;
       height: calc(80px + 56.25vw); /* header mobile + vidéo 16:9 pleine largeur */
-      background: #0e0e0e;
+      background: var(--cream); /* bandeau haut crème pour que le header (logo/menu foncés) reste visible */
     }
     .hero-video video {
       top: 80px; left: 0; right: 0; bottom: 0;
       width: 100%; height: auto;
       object-fit: contain;
-      background: #0e0e0e;
+      background: var(--cream);
     }
     .hero-video::after { display: none; }
     .hero-video .sound-toggle, .hero-video .scroll-cue { display: none; }
@@ -528,40 +528,43 @@
     margin: 16px auto 0;
     text-wrap: pretty;
   }
-  .corp-galerie__track {
-    display: flex;
-    align-items: flex-end;
-    gap: clamp(18px, 2.4vw, 40px);
-    padding: 0 max(8vw, var(--gutter));
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x proximity;
-    scroll-padding-left: 8vw;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    cursor: grab;
+  /* Grille responsive (défile verticalement avec la page — pas de scroll horizontal) */
+  .corp-galerie__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(10px, 1.4vw, 20px);
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
   }
-  .corp-galerie__track::-webkit-scrollbar { display: none; }
-  .corp-galerie__track.is-grabbing { cursor: grabbing; scroll-snap-type: none; }
-  .corp-galerie__item { flex: 0 0 auto; margin: 0; scroll-snap-align: center; }
+  .corp-galerie__item { position: relative; margin: 0; }
   .corp-galerie__frame {
-    height: clamp(320px, 56vh, 600px);
+    position: relative;
+    aspect-ratio: 4 / 5;
     overflow: hidden;
     background: rgba(245, 239, 232, 0.06);
   }
   .corp-galerie__frame img {
+    width: 100%;
     height: 100%;
-    width: auto;
-    max-width: none;
+    object-fit: cover;
     display: block;
-    transition: transform 1.4s var(--ease-out);
+    transition: transform 1.1s var(--ease-out);
   }
-  .corp-galerie__item:hover .corp-galerie__frame img { transform: scale(1.04); }
+  .corp-galerie__item:hover .corp-galerie__frame img { transform: scale(1.05); }
+  .corp-galerie__frame::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 42%);
+    pointer-events: none;
+  }
   .corp-galerie__item figcaption {
+    position: absolute;
+    left: 15px; bottom: 13px;
     display: flex;
     align-items: baseline;
-    gap: 14px;
-    margin-top: 14px;
+    gap: 10px;
+    z-index: 2;
   }
   .corp-galerie__num {
     font-family: 'JetBrains Mono', monospace;
@@ -572,38 +575,13 @@
   .corp-galerie__tag {
     font-family: 'Inter', sans-serif;
     font-size: 9px;
-    letter-spacing: 0.5em;
-    text-transform: uppercase;
-    color: rgba(245, 239, 232, 0.55);
-  }
-  .corp-galerie__foot {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 0 8vw;
-    margin-top: clamp(24px, 4vh, 44px);
-  }
-  .corp-galerie__progress {
-    flex: 1;
-    height: 1px;
-    background: rgba(245, 239, 232, 0.18);
-    position: relative;
-  }
-  .corp-galerie__progress span {
-    position: absolute;
-    top: 0; left: 0; bottom: 0;
-    width: 0%;
-    background: var(--cream);
-  }
-  .corp-galerie__hint {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
     letter-spacing: 0.4em;
-    color: rgba(245, 239, 232, 0.5);
-    white-space: nowrap;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
   }
-  @media (max-width: 700px) {
-    .corp-galerie__frame { height: clamp(280px, 46vh, 440px); }
+  @media (max-width: 760px) {
+    .corp-galerie__grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .corp-galerie__item figcaption { left: 11px; bottom: 10px; }
   }
 
   /* ===== Rendu — le film (façade YouTube + révélation « rideau ») ===== */
@@ -805,7 +783,7 @@
       <h2>Une campagne <em>lunetterie</em><span class="end-bordeaux">.</span></h2>
       <p class="corp-galerie__lead">Le reportage photo d'une campagne récente. Le produit dans son décor, les visages qui le portent, la matière au plus près.</p>
     </header>
-    <div class="corp-galerie__track" data-galerie-track>
+    <div class="corp-galerie__grid">
       <figure class="corp-galerie__item corp-reveal">
         <div class="corp-galerie__frame"><img src="assets/corpo-galerie-01.jpg" alt="Plan large dans une salle de musée, tableaux anciens et parquet" width="1850" height="2200" loading="lazy" /></div>
         <figcaption><span class="corp-galerie__num">01</span><span class="corp-galerie__tag">Le décor</span></figcaption>
@@ -826,10 +804,6 @@
         <div class="corp-galerie__frame"><img src="assets/corpo-galerie-05.jpg" alt="Regard derrière la monture — portrait noir et blanc" width="2832" height="4240" loading="lazy" /></div>
         <figcaption><span class="corp-galerie__num">05</span><span class="corp-galerie__tag">Le regard</span></figcaption>
       </figure>
-    </div>
-    <div class="corp-galerie__foot">
-      <div class="corp-galerie__progress"><span data-galerie-progress></span></div>
-      <span class="corp-galerie__hint" data-galerie-hint>FAITES GLISSER →</span>
     </div>
 </section>
 
@@ -1081,40 +1055,6 @@
 </script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // --- Galerie : bande horizontale autonome (progression + molette + glisser) ---
-    const track = document.querySelector('[data-galerie-track]');
-    if (track) {
-      const bar = document.querySelector('[data-galerie-progress]');
-      const updateBar = () => {
-        const m = track.scrollWidth - track.clientWidth;
-        if (bar) bar.style.width = (m > 0 ? (track.scrollLeft / m) * 100 : 0) + '%';
-      };
-      track.addEventListener('scroll', updateBar, { passive: true });
-      window.addEventListener('resize', updateBar);
-      updateBar();
-
-      // Glisser à la souris (pointer) — la molette laisse défiler la page normalement
-      // (pas de détournement molette->horizontal, source de saccades)
-      let down = false, startX = 0, startLeft = 0, moved = false;
-      track.addEventListener('pointerdown', (e) => {
-        if (e.pointerType === 'touch') return;
-        down = true; moved = false; startX = e.clientX; startLeft = track.scrollLeft;
-        track.classList.add('is-grabbing');
-      });
-      window.addEventListener('pointermove', (e) => {
-        if (!down) return;
-        const dx = e.clientX - startX;
-        if (Math.abs(dx) > 4) moved = true;
-        track.scrollLeft = startLeft - dx;
-        updateBar();
-      });
-      const release = () => { down = false; track.classList.remove('is-grabbing'); };
-      window.addEventListener('pointerup', release);
-      window.addEventListener('pointercancel', release);
-      // Empêche le clic « fantôme » après un glisser
-      track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
-    }
-
     // --- Rendu : lecture du film au clic (façade YouTube, chargée à la demande) ---
     const vframe = document.querySelector('[data-video]');
     if (vframe) {
