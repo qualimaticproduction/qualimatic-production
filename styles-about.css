@@ -198,6 +198,67 @@
   font-style: italic;
 }
 
+/* ----- DÉMARCHE — présentation perso + photos (van & chats) ----- */
+.about-demarche__perso {
+  max-width: 65ch;
+  margin: clamp(48px, 6vw, 80px) auto 0;
+}
+.about-demarche__lead {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.85;
+  color: var(--ink);
+  opacity: 0.86;
+  letter-spacing: 0.005em;
+  text-align: left;
+  margin: 0;
+}
+
+/* Galerie van + chats — van pleine largeur puis chats en 3 col (desktop) */
+.about-demarche__gallery {
+  max-width: 600px;
+  margin: clamp(48px, 6vw, 88px) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+  align-items: start;
+}
+.about-demarche__feature {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+.about-demarche__feature-media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--ink);
+}
+.about-demarche__feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  display: block;
+}
+.about-demarche__shot { margin: 0; }
+.about-demarche__shot img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Légendes discrètes, italique serif taupe */
+.about-demarche__cap {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(13px, 1.1vw, 15px);
+  color: var(--taupe);
+  margin-top: 12px;
+  text-align: center;
+  line-height: 1.4;
+  letter-spacing: 0.005em;
+}
+
 /* ----- PRINCIPES (4 piliers) ----- */
 .about-principes {
   padding: clamp(80px, 10vw, 140px) 0;
@@ -689,4 +750,23 @@
 
   /* EQUIP */
   .about-equipement__grid { grid-template-columns: 1fr; }
+
+  /* DÉMARCHE — van + chats en défilement horizontal (swipe), gain de place */
+  .about-demarche__gallery {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-left: var(--gutter);
+    padding-bottom: 10px;
+  }
+  .about-demarche__gallery > * {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
+    margin: 0;
+  }
+  .about-demarche__feature-media { aspect-ratio: auto; }
+  .about-demarche__feature-media img { height: auto; }
+  .about-demarche__cap { margin-bottom: 0; }
 }

@@ -48,6 +48,49 @@
 <link rel="stylesheet" href="styles.css?v=20260707" />
 <link rel="stylesheet" href="styles-geo.css?v=20260707" />
 
+<!-- Hero accueil : logo blanc à la place du slogan + crédit Charly en bas à gauche -->
+<style>
+  .hero__title--logo { margin-bottom: 24px; }
+  .hero__title--logo img {
+    width: clamp(240px, 44vw, 500px);
+    height: auto;
+    display: inline-block;
+    filter: drop-shadow(0 1px 10px rgba(0, 0, 0, 0.4));
+  }
+  .hero__credit {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 34px;
+    z-index: 2;
+    text-align: left;
+    line-height: 1.15;
+  }
+  .hero__credit-name {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2vw, 27px);
+    color: var(--cream);
+    letter-spacing: 0.01em;
+  }
+  .hero__credit-role {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.8;
+    margin-top: 7px;
+  }
+  @media (max-width: 768px) {
+    .hero__credit { bottom: 24px; }
+    .hero__credit-name { font-size: 19px; }
+    .hero__credit-role { font-size: 9px; letter-spacing: 0.24em; }
+    /* évite tout chevauchement avec le crédit en bas à gauche */
+    .scroll-cue--minimal { display: none; }
+  }
+</style>
+
 <!-- JSON-LD: LocalBusiness + Person -->
 <script type="application/ld+json">
 {
@@ -242,17 +285,8 @@
   </div>
 
   <div class="hero__inner">
-    <div class="hero__eyebrow"
-         data-fr="QUALIMATIC PRODUCTION — EST. 2018"
-         data-en="QUALIMATIC PRODUCTION — EST. 2018">
-      QUALIMATIC PRODUCTION — EST. 2018
-    </div>
-
-    <h1 class="hero__title"
-        data-fr="<span>PRÉSENT</span><br/><em class='italic-taupe'>dans chaque</em> <span class='end-bordeaux'>image.</span>"
-        data-en="<span>PRESENT</span><br/><em class='italic-taupe'>in every</em> <span class='end-bordeaux'>frame.</span>">
-      <span>PRÉSENT</span><br/>
-      <em class="italic-taupe">dans chaque</em> <span class="end-bordeaux">image.</span>
+    <h1 class="hero__title hero__title--logo">
+      <img src="assets/logo-blanc.png" alt="Qualimatic Production — Vidéaste de mariage cinématographique" width="3400" height="987" />
     </h1>
 
     <p class="hero__sub"
@@ -270,33 +304,15 @@
     </div>
   </div>
 
-  <a href="#intro" class="scroll-cue scroll-cue--minimal" aria-label="Faire défiler">
+  <div class="hero__credit">
+    <span class="hero__credit-name">Charly Coulardot</span>
+    <span class="hero__credit-role" data-fr="Réalisateur &amp; vidéaste" data-en="Director &amp; filmmaker">Réalisateur &amp; vidéaste</span>
+  </div>
+
+  <a href="#univers" class="scroll-cue scroll-cue--minimal" aria-label="Faire défiler">
     <span class="scroll-cue__line" aria-hidden="true"></span>
     <span class="scroll-cue__label" data-fr="SCROLL" data-en="SCROLL">SCROLL</span>
   </a>
-</section>
-
-<!-- ========== INTRO ========== -->
-<section class="intro container" id="intro">
-  <div class="intro__grid">
-    <aside class="fade-in">
-      <div class="intro__signature">Charly</div>
-      <div class="intro__name">CHARLY COULARDOT</div>
-      <div class="intro__role"
-           data-fr="Réalisateur &amp; vidéaste"
-           data-en="Director &amp; filmmaker">
-        Réalisateur &amp; vidéaste
-      </div>
-    </aside>
-
-    <div class="intro__lede fade-in" data-delay="120">
-      <p data-fr="Mon métier&nbsp;<span class='end-bordeaux'>disparaitre pour mieux raconter.</span>"
-              data-en="My craft&nbsp;<span class='end-bordeaux'>to disappear, the better to tell.</span>">
-        Mon métier&nbsp;<span class="end-bordeaux">disparaitre pour mieux raconter.</span>
-      </p>
-    </div>
-  </div>
-  <div class="intro__divider"></div>
 </section>
 
 <!-- ========== UNIVERS ========== -->
@@ -400,9 +416,9 @@
       </div>
 
       <p class="approach__lede fade-in" data-delay="100"
-         data-fr="Quatre <em>principes simples</em> guident chaque film. Une grammaire qui ne change pas quel que soit l'univers."
-         data-en="Four <em>simple principles</em> guide every film. A grammar that does not change whatever the world.">
-        Quatre <em>principes simples</em> guident chaque film. Une grammaire qui ne change pas quel que soit l'univers.
+         data-fr="Quatre <em>principes simples</em> guident chaque film."
+         data-en="Four <em>simple principles</em> guide every film.">
+        Quatre <em>principes simples</em> guident chaque film.
       </p>
 
       <div class="approach__list">

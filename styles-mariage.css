@@ -1679,45 +1679,43 @@
    ============================================================ */
 @media (max-width: 768px) {
   .altitude {
-    padding: 36px 0 44px;
+    padding: 26px 0 32px;
     background-attachment: scroll;
   }
-  .altitude__inner { padding: 0 24px; }
-  .altitude__header { margin-bottom: 24px; }
-  .altitude__divider { margin: 28px 0; gap: 14px; }
-  .altitude__signature { margin-top: 24px; }
-  .altitude__sign-name { font-size: 28px; }
+  .altitude__inner { padding: 0 20px; }
+  .altitude__header { margin-bottom: 16px; }
+  .altitude__divider { margin: 18px 0; gap: 10px; }
+  .altitude__signature { margin-top: 16px; }
+  .altitude__sign-name { font-size: 26px; }
 
-  /* Aplatir les collages en colonne simple */
+  /* Compact mobile : 2 photos côte à côte + vidéo pleine largeur dessous
+     (au lieu de tout empiler → section beaucoup moins longue) */
   .altitude__collage {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
     min-height: 0;
+    align-items: start;
   }
-  .altitude__media,
-  .altitude__video {
-    grid-column: unset !important;
-    grid-row: unset !important;
+  .altitude__media {
+    grid-column: auto !important;
+    grid-row: auto !important;
     margin-top: 0 !important;
     width: 100%;
+    aspect-ratio: 4 / 5 !important;
   }
-
-  /* Letterbox mobile sur iframes YouTube : object-fit ne marche pas
-     sur iframe, donc wrapper noir + max-height + iframe centrée */
   .altitude__video {
-    background: #0e0e0e;
-    max-height: 62vh;
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    margin-top: 0 !important;
+    width: 100%;
     aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    object-fit: contain;
+    max-height: none;
+    background: #0e0e0e;
   }
   .altitude__video iframe {
     width: 100%;
     height: 100%;
-    object-fit: contain;
   }
 }
 
