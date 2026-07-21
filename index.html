@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- SEO -->
-<title>Qualimatic Production — Vidéaste de mariage haut de gamme | Vallée de la Loire &amp; France</title>
+<title>Qualimatic Production — vidéaste de mariage, Val de Loire</title>
 <meta name="description" content="Vidéaste cinématographique haut de gamme en Vallée de la Loire. Films de mariage d'auteur, intemporels. Châteaux, France &amp; destination weddings." />
 <meta name="keywords" content="vidéaste mariage haut de gamme, vidéaste mariage cinématographique France, vidéaste mariage Vallée de la Loire, film de mariage, vidéaste Loir-et-Cher, vidéaste Romorantin" />
 <meta name="author" content="Charly Coulardot — Qualimatic Production" />
@@ -88,6 +88,18 @@
     .hero__credit-role { font-size: 9px; letter-spacing: 0.24em; }
     /* évite tout chevauchement avec le crédit en bas à gauche */
     .scroll-cue--minimal { display: none; }
+  }
+
+  /* Bandeau « où je filme » — liens vers les pages lieux (maillage interne) */
+  .interventions-strip__list a {
+    color: inherit;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.22);
+    padding-bottom: 2px;
+    transition: color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+  }
+  .interventions-strip__list a:hover {
+    color: var(--bordeaux);
+    border-color: var(--bordeaux);
   }
 </style>
 
@@ -505,6 +517,29 @@
 </section>
 
 </main>
+
+<!-- ========== INTERVENTIONS STRIP (maillage interne) ========== -->
+<section class="interventions-strip" aria-label="Zones d'intervention">
+  <div class="container">
+    <div class="interventions-strip__label"
+         data-fr="OÙ JE FILME" data-en="WHERE I FILM">OÙ JE FILME</div>
+    <p class="interventions-strip__list">
+      <a href="videaste-mariage-centre-val-de-loire.html">Centre-Val de Loire</a> <span>·</span>
+      <a href="videaste-mariage-orleans.html">Orléans</a> <span>·</span>
+      <a href="videaste-mariage-tours.html">Tours</a> <span>·</span>
+      <a href="videaste-mariage-blois.html">Blois</a> <span>·</span>
+      <a href="videaste-mariage-romorantin.html">Romorantin</a> <span>·</span>
+      <a href="videaste-mariage-chambord.html">Chambord</a> <span>·</span>
+      <a href="videaste-mariage-chenonceau.html">Chenonceau</a> <span>·</span>
+      <a href="videaste-mariage-touraine.html">Touraine</a> <span>·</span>
+      <a href="videaste-mariage-bourgogne.html">Bourgogne</a>
+    </p>
+    <a href="zones-intervention.html" class="interventions-strip__link">
+      <span data-fr="Découvrir toutes les zones" data-en="See all areas">Découvrir toutes les zones</span>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>
 
 <!-- ========== FOOTER ========== -->
 <footer class="footer" role="contentinfo" style="background-color: rgb(69, 4, 14); opacity: 100">

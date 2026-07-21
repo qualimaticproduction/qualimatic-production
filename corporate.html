@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Film de marque &amp; reportage photo pour entreprises | Qualimatic Production</title>
-<meta name="description" content="Films corporate et identité de marque cinématographiques. Portraits d'artisans, films institutionnels, marques d'exception. Vallée de la Loire." />
-<meta name="keywords" content="film corporate, film de marque, reportage photo entreprise, vidéaste entreprise haut de gamme, portrait artisan, savoir-faire" />
+<title>Film d'entreprise Loir-et-Cher &amp; Vallée de la Loire</title>
+<meta name="description" content="Films de marque et vidéos d'entreprise en Loir-et-Cher (41) : Blois, Romorantin, Tours, Orléans. Portraits d'artisans, PME, savoir-faire. Approche cinéma." />
+<meta name="keywords" content="film entreprise Loir-et-Cher, réalisation vidéo entreprise 41, production vidéo Blois, montage vidéo Blois, agence audiovisuelle Blois, film de marque, film corporate haut de gamme, portrait artisan" />
 <meta name="author" content="Charly Coulardot — Qualimatic Production" />
 <meta name="robots" content="index, follow" />
 
@@ -16,8 +16,8 @@
 
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Film de marque &amp; reportage photo pour entreprises | Qualimatic" />
-<meta property="og:description" content="Votre savoir-faire, raconté en image. Films de marque cinématographiques et reportages photo haut de gamme." />
+<meta property="og:title" content="Film d'entreprise &amp; film de marque en Loir-et-Cher | Qualimatic" />
+<meta property="og:description" content="Votre savoir-faire, raconté en image. Films de marque cinématographiques et reportages photo haut de gamme, en Vallée de la Loire." />
 <meta property="og:url" content="https://www.qualimaticproduction.fr/corporate.html" />
 <meta property="og:image" content="https://www.qualimaticproduction.fr/assets/og-cover.jpg" />
 <meta property="og:image:width" content="1200" />
@@ -47,10 +47,16 @@
       "serviceType": "Corporate Filmmaking & Brand Photography",
       "provider": { "@id": "https://www.qualimaticproduction.fr/#business" },
       "areaServed": [
-        { "@type": "Country", "name": "France" },
-        { "@type": "Place", "name": "Vallée de la Loire" }
+        { "@type": "AdministrativeArea", "name": "Loir-et-Cher" },
+        { "@type": "City", "name": "Blois" },
+        { "@type": "City", "name": "Romorantin-Lanthenay" },
+        { "@type": "City", "name": "Tours" },
+        { "@type": "City", "name": "Orléans" },
+        { "@type": "AdministrativeArea", "name": "Centre-Val de Loire" },
+        { "@type": "Place", "name": "Vallée de la Loire" },
+        { "@type": "Country", "name": "France" }
       ],
-      "description": "Films de marque cinématographiques et reportages photo pour entreprises, artisans et maisons d'exception. Portraits, savoir-faire, événementiel.",
+      "description": "Films de marque cinématographiques et reportages photo pour entreprises, artisans et maisons d'exception, en Loir-et-Cher et en Vallée de la Loire. Portraits, savoir-faire, événementiel.",
       "offers": {
         "@type": "Offer",
         "availability": "https://schema.org/InStock",
@@ -418,6 +424,28 @@
     text-wrap: pretty;
   }
   .corp-method__text em { color: var(--bordeaux); }
+
+  /* Ancrage local — même gabarit que .corp-method, fond crème pour alterner */
+  .corp-local { background: var(--cream); }
+  .corp-local .corp-method__text + .corp-method__text { margin-top: 22px; }
+  .corp-local__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 36px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    border-bottom: 1px solid var(--bordeaux);
+    padding-bottom: 4px;
+    transition: opacity 0.3s var(--ease-out);
+  }
+  .corp-local__link:hover { opacity: 0.7; }
+  .corp-local__link .arrow { transition: transform 0.3s var(--ease-out); }
+  .corp-local__link:hover .arrow { transform: translate(2px, -2px); }
 
   /* Final CTA */
   .corp-cta {
@@ -911,7 +939,25 @@
   </div>
 </section>
 
-<!-- ========== 7. MÉTHODE ========== -->
+<!-- ========== 7. ANCRAGE LOCAL ========== -->
+<section class="corp-method corp-local" id="secteur" aria-label="Secteur d'intervention">
+  <div class="corp-method__inner corp-reveal">
+    <span class="corp-section__eyebrow">Le secteur</span>
+    <h2>Où je <em>travaille</em><span class="end-bordeaux">.</span></h2>
+    <p class="corp-method__text">
+      Je suis installé à Romorantin-Lanthenay, en <em>Loir-et-Cher</em>. Blois, Tours et Orléans sont à moins d'une heure de route.
+    </p>
+    <p class="corp-method__text">
+      Pour un film d'entreprise, cette proximité change la donne&nbsp;: on peut venir repérer l'atelier avant de tourner, revenir un autre jour, attendre la bonne lumière plutôt que de tout jouer en une matinée. Au-delà du 41 et de la Vallée de la Loire, je me déplace partout en France&nbsp;— les frais sont alors facturés au coût réel.
+    </p>
+    <a href="zones-intervention.html" class="corp-local__link">
+      <span>Toutes les zones d'intervention</span>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- ========== 8. MÉTHODE ========== -->
 <section class="corp-method" id="methode" aria-label="Méthode">
   <div class="corp-method__inner corp-reveal">
     <span class="corp-section__eyebrow">Méthode</span>
@@ -922,7 +968,7 @@
   </div>
 </section>
 
-<!-- ========== 8. CTA FINAL ========== -->
+<!-- ========== 9. CTA FINAL ========== -->
 <section class="corp-cta" aria-label="Appel à l'action">
   <div class="container">
     <h2 class="corp-cta__title corp-reveal">Parlons de <em>votre projet</em><span class="end-bordeaux">.</span></h2>
