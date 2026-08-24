@@ -1195,6 +1195,58 @@
 .partner-card__cta a:hover { color: var(--cream); border-color: var(--bordeaux); }
 .partner-card__cta a:hover::before { transform: scaleX(1); }
 
+/* Bouton brochure duo — cartes partenaires (fond crème) */
+.btn-plaquette--partner {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 12px 22px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--cream);
+  background: var(--bordeaux);
+  border: 1px solid var(--bordeaux);
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  position: static;          /* annule le ::before scaleX du .btn-plaquette parent */
+  overflow: visible;
+  transition: background 0.32s ease, color 0.32s ease, border-color 0.32s ease;
+}
+.btn-plaquette--partner::before { display: none; content: none; }
+
+.btn-plaquette--partner:hover,
+.btn-plaquette--partner:focus-visible {
+  background: transparent;
+  color: var(--bordeaux);
+  border-color: var(--bordeaux);
+  outline: none;
+}
+.btn-plaquette--partner .btn-plaquette__icon {
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 0.32s ease;
+}
+.btn-plaquette--partner:hover .btn-plaquette__icon,
+.btn-plaquette--partner:focus-visible .btn-plaquette__icon {
+  transform: translateY(2px);
+}
+
+@media (max-width: 767px) {
+  .btn-plaquette--partner {
+    align-self: stretch;
+    justify-content: center;
+    width: 100%;
+    font-size: 10px;
+    padding: 12px 18px;
+  }
+}
+
 /* ============================================
    FORM SECTION
    ============================================ */
