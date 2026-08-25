@@ -27,7 +27,13 @@
 
 img, video, iframe, svg { max-width: 100%; }
 
-html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-text-size-adjust: 100%; /* iOS Safari gonfle le texte des blocs larges et fait déborder les cartes */
+  text-size-adjust: 100%;
+}
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
