@@ -866,6 +866,116 @@
 .btn-plaquette:hover { color: var(--cream); border-color: var(--bordeaux); }
 .btn-plaquette:hover::before { transform: scaleX(1); }
 
+/* ----- Formules : saison, bandeau déplacement, valeur, options & en pratique ----- */
+.formules__season {
+  display: block;
+  margin-top: 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+
+.formules__travel {
+  max-width: 1200px;
+  margin: 0 auto clamp(44px, 5vw, 64px);
+  padding: clamp(26px, 3vw, 38px) clamp(22px, 4vw, 56px);
+  background: var(--bordeaux);
+  text-align: center;
+}
+.formules__travel-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.25;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+}
+.formules__travel-title::before {
+  content: "✻";
+  display: block;
+  font-style: normal;
+  font-size: 14px;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+.formules__travel-text {
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(245, 239, 232, 0.9);
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+
+.formules__extra {
+  max-width: 1200px;
+  margin: clamp(20px, 3vw, 32px) auto 0;
+  padding: clamp(30px, 4vw, 48px) clamp(24px, 4vw, 56px);
+  background: rgba(245, 239, 232, 0.04);
+  border: 1px solid rgba(245, 239, 232, 0.14);
+}
+.formules__extra-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(24px, 2.4vw, 32px);
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(245, 239, 232, 0.14);
+}
+.formules__options,
+.formules__practical {
+  list-style: none;
+  columns: 2;
+  column-gap: clamp(28px, 4vw, 64px);
+}
+.formules__options li,
+.formules__practical li {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 14px;
+  padding-left: 22px;
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(245, 239, 232, 0.88);
+}
+.formules__options li::before,
+.formules__practical li::before {
+  content: "✻";
+  position: absolute;
+  left: 0; top: 1px;
+  color: #FFFFFF;
+  font-size: 12px;
+}
+.formules__options li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(245, 239, 232, 0.08);
+}
+.formules__option-price {
+  flex: none;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .formules__options,
+  .formules__practical { columns: 1; }
+}
+
 /* ============================================
    MARQUEE TESTIMONIALS
    ============================================ */
