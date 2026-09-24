@@ -461,6 +461,16 @@
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(20px, 2.4vw, 32px);
 }
+.video-card--reel img { object-position: center 40%; }
+
+/* Lightbox : variante verticale pour les reels Instagram */
+.lightbox--vertical .lightbox__inner {
+  width: min(420px, 92vw);
+  height: min(86vh, 780px);
+  max-width: none;
+  aspect-ratio: auto;
+  background: #fff;
+}
 
 .video-card {
   position: relative;

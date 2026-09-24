@@ -60,8 +60,17 @@
         document.body.style.overflow = 'hidden';
       });
     });
+    // Reels Instagram (format vertical) : lecteur embed officiel
+    document.querySelectorAll('[data-ig]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        frame.src = `https://www.instagram.com/reel/${el.dataset.ig}/embed/`;
+        lb.classList.add('is-open', 'lightbox--vertical');
+        document.body.style.overflow = 'hidden';
+      });
+    });
     const closeFn = () => {
-      lb.classList.remove('is-open');
+      lb.classList.remove('is-open', 'lightbox--vertical');
       frame.src = '';
       document.body.style.overflow = '';
     };
