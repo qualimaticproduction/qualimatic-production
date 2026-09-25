@@ -466,7 +466,7 @@
   max-width: 1100px;
   margin: 0 auto;
 }
-.video-card--reel img { object-position: center 40%; }
+.video-card--reel img { object-position: center 26%; }
 
 /* Lightbox : variante verticale pour les reels Instagram */
 .lightbox--vertical .lightbox__inner {
