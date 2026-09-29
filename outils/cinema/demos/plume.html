@@ -1,0 +1,317 @@
+<title>La plume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+  /* Un bureau vu de dessus : cuir vert, papier crème, encre sépia. Un seul univers, couleurs fixes. */
+  :root {
+    --leather: #1e3326; --leather-deep: #13231a;
+    --paper: #f6efe2; --paper-edge: #e9dfcc;
+    --ink: #2a1a12; --ink-soft: rgba(42, 26, 18, .45);
+    --wine: #5C1721; --cream: #F5EFE8; --taupe: #A89888;
+    --script: 'Allura', 'Snell Roundhand', cursive;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--leather-deep); color: var(--cream); font: 300 15px/1.5 var(--sans); }
+
+  .track { position: relative; height: 700vh; }
+  .stage {
+    position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+    display: grid; place-items: center;
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.06), rgba(0,0,0,.35) 75%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.35'/></svg>"),
+      var(--leather);
+  }
+
+  /* Le bureau : bandeau du haut (encrier, cachet) + la feuille. Mis à l'échelle pour tenir à l'écran. */
+  .desk { position: relative; width: min(560px, 92vw); transform-origin: 50% 50%; padding-top: calc(min(560px, 92vw) * .2); } /* place pour la plume au repos dans l'encrier */
+  .desk-top { position: relative; height: calc(min(560px, 92vw) * .2); }
+  .inkwell {
+    position: absolute; left: 4%; top: 18%; width: 16%; aspect-ratio: 1; border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%, #0b0706 0 30%, transparent 31%),
+      radial-gradient(circle at 38% 34%, rgba(255,255,255,.75), rgba(255,255,255,0) 22%),
+      radial-gradient(circle at 50% 50%, rgba(210,225,230,.55), rgba(140,160,170,.35) 62%, rgba(40,50,55,.5) 70%, transparent 71%);
+    box-shadow: 6px 10px 18px rgba(0,0,0,.45);
+  }
+  .seal {
+    position: absolute; right: 6%; top: 26%; width: 11%; aspect-ratio: 1; border-radius: 48% 52% 46% 54%;
+    background: radial-gradient(circle at 40% 35%, #8a2733, var(--wine) 55%, #3d0e15);
+    box-shadow: 3px 6px 10px rgba(0,0,0,.45), inset 0 0 0 3px rgba(0,0,0,.15);
+    display: grid; place-items: center; color: rgba(245,239,232,.55); font: 400 calc(min(560px, 92vw) * .035)/1 var(--serif);
+  }
+
+  .paper {
+    --fs: calc(min(560px, 92vw) * .066);
+    position: relative; background:
+      radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+      linear-gradient(var(--paper), var(--paper-edge));
+    color: var(--ink);
+    padding: 7% 8% 8%;
+    box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 10px 18px 36px rgba(0,0,0,.5);
+    display: flex; flex-direction: column; gap: calc(var(--fs) * .42);
+  }
+  .paper canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* Les intitulés existent en vrai (accessibles), mais transparents : l'encre est dessinée par la plume */
+  .lbl { font: 400 var(--fs)/1.1 var(--script); color: transparent; white-space: nowrap; }
+  .title { font-size: calc(var(--fs) * 1.3); margin-bottom: calc(var(--fs) * .2); display: block; }
+  .row { display: flex; align-items: flex-end; gap: .6em; }
+  .row.col { flex-direction: column; align-items: stretch; gap: .2em; }
+  .field {
+    flex: 1; min-width: 0; font: italic 400 calc(var(--fs) * .52)/1.3 var(--serif); color: var(--ink);
+    background: transparent; border: 0; border-bottom: 1px dotted var(--ink-soft); border-radius: 0;
+    padding: 2px 2px 3px; outline: none; opacity: 0; transition: opacity .9s ease;
+  }
+  .field:focus { border-bottom: 1px solid var(--wine); }
+  select.field { appearance: none; -webkit-appearance: none; cursor: pointer; }
+  textarea.field {
+    border: 0; resize: none; height: calc(var(--fs) * 2.2); line-height: calc(var(--fs) * .72);
+    background: repeating-linear-gradient(transparent 0 calc(var(--fs) * .72 - 1px), var(--ink-soft) calc(var(--fs) * .72 - 1px) calc(var(--fs) * .72));
+  }
+  .send {
+    align-self: flex-end; margin-top: calc(var(--fs) * .25); opacity: 0; transition: opacity .9s ease .2s;
+    font: 400 11px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--cream);
+    background: var(--wine); border: 0; padding: 12px 18px; border-radius: 999px 999px 999px 999px / 60% 60% 60% 60%;
+    box-shadow: 2px 4px 10px rgba(61,14,21,.35); cursor: pointer;
+  }
+  .send:hover, .send:focus-visible { background: #6f1d29; }
+  .paper.is-ready .field, .paper.is-ready .send { opacity: 1; }
+  .note { position: absolute; left: 8%; right: 8%; bottom: 2.4%; font: 400 11px/1.4 var(--sans); color: var(--wine); text-align: center; min-height: 1.4em; }
+
+  .quill, .quill-shadow { position: absolute; left: 0; top: 0; pointer-events: none; will-change: transform; }
+  .quill-shadow { filter: brightness(0) blur(3px); opacity: .28; }
+
+  .caption {
+    position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; pointer-events: none;
+    font: 400 10px/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: rgba(245,239,232,.6);
+    transition: opacity .6s ease;
+  }
+  .after { background: var(--leather-deep); color: var(--taupe); text-align: center; padding: 60px 20px 80px; font-size: 13px; }
+</style>
+
+<section class="track" aria-label="Formulaire de contact écrit à la plume">
+  <div class="stage">
+    <div class="desk">
+      <div class="desk-top" aria-hidden="true">
+        <div class="inkwell"></div>
+        <div class="seal">Q</div>
+      </div>
+      <form class="paper" novalidate>
+        <canvas aria-hidden="true"></canvas>
+        <span class="lbl title">Racontez-moi votre mariage</span>
+        <div class="row"><label class="lbl" for="f-noms">Vos prénoms</label><input class="field" id="f-noms" name="couple" autocomplete="name" disabled /></div>
+        <div class="row"><label class="lbl" for="f-email">Email</label><input class="field" id="f-email" name="email" type="email" autocomplete="email" disabled /></div>
+        <div class="row"><label class="lbl" for="f-tel">Téléphone</label><input class="field" id="f-tel" name="phone" type="tel" autocomplete="tel" disabled /></div>
+        <div class="row"><label class="lbl" for="f-date">Date du mariage</label><input class="field" id="f-date" name="wedding_date" disabled /></div>
+        <div class="row"><label class="lbl" for="f-lieu">Lieu</label><input class="field" id="f-lieu" name="location" disabled /></div>
+        <div class="row"><label class="lbl" for="f-formule">Formule envisagée</label>
+          <select class="field" id="f-formule" name="formule" disabled>
+            <option value="a-definir">À définir</option>
+            <option value="elegance">Élégance · 2 650 €</option>
+            <option value="signature">Signature · 4 000 €</option>
+            <option value="sur-mesure">Sur-mesure</option>
+          </select></div>
+        <div class="row col"><label class="lbl" for="f-msg">Votre message</label><textarea class="field" id="f-msg" name="message" rows="3" disabled></textarea></div>
+        <button class="send" type="submit" disabled>Envoyer ma lettre</button>
+        <p class="note" role="status"></p>
+      </form>
+      <img class="quill-shadow" src="plume.webp" alt="" />
+      <img class="quill" src="plume.webp" alt="" />
+    </div>
+    <p class="caption">Faites défiler : la plume écrit</p>
+  </div>
+</section>
+<p class="after">Démo de travail · Qualimatic Production</p>
+
+<script>
+(function () {
+  'use strict';
+  // Plume : 800 × 502, pointe en (1, 500), axe vers le haut à droite (≈ -30°)
+  var IMG_W = 800, IMG_H = 502, TIP_X = 1, TIP_Y = 500;
+  var HOLD_IN = 0.03, HOLD_OUT = 0.1;
+
+  var track = document.querySelector('.track'), stage = track.querySelector('.stage');
+  var desk = stage.querySelector('.desk'), paper = desk.querySelector('.paper');
+  var canvas = paper.querySelector('canvas'), ctx = canvas.getContext('2d');
+  var quill = desk.querySelector('.quill'), shadow = desk.querySelector('.quill-shadow');
+  var inkwell = desk.querySelector('.inkwell'), caption = stage.querySelector('.caption');
+  var fields = [].slice.call(paper.querySelectorAll('.field, .send'));
+  var note = paper.querySelector('.note');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var ease = function (u) { return u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2; };
+
+  var scale = 1, dpr = 1, W = 0, H = 0, qW = 0, labels = [], segs = [], T = 1, ready = false;
+  var current = 0;
+
+  // Position d'un élément dans le repère du bureau (non mis à l'échelle)
+  function local(el) {
+    var d = desk.getBoundingClientRect(), r = el.getBoundingClientRect();
+    return { x: (r.left - d.left) / scale, y: (r.top - d.top) / scale, w: r.width / scale, h: r.height / scale };
+  }
+
+  // Chaque intitulé est dessiné une fois hors écran ; on en relève, colonne par colonne,
+  // le haut et le bas de l'encre pour que la pointe suive vraiment les lettres
+  function rasterize(el) {
+    var cs = getComputedStyle(el), fs = parseFloat(cs.fontSize);
+    var box = local(el), p = local(paper);
+    var pad = Math.ceil(fs * .5), w = Math.ceil(box.w + pad * 2), h = Math.ceil(box.h + pad * 2);
+    var c = document.createElement('canvas'); c.width = w * dpr; c.height = h * dpr;
+    var x = c.getContext('2d'); x.scale(dpr, dpr);
+    x.font = '400 ' + fs + 'px Allura, cursive'; x.fillStyle = '#2a1a12'; x.textBaseline = 'middle';
+    x.fillText(el.textContent, pad, pad + box.h / 2 + fs * .04);
+    var data = x.getImageData(0, 0, c.width, c.height).data;
+    var top = [], bot = [], x0 = -1, x1 = -1;
+    for (var cx = 0; cx < w; cx++) {
+      var t = -1, b = -1, px = Math.floor(cx * dpr);
+      for (var cy = 0; cy < c.height; cy++) {
+        if (data[(cy * c.width + px) * 4 + 3] > 60) { if (t < 0) t = cy; b = cy; }
+      }
+      top.push(t < 0 ? -1 : t / dpr); bot.push(b < 0 ? -1 : b / dpr);
+      if (t >= 0) { if (x0 < 0) x0 = cx; x1 = cx; }
+    }
+    // Lever de plume dans les blancs entre les mots (moyenne glissante des colonnes vides)
+    var lift = top.map(function (_, i) {
+      var n = 0, k = 0;
+      for (var j = i - 7; j <= i + 7; j++) { if (j >= 0 && j < w) { k++; if (top[j] < 0) n++; } }
+      return n / Math.max(k, 1);
+    });
+    return { el: el, canvas: c, ox: box.x - p.x - pad, oy: box.y - p.y - pad, px: p.x, py: p.y,
+      w: w, h: h, fs: fs, top: top, bot: bot, lift: lift, x0: x0, x1: x1, mid: pad + box.h / 2 };
+  }
+
+  function tipAt(L, rx) {
+    var c = clamp(Math.round(rx), 0, L.w - 1);
+    var y, h;
+    if (L.top[c] < 0) { y = L.mid + L.fs * .12; h = .45 * L.lift[c]; }
+    else {
+      // La pointe monte et descend dans l'encre, comme les pleins et les déliés
+      var s = .5 + .5 * Math.sin(rx * 2 * Math.PI / (L.fs * .24));
+      y = L.top[c] + (L.bot[c] - L.top[c]) * s; h = .45 * L.lift[c];
+    }
+    return { x: L.px + L.ox + rx, y: L.py + L.oy + y, h: h };
+  }
+
+  function layout() {
+    desk.style.transform = 'none'; scale = 1;
+    var dh = desk.offsetHeight, dw = desk.offsetWidth;
+    scale = Math.min(1, (stage.clientHeight * .9) / dh, (stage.clientWidth * .96) / dw);
+    desk.style.transform = 'scale(' + scale + ')';
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    var p = local(paper); W = p.w; H = p.h;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    qW = W * .42;
+    [quill, shadow].forEach(function (q) { q.style.width = qW + 'px'; q.style.height = (qW * IMG_H / IMG_W) + 'px'; });
+    labels = [].slice.call(paper.querySelectorAll('.lbl')).map(rasterize);
+
+    // L'encrier : on y trempe la pointe
+    var iw = local(inkwell), ink = { x: iw.x + iw.w * .5, y: iw.y + iw.h * .52 };
+
+    // Le scénario : sortir de l'encrier, écrire chaque intitulé, lever entre deux, retremper, se reposer
+    segs = [];
+    var travel = function (a, b) { var d = Math.hypot(b.x - a.x, b.y - a.y); segs.push({ type: 'travel', a: a, b: b, w: .35 + d / W * .9 }); };
+    var at = { x: ink.x, y: ink.y, h: 0 };
+    segs.push({ type: 'rest', p: at, w: .25 });
+    labels.forEach(function (L, i) {
+      var s = tipAt(L, L.x0), e = tipAt(L, L.x1);
+      travel(at, { x: s.x, y: s.y, h: 0 });
+      segs.push({ type: 'write', i: i, w: (L.x1 - L.x0) / W * 2.3 });
+      at = { x: e.x, y: e.y, h: 0 };
+      if (i === 2 || i === 5) { travel(at, { x: ink.x, y: ink.y, h: 0 }); segs.push({ type: 'dip', p: ink, w: .35 }); at = { x: ink.x, y: ink.y, h: 0 }; }
+    });
+    travel(at, { x: ink.x, y: ink.y, h: 0 });
+    segs.push({ type: 'rest', p: { x: ink.x, y: ink.y, h: 0 }, w: .3 });
+    T = segs.reduce(function (s, g) { return s + g.w; }, 0);
+  }
+
+  function stateAt(t) {
+    var acc = 0, done = -1;
+    for (var k = 0; k < segs.length; k++) {
+      var g = segs[k];
+      if (t <= acc + g.w || k === segs.length - 1) {
+        var u = clamp((t - acc) / g.w, 0, 1);
+        if (g.type === 'rest') return { x: g.p.x, y: g.p.y, h: .1, write: done, u: 1 };
+        if (g.type === 'dip') { var d = Math.sin(u * Math.PI); return { x: g.p.x, y: g.p.y - d * 2, h: .1 + .35 * d, write: done, u: 1 }; }
+        if (g.type === 'travel') {
+          var e = ease(u);
+          return { x: g.a.x + (g.b.x - g.a.x) * e, y: g.a.y + (g.b.y - g.a.y) * e, h: Math.sin(u * Math.PI) * .95, write: done, u: 1 };
+        }
+        var L = labels[g.i], rx = L.x0 + (L.x1 - L.x0) * u, tp = tipAt(L, rx);
+        return { x: tp.x, y: tp.y, h: tp.h, write: g.i, u: u, rx: rx };
+      }
+      acc += g.w;
+      if (g.type === 'write') done = g.i;
+    }
+  }
+
+  function render(t, now) {
+    var s = stateAt(t);
+    // L'encre : intitulés terminés en entier, celui en cours jusqu'à la pointe
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    labels.forEach(function (L, i) {
+      var full = i < s.write || (i === s.write && s.u >= 1) || (s.write > i);
+      var cur = i === s.write && s.u < 1;
+      if (!full && !cur) return;
+      var wpx = cur ? Math.max(0, s.rx + 1) : L.w;
+      ctx.drawImage(L.canvas, 0, 0, wpx * dpr, L.canvas.height, L.ox, L.oy, wpx, L.h);
+    });
+
+    // La main invisible : légère respiration, inclinaison qui suit le geste, hauteur au-dessus du papier
+    var breath = Math.sin(now / 900) * 1.3 + Math.sin(now / 370) * .4;
+    var angle = -14 + breath + (s.write >= 0 && s.u < 1 ? Math.sin(s.rx * .5) * 1.2 : 0);
+    var hh = clamp(s.h, 0, 1);
+    var sc = 1 + hh * .06;
+    var ox = TIP_X / IMG_W * qW, oy = TIP_Y / IMG_H * (qW * IMG_H / IMG_W);
+    var lift = hh * 10;                                   // la plume « monte » vers le spectateur
+    var tx = s.x - ox, ty = s.y - oy - lift;
+    quill.style.transformOrigin = ox + 'px ' + oy + 'px';
+    quill.style.transform = 'translate(' + tx + 'px,' + ty + 'px) rotate(' + angle + 'deg) scale(' + sc + ')';
+    // L'ombre : nette et collée quand la pointe touche, plus loin et plus floue quand elle se lève
+    var sx = 4 + hh * 22, sy = 6 + hh * 30;
+    shadow.style.transformOrigin = ox + 'px ' + oy + 'px';
+    shadow.style.transform = 'translate(' + (s.x - ox + sx) + 'px,' + (s.y - oy + sy) + 'px) rotate(' + angle + 'deg)';
+    shadow.style.filter = 'brightness(0) blur(' + (2 + hh * 6).toFixed(1) + 'px)';
+    shadow.style.opacity = (.32 - hh * .12).toFixed(2);
+
+    var isReady = t >= T - 1e-3;
+    if (isReady !== ready) {
+      ready = isReady;
+      paper.classList.toggle('is-ready', ready);
+      fields.forEach(function (f) { f.disabled = !ready; });
+    }
+  }
+
+  function progress() {
+    var top = track.getBoundingClientRect().top, len = track.offsetHeight - stage.offsetHeight;
+    return len > 0 ? clamp(-top / len, 0, 1) : 0;
+  }
+
+  function loop(now) {
+    requestAnimationFrame(loop);
+    if (!segs.length) return;
+    var p = progress();
+    var target = reduce ? T : clamp((p - HOLD_IN) / (1 - HOLD_IN - HOLD_OUT), 0, 1) * T;
+    current = Math.abs(target - current) < 1e-4 ? target : current + (target - current) * .12;
+    render(current, now);
+    caption.style.opacity = clamp(1 - p / .04, 0, 1);
+  }
+
+  paper.addEventListener('submit', function (e) {
+    e.preventDefault();
+    note.textContent = 'Démo : sur le site, votre lettre me sera envoyée.';
+  });
+
+  function start() { layout(); requestAnimationFrame(loop); }
+  var t0;
+  addEventListener('resize', function () { clearTimeout(t0); t0 = setTimeout(layout, 150); });
+  var go = function () { if (quill.complete) start(); else quill.onload = start; };
+  if (document.fonts && document.fonts.load) document.fonts.load('40px Allura').then(go, go); else go();
+})();
+</script>

@@ -1,0 +1,648 @@
+<title>Mariage au château</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  /* Visite d'un château au scroll : cadres (films), livre (tarifs, avis), bureau (lettre à la plume).
+     Un seul univers, sombre et doré : couleurs fixes. */
+  :root {
+    --night: #0f0b08; --cream: #F5EFE8; --wine: #5C1721; --taupe: #A89888; --taupe-soft: #C7BBAB;
+    --ink: #33231a; --ink-soft: rgba(51, 35, 26, .5); --gold: #c9a45c;
+    --script: 'Allura', 'Snell Roundhand', cursive;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  body { background: var(--night); color: var(--cream); font: 300 15px/1.5 var(--sans); }
+  button, input, select, textarea { font: inherit; color: inherit; }
+
+  .track { position: relative; height: 1700vh; }
+  .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; overflow: clip; background: var(--night); }
+  .scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .loader { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(245,239,232,.5); transform: scaleX(0); transform-origin: left; transition: opacity .8s; }
+
+  /* Tous les éléments posés sur le décor : placés par une transformation projective (coins exacts) */
+  .ov { position: absolute; left: 0; top: 0; transform-origin: 0 0; visibility: hidden; opacity: 0; }
+
+  /* Ouverture */
+  .intro { position: absolute; left: 0; right: 0; bottom: clamp(70px, 13vh, 130px); text-align: center; padding: 0 20px; pointer-events: none;
+    text-shadow: 0 2px 30px rgba(0,0,0,.55); }
+  .intro small { display: block; font: 400 10px/1 var(--sans); letter-spacing: .34em; text-transform: uppercase; opacity: .82; margin-bottom: 18px; }
+  .intro h1 { font: 400 clamp(40px, 7vw, 88px)/1 var(--serif); }
+  .intro h1 em { font-style: italic; }
+  .intro p { margin-top: 14px; font-size: 12px; letter-spacing: .24em; text-transform: uppercase; opacity: .85; }
+  .hint { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); font: 400 10px/1 var(--sans);
+    letter-spacing: .3em; text-transform: uppercase; color: rgba(245,239,232,.7); pointer-events: none; white-space: nowrap; }
+
+  /* Chapitres */
+  .chap { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 14px); right: 14px; z-index: 30; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; max-width: calc(100vw - 28px); }
+  .chap button { font: 400 10px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: rgba(245,239,232,.8);
+    background: rgba(15,11,8,.45); border: 1px solid rgba(245,239,232,.25); padding: 8px 12px; cursor: pointer;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: color .3s, border-color .3s; }
+  .chap button:hover, .chap button:focus-visible, .chap button.is-on { color: var(--cream); border-color: rgba(245,239,232,.7); }
+
+  /* Les films dans les cadres */
+  .art { display: block; overflow: hidden; background: #2a2019; box-shadow: inset 0 0 calc(var(--u) * 6) rgba(0,0,0,.45); }
+  .art img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(.12) contrast(.96) brightness(.96); }
+  .art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,240,215,.16), rgba(255,240,215,0) 45%, rgba(0,0,0,.18)); pointer-events: none; }
+  .art .play { position: absolute; left: 50%; top: 50%; width: calc(var(--u) * 30); height: calc(var(--u) * 30); transform: translate(-50%, -50%);
+    border-radius: 50%; background: rgba(92,23,33,.88); display: grid; place-items: center; transition: transform .4s, background .4s; }
+  .art .play svg { width: 34%; margin-left: 8%; fill: var(--cream); }
+  .art:hover .play, .art:focus-visible .play { transform: translate(-50%, -50%) scale(1.08); background: var(--wine); }
+  .plaque { display: grid; place-items: center; text-align: center; color: #3b2a14;
+    background: linear-gradient(180deg, #e8cf8f, #b8904a 55%, #d9b86f); box-shadow: 0 2px 6px rgba(0,0,0,.45);
+    font: 500 calc(var(--u) * 8)/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+
+  /* Couverture */
+  .cover { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: calc(var(--u) * 3); }
+  .gold { background: linear-gradient(120deg, #9a7231, #f4dfa6 38%, #b98c3f 55%, #f1d796 72%, #9a7231);
+    -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 1px 0 rgba(0,0,0,.55)); }
+  .cover .star { font: 400 calc(var(--u) * 9)/1 var(--serif); }
+  .cover .brand { font: 400 calc(var(--u) * 17)/1.1 var(--script); }
+  .cover .rule { width: 40%; height: 1px; background: linear-gradient(90deg, transparent, #d9b86f, transparent); }
+  .cover .t1 { font: 400 calc(var(--u) * 5.2)/1 var(--sans); letter-spacing: .5em; text-transform: uppercase; margin-left: .5em; }
+  .cover .t2 { font: italic 400 calc(var(--u) * 9)/1 var(--serif); }
+
+  /* Pages du livre */
+  .page { color: var(--ink); }
+  .pg { position: absolute; inset: 0; padding: 9% 11% 8%; display: flex; flex-direction: column; }
+  .pg-run { font: 400 calc(var(--u) * 2.6)/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: rgba(51,35,26,.55); text-align: center; }
+  .pg-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .pg-body.center { align-items: center; text-align: center; }
+  .pg-eyebrow { font: 400 calc(var(--u) * 3)/1.2 var(--sans); letter-spacing: .32em; text-transform: uppercase; color: rgba(51,35,26,.65); }
+  .pg-title { font: italic 400 calc(var(--u) * 13)/1 var(--serif); color: var(--wine); margin: calc(var(--u) * 3) 0 calc(var(--u) * 2); }
+  .pg-price { font: 400 calc(var(--u) * 7)/1 var(--serif); }
+  .pg-price small { font: 400 calc(var(--u) * 3)/1 var(--sans); letter-spacing: .2em; }
+  .pg-sub { margin-top: calc(var(--u) * 3); font: italic 400 calc(var(--u) * 4.1)/1.35 var(--serif); color: rgba(51,35,26,.8); }
+  .pg-orn { margin: calc(var(--u) * 5) 0; color: var(--wine); font-size: calc(var(--u) * 5); }
+  .pg-note { font: 400 calc(var(--u) * 3.2)/1.45 var(--sans); color: rgba(51,35,26,.7); max-width: 80%; }
+  .pg h4 { font: 400 calc(var(--u) * 3.1)/1.2 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: rgba(51,35,26,.65); margin-bottom: calc(var(--u) * 3); }
+  .pg ul { list-style: none; display: grid; gap: calc(var(--u) * 1.5); }
+  .pg li { font: 400 calc(var(--u) * 3.55)/1.35 var(--serif); padding-left: 1.1em; position: relative; }
+  .pg li::before { content: '✻'; position: absolute; left: 0; color: var(--wine); font-size: .7em; top: .25em; }
+  .pg-cta { margin-top: calc(var(--u) * 4); align-self: flex-start; font: 400 calc(var(--u) * 2.8)/1 var(--sans); letter-spacing: .24em; text-transform: uppercase;
+    color: var(--cream); background: var(--wine); border: 0; padding: calc(var(--u) * 2.4) calc(var(--u) * 3.6); cursor: pointer; }
+  .pg-cta:hover, .pg-cta:focus-visible { background: #6f1d29; }
+  .pg-num { text-align: center; font: italic 400 calc(var(--u) * 3.4)/1 var(--serif); color: rgba(51,35,26,.55); }
+  .review + .review { margin-top: calc(var(--u) * 5); padding-top: calc(var(--u) * 5); border-top: 1px solid rgba(51,35,26,.2); }
+  .review p { font: italic 400 calc(var(--u) * 3.5)/1.5 var(--serif); }
+  .review p::before { content: '« '; color: var(--wine); }
+  .review p::after { content: ' »'; color: var(--wine); }
+  .review cite { display: block; margin-top: calc(var(--u) * 2); font: normal 400 calc(var(--u) * 6)/1 var(--script); color: var(--wine); }
+  .review cite small { font: 400 calc(var(--u) * 2.5)/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: rgba(51,35,26,.55); margin-left: .6em; }
+  .leaf { position: absolute; inset: 0; display: none; }
+  .leaf .pg { background: var(--leaf, #cdbfb0); }
+
+  /* La lettre sur le bureau */
+  .letter { color: var(--ink); overflow: visible; }
+  .letter canvas.ink { position: absolute; left: 0; top: 0; pointer-events: none; }
+  .half { position: absolute; top: 0; bottom: 0; width: 50%; padding: 6% 5% 5% 5.5%; display: flex; flex-direction: column; gap: calc(var(--u) * 1.6); }
+  .half.l { left: 0; } .half.r { left: 50%; padding-left: 6%; }
+  .lbl { font: 400 calc(var(--u) * 3.1)/1.1 var(--script); color: transparent; white-space: nowrap; }
+  .lbl.title { font-size: calc(var(--u) * 4.3); margin-bottom: calc(var(--u) * .6); display: block; align-self: flex-start; }
+  .row { display: flex; align-items: flex-end; gap: .6em; }
+  .row.col { flex-direction: column; align-items: stretch; gap: .15em; }
+  .field { flex: 1; min-width: 0; font: italic 400 max(16px, calc(var(--u) * 1.9))/1.3 var(--serif); color: var(--ink); background: transparent;
+    border: 0; border-bottom: 1px dotted var(--ink-soft); border-radius: 0; padding: 1px 2px 2px; outline: none; opacity: 0; transition: opacity .9s; }
+  .field:focus { border-bottom: 1px solid var(--wine); }
+  select.field { appearance: none; -webkit-appearance: none; cursor: pointer; }
+  textarea.field { border: 0; resize: none; height: calc(var(--u) * 8.4); line-height: calc(var(--u) * 2.8);
+    background: repeating-linear-gradient(transparent 0 calc(var(--u) * 2.8 - 1px), var(--ink-soft) calc(var(--u) * 2.8 - 1px) calc(var(--u) * 2.8)); }
+  .send { align-self: flex-start; margin-top: calc(var(--u) * 1.2); opacity: 0; transition: opacity .9s .2s;
+    font: 400 max(10px, calc(var(--u) * 1.25))/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--cream);
+    background: var(--wine); border: 0; padding: calc(var(--u) * 1.3) calc(var(--u) * 2.2); cursor: pointer; }
+  .send:hover, .send:focus-visible { background: #6f1d29; }
+  .letter.is-ready .field, .letter.is-ready .send { opacity: 1; }
+  .letter.is-sent .send { opacity: 0; pointer-events: none; }
+  .quill, .quill-shadow { position: absolute; left: 0; top: 0; pointer-events: none; }
+  .quill-shadow { filter: brightness(0) blur(3px); opacity: .3; }
+  .seal { position: absolute; width: calc(var(--u) * 15); aspect-ratio: 1; right: 6%; bottom: 6%; opacity: 0; pointer-events: none; }
+  .letter.is-sent .seal { animation: stamp .9s cubic-bezier(.2,.9,.3,1.2) forwards; }
+  @keyframes stamp { 0% { opacity: 0; transform: scale(2.2) rotate(-18deg); } 55% { opacity: 1; transform: scale(.92) rotate(-6deg); } 100% { opacity: 1; transform: scale(1) rotate(-8deg); } }
+  .thanks { position: absolute; left: 56%; right: 22%; bottom: 8%; font: 400 calc(var(--u) * 3.2)/1.15 var(--script); color: var(--ink);
+    opacity: 0; transition: opacity 1.2s .6s; }
+  .letter.is-sent .thanks { opacity: 1; }
+
+  .halfnav { position: absolute; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); transform: translateX(-50%); display: none; gap: 8px; z-index: 5; }
+  .halfnav.is-on { display: flex; }
+  .halfnav button { font: 400 10px/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--cream); cursor: pointer;
+    background: rgba(15,11,8,.6); border: 1px solid rgba(245,239,232,.35); padding: 10px 14px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .halfnav button[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); }
+  .after { text-align: center; padding: 60px 20px 90px; color: var(--taupe); font-size: 13px; }
+  .after strong { display: block; font: italic 400 24px/1.3 var(--serif); color: var(--cream); margin-bottom: 8px; }
+  @media (prefers-reduced-motion: reduce) { .letter.is-sent .seal { animation: none; opacity: 1; transform: rotate(-8deg); } }
+</style>
+
+<nav class="chap" aria-label="Chapitres">
+  <button type="button" data-go="films">Films</button>
+  <button type="button" data-go="tarifs">Tarifs</button>
+  <button type="button" data-go="avis">Avis</button>
+  <button type="button" data-go="contact">Contact</button>
+</nav>
+
+<section class="track" aria-label="Visite du château : films, tarifs, avis, contact">
+  <div class="stage">
+    <canvas class="scene" aria-hidden="true"></canvas>
+
+    <div class="intro">
+      <small>Qualimatic Production</small>
+      <h1>Films de <em>mariage</em></h1>
+      <p>Vallée de la Loire · Partout en France</p>
+    </div>
+    <p class="hint">Faites défiler pour entrer</p>
+
+    <!-- Les trois cadres -->
+    <a class="ov art" data-q="f1" href="https://youtu.be/7OEqLbjnlPQ" target="_blank" rel="noopener" aria-label="Voir le film"><img src="img/film.jpg" alt="Affiche du film Les Vibiches" /><span class="play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 10 6 0 12z"/></svg></span></a>
+    <a class="ov art" data-q="f2" href="https://youtu.be/45-oWLe-S2U" target="_blank" rel="noopener" aria-label="Voir le film complet"><img src="img/film-complet.jpg" alt="Mariée sous son voile, en noir et blanc" /><span class="play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 10 6 0 12z"/></svg></span></a>
+    <a class="ov art" data-q="f3" href="https://youtu.be/yfy-11oyKZw" target="_blank" rel="noopener" aria-label="Voir le teaser"><img src="img/teaser.jpg" alt="Portrait de mariée" /><span class="play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 10 6 0 12z"/></svg></span></a>
+    <div class="ov plaque" data-q="p1">Film</div>
+    <div class="ov plaque" data-q="p2">Film complet</div>
+    <div class="ov plaque" data-q="p3">Teaser</div>
+
+    <!-- La couverture -->
+    <div class="ov cover" data-q="cover">
+      <span class="gold star">✻</span>
+      <span class="gold brand">Qualimatic</span>
+      <span class="rule"></span>
+      <span class="gold t1">Tarifs</span>
+      <span class="gold t2">2027 — 2028</span>
+    </div>
+
+    <!-- Le livre ouvert -->
+    <div class="ov page" data-q="pl"><div class="pg base"></div><div class="leaf"><div class="pg"></div></div></div>
+    <div class="ov page" data-q="pr"><div class="pg base"></div><div class="leaf"><div class="pg"></div></div></div>
+
+    <!-- La lettre -->
+    <form class="ov letter" data-q="paper" novalidate>
+      <canvas class="ink" aria-hidden="true"></canvas>
+      <div class="half l">
+        <span class="lbl title">Racontez-moi votre mariage</span>
+        <div class="row"><label class="lbl" for="f-noms">Vos prénoms</label><input class="field" id="f-noms" name="couple" autocomplete="name" disabled /></div>
+        <div class="row"><label class="lbl" for="f-email">Email</label><input class="field" id="f-email" name="email" type="email" autocomplete="email" disabled /></div>
+        <div class="row"><label class="lbl" for="f-tel">Téléphone</label><input class="field" id="f-tel" name="phone" type="tel" autocomplete="tel" disabled /></div>
+        <div class="row"><label class="lbl" for="f-date">Date du mariage</label><input class="field" id="f-date" name="wedding_date" disabled /></div>
+      </div>
+      <div class="half r">
+        <div class="row"><label class="lbl" for="f-lieu">Lieu</label><input class="field" id="f-lieu" name="location" disabled /></div>
+        <div class="row"><label class="lbl" for="f-formule">Formule envisagée</label>
+          <select class="field" id="f-formule" name="formule" disabled>
+            <option value="a-definir">À définir</option>
+            <option value="elegance">Élégance · 2 650 €</option>
+            <option value="signature">Signature · 4 000 €</option>
+            <option value="sur-mesure">Sur-mesure</option>
+          </select></div>
+        <div class="row col"><label class="lbl" for="f-msg">Votre message</label><textarea class="field" id="f-msg" name="message" rows="3" disabled></textarea></div>
+        <button class="send" type="submit" disabled>Envoyer ma lettre</button>
+      </div>
+      <img class="quill-shadow" src="img/plume.webp" alt="" />
+      <img class="quill" src="img/plume.webp" alt="" />
+      <p class="thanks" role="status">Merci ! Votre lettre est partie, je vous réponds sous 48 h.</p>
+      <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <radialGradient id="wax" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#b3353f"/><stop offset=".55" stop-color="#8a1c26"/><stop offset="1" stop-color="#4d0c13"/></radialGradient>
+          <radialGradient id="waxIn" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#9c2530"/><stop offset="1" stop-color="#6d131c"/></radialGradient>
+          <path id="ring" d="M60 60 m-33 0 a33 33 0 1 1 66 0 a33 33 0 1 1 -66 0"/>
+        </defs>
+        <!-- Cire irrégulière, puis la frappe du cachet -->
+        <path d="M61 4c9 1 14 7 22 9s16 4 20 12 1 15 5 23 7 14 3 22-12 9-16 16-7 15-15 18-15-2-23-1-16 6-23 2-7-12-14-17-15-6-17-14 4-15 3-24-6-15-1-22 13-6 20-11 9-13 17-14 10 3 19 1z" fill="url(#wax)"/>
+        <circle cx="60" cy="60" r="41" fill="url(#waxIn)" stroke="#5a0f17" stroke-width="1.5"/>
+        <circle cx="60" cy="60" r="41" fill="none" stroke="#c4525b" stroke-opacity=".45" stroke-width="1" transform="translate(-.8 -.8)"/>
+        <text font-family="Inter, sans-serif" font-size="7.2" letter-spacing="3.2" fill="#5a0f17"><textPath href="#ring" startOffset="3%">QUALIMATIC · PRODUCTION ·</textPath></text>
+        <text font-family="Inter, sans-serif" font-size="7.2" letter-spacing="3.2" fill="#d77a82" fill-opacity=".5" transform="translate(-.6 -.6)"><textPath href="#ring" startOffset="3%">QUALIMATIC · PRODUCTION ·</textPath></text>
+        <!-- La montagne Qualimatic, en relief : ombre puis lumière -->
+        <g transform="translate(60 62) scale(.62) translate(-32 -25)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 38 L18 18 L24 25 L32 12 L42 28 L48 22 L61 38" stroke="#4a0a12" stroke-width="5"/>
+          <path d="M3 38 L18 18 L24 25 L32 12 L42 28 L48 22 L61 38" stroke="#d98a91" stroke-opacity=".75" stroke-width="2" transform="translate(-.9 -.9)"/>
+        </g>
+      </svg>
+    </form>
+
+    <div class="halfnav" role="group" aria-label="Pages de la lettre"><button type="button" data-half="0" aria-pressed="true">← Début</button><button type="button" data-half="1" aria-pressed="false">Suite →</button></div>
+    <div class="loader" aria-hidden="true"></div>
+  </div>
+</section>
+
+<p class="after"><strong>Merci de votre visite</strong>Démo de travail · Qualimatic Production</p>
+
+<script>
+(function () {
+  'use strict';
+  var SW = 1280, SH = 720, COUNT = 361;
+
+  /* ---------- Ce que la vidéo contient (coordonnées de l'image source, 1280 × 720) ---------- */
+  var rectQ = function (x, y, w, h) { return [[x, y], [x + w, y], [x + w, y + h], [x, y + h]]; };
+  var Q = {
+    f1: rectQ(98, 290, 192, 258), f2: rectQ(524, 281, 216, 258), f3: rectQ(983, 292, 204, 253),
+    p1: rectQ(144, 652, 100, 22), p2: rectQ(567, 652, 130, 22), p3: rectQ(1035, 652, 100, 22),
+    cover: rectQ(523, 147, 295, 469),
+    pl: [[155, 144], [435, 120], [419, 621], [88, 616]],
+    pr: [[464, 131], [800, 141], [835, 627], [453, 624]],
+    paper: [[379, 219], [909, 218], [941, 563], [344, 565]]
+  };
+  var INKWELL = [209, 205];
+
+  /* Le parcours : la vidéo avance, puis s'arrête sur les plans fixes où le contenu apparaît */
+  var SEG = [
+    { k: 'hold', f: 0, len: .5, name: 'intro' },
+    { k: 'video', f0: 0, f1: 138, len: 3.2 },
+    { k: 'hold', f: 138, len: 2.4, name: 'films' },
+    { k: 'video', f0: 138, f1: 204, len: 1.6 },
+    { k: 'hold', f: 204, len: 1.0, name: 'cover' },
+    { k: 'video', f0: 204, f1: 248, len: 1.0 },
+    { k: 'hold', f: 248, len: 5.0, name: 'book' },
+    { k: 'video', f0: 248, f1: 345, len: 2.2 },
+    { k: 'hold', f: 345, len: 5.0, name: 'desk' },
+    { k: 'hold', f: 345, len: .9, name: 'ready' }
+  ];
+  var TOTAL = 0;
+  SEG.forEach(function (s) { s.t0 = TOTAL; TOTAL += s.len; });
+  var byName = {}; SEG.forEach(function (s) { if (s.name) byName[s.name] = s; });
+
+  /* ---------- Contenu du livre (tarifs 2027-2028 et avis, repris du site) ---------- */
+  var RUN = '<p class="pg-run">Qualimatic · Tarifs 2027 — 2028</p>';
+  var list = function (items) { return '<ul>' + items.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul>'; };
+  var PAGES = [
+    RUN + '<div class="pg-body center"><p class="pg-eyebrow">Formule</p><h3 class="pg-title">Élégance</h3><p class="pg-price">2 650 € <small>TTC</small></p><p class="pg-sub">Des préparatifs<br>à la première danse</p><p class="pg-orn">✻</p><p class="pg-note">Aucun frais de déplacement en France métropolitaine</p></div><p class="pg-num">1</p>',
+    RUN + '<div class="pg-body"><h4>Ce qui est inclus</h4>' + list(['Présence des préparatifs jusqu’à la première danse', 'Cérémonie laïque ou religieuse', 'Séance couple éditoriale', 'Plans drone (selon la réglementation et la météo)', 'Film de mariage de 6 à 8 minutes', 'Montage cinématographique étalonné']) + '<button class="pg-cta" type="button" data-formule="elegance">Choisir Élégance</button></div><p class="pg-num">2</p>',
+    RUN + '<div class="pg-body center"><p class="pg-eyebrow">La formule complète</p><h3 class="pg-title">Signature</h3><p class="pg-price">4 000 € <small>TTC</small></p><p class="pg-sub">Journée complète<br>9 h → 1 h</p><p class="pg-orn">✻</p><p class="pg-note">Livraison prioritaire sous 5 semaines · Coffret USB personnalisé offert</p></div><p class="pg-num">3</p>',
+    RUN + '<div class="pg-body"><h4>Ce qui est inclus</h4>' + list(['Couverture intégrale, des préparatifs à la soirée', 'Cérémonie et discours en intégralité', 'Séance couple éditoriale', 'Plans drone (selon la réglementation et la météo)', 'Film de mariage de 6 à 8 minutes', 'Film long de 20 à 25 minutes', 'Teaser d’une minute livré sous 7 jours']) + '<button class="pg-cta" type="button" data-formule="signature">Choisir Signature</button></div><p class="pg-num">4</p>',
+    RUN + '<div class="pg-body"><h4>✻ Vos mots</h4><div class="review"><p>Charly a été fantastique. La vidéo est juste sublime et les émotions sont très bien retranscrites. Au premier visionnage nous avons eu des frissons et des larmes.</p><cite>Marine<small>octobre 2025</small></cite></div><div class="review"><p>Charly a été adorable, discret et très à l’écoute tout au long de notre journée. Il a su capturer chaque moment avec beaucoup de sensibilité.</p><cite>Alice<small>février 2026</small></cite></div></div><p class="pg-num">5</p>',
+    RUN + '<div class="pg-body"><div class="review"><p>Une expérience formidable avec Charly, qui a su capturer les moments les plus magiques de notre mariage en se fondant dans le décor.</p><cite>Clémentine<small>août 2025</small></cite></div><div class="review"><p>Son travail est juste exceptionnel et nous laissera une marque indélébile. Charly sait se montrer discret, avec une efficacité toujours au rendez-vous.</p><cite>Amin<small>janvier 2024</small></cite></div></div><p class="pg-num">6</p>'
+  ];
+
+  /* ---------- Éléments ---------- */
+  var track = document.querySelector('.track'), stage = track.querySelector('.stage');
+  var canvas = stage.querySelector('.scene'), ctx = canvas.getContext('2d', { alpha: false });
+  var intro = stage.querySelector('.intro'), hint = stage.querySelector('.hint'), loader = stage.querySelector('.loader');
+  var ovs = [].slice.call(stage.querySelectorAll('.ov'));
+  var el = {}; ovs.forEach(function (o) { el[o.dataset.q] = o; });
+  var letter = el.paper, ink = letter.querySelector('canvas.ink'), ictx = ink.getContext('2d');
+  var quill = letter.querySelector('.quill'), qshadow = letter.querySelector('.quill-shadow');
+  var fields = [].slice.call(letter.querySelectorAll('.field, .send'));
+  var halfnav = stage.querySelector('.halfnav');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var smooth = function (t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); };
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+  var lerpR = function (a, b, t) { return [0, 1, 2, 3].map(function (i) { return lerp(a[i], b[i], t); }); };
+
+  /* ---------- Images de la vidéo ---------- */
+  var frames = [], loaded = 0;
+  (function load() {
+    var order = [], seen = {};
+    [0, 138, 204, 248, 345].concat([32, 16, 8, 4, 2, 1].reduce(function (acc, st) { for (var i = 0; i < COUNT; i += st) acc.push(i); return acc; }, []))
+      .forEach(function (i) { if (!seen[i]) { seen[i] = 1; order.push(i); } });
+    var next = 0;
+    function pump() {
+      if (next >= order.length) return;
+      var i = order[next++], img = new Image();
+      img.onload = function () { frames[i] = img; loaded++; loader.style.transform = 'scaleX(' + loaded / COUNT + ')'; if (loaded === COUNT) loader.style.opacity = 0; dirty = true; pump(); };
+      img.onerror = pump;
+      img.src = 'f/' + String(i).padStart(3, '0') + '.webp';
+    }
+    for (var k = 0; k < 6; k++) pump();
+  })();
+  function nearest(i) {
+    if (frames[i]) return frames[i];
+    for (var d = 1; d < COUNT; d++) { if (frames[i - d]) return frames[i - d]; if (frames[i + d]) return frames[i + d]; }
+    return null;
+  }
+
+  /* ---------- Géométrie projective ---------- */
+  // Carré unité → quadrilatère (Heckbert). Renvoie [a,b,c,d,e,f,g,h] : x=(au+bv+c)/(gu+hv+1), y=(du+ev+f)/(gu+hv+1)
+  function sq2quad(q) {
+    var x0 = q[0][0], y0 = q[0][1], x1 = q[1][0], y1 = q[1][1], x2 = q[2][0], y2 = q[2][1], x3 = q[3][0], y3 = q[3][1];
+    var sx = x0 - x1 + x2 - x3, sy = y0 - y1 + y2 - y3;
+    if (Math.abs(sx) < 1e-9 && Math.abs(sy) < 1e-9) return [x1 - x0, x2 - x1, x0, y1 - y0, y2 - y1, y0, 0, 0];
+    var dx1 = x1 - x2, dx2 = x3 - x2, dy1 = y1 - y2, dy2 = y3 - y2, den = dx1 * dy2 - dx2 * dy1;
+    var g = (sx * dy2 - dx2 * sy) / den, h = (dx1 * sy - sx * dy1) / den;
+    return [x1 - x0 + g * x1, x3 - x0 + h * x3, x0, y1 - y0 + g * y1, y3 - y0 + h * y3, y0, g, h];
+  }
+  function matrix3d(w, h, q) {
+    var m = sq2quad(q);
+    return 'matrix3d(' + [m[0] / w, m[3] / w, 0, m[6] / w, m[1] / h, m[4] / h, 0, m[7] / h, 0, 0, 1, 0, m[2], m[5], 0, 1].join(',') + ')';
+  }
+  // Point de l'image source → coordonnées (u, v) dans le quadrilatère (inverse de sq2quad)
+  function quadInverse(q, x, y) {
+    var m = sq2quad(q), a = m[0], b = m[1], c = m[2], d = m[3], e = m[4], f = m[5], g = m[6], h = m[7];
+    var A = [[a, b, c], [d, e, f], [g, h, 1]];
+    var det = A[0][0] * (A[1][1] * A[2][2] - A[1][2] * A[2][1]) - A[0][1] * (A[1][0] * A[2][2] - A[1][2] * A[2][0]) + A[0][2] * (A[1][0] * A[2][1] - A[1][1] * A[2][0]);
+    var inv = [
+      [(A[1][1] * A[2][2] - A[1][2] * A[2][1]) / det, (A[0][2] * A[2][1] - A[0][1] * A[2][2]) / det, (A[0][1] * A[1][2] - A[0][2] * A[1][1]) / det],
+      [(A[1][2] * A[2][0] - A[1][0] * A[2][2]) / det, (A[0][0] * A[2][2] - A[0][2] * A[2][0]) / det, (A[0][2] * A[1][0] - A[0][0] * A[1][2]) / det],
+      [(A[1][0] * A[2][1] - A[1][1] * A[2][0]) / det, (A[0][1] * A[2][0] - A[0][0] * A[2][1]) / det, (A[0][0] * A[1][1] - A[0][1] * A[1][0]) / det]];
+    var X = inv[0][0] * x + inv[0][1] * y + inv[0][2], Y = inv[1][0] * x + inv[1][1] * y + inv[1][2], Z = inv[2][0] * x + inv[2][1] * y + inv[2][2];
+    return [X / Z, Y / Z];
+  }
+  var qW = function (q) { return (Math.hypot(q[1][0] - q[0][0], q[1][1] - q[0][1]) + Math.hypot(q[2][0] - q[3][0], q[2][1] - q[3][1])) / 2; };
+  var qH = function (q) { return (Math.hypot(q[3][0] - q[0][0], q[3][1] - q[0][1]) + Math.hypot(q[2][0] - q[1][0], q[2][1] - q[1][1])) / 2; };
+
+  /* ---------- Cadrage ---------- */
+  var vw = 0, vh = 0, dpr = 1, narrow = false;
+  var VR = [300, 0, 680, 720];                       // cadrage « vidéo » : la bande centrale
+  var R = {
+    films: [50, 230, 1180, 450], f1: [40, 235, 300, 400], f2: [470, 225, 330, 420], f3: [930, 235, 305, 400],
+    cover: [430, 100, 420, 550],
+    book: [70, 100, 790, 545], pl: [70, 105, 395, 530], pr: [440, 115, 410, 530],
+    desk: [150, 150, 810, 440], deskW: [320, 185, 650, 400], lh: [335, 200, 325, 380], rh: [620, 200, 335, 380]
+  };
+  var BOOK_KEYS = [[0, 'pl'], [.1, 'pl'], [.18, 'pr'], [.28, 'pr'], [.38, 'pl'], [.48, 'pl'], [.56, 'pr'], [.66, 'pr'], [.76, 'pl'], [.86, 'pl'], [.94, 'pr'], [1, 'pr']];
+  function keyed(keys, u) {
+    for (var i = 1; i < keys.length; i++) if (u <= keys[i][0]) {
+      var a = keys[i - 1], b = keys[i];
+      return lerpR(R[a[1]], R[b[1]], smooth((u - a[0]) / (b[0] - a[0] || 1)));
+    }
+    return R[keys[keys.length - 1][1]];
+  }
+  var deskHalf = 0, focusHalf = 0;                    // téléphone : moitié gauche ou droite de la lettre
+  function holdROI(name, u) {
+    if (name === 'intro') return VR;
+    if (name === 'films') return narrow ? keyed([[0, 'f1'], [.22, 'f1'], [.38, 'f2'], [.6, 'f2'], [.76, 'f3'], [1, 'f3']], u) : R.films;
+    if (name === 'cover') return R.cover;
+    if (name === 'book') return narrow ? keyed(BOOK_KEYS, u) : R.book;
+    if (name === 'desk') return narrow ? lerpR(lerpR(R.desk, R.lh, smooth(u / .08)), R.rh, deskHalf) : lerpR(R.desk, R.deskW, smooth((u - .04) / .1));
+    return narrow ? lerpR(R.lh, R.rh, focusHalf) : R.deskW;
+  }
+  function roiAt(tau) {
+    for (var i = 0; i < SEG.length; i++) {
+      var s = SEG[i], u = (tau - s.t0) / s.len;
+      if (u <= 1 || i === SEG.length - 1) {
+        u = clamp(u, 0, 1);
+        if (s.k === 'hold') return { r: holdROI(s.name, u), hold: true };
+        // Vidéo : on quitte le plan précédent et on rejoint le suivant en douceur
+        var prev = SEG[i - 1], next = SEG[i + 1];
+        var from = prev ? holdROI(prev.name, 1) : VR, to = next ? holdROI(next.name, 0) : VR;
+        var r = u < .35 ? lerpR(from, VR, smooth(u / .35)) : u > .65 ? lerpR(VR, to, smooth((u - .65) / .35)) : VR;
+        return { r: r, hold: false };
+      }
+    }
+  }
+  function camera(tau) {
+    var q = roiAt(tau), r = q.r, cover = Math.max(vw / SW, vh / SH);
+    var m = q.hold ? .94 : 1, zmax = q.hold ? 1.25 : 1;
+    var s = Math.min(cover * zmax, m * vw / r[2], m * vh / r[3]);
+    var dw = SW * s, dh = SH * s;
+    var ox = vw / 2 - (r[0] + r[2] / 2) * s, oy = vh / 2 - (r[1] + r[3] / 2) * s;
+    ox = dw >= vw ? clamp(ox, vw - dw, 0) : (vw - dw) / 2;
+    oy = dh >= vh ? clamp(oy, vh - dh, 0) : (vh - dh) * .46;
+    return { s: s, ox: ox, oy: oy, dw: dw, dh: dh };
+  }
+  function segAt(tau) {
+    for (var i = 0; i < SEG.length; i++) { var s = SEG[i]; if (tau <= s.t0 + s.len || i === SEG.length - 1) return { s: s, u: clamp((tau - s.t0) / s.len, 0, 1) }; }
+  }
+
+  /* ---------- Mise en page des éléments posés ---------- */
+  var VS = {};                                        // taille « virtuelle » de chaque élément (≈ sa taille à l'écran)
+  function refScale(name) { var s = byName[name]; return camera(s.t0 + s.len * .5).s; }
+  function sizeOverlay(key, sref) {
+    var q = Q[key], w = Math.round(qW(q) * sref), h = Math.round(qH(q) * sref);
+    VS[key] = [w, h];
+    var o = el[key]; o.style.width = w + 'px'; o.style.height = h + 'px'; o.style.setProperty('--u', (w / 100) + 'px');
+  }
+  function place(key, cam, opacity) {
+    var o = el[key];
+    if (opacity <= 0.001) { if (o.style.visibility !== 'hidden') { o.style.visibility = 'hidden'; o.style.opacity = 0; } return; }
+    var q = Q[key].map(function (p) { return [cam.ox + p[0] * cam.s, cam.oy + p[1] * cam.s]; });
+    o.style.visibility = 'visible'; o.style.opacity = opacity;
+    o.style.transform = matrix3d(VS[key][0], VS[key][1], q);
+  }
+
+  /* ---------- Le livre : pages qui tournent ---------- */
+  var baseL = el.pl.querySelector('.base'), baseR = el.pr.querySelector('.base');
+  var leafL = el.pl.querySelector('.leaf'), leafR = el.pr.querySelector('.leaf');
+  var shown = { bl: -1, br: -1, ll: -1, lr: -1 };
+  function setHTML(node, key, idx) { if (shown[key] !== idx) { shown[key] = idx; node.innerHTML = idx < 0 ? '' : PAGES[idx]; } }
+  function bookState(u) {
+    var S = [[0, .28], [.38, .66], [.76, 1]], T = [[.28, .38], [.66, .76]];
+    for (var k = 0; k < 3; k++) if (u >= S[k][0] && u <= S[k][1]) return { L: 2 * k, R: 2 * k + 1 };
+    for (var j = 0; j < 2; j++) if (u > T[j][0] && u < T[j][1]) return { turn: j, t: (u - T[j][0]) / (T[j][1] - T[j][0]) };
+    return { L: 4, R: 5 };
+  }
+  function renderBook(u) {
+    var st = bookState(u);
+    if (st.turn === undefined) {
+      setHTML(baseL, 'bl', st.L); setHTML(baseR, 'br', st.R);
+      leafL.style.display = leafR.style.display = 'none';
+      return;
+    }
+    var k = st.turn, t = st.t, lift = Math.sin(t * Math.PI);
+    setHTML(baseR, 'br', 2 * k + 3);                  // la page suivante se découvre à droite
+    if (t < .5) {
+      setHTML(baseL, 'bl', 2 * k);
+      setHTML(leafR.firstChild, 'lr', 2 * k + 1);
+      leafR.style.display = 'block'; leafL.style.display = 'none';
+      leafR.style.transformOrigin = '0 50%';
+      leafR.style.transform = 'scaleX(' + (1 - 2 * t) + ') scaleY(' + (1 + lift * .03) + ')';
+      leafR.style.setProperty('--leaf', 'rgb(' + Math.round(178 + 30 * lift) + ',' + Math.round(162 + 28 * lift) + ',' + Math.round(147 + 26 * lift) + ')');
+      leafR.style.boxShadow = '0 0 ' + (30 * lift) + 'px rgba(0,0,0,' + (.35 * lift) + ')';
+    } else {
+      setHTML(baseL, 'bl', 2 * k);
+      setHTML(leafL.firstChild, 'll', 2 * k + 2);
+      leafL.style.display = 'block'; leafR.style.display = 'none';
+      leafL.style.transformOrigin = '100% 50%';
+      leafL.style.transform = 'scaleX(' + (2 * t - 1) + ') scaleY(' + (1 + lift * .03) + ')';
+      leafL.style.setProperty('--leaf', 'rgb(' + Math.round(205 + 10 * lift) + ',' + Math.round(190 + 10 * lift) + ',' + Math.round(179 + 8 * lift) + ')');
+      leafL.style.boxShadow = '0 0 ' + (30 * lift) + 'px rgba(0,0,0,' + (.35 * lift) + ')';
+    }
+  }
+
+  /* ---------- La lettre : la plume écrit les intitulés ---------- */
+  var IMG_W = 800, IMG_H = 502, TIP_X = 1, TIP_Y = 500;
+  var LW = 0, LH = 0, qPx = 0, labels = [], wsegs = [], WT = 1, inkPos = [0, 0];
+  var ready = false, latched = false, sent = false;
+  function rasterize(node) {
+    var fs = parseFloat(getComputedStyle(node).fontSize);
+    // Position dans la lettre (en remontant les parents positionnés : les moitiés le sont)
+    var x0 = 0, y0 = 0, n = node;
+    while (n && n !== letter) { x0 += n.offsetLeft; y0 += n.offsetTop; n = n.offsetParent; }
+    var bw = node.offsetWidth, bh = node.offsetHeight;
+    var pad = Math.ceil(fs * .5), w = Math.ceil(bw + pad * 2), h = Math.ceil(bh + pad * 2);
+    var c = document.createElement('canvas'); c.width = w * dpr; c.height = h * dpr;
+    var x = c.getContext('2d'); x.scale(dpr, dpr);
+    x.font = '400 ' + fs + 'px Allura, cursive'; x.fillStyle = '#33231a'; x.textBaseline = 'middle';
+    x.fillText(node.textContent, pad, pad + bh / 2 + fs * .04);
+    var data = x.getImageData(0, 0, c.width, c.height).data, top = [], bot = [], a = -1, b = -1;
+    for (var cx = 0; cx < w; cx++) {
+      var t = -1, bb = -1, px = Math.floor(cx * dpr);
+      for (var cy = 0; cy < c.height; cy++) if (data[(cy * c.width + px) * 4 + 3] > 60) { if (t < 0) t = cy; bb = cy; }
+      top.push(t < 0 ? -1 : t / dpr); bot.push(bb < 0 ? -1 : bb / dpr);
+      if (t >= 0) { if (a < 0) a = cx; b = cx; }
+    }
+    var lift = top.map(function (_, i) { var n = 0, k = 0; for (var j = i - 7; j <= i + 7; j++) if (j >= 0 && j < w) { k++; if (top[j] < 0) n++; } return n / Math.max(k, 1); });
+    return { c: c, ox: x0 - pad, oy: y0 - pad, w: w, h: h, fs: fs, top: top, bot: bot, lift: lift, x0: a, x1: b, mid: pad + bh / 2,
+      half: node.closest('.half.r') ? 1 : 0 };
+  }
+  function tipAt(L, rx) {
+    var c = clamp(Math.round(rx), 0, L.w - 1), y;
+    if (L.top[c] < 0) y = L.mid + L.fs * .12;
+    else y = L.top[c] + (L.bot[c] - L.top[c]) * (.5 + .5 * Math.sin(rx * 2 * Math.PI / (L.fs * .24)));
+    return { x: L.ox + rx, y: L.oy + y, h: .45 * L.lift[c] };
+  }
+  function layoutLetter() {
+    var sref = narrow ? camera(byName.desk.t0 + byName.desk.len * .3).s : refScale('ready');
+    sizeOverlay('paper', sref);
+    LW = VS.paper[0]; LH = VS.paper[1];
+    ink.width = Math.round(LW * dpr); ink.height = Math.round(LH * dpr); ink.style.width = LW + 'px'; ink.style.height = LH + 'px';
+    qPx = LW * .21;
+    [quill, qshadow].forEach(function (q) { q.style.width = qPx + 'px'; q.style.height = (qPx * IMG_H / IMG_W) + 'px'; });
+    labels = [].slice.call(letter.querySelectorAll('.lbl')).map(rasterize);
+    var uv = quadInverse(Q.paper, INKWELL[0], INKWELL[1]); inkPos = [uv[0] * LW, uv[1] * LH];
+    // Scénario : sortir de l'encrier, écrire chaque intitulé, retremper, se reposer
+    wsegs = [];
+    var travel = function (a, b) { wsegs.push({ type: 'travel', a: a, b: b, w: .35 + Math.hypot(b.x - a.x, b.y - a.y) / LW * 1.6 }); };
+    var home = { x: inkPos[0], y: inkPos[1], half: 0 }, at = home;
+    wsegs.push({ type: 'rest', p: home, w: .3 });
+    labels.forEach(function (L, i) {
+      var s = tipAt(L, L.x0), e = tipAt(L, L.x1);
+      travel(at, { x: s.x, y: s.y, half: L.half });
+      wsegs.push({ type: 'write', i: i, w: (L.x1 - L.x0) / LW * 4.2 });
+      at = { x: e.x, y: e.y, half: L.half };
+      if (!narrow && (i === 2 || i === 5)) { travel(at, home); wsegs.push({ type: 'dip', p: home, w: .35 }); at = home; }
+    });
+    travel(at, home);
+    wsegs.push({ type: 'rest', p: home, w: .3 });
+    WT = wsegs.reduce(function (s, g) { return s + g.w; }, 0);
+  }
+  function writeState(t) {
+    var acc = 0, done = -1;
+    for (var k = 0; k < wsegs.length; k++) {
+      var g = wsegs[k];
+      if (t <= acc + g.w || k === wsegs.length - 1) {
+        var u = clamp((t - acc) / g.w, 0, 1);
+        if (g.type === 'rest') return { x: g.p.x, y: g.p.y, h: .1, write: done, u: 1, half: g.p.half };
+        if (g.type === 'dip') { var d = Math.sin(u * Math.PI); return { x: g.p.x, y: g.p.y, h: .1 + .35 * d, write: done, u: 1, half: 0 }; }
+        if (g.type === 'travel') { var e = smooth(u); return { x: lerp(g.a.x, g.b.x, e), y: lerp(g.a.y, g.b.y, e), h: Math.sin(u * Math.PI) * .95, write: done, u: 1, half: lerp(g.a.half, g.b.half, e) }; }
+        var L = labels[g.i], rx = L.x0 + (L.x1 - L.x0) * u, tp = tipAt(L, rx);
+        return { x: tp.x, y: tp.y, h: tp.h, write: g.i, u: u, rx: rx, half: L.half };
+      }
+      acc += g.w;
+      if (g.type === 'write') done = g.i;
+    }
+  }
+  function renderLetter(t, now) {
+    var s = writeState(t);
+    deskHalf = s.half;
+    ictx.setTransform(dpr, 0, 0, dpr, 0, 0); ictx.clearRect(0, 0, LW, LH);
+    labels.forEach(function (L, i) {
+      var cur = i === s.write && s.u < 1;
+      if (!(i <= s.write || cur)) return;
+      var wpx = cur ? Math.max(0, s.rx + 1) : L.w;
+      ictx.drawImage(L.c, 0, 0, wpx * dpr, L.c.height, L.ox, L.oy, wpx, L.h);
+    });
+    // La main invisible : respiration, inclinaison du geste, hauteur au-dessus du papier (ombre)
+    var breath = Math.sin(now / 900) * 1.3 + Math.sin(now / 370) * .4;
+    var angle = -14 + breath + (s.write >= 0 && s.u < 1 ? Math.sin(s.rx * .5) * 1.2 : 0);
+    var hh = clamp(s.h, 0, 1), ox = TIP_X / IMG_W * qPx, oy = TIP_Y / IMG_H * (qPx * IMG_H / IMG_W);
+    quill.style.transformOrigin = qshadow.style.transformOrigin = ox + 'px ' + oy + 'px';
+    quill.style.transform = 'translate(' + (s.x - ox) + 'px,' + (s.y - oy - hh * LW * .012) + 'px) rotate(' + angle + 'deg) scale(' + (1 + hh * .06) + ')';
+    qshadow.style.transform = 'translate(' + (s.x - ox + LW * (.005 + hh * .025)) + 'px,' + (s.y - oy + LW * (.008 + hh * .034)) + 'px) rotate(' + angle + 'deg)';
+    qshadow.style.filter = 'brightness(0) blur(' + (2 + hh * 6).toFixed(1) + 'px)';
+    qshadow.style.opacity = (.32 - hh * .12).toFixed(2);
+  }
+  function setReady(v) {
+    if (v === ready) return;
+    ready = v; letter.classList.toggle('is-ready', v);
+    fields.forEach(function (f) { f.disabled = !v; });
+  }
+  function setHalf(h) {
+    focusHalf = h;
+    halfnav.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.half === h)); });
+  }
+  letter.addEventListener('focusin', function (e) { latched = true; setHalf(e.target.closest('.half.r') ? 1 : 0); });
+  // Si le navigateur tente malgré tout de décaler la scène (champ focalisé hors cadre), on la remet en place
+  stage.addEventListener('scroll', function () { stage.scrollLeft = 0; stage.scrollTop = 0; });
+  halfnav.addEventListener('click', function (e) { var b = e.target.closest('[data-half]'); if (b) setHalf(+b.dataset.half); });
+  letter.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (sent) return;
+    sent = true; letter.classList.add('is-sent');
+    fields.forEach(function (f) { if (f.tagName !== 'BUTTON') f.readOnly = true; });
+    setHalf(1);
+  });
+
+  /* ---------- Dessin ---------- */
+  var amb = document.createElement('canvas'); amb.width = 32; amb.height = 18; var actx = amb.getContext('2d');
+  function draw(tau, now) {
+    var cam = camera(tau), sg = segAt(tau), s = sg.s, u = sg.u;
+    var f = s.k === 'hold' ? s.f : lerp(s.f0, s.f1, u);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#0f0b08'; ctx.fillRect(0, 0, vw, vh);
+    var i0 = Math.floor(f), a = nearest(i0);
+    if (a && cam.dh < vh - 1) {
+      actx.drawImage(a, 0, 0, 32, 18);
+      var k = Math.max(vw / 32, vh / 18) * 1.15;
+      ctx.globalAlpha = .5; ctx.drawImage(amb, (vw - 32 * k) / 2, (vh - 18 * k) / 2, 32 * k, 18 * k); ctx.globalAlpha = 1;
+      ctx.fillStyle = 'rgba(15,11,8,.45)'; ctx.fillRect(0, 0, vw, vh);
+    }
+    if (a) ctx.drawImage(a, cam.ox, cam.oy, cam.dw, cam.dh);
+    var fr = f - i0;
+    if (fr > .02 && frames[i0 + 1]) { ctx.globalAlpha = fr; ctx.drawImage(frames[i0 + 1], cam.ox, cam.oy, cam.dw, cam.dh); ctx.globalAlpha = 1; }
+
+    var fade = function (name, a0, a1, b0, b1) { return s.name === name ? Math.min(smooth((u - a0) / (a1 - a0)), 1 - smooth((u - b0) / (b1 - b0))) : 0; };
+    var oF = fade('films', 0, .12, .92, 1);
+    ['f1', 'f2', 'f3', 'p1', 'p2', 'p3'].forEach(function (k) { place(k, cam, oF); });
+    place('cover', cam, fade('cover', 0, .3, .88, 1));
+    var oB = fade('book', 0, .06, .94, 1);
+    if (oB > 0) renderBook(u);
+    place('pl', cam, oB); place('pr', cam, oB);
+
+    var inDesk = s.name === 'desk' || s.name === 'ready';
+    var oL = s.name === 'desk' ? smooth(u / .04) : s.name === 'ready' ? 1 : 0;
+    if ((latched || sent) && inDesk) oL = 1;
+    place('paper', cam, oL);
+    if (oL > 0) {
+      var wt = latched || sent || s.name === 'ready' ? WT : u * WT;   // une fois la lettre commencée, elle reste écrite
+      renderLetter(wt, now);
+      setReady(latched || sent || s.name === 'ready' || u > .999);
+    } else if (!latched) setReady(false);
+
+    var showNav = narrow && inDesk && (s.name === 'ready' || latched || sent);
+    if (halfnav.classList.contains('is-on') !== showNav) halfnav.classList.toggle('is-on', showNav);
+    intro.style.opacity = s.name === 'intro' ? 1 : (SEG[1] === s ? 1 - smooth(u / .1) : 0);
+    hint.style.opacity = s.name === 'intro' ? 1 - u : 0;
+  }
+
+  /* ---------- Boucle, scroll, chapitres ---------- */
+  var current = 0, dirty = true, lastTau = -1;
+  function range() { var top = track.getBoundingClientRect().top + scrollY; return { top: top, len: track.offsetHeight - stage.offsetHeight }; }
+  function tauFromScroll() { var r = range(); return r.len > 0 ? clamp((scrollY - r.top) / r.len, 0, 1) * TOTAL : 0; }
+  function loop(now) {
+    requestAnimationFrame(loop);
+    var target = tauFromScroll();
+    current = reduce || Math.abs(target - current) < 1e-4 ? target : current + (target - current) * .12;
+    if (narrow) focusSmooth += (focusHalf - focusSmooth) * .08;
+    draw(current, now);
+  }
+  var focusSmooth = 0;
+  var holdROIBase = holdROI;
+  holdROI = function (name, u) { return name === 'ready' && narrow ? lerpR(R.lh, R.rh, focusSmooth) : holdROIBase(name, u); };
+
+  function go(name) {
+    var s = { films: byName.films.t0 + byName.films.len * .3, tarifs: byName.book.t0 + byName.book.len * .08,
+      avis: byName.book.t0 + byName.book.len * .82, contact: byName.ready.t0 + byName.ready.len * .5 }[name];
+    var r = range(); scrollTo({ top: r.top + s / TOTAL * r.len, behavior: 'instant' }); current = s;
+  }
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(b.dataset.go); }); });
+  stage.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-formule]'); if (!b) return;
+    go('contact'); letter.querySelector('#f-formule').value = b.dataset.formule;
+  });
+
+  function layout() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    vw = stage.clientWidth; vh = stage.clientHeight; narrow = vw < 760 || vw / vh < .9;
+    canvas.width = Math.round(vw * dpr); canvas.height = Math.round(vh * dpr);
+    ['f1', 'f2', 'f3', 'p1', 'p2', 'p3'].forEach(function (k) { sizeOverlay(k, narrow ? camera(byName.films.t0 + byName.films.len * (k.slice(1) === '1' ? .1 : k.slice(1) === '2' ? .5 : .9)).s : refScale('films')); });
+    sizeOverlay('cover', refScale('cover'));
+    var sb = narrow ? camera(byName.book.t0 + byName.book.len * .05).s : refScale('book');
+    sizeOverlay('pl', sb); sizeOverlay('pr', sb);
+    layoutLetter();
+  }
+  var rt;
+  addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 150); });
+  var start = function () { layout(); requestAnimationFrame(loop); };
+  if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('40px Allura'), document.fonts.load('italic 20px "Playfair Display"')]).then(start, start); else start();
+})();
+</script>
