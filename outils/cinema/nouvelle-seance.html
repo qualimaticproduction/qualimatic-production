@@ -90,7 +90,7 @@
       <div class="grid">
         <div><label for="host">Hébergeur du film</label>
           <select id="host"><option value="youtube">YouTube</option><option value="vimeo">Vimeo</option><option value="bunny">Bunny Stream</option></select></div>
-        <div><label for="video">Lien du film</label><input id="video" required placeholder="https://youtu.be/…" /></div>
+        <div><label for="video">Lien du film</label><input id="video" required placeholder="Lien YouTube / Vimeo, ou code d’intégration Bunny" /></div>
         <div><label for="dlFilm">Téléchargement du film 4K</label><input id="dlFilm" placeholder="Lien de téléchargement (facultatif)" /></div>
         <div><label for="dlTeaser">Téléchargement du teaser</label><input id="dlTeaser" placeholder="Lien de téléchargement (facultatif)" /></div>
         <div class="full"><label for="salut">Salutation</label><input id="salut" placeholder="Chloé, Victor," /></div>
@@ -165,7 +165,10 @@
       const m = v.match(/vimeo\.com\/(?:video\/)?(\d+)/);
       return m ? m[1] : v.replace(/\D/g, '');
     }
-    return v; // Bunny : lien d'intégration complet
+    // Bunny : on accepte le lien d'intégration ou le code <div>…<iframe src="…"> copié tel quel ;
+    // on retire les réglages (autoplay, muted…) : la page gère la lecture elle-même
+    const m = v.match(/https:\/\/(?:iframe|player)\.mediadelivery\.net\/(?:embed|play)\/\d+\/[\w-]+/);
+    return m ? m[0].replace('/play/', '/embed/') : v;
   }
 
   async function seal(obj, code) {
