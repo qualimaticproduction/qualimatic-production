@@ -242,6 +242,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 16px;
 }
 
+/* Lien « Votre séance » : l'espace des mariés, repérable sans crier */
+.header__nav a.nav-seance { white-space: nowrap; }
+.nav-seance__star { color: var(--bordeaux); margin-right: 0.4em; }
+.mobile-menu .nav-seance__star { color: var(--taupe-soft); }
+
 /* Pill button */
 .btn-pill {
   display: inline-flex;
@@ -1366,6 +1371,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ============================================
    RESPONSIVE
    ============================================ */
+/* Menu : resserré sur les écrans moyens, burger sur tablette et petit portable
+   (sept rubriques ne tiennent plus entre le logo et le bouton d'appel) */
+@media (max-width: 1360px) {
+  .header__nav { gap: 26px; }
+  .header__nav a { letter-spacing: 0.14em; }
+}
+
+@media (max-width: 1180px) {
+  .header { grid-template-columns: 1fr auto; }
+  .header__nav { display: none; }
+  .burger { display: flex; }
+}
+
 @media (max-width: 1024px) {
   .header__nav { gap: 22px; }
   .header__nav a { font-size: 12px; letter-spacing: 0.14em; }

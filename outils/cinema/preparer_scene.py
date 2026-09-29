@@ -9,7 +9,7 @@ Produit, dans livraison/cinema/ :
 
 Usage :
   pip install pillow numpy scipy imageio-ffmpeg
-  python3 outils/cinema/preparer_scene.py cinema-16x9.mp4
+  python3 outils/cinema/preparer_scene.py outils/cinema/source/cinema-16x9.mp4
 
 À relancer uniquement si la vidéo de la salle change. Les pages clients
 (livraison/<couple>/) réutilisent toutes la même scène.
@@ -165,7 +165,7 @@ def norm(rects, W, H, nd=4):
 
 
 def main():
-    video = Path(sys.argv[1] if len(sys.argv) > 1 else ROOT / "cinema-16x9.mp4")
+    video = Path(sys.argv[1] if len(sys.argv) > 1 else ROOT / "outils" / "cinema" / "source" / "cinema-16x9.mp4")
     with tempfile.TemporaryDirectory() as t:
         tmp = Path(t)
         pngs = extract(video, tmp)

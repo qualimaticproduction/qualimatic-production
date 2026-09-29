@@ -1,17 +1,155 @@
 /* ============================================
    QUALIMATIC — Salle de projection (page de livraison)
+
    Le scroll pilote le plan-séquence façade → hall → salle → écran.
-   La scène (images + repères suivis) est commune à tous les couples ;
-   chaque page client ne fournit que sa configuration (window.QM_CINEMA).
+   La scène (images + repères suivis) est commune à tous les couples :
+   chaque page client ne fournit que sa configuration (window.QM_SEANCE).
+
+   Ce qui est privé (lien du film, fichiers, mot personnel) est chiffré
+   dans cfg.coffre (AES-GCM, clé dérivée du code d'accès) : sans le code,
+   ces informations sont illisibles, même en lisant le code de la page.
+   Le coffre se fabrique avec outils/cinema/nouvelle-seance.html.
    ============================================ */
 
 (function () {
   'use strict';
 
-  const cfg = window.QM_CINEMA || {};
-  const track = document.querySelector('[data-cinema]');
-  if (!track) return;
+  const cfg = window.QM_SEANCE || {};
+  const lang = cfg.lang === 'en' ? 'en' : 'fr';
 
+  const T = {
+    fr: {
+      presente: 'Qualimatic Production présente',
+      defiler: 'Faites défiler pour entrer',
+      skip: 'Aller au film',
+      installez: 'Installez-vous…',
+      privee: 'Séance privée',
+      lancer: 'Lancer la séance',
+      unFilmDe: 'un film de',
+      tourner: 'Tournez votre téléphone pour le plein écran',
+      code: 'Votre code d’accès',
+      entrer: 'Entrer dans la salle',
+      verif: 'Ouverture…',
+      erreur: 'Ce code ne correspond pas. Vérifiez-le et réessayez.',
+      aide: 'Le code vous a été envoyé avec le lien de votre séance.',
+      toutes: 'Toutes les séances',
+      toutesUrl: '../../votre-seance.html',
+      mot: ['Un mot', 'pour vous'],
+      fichiers: ['Vos', 'fichiers'],
+      fichiersIntro: 'Téléchargez-les dès maintenant et gardez-en deux copies : une sur votre ordinateur, une sur un disque externe.',
+      bientot: 'Bientôt disponible',
+      telecharger: 'Télécharger',
+      affiche: 'L’affiche',
+      afficheDetail: 'Haute définition, prête à imprimer',
+      partager: ['Partager', 'la séance'],
+      partagerTexte: 'Envoyez ce lien et votre code à vos proches : ils entreront dans la même salle que vous.',
+      copier: 'Copier le lien',
+      copie: 'Lien copié',
+      apres: ['Et', 'maintenant'],
+      apresTexte: 'Si le film vous a touchés, quelques mots de votre part comptent beaucoup : ils aident d’autres couples à me trouver.',
+      avis: 'Laisser un avis',
+      slogan: 'Discret derrière l’objectif. Présent dans chaque image.',
+      site: 'https://www.qualimaticproduction.fr/'
+    },
+    en: {
+      presente: 'Qualimatic Production presents',
+      defiler: 'Scroll to step inside',
+      skip: 'Go to the film',
+      installez: 'Take your seat…',
+      privee: 'Private screening',
+      lancer: 'Start the screening',
+      unFilmDe: 'a film by',
+      tourner: 'Turn your phone for full screen',
+      code: 'Your access code',
+      entrer: 'Enter the theatre',
+      verif: 'Opening…',
+      erreur: 'This code doesn’t match. Please check it and try again.',
+      aide: 'Your code was sent to you with the link to your screening.',
+      toutes: 'All screenings',
+      toutesUrl: '../../en/your-screening.html',
+      mot: ['A few words', 'for you'],
+      fichiers: ['Your', 'files'],
+      fichiersIntro: 'Download them now and keep two copies: one on your computer, one on an external drive.',
+      bientot: 'Coming soon',
+      telecharger: 'Download',
+      affiche: 'The poster',
+      afficheDetail: 'High resolution, ready to print',
+      partager: ['Share', 'the screening'],
+      partagerTexte: 'Send this link and your code to your loved ones: they will step into the same theatre.',
+      copier: 'Copy the link',
+      copie: 'Link copied',
+      apres: ['And', 'now'],
+      apresTexte: 'If the film moved you, a few words from you mean a lot: they help other couples find me.',
+      avis: 'Leave a review',
+      slogan: 'Discreet behind the lens. Present in every frame.',
+      site: 'https://www.qualimaticproduction.fr/en/'
+    }
+  }[lang];
+
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  // « Les Vibiches » → « Les <em>Vibiches</em> » : le dernier mot en italique, signature de la marque
+  const accent = s => {
+    const words = String(s || '').trim().split(/\s+/);
+    if (words.length < 2) return `<em>${esc(s)}</em>`;
+    const last = words.pop();
+    return `${esc(words.join(' '))} <em>${esc(last)}</em>`;
+  };
+
+  /* ---------- Construction de la page ---------- */
+
+  const root = document.querySelector('[data-seance]') || document.body;
+  const locked = !!cfg.coffre;
+
+  root.insertAdjacentHTML('beforeend', `
+    <a class="cinema-skip is-hidden" href="#seance">${T.skip}</a>
+    <section class="cinema-track" data-cinema aria-label="${esc(cfg.titre)}">
+      <div class="cinema-stage">
+        <canvas aria-hidden="true"></canvas>
+        <div class="cinema-intro">
+          <div class="cinema-intro__title">
+            <p class="cinema-intro__eyebrow">${T.presente}</p>
+            <h1>${accent(cfg.titre)}</h1>
+            ${cfg.sousTitre ? `<p>${esc(cfg.sousTitre)}</p>` : ''}
+          </div>
+        </div>
+        <p class="cinema-hint">${T.defiler}</p>
+        <p class="cinema-caption" data-caption data-from="8.4" data-to="10.4">${T.installez}</p>
+        <div class="cinema-screen" id="seance">
+          <div class="cinema-card">
+            <p class="cinema-card__eyebrow">${T.privee}</p>
+            <h2 class="cinema-card__title">${accent(cfg.titre)}</h2>
+            <button class="cinema-play" type="button">
+              <span class="cinema-play__disc"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 10 6 0 12z"/></svg></span>
+              <span>${T.lancer}</span>
+            </button>
+            ${cfg.realisateur ? `<p class="cinema-card__credit">${T.unFilmDe} ${esc(cfg.realisateur)}</p>` : ''}
+          </div>
+          <div class="cinema-player"></div>
+        </div>
+        <p class="cinema-rotate">${T.tourner}</p>
+        <div class="cinema-loader" aria-hidden="true"></div>
+      </div>
+    </section>
+    ${locked ? `
+    <div class="guichet" role="dialog" aria-modal="true" aria-labelledby="guichet-titre">
+      <form class="guichet__ticket" novalidate>
+        <p class="guichet__eyebrow">${T.privee}</p>
+        <h2 class="guichet__title" id="guichet-titre">${accent(cfg.titre)}</h2>
+        ${cfg.sousTitre ? `<p class="guichet__sub">${esc(cfg.sousTitre)}</p>` : ''}
+        <label class="guichet__label" for="guichet-code">${T.code}</label>
+        <input class="guichet__input" id="guichet-code" name="code" type="text" inputmode="text"
+               autocomplete="off" autocapitalize="characters" spellcheck="false" required />
+        <p class="guichet__error" role="alert" aria-live="polite"></p>
+        <button class="guichet__btn" type="submit">${T.entrer}</button>
+        <p class="guichet__help">${T.aide}</p>
+      </form>
+      <a class="guichet__back" href="${T.toutesUrl}">← ${T.toutes}</a>
+    </div>` : ''}
+  `);
+
+  if (locked) document.documentElement.classList.add('is-locked');
+
+  const track = document.querySelector('[data-cinema]');
   const stage = track.querySelector('.cinema-stage');
   const canvas = stage.querySelector('canvas');
   const ctx = canvas.getContext('2d', { alpha: false });
@@ -24,6 +162,152 @@
   const captions = Array.from(stage.querySelectorAll('[data-caption]'));
   const skip = document.querySelector('.cinema-skip');
 
+  // Contenu privé : rempli une fois le coffre ouvert (ou directement s'il n'y en a pas)
+  let secret = locked ? null : (cfg.prive || {});
+
+  function renderAfter() {
+    const s = secret || {};
+    const mot = s.mot || {};
+    const files = (s.fichiers || []).slice();
+    if (cfg.afficheHD) files.push({ titre: T.affiche, detail: T.afficheDetail, lien: cfg.afficheHD, telecharger: true });
+
+    const fileRows = files.map(f => `
+      <li>
+        <div><strong>${esc(f.titre)}</strong>${f.detail ? `<span>${esc(f.detail)}</span>` : ''}</div>
+        ${f.lien
+          ? `<a class="btn" href="${esc(f.lien)}" ${f.telecharger ? `download` : 'target="_blank" rel="noopener"'}>${T.telecharger}</a>`
+          : `<span class="btn is-pending" aria-disabled="true">${T.bientot}</span>`}
+      </li>`).join('');
+
+    const html = `
+      <section class="after">
+        <div class="after__inner">
+          ${mot.paragraphes && mot.paragraphes.length ? `
+          <article class="block letter fade-in">
+            <h2><span class="asterisk">✻</span>${esc(T.mot[0])} <em>${esc(T.mot[1])}</em></h2>
+            ${mot.salutation ? `<p>${esc(mot.salutation)}</p>` : ''}
+            ${mot.paragraphes.map(p => `<p>${esc(p)}</p>`).join('')}
+            ${mot.signature ? `<p class="signature">${esc(mot.signature)}</p>` : ''}
+          </article>` : ''}
+          ${files.length ? `
+          <section class="block fade-in">
+            <h2><span class="asterisk">✻</span>${esc(T.fichiers[0])} <em>${esc(T.fichiers[1])}</em></h2>
+            <p>${T.fichiersIntro}</p>
+            <ul class="files">${fileRows}</ul>
+          </section>` : ''}
+          <section class="block fade-in">
+            <h2><span class="asterisk">✻</span>${esc(T.partager[0])} <em>${esc(T.partager[1])}</em></h2>
+            <p>${T.partagerTexte}</p>
+            <div class="actions"><button class="btn" type="button" data-copy>${T.copier}</button></div>
+          </section>
+          <section class="block fade-in">
+            <h2><span class="asterisk">✻</span>${esc(T.apres[0])} <em>${esc(T.apres[1])}</em></h2>
+            <p>${T.apresTexte}</p>
+            <div class="actions">
+              ${s.avis ? `<a class="btn" href="${esc(s.avis)}" target="_blank" rel="noopener">${T.avis}</a>` : ''}
+              <a class="btn" href="${T.site}" target="_blank" rel="noopener">Qualimatic Production</a>
+            </div>
+          </section>
+        </div>
+      </section>
+      <footer class="foot">
+        <a href="${T.site}">Qualimatic Production</a>
+        <p>${T.slogan}</p>
+        <a class="foot__all" href="${T.toutesUrl}">${T.toutes}</a>
+      </footer>`;
+    track.insertAdjacentHTML('afterend', html);
+
+    const copy = document.querySelector('[data-copy]');
+    copy.addEventListener('click', () => {
+      const url = location.href.split('#')[0];
+      const done = () => {
+        copy.textContent = T.copie;
+        setTimeout(() => { copy.textContent = T.copier; }, 2200);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, () => window.prompt(T.copier, url));
+      else window.prompt(T.copier, url);
+    });
+
+    const els = document.querySelectorAll('.fade-in');
+    if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('is-visible')); return; }
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    }), { threshold: 0.15 });
+    els.forEach(el => io.observe(el));
+  }
+
+  /* ---------- Le guichet : code d'accès ---------- */
+
+  const MEMO = 'qm_seance_' + (cfg.slug || location.pathname);
+
+  // Majuscules, accents, espaces et tirets ne comptent pas : « Rideau-5184 » = « rideau 5184 »
+  const normalize = code => String(code).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  async function openCoffre(coffre, code) {
+    const b64 = coffre.slice(coffre.indexOf(':') + 1);
+    const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const salt = bytes.slice(0, 16), iv = bytes.slice(16, 28), data = bytes.slice(28);
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(normalize(code)), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt, iterations: 250000, hash: 'SHA-256' },
+      base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+    const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
+
+  function unlock(data, animate) {
+    secret = data;
+    renderAfter();
+    document.documentElement.classList.remove('is-locked');
+    const g = document.querySelector('.guichet');
+    if (g) {
+      if (animate) { g.classList.add('is-open'); setTimeout(() => g.remove(), 900); }
+      else g.remove();
+    }
+    marqueeStart = performance.now();
+    if (skip) skip.classList.remove('is-hidden');
+  }
+
+  if (locked) {
+    const form = document.querySelector('.guichet__ticket');
+    const input = form.querySelector('input');
+    const error = form.querySelector('.guichet__error');
+    const btn = form.querySelector('button');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!normalize(input.value)) { input.focus(); return; }
+      btn.disabled = true; btn.textContent = T.verif; error.textContent = '';
+      try {
+        const data = await openCoffre(cfg.coffre, input.value);
+        try { localStorage.setItem(MEMO, input.value); } catch (err) { /* navigation privée */ }
+        unlock(data, true);
+      } catch (err) {
+        error.textContent = T.erreur;
+        form.classList.remove('is-shaking'); void form.offsetWidth; form.classList.add('is-shaking');
+        btn.disabled = false; btn.textContent = T.entrer;
+        input.select();
+      }
+    });
+
+    // Code déjà saisi sur cet appareil : on entre directement
+    let saved = null;
+    try { saved = localStorage.getItem(MEMO); } catch (err) { /* navigation privée */ }
+    if (saved) {
+      openCoffre(cfg.coffre, saved).then(d => unlock(d, false), () => {
+        try { localStorage.removeItem(MEMO); } catch (err) { /* navigation privée */ }
+        input.focus();
+      });
+    } else {
+      setTimeout(() => input.focus({ preventScroll: true }), 600);
+    }
+  } else {
+    renderAfter();
+    if (skip) skip.classList.remove('is-hidden');
+  }
+
+  /* ---------- Moteur de la salle ---------- */
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const BG = '#0d0a09';
   const HOLD_IN = 0.03;   // part du scroll où l'on reste devant la façade
@@ -35,13 +319,11 @@
   let poster = null;
   let vw = 0, vh = 0, dpr = 1;
   let target = 0, current = 0, drawn = -1;
-  let marqueeStart = 0;
+  let marqueeStart = locked ? Infinity : 0;
   let playing = false;
 
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const smoothstep = t => t * t * (3 - 2 * t);
-
-  /* ---------- Chargement ---------- */
 
   const sceneUrl = new URL(cfg.scene || '../cinema/scene.json', location.href);
 
@@ -51,10 +333,10 @@
     loadFrames();
   });
 
-  if (cfg.poster) {
+  if (cfg.affiche) {
     const img = new Image();
     img.onload = () => { poster = img; drawn = -1; };
-    img.src = cfg.poster;
+    img.src = cfg.affiche;
   }
 
   // Les polices doivent être prêtes avant d'écrire la marquise sur le canvas
@@ -88,7 +370,10 @@
       img.onload = () => {
         const done = () => {
           frames[i] = img; loaded++;
-          if (i === 0) { marqueeStart = performance.now(); stage.classList.add('is-ready'); }
+          if (i === 0) {
+            if (!locked && !marqueeStart) marqueeStart = performance.now();
+            stage.classList.add('is-ready');
+          }
           if (loader) loader.style.transform = `scaleX(${loaded / count})`;
           if (loaded === count) stage.classList.add('is-loaded');
           drawn = -1;
@@ -111,7 +396,7 @@
     return null;
   }
 
-  /* ---------- Scroll → image ---------- */
+  /* Scroll → image */
 
   function trackRange() {
     const top = track.getBoundingClientRect().top + window.scrollY;
@@ -127,11 +412,10 @@
     return clamp((p - HOLD_IN) / (1 - HOLD_IN - HOLD_OUT), 0, 1) * (count - 1);
   }
 
-  /* ---------- Cadrage ---------- */
+  /* Cadrage : sur un écran large la vidéo couvre tout. Sur un écran étroit
+     (téléphone), on garde visible la zone utile (roi) de chaque moment,
+     quitte à laisser des marges au-dessus et en dessous. */
 
-  // Sur un écran large la vidéo couvre tout. Sur un écran étroit (téléphone),
-  // on garde visible la zone utile (roi) de chaque moment, quitte à laisser
-  // du noir au-dessus et en dessous, comme un format cinéma.
   function roiAt(f) {
     const k = scene.roi;
     if (f <= k[0][0]) return k[0].slice(1);
@@ -173,7 +457,7 @@
     };
   }
 
-  /* ---------- Dessin ---------- */
+  /* Dessin */
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -200,22 +484,23 @@
   }
 
   function drawMarquee(r, now) {
-    const lines = cfg.marquee;
+    const lines = cfg.marquise;
     if (!r || !lines || !lines.length) return;
     const total = lines.join('').length;
-    const shown = reduceMotion ? total : Math.floor(clamp((now - marqueeStart - 350) / 55, 0, total));
+    const shown = reduceMotion && isFinite(marqueeStart) ? total
+      : Math.floor(clamp((now - marqueeStart - 350) / 55, 0, total));
+    if (!shown) return;
     ctx.save();
     ctx.beginPath(); ctx.rect(r.x, r.y, r.w, r.h); ctx.clip();
     ctx.fillStyle = '#231816';
-    ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
     const rowH = r.h / lines.length;
     let budget = shown;
     lines.forEach((line, n) => {
       let size = rowH * 0.62;
       ctx.font = `600 ${size}px "Playfair Display", Georgia, serif`;
-      const spacing = size * 0.16;
-      if ('letterSpacing' in ctx) ctx.letterSpacing = spacing + 'px';
+      if ('letterSpacing' in ctx) ctx.letterSpacing = size * 0.16 + 'px';
       const wMax = r.w * 0.86;
       const measured = ctx.measureText(line).width;
       if (measured > wMax) {
@@ -227,7 +512,6 @@
       budget -= line.length;
       // Les lettres se posent une à une, alignées comme sur un vrai tableau
       const full = ctx.measureText(line).width;
-      ctx.textAlign = 'left';
       ctx.fillText(text, r.x + (r.w - full) / 2, r.y + rowH * (n + 0.54));
     });
     ctx.restore();
@@ -290,7 +574,7 @@
       ctx.fillStyle = g; ctx.fillRect(0, cam.oy + cam.dh - fade, vw, fade + 1);
     }
 
-    placeScreen(tracked('screen', f, cam), cam);
+    placeScreen(tracked('screen', f, cam));
   }
 
   // Le carton « Lancer la séance » et le lecteur suivent l'écran pendant le zoom
@@ -322,14 +606,12 @@
     const sec = f / scene.fps;
     captions.forEach(el => {
       const from = parseFloat(el.dataset.from), to = parseFloat(el.dataset.to);
-      const edge = 0.6;
-      const o = clamp(Math.min(sec - from, to - sec) / edge, 0, 1);
-      el.style.opacity = o;
+      el.style.opacity = clamp(Math.min(sec - from, to - sec) / 0.6, 0, 1);
     });
-    if (skip) skip.classList.toggle('is-hidden', p > 0.9);
+    if (skip && !document.documentElement.classList.contains('is-locked')) skip.classList.toggle('is-hidden', p > 0.9);
   }
 
-  /* ---------- Boucle ---------- */
+  /* Boucle */
 
   let lastP = -1;
   function loop(now) {
@@ -339,7 +621,7 @@
     target = frameForProgress(p);
     const diff = target - current;
     current = reduceMotion || Math.abs(diff) < 0.01 ? target : current + diff * 0.16;
-    const marqueeAnimating = now - marqueeStart < 3500;
+    const marqueeAnimating = isFinite(marqueeStart) && now - marqueeStart < 3500;
     if (current !== drawn || marqueeAnimating || p !== lastP) {
       draw(current, now);
       updateOverlays(p, current);
@@ -354,7 +636,7 @@
     resizeTimer = setTimeout(() => { if (scene) resize(); }, 120);
   });
 
-  /* ---------- Aller directement au film ---------- */
+  /* Aller directement au film */
 
   function goToScreen() {
     const { top, len } = trackRange();
@@ -364,34 +646,34 @@
 
   if (skip) skip.addEventListener('click', e => { e.preventDefault(); goToScreen(); });
 
-  /* ---------- Lecteur ---------- */
+  /* Lecteur : chargé seulement au clic, rien n'est envoyé à l'hébergeur
+     vidéo tant que le couple n'a pas lancé la séance. */
 
-  // Le lecteur n'est chargé qu'au clic : rien n'est envoyé à l'hébergeur
-  // vidéo tant que le couple n'a pas lancé la séance.
   function embedUrl() {
-    if (cfg.vimeo) return `https://player.vimeo.com/video/${cfg.vimeo}?autoplay=1&title=0&byline=0&portrait=0&dnt=1`;
-    if (cfg.bunny) return `${cfg.bunny}${cfg.bunny.includes('?') ? '&' : '?'}autoplay=true&preload=true`;
-    if (cfg.youtube) return `https://www.youtube-nocookie.com/embed/${cfg.youtube}?autoplay=1&rel=0&playsinline=1`;
+    const film = (secret && secret.film) || {};
+    if (film.vimeo) return `https://player.vimeo.com/video/${encodeURIComponent(film.vimeo)}?autoplay=1&title=0&byline=0&portrait=0&dnt=1`;
+    if (film.bunny) return `${film.bunny}${film.bunny.includes('?') ? '&' : '?'}autoplay=true&preload=true`;
+    if (film.youtube) return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(film.youtube)}?autoplay=1&rel=0&playsinline=1`;
     return null;
   }
 
-  if (playBtn) playBtn.addEventListener('click', () => {
+  playBtn.addEventListener('click', () => {
     const src = embedUrl();
     if (!src) return;
     if (scene && current < count - 2) goToScreen();
     const frame = document.createElement('iframe');
     frame.src = src;
-    frame.title = cfg.title ? `Film — ${cfg.title}` : 'Film';
+    frame.title = cfg.titre || 'Film';
     frame.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
     frame.allowFullscreen = true;
     player.appendChild(frame);
     playing = true;
     screenEl.classList.add('is-playing');
-    try { localStorage.setItem('qm_cinema_vu_' + (cfg.slug || location.pathname), '1'); } catch (e) { /* navigation privée */ }
+    try { localStorage.setItem(MEMO + '_vu', '1'); } catch (e) { /* navigation privée */ }
   });
 
   // Visite suivante : le lien « Aller au film » est mis en avant
   try {
-    if (skip && localStorage.getItem('qm_cinema_vu_' + (cfg.slug || location.pathname))) skip.classList.add('is-returning');
+    if (localStorage.getItem(MEMO + '_vu')) skip.classList.add('is-returning');
   } catch (e) { /* navigation privée */ }
 })();

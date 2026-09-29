@@ -4,168 +4,40 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Les Vibiches — Séance privée · Qualimatic Production</title>
-<meta name="description" content="Le film de mariage de Chloé et Victor, au Domaine de Mont. Séance privée." />
 <!-- Page privée : jamais indexée -->
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <meta name="theme-color" content="#0d0a09" />
-
 <meta property="og:title" content="Les Vibiches — Séance privée" />
-<meta property="og:description" content="Votre film vous attend. Entrez dans la salle." />
-<meta property="og:image" content="affiche.jpg" />
-
+<meta property="og:image" content="https://www.qualimaticproduction.fr/livraison/les-vibiches/affiche.jpg" />
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&family=Allura&display=swap" rel="stylesheet" />
-
 <link rel="preload" href="../cinema/frames/0000.webp" as="image" />
 <link rel="stylesheet" href="../cinema/cinema.css" />
-
 <script>
-  /* Tout ce qui est propre au couple se règle ici */
-  window.QM_CINEMA = {
-    slug: 'les-vibiches',
-    scene: '../cinema/scene.json',
-    title: 'Les Vibiches',
-    poster: 'affiche.jpg',
-    // Le tableau à lettres de la marquise : une ligne par rangée (3 rangées)
-    marquee: ['CE SOIR', 'LES VIBICHES', 'DOMAINE DE MONT'],
-    // Lecteur : renseigner UN seul des trois (vimeo: '123456789' · bunny: 'https://iframe.mediadelivery.net/embed/…' · youtube: 'ID')
-    youtube: '7OEqLbjnlPQ',
-    // Lien vers vos avis Google (laisser vide pour masquer le bouton)
-    avis: ''
+  /* Généré par outils/cinema/nouvelle-seance.html — le « coffre » ne s'ouvre qu'avec le code du couple */
+  window.QM_SEANCE = {
+    "slug": "les-vibiches",
+    "lang": "fr",
+    "titre": "Les Vibiches",
+    "sousTitre": "Chloé & Victor · Domaine de Mont",
+    "affiche": "affiche.jpg",
+    "afficheHD": "affiche-hd.jpg",
+    "marquise": [
+      "CE SOIR",
+      "LES VIBICHES",
+      "DOMAINE DE MONT"
+    ],
+    "realisateur": "Charly Coulardot",
+    "coffre": "v1:5TJKa3kzAMBDdL/2P8egeqRcIuQ71GfPNVEybwYSKfGlw8Dd5wLwoI4NwCaesVL2pt5Q0FhE+KIhuFZAroA8WgFNZ9qUEdbV3iIxw9pWS73hMKPaKbvhHt5m1x7/1WIAT1cDschPJsIe/CJyGp7PosAVa/lqmofy5A9pPPvk5JkpzrXoUAxOjlvmzaRVEdpeDA2yz+MhkCNmY4J/jZtT98LiYdw/xq5jnSrzBe6qPS7A9h0dpAi5MjogqiQGPEcQP0DoV7W6Ho6C5yUbzUxoxgByjfzXD2ATKdbQr2Pz2U96ZJCPg+BitatidmsM3LfcUmfuYC/OwLx3+uqjnw8aNkD4itAppffCTzl4RvqI5oW5/CnLy3JUbXrpel9N+HPURHzVEBx4MaNt9PbsSnJ7FKXyea2uzCj9LnhlHdZw9K0Fi3fTEqGhOvlkcHGsBw/PH2mzbtu8Huz5RhNlhoKt4395UVclw0O6dSPZ6Uuitirs/RHm0mcF2S2Ks0p0cZk9nXvnHzxnVFumpDkqQwylJyowwITLrtwrR4iH/IjJnFs55WUDtpJWQuh5OEOuVDBTXqTHPjuDa2y0qcfTPKiUsizkkSoC7wyt0CvT1PiBHUs+9uJMUK2Y+8GbgZ4s1vIK4rl/zAZOwPMBsFzCbRmQ9AvHzVwJA0pWoOZo4xNHzRE3xDSAsm0JZosLf/xsToySlI4cbJ5yL/UeEJNJqG8dh9O50qzwCI/z"
   };
 </script>
 </head>
 <body>
-
-<a class="cinema-skip" href="#seance">Aller au film</a>
-
-<main>
-  <section class="cinema-track" data-cinema aria-label="Entrée dans la salle de projection">
-    <div class="cinema-stage">
-      <canvas aria-hidden="true"></canvas>
-
-      <div class="cinema-intro">
-        <div class="cinema-intro__title">
-          <p class="cinema-intro__eyebrow">Qualimatic Production présente</p>
-          <h1>Les <em>Vibiches</em></h1>
-          <p>Chloé &amp; Victor · Domaine de Mont</p>
-        </div>
-      </div>
-      <p class="cinema-hint">Faites défiler pour entrer</p>
-
-      <p class="cinema-caption" data-caption data-from="8.4" data-to="10.4">Installez-vous…</p>
-
-      <div class="cinema-screen" id="seance">
-        <div class="cinema-card">
-          <p class="cinema-card__eyebrow">Séance privée</p>
-          <h2 class="cinema-card__title">Les <em>Vibiches</em></h2>
-          <button class="cinema-play" type="button">
-            <span class="cinema-play__disc"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 10 6 0 12z"/></svg></span>
-            <span>Lancer la séance</span>
-          </button>
-          <p class="cinema-card__credit">un film de Charly Coulardot</p>
-        </div>
-        <div class="cinema-player"></div>
-      </div>
-
-      <p class="cinema-rotate">Tournez votre téléphone pour le plein écran</p>
-      <div class="cinema-loader" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <section class="after">
-    <div class="after__inner">
-
-      <article class="block letter fade-in">
-        <h2><span class="asterisk">✻</span>Un mot <em>pour vous</em></h2>
-        <p>Chloé, Victor,</p>
-        <p>Merci de m'avoir laissé une place discrète dans votre journée au Domaine de Mont. Ce film est le vôtre : les regards, les rires, les silences aussi.</p>
-        <p>Prenez le temps. Regardez-le à deux d'abord, puis avec ceux que vous aimez.</p>
-        <p class="signature">Charly</p>
-      </article>
-
-      <section class="block fade-in">
-        <h2><span class="asterisk">✻</span>Vos <em>fichiers</em></h2>
-        <p>Téléchargez-les dès maintenant et gardez-en deux copies : une sur votre ordinateur, une sur un disque externe.</p>
-        <ul class="files">
-          <li>
-            <div><strong>Le film</strong><span>Version intégrale · 4K</span></div>
-            <a class="btn is-pending" href="#" aria-disabled="true">Bientôt disponible</a>
-          </li>
-          <li>
-            <div><strong>Le teaser</strong><span>Format court, pour partager</span></div>
-            <a class="btn is-pending" href="#" aria-disabled="true">Bientôt disponible</a>
-          </li>
-          <li>
-            <div><strong>L'affiche</strong><span>Haute définition, prête à imprimer</span></div>
-            <a class="btn" href="affiche-hd.jpg" download="Les-Vibiches-affiche.jpg">Télécharger</a>
-          </li>
-        </ul>
-      </section>
-
-      <section class="block fade-in">
-        <h2><span class="asterisk">✻</span>Partager <em>la séance</em></h2>
-        <p>Envoyez ce lien à vos proches : ils entreront dans la même salle que vous.</p>
-        <div class="actions">
-          <button class="btn" type="button" data-copy>Copier le lien</button>
-        </div>
-      </section>
-
-      <section class="block fade-in">
-        <h2><span class="asterisk">✻</span>Et <em>maintenant</em></h2>
-        <p>Si le film vous a touchés, quelques mots de votre part comptent beaucoup : ils aident d'autres couples à me trouver.</p>
-        <div class="actions">
-          <a class="btn" href="#" data-avis target="_blank" rel="noopener" hidden>Laisser un avis</a>
-          <a class="btn" href="https://www.qualimaticproduction.fr/" target="_blank" rel="noopener">Qualimatic Production</a>
-        </div>
-      </section>
-
-    </div>
-  </section>
-</main>
-
-<footer class="foot">
-  <a href="https://www.qualimaticproduction.fr/">Qualimatic Production</a>
-  <p>Discret derrière l'objectif. Présent dans chaque image.</p>
-</footer>
-
+<main data-seance></main>
+<noscript><p style="color:#F5EFE8;padding:40px;text-align:center">Activez JavaScript pour entrer dans la salle.</p></noscript>
 <script src="../cinema/cinema.js"></script>
-<script>
-  (function () {
-    var cfg = window.QM_CINEMA;
-
-    var avis = document.querySelector('[data-avis]');
-    if (avis && cfg.avis) { avis.href = cfg.avis; avis.hidden = false; }
-
-    var copy = document.querySelector('[data-copy]');
-    if (copy) copy.addEventListener('click', function () {
-      var url = location.href.split('#')[0];
-      var done = function () {
-        copy.textContent = 'Lien copié';
-        setTimeout(function () { copy.textContent = 'Copier le lien'; }, 2200);
-      };
-      if (navigator.share && /Mobi/i.test(navigator.userAgent)) {
-        navigator.share({ title: document.title, url: url }).catch(function () {});
-      } else if (navigator.clipboard) {
-        navigator.clipboard.writeText(url).then(done, function () { prompt('Copiez ce lien :', url); });
-      } else {
-        prompt('Copiez ce lien :', url);
-      }
-    });
-
-    var els = document.querySelectorAll('.fade-in');
-    if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('is-visible'); }); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.15 });
-    els.forEach(function (el) { io.observe(el); });
-  })();
-</script>
 </body>
 </html>
