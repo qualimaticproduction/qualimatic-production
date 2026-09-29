@@ -1,0 +1,432 @@
+/* ============================================
+   QUALIMATIC — Salle de projection (page de livraison)
+   ============================================ */
+
+:root {
+  --cream: #F5EFE8;
+  --cream-soft: #EFE7DD;
+  --ink: #1A1A1A;
+  --bordeaux: #5C1721;
+  --taupe: #A89888;
+  --taupe-soft: #C7BBAB;
+  --night: #0d0a09;
+  --screen: #F4EEE3;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --gutter: clamp(20px, 5vw, 64px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  background: var(--night);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+::selection { background: var(--bordeaux); color: var(--cream); }
+
+.asterisk { color: var(--bordeaux); margin-right: 0.45em; font-size: 0.8em; }
+
+/* ---------- La salle ---------- */
+
+.cinema-track {
+  position: relative;
+  height: 900vh;
+  background: var(--night);
+}
+
+.cinema-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  color: var(--cream);
+}
+
+.cinema-stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease-out);
+}
+
+.cinema-stage.is-ready canvas { opacity: 1; }
+
+.cinema-loader {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: rgba(245, 239, 232, 0.5);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s linear, opacity 0.8s ease 0.4s;
+}
+
+.cinema-stage.is-loaded .cinema-loader { opacity: 0; }
+
+/* Titres d'ouverture (devant la façade) */
+
+.cinema-intro {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--gutter) clamp(84px, 13vh, 120px);
+}
+
+.cinema-intro__title .cinema-intro__eyebrow {
+  margin: 0 0 16px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 232, 0.72);
+}
+
+.cinema-intro__title {
+  opacity: 0;
+  animation: rise 1.8s var(--ease-out) 1s forwards;
+}
+
+.cinema-intro__title h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(40px, 7vw, 92px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
+}
+
+.cinema-intro__title h1 em { font-style: italic; }
+
+.cinema-intro__title p {
+  margin-top: 14px;
+  font-size: clamp(12px, 1.2vw, 14px);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 232, 0.82);
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.6);
+}
+
+.cinema-hint {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(22px, 4vh, 40px);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 232, 0.7);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.cinema-hint::after {
+  content: '';
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(rgba(245, 239, 232, 0.8), rgba(245, 239, 232, 0));
+  animation: drip 2.2s ease-in-out infinite;
+  transform-origin: top;
+}
+
+.cinema-caption {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(70px, 14vh, 140px);
+  text-align: center;
+  font-family: 'Allura', cursive;
+  font-size: clamp(34px, 4.4vw, 56px);
+  color: rgba(245, 239, 232, 0.92);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Aller directement au film */
+
+.cinema-skip {
+  position: fixed;
+  top: clamp(14px, 2.4vh, 24px);
+  right: clamp(14px, 2.4vw, 28px);
+  z-index: 10;
+  padding: 9px 16px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(245, 239, 232, 0.78);
+  border: 1px solid rgba(245, 239, 232, 0.28);
+  background: rgba(13, 10, 9, 0.35);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: opacity 0.5s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.cinema-skip:hover,
+.cinema-skip.is-returning { color: var(--cream); border-color: rgba(245, 239, 232, 0.7); }
+.cinema-skip.is-hidden { opacity: 0; pointer-events: none; }
+
+/* L'écran : carton d'ouverture puis lecteur */
+
+.cinema-screen {
+  --u: 1;
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--ink);
+  pointer-events: none;
+  container-type: size;
+}
+
+.cinema-screen.is-interactive { pointer-events: auto; }
+
+.cinema-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.6s ease;
+}
+
+.cinema-screen.is-playing .cinema-card { opacity: 0; pointer-events: none; }
+
+.cinema-card__eyebrow {
+  font-size: max(9px, calc(var(--u) * 13px));
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.cinema-card__title {
+  margin-top: calc(var(--u) * 14px);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  font-size: max(24px, calc(var(--u) * 76px));
+  line-height: 1;
+}
+
+.cinema-card__title em { font-style: italic; color: var(--bordeaux); }
+
+.cinema-play {
+  margin-top: calc(var(--u) * 34px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--u) * 14px);
+  font-size: max(9px, calc(var(--u) * 12px));
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.cinema-play__disc {
+  width: max(46px, calc(var(--u) * 86px));
+  height: max(46px, calc(var(--u) * 86px));
+  border-radius: 50%;
+  border: 1px solid rgba(26, 26, 26, 0.55);
+  display: grid;
+  place-items: center;
+  transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+}
+
+.cinema-play__disc svg { width: 28%; height: 28%; margin-left: 8%; fill: currentColor; transition: fill 0.4s; }
+
+.cinema-play:hover .cinema-play__disc,
+.cinema-play:focus-visible .cinema-play__disc { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--cream); }
+
+.cinema-card__credit {
+  margin-top: calc(var(--u) * 30px);
+  font-family: 'Allura', cursive;
+  font-size: max(18px, calc(var(--u) * 30px));
+  color: var(--taupe);
+}
+
+/* Téléphone à la verticale : inviter à le tourner pour le plein écran */
+.cinema-rotate {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(60px, 14vh, 120px);
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 232, 0.6);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  display: none;
+}
+
+@media (orientation: portrait) and (max-width: 700px) {
+  .cinema-rotate { display: block; }
+  .cinema-stage.is-at-screen .cinema-rotate { opacity: 1; }
+}
+
+/* Écran bas (téléphone) : on garde l'essentiel, le titre et le bouton */
+@container (max-height: 230px) {
+  .cinema-card__eyebrow, .cinema-card__credit { display: none; }
+  .cinema-card__title { margin-top: 0; }
+  .cinema-play { margin-top: 12px; gap: 8px; }
+}
+
+.cinema-player {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: #000;
+}
+
+.cinema-screen.is-playing .cinema-player { display: grid; }
+
+.cinema-player iframe {
+  width: min(100cqw, calc(100cqh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+}
+
+/* ---------- Après la séance ---------- */
+
+.after {
+  background: var(--cream);
+  position: relative;
+}
+
+.after::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: -1px;
+  height: 22vh;
+  background: linear-gradient(var(--night), rgba(13, 10, 9, 0));
+  pointer-events: none;
+}
+
+.after__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(120px, 22vh, 200px) var(--gutter) clamp(80px, 12vh, 120px);
+}
+
+.block + .block { margin-top: clamp(84px, 14vh, 140px); }
+
+.block h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(30px, 4.2vw, 46px);
+  line-height: 1.1;
+  margin-bottom: 26px;
+}
+
+.block h2 em { font-style: italic; color: var(--bordeaux); }
+
+.block p { font-size: 16px; color: #3a3431; }
+.block p + p { margin-top: 1em; }
+
+.letter p { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.75; color: var(--ink); }
+
+.letter .signature {
+  margin-top: 18px;
+  font-family: 'Allura', cursive;
+  font-size: 46px;
+  line-height: 1;
+  color: var(--bordeaux);
+}
+
+.files { list-style: none; margin-top: 34px; border-top: 1px solid var(--taupe-soft); }
+
+.files li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--taupe-soft);
+}
+
+.files strong {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  font-size: 21px;
+  color: var(--ink);
+}
+
+.files span { display: block; font-size: 13px; color: var(--taupe); margin-top: 2px; }
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  transition: background 0.35s var(--ease-out), color 0.35s var(--ease-out), border-color 0.35s var(--ease-out);
+}
+
+.btn:hover, .btn:focus-visible { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--cream); }
+
+.btn.is-pending { color: var(--taupe); border-color: var(--taupe-soft); pointer-events: none; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+.foot {
+  background: var(--ink);
+  color: var(--taupe-soft);
+  text-align: center;
+  padding: 64px var(--gutter);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.foot a { text-decoration: none; color: var(--cream); letter-spacing: 0.3em; text-transform: uppercase; font-size: 11px; }
+.foot p { margin-top: 12px; font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 15px; letter-spacing: 0; }
+
+.fade-in { opacity: 0; transform: translateY(18px); transition: opacity 1.1s var(--ease-out), transform 1.1s var(--ease-out); }
+.fade-in.is-visible { opacity: 1; transform: none; }
+
+@media (max-width: 560px) {
+  .files li { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes drip { 0% { transform: scaleY(0); opacity: 1; } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cinema-track { height: 420vh; }
+  .cinema-intro__eyebrow, .cinema-intro__title { animation: none; opacity: 1; }
+  .cinema-hint::after { animation: none; }
+  .fade-in { opacity: 1; transform: none; }
+}

@@ -9,6 +9,8 @@ Allow: /
 # Pages non indexables
 Disallow: /404.html
 Disallow: /uploads/
+Disallow: /livraison/
+Disallow: /outils/
 Disallow: /assets/og-cover.jpg
 
 # Empêcher l'indexation des URLs de redirection / paramètres internes
