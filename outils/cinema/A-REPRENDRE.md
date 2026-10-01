@@ -1,6 +1,6 @@
 # À reprendre : pages « expérience au scroll »
 
-Point d'étape du 29 septembre 2026. Tout le travail est sur la branche `claude/analyse-dlvrd-site-9p1lqq`
+Point d'étape du 1er octobre 2026. Tout le travail est sur la branche `claude/analyse-dlvrd-site-9p1lqq`
 (pull request #1).
 
 ## 1. Page mariage « visite du château » (démo validée, à refaire en version finale)
@@ -15,35 +15,44 @@ Vidéo de la démo : `outils/cinema/source/chateau-16x9.mp4` (720p, 30 s).
 4. `4-salon-bleu-fenetre-jardin` : soleil par une porte-fenêtre ouverte sur le jardin, lustre → **le salon au livre et le bureau**.
 5. `5-villa-allee-cypres` : allée de cyprès, parterres de buis, heure dorée → **l'arrivée en drone**.
 
-### À ne pas oublier
-- [ ] **Rappeler à Charly de générer l'image du cachet de cire rouge avec son logo** (vue de dessus,
-      fond uni, haute définition) : il remplacera le cachet dessiné de la démo.
-- [ ] Nouveau prompt prêt : `outils/cinema/prompt-chateau-v2.md` (entrée plus rapide, cadres sobres,
-      couverture « Qualimatic · Tarifs 2027-2028 » + logo, deux pages qui tournent, livre qui se referme).
-- [ ] Code : raccourcir le scroll avant le hall ; le texte des pages s'efface pendant chaque page tournée
-      (impossible de le coller sur une page qui se courbe) et réapparaît quand elle est à plat.
-- [ ] **Retirer les raccourcis en haut à droite (Films · Tarifs · Avis · Contact) pendant l'expérience.**
-      Sinon les visiteurs cliquent directement sur « Tarifs » et ratent la visite.
-      Les afficher seulement une fois toute l'animation déroulée (et éventuellement dès l'arrivée
-      pour les visiteurs qui reviennent, mémorisé sur leur appareil).
-- [ ] Nouvelle vidéo en bonne qualité (1080p minimum, idéalement 4K), en 16:9 **et** 9:16,
-      avec les mêmes plans fixes : cadres, couverture, livre ouvert, bureau (feuille vierge + encrier).
-- [ ] Vraies miniatures des 3 films dans les cadres + lecture dans un lecteur par-dessus la page (Bunny).
-- [ ] Envoi réel de la lettre (Web3Forms, comme le formulaire actuel), puis cachet de cire.
-- [ ] Intégrer dans `mariage.html` : l'expérience en haut, puis FAQ, zones, partenaires en dessous (SEO).
-- [ ] Remplacer `overflow-x: hidden` par `overflow-x: clip` sur html/body (sinon l'effet « collé » au scroll casse).
-- [ ] Vérifier les contenus : formules, avis choisis, textes du livre.
+### Plan de la version finale (point du 1er octobre 2026)
 
-### Idées d'amélioration proposées
-- Cadres « vivants » : un extrait muet de chaque film en boucle dans le cadre au lieu d'une image fixe.
-- Son d'ambiance facultatif (bouton « Activer le son ») : oiseaux dans le jardin, pas dans le hall,
-  froissement des pages, plume qui gratte, cachet qui se pose.
-- Disponibilité de la date : dans la lettre, dès que la date est écrite, « Cette date est encore libre »
-  (liste des dates réservées tenue à jour).
-- Une page « Options à la carte & en pratique » dans le livre, et la plaquette PDF en marque-page.
-- Réponse automatique au couple après l'envoi, dans le même style (lettre + cachet).
-- Version allégée si la connexion est lente, et version sans animation (accessibilité, Google).
-- Mesurer jusqu'où les visiteurs vont dans la visite, pour ajuster la longueur.
+**Étape 1 : la matière (Charly)**
+- [ ] Générer la vidéo v2 avec `prompt-chateau-v2.md`, en 1080p minimum, **16:9 et 9:16**.
+      Vérifier image par image : couverture lisible (« Qualimatic », « Tarifs 2027-2028 », logo),
+      cadres / pages / feuille vierges, moments d'arrêt vraiment immobiles.
+- [ ] **Générer l'image du cachet de cire rouge avec le logo** (vue de dessus, fond uni, haute définition).
+- [ ] Choisir : 3 doubles pages (Élégance, Signature, avis) ou 4 (+ options à la carte et infos pratiques,
+      il faut alors 3 pages qui tournent dans la vidéo).
+- [ ] Miniatures des 3 films (ou extraits de 5 s pour des cadres « vivants »).
+
+**Étape 2 : la construction (Claude)**
+- [ ] Repérer les plans fixes et les zones (cadres, couverture, pages, feuille, encrier) dans la nouvelle vidéo.
+- [ ] Moteur réutilisable (`assets/mariage/chateau.js` + CSS), intégré en haut de `mariage.html` à la place
+      de la vidéo d'en-tête ; FAQ, zones, partenaires et le reste restent en dessous (référencement).
+- [ ] Rythme : entrée rapide, scroll total raccourci par rapport à la démo.
+- [ ] **Raccourcis Films · Tarifs · Avis · Contact cachés pendant la visite**, affichés une fois la visite
+      terminée (et d'emblée pour les visiteurs qui reviennent).
+- [ ] Lettre : **case de consentement RGPD** (obligatoire, comme le formulaire actuel), envoi réel par
+      Web3Forms (mêmes champs et clé que le formulaire actuel), protection anti-spam, messages d'erreur
+      écrits à l'encre, cachet de cire à l'envoi.
+- [ ] Films : lecteur Bunny par-dessus la page au clic.
+- [ ] Les affiches restent dans les cadres pendant que la caméra repart (suivi du mouvement), au lieu de s'effacer.
+- [ ] Version anglaise (`en/wedding.html`) : textes du livre et de la lettre traduits.
+- [ ] Deux qualités d'images (téléphone / ordinateur), chargement progressif, image d'attente.
+- [ ] Remplacer `overflow-x: hidden` par `overflow-x: clip` sur html/body.
+- [ ] Version sans animation (réglage « réduire les animations », connexion lente, échec du script) :
+      la page actuelle classique.
+- [ ] Mesure d'audience par chapitre (Google Analytics déjà présent sur le site).
+
+**Étape 3 : les essais**
+- [ ] Tests sur vrai iPhone (Safari) et Android, ordinateur, tablette.
+- [ ] Pull request séparée de la #1 (salle de projection), pour ne pas bloquer l'une avec l'autre.
+
+### Idées en réserve
+- Cadres « vivants » (extrait muet en boucle), son d'ambiance facultatif, disponibilité de la date dans la lettre,
+  réponse automatique au couple (lettre + cachet), lien « ou appelez-moi / WhatsApp » discret sur le bureau,
+  le 4e film « Réseaux sociaux » (petit cadre ou téléphone posé sur le bureau).
 
 ## 2. Salle de projection (livraison des films) : en place, à finaliser
 
