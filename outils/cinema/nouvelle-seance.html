@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nouvelle séance · Qualimatic</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F5EFE8; --cream-soft: #EFE7DD; --ink: #1A1A1A;
+    --bordeaux: #5C1721; --taupe: #A89888; --taupe-soft: #C7BBAB; --muted: #6f635a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 300 15px/1.6 'Inter', system-ui, sans-serif; background: var(--cream); color: var(--ink); padding: 56px 20px 96px; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  h1 { font: 400 clamp(34px, 5vw, 48px)/1.1 'Playfair Display', Georgia, serif; }
+  h1 em, h2 em { font-style: italic; color: var(--bordeaux); }
+  h2 { font: 400 24px/1.2 'Playfair Display', Georgia, serif; margin-bottom: 18px; }
+  .star { color: var(--bordeaux); margin-right: 0.4em; font-size: 0.8em; }
+  .lead { margin-top: 14px; max-width: 60ch; color: var(--muted); }
+  fieldset { border: 0; border-top: 1px solid var(--taupe-soft); padding: 34px 0 6px; margin-top: 34px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+  .full { grid-column: 1 / -1; }
+  label { display: block; font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  input, select, textarea {
+    width: 100%; font: 400 15px/1.4 'Inter', sans-serif; color: var(--ink);
+    background: #fffaf4; border: 1px solid var(--taupe-soft); padding: 11px 12px; border-radius: 0;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--bordeaux); }
+  textarea { min-height: 150px; resize: vertical; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .row { display: flex; gap: 10px; }
+  .row input { flex: 1; min-width: 0; }
+  button, .dl {
+    font: 400 11px/1 'Inter', sans-serif; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 14px 20px; border: 1px solid var(--ink); background: transparent; color: var(--ink);
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+    transition: background .3s, color .3s, border-color .3s;
+  }
+  button:hover, .dl:hover { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--cream); }
+  .primary { background: var(--ink); color: var(--cream); }
+  .actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .error { color: var(--bordeaux); font-size: 13px; }
+  .result { margin-top: 40px; padding: 30px; background: var(--cream-soft); border: 1px solid var(--taupe-soft); }
+  .result[hidden] { display: none; }
+  .result ol { margin: 16px 0 0 20px; display: grid; gap: 12px; }
+  .result code, .result pre { font: 12px/1.5 ui-monospace, Menlo, monospace; background: #fffaf4; border: 1px solid var(--taupe-soft); }
+  .result code { padding: 1px 5px; }
+  .result pre { padding: 12px; margin-top: 8px; white-space: pre-wrap; word-break: break-all; }
+  .files { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .code-big { font: 400 22px/1 'Inter', sans-serif; letter-spacing: 0.2em; color: var(--bordeaux); }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><span class="star">✻</span>Nouvelle <em>séance</em></h1>
+  <p class="lead">Remplissez la fiche du couple : l'outil prépare leur salle privée (page, affiche et contenu chiffré avec leur code d'accès). Tout se passe dans votre navigateur, rien n'est envoyé nulle part.</p>
+
+  <form id="f" novalidate>
+    <fieldset>
+      <h2>Le film</h2>
+      <div class="grid">
+        <div><label for="titre">Titre du film</label><input id="titre" required placeholder="Les Vibiches" /></div>
+        <div><label for="slug">Adresse de la page</label><input id="slug" required placeholder="les-vibiches" /><p class="hint">qualimaticproduction.fr/livraison/<b id="slugOut">…</b>/</p></div>
+        <div><label for="noms">Prénoms</label><input id="noms" placeholder="Chloé &amp; Victor" /></div>
+        <div><label for="lieu">Lieu</label><input id="lieu" placeholder="Domaine de Mont" /></div>
+        <div><label for="annee">Année</label><input id="annee" inputmode="numeric" placeholder="2026" /></div>
+        <div><label for="lang">Langue de la page</label><select id="lang"><option value="fr">Français</option><option value="en">English</option></select></div>
+        <div class="full"><label for="affiche">Affiche (JPG ou PNG, format portrait)</label><input id="affiche" type="file" accept="image/*" required /></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <h2>La marquise</h2>
+      <div class="grid">
+        <div><label for="m1">Rangée 1</label><input id="m1" value="CE SOIR" /></div>
+        <div><label for="m2">Rangée 2</label><input id="m2" placeholder="LES VIBICHES" /></div>
+        <div><label for="m3">Rangée 3</label><input id="m3" placeholder="DOMAINE DE MONT" /></div>
+      </div>
+      <p class="hint">Remplies automatiquement avec le titre et le lieu, modifiables. Restez court : 18 caractères par rangée environ.</p>
+    </fieldset>
+
+    <fieldset>
+      <h2>Privé <em>(chiffré)</em></h2>
+      <div class="grid">
+        <div><label for="host">Hébergeur du film</label>
+          <select id="host"><option value="youtube">YouTube</option><option value="vimeo">Vimeo</option><option value="bunny">Bunny Stream</option></select></div>
+        <div><label for="video">Lien du film</label><input id="video" required placeholder="Lien YouTube / Vimeo, ou code d’intégration Bunny" /></div>
+        <div><label for="dlFilm">Téléchargement du film 4K</label><input id="dlFilm" placeholder="Lien de téléchargement (facultatif)" /></div>
+        <div><label for="dlTeaser">Téléchargement du teaser</label><input id="dlTeaser" placeholder="Lien de téléchargement (facultatif)" /></div>
+        <div class="full"><label for="salut">Salutation</label><input id="salut" placeholder="Chloé, Victor," /></div>
+        <div class="full"><label for="mot">Votre mot</label><textarea id="mot" placeholder="Un paragraphe par bloc, séparés par une ligne vide."></textarea></div>
+        <div><label for="signature">Signature</label><input id="signature" value="Charly" /></div>
+        <div><label for="avis">Lien d'avis Google</label><input id="avis" placeholder="https://g.page/r/…/review" /></div>
+        <div class="full"><label for="code">Code d'accès du couple</label>
+          <div class="row"><input id="code" required /><button type="button" id="gen">Générer</button></div>
+          <p class="hint">Majuscules, accents, espaces et tirets ne comptent pas. Notez-le : il n'est enregistré nulle part.</p></div>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <button class="primary" type="submit">Préparer la séance</button>
+      <span class="error" id="err" role="alert"></span>
+    </div>
+  </form>
+
+  <section class="result" id="result" hidden>
+    <h2><span class="star">✻</span>Séance <em>prête</em></h2>
+    <p>Code d'accès : <span class="code-big" id="codeOut"></span></p>
+    <div class="files" id="files"></div>
+    <ol>
+      <li>Sur GitHub, dans le dossier <code>livraison</code>, créez le dossier <code id="dirOut"></code> (<b>Add file → Upload files</b>, en tapant <code>livraison/<span class="slugTxt"></span>/</code> devant le nom) et déposez-y les trois fichiers.</li>
+      <li>Ouvrez <code>livraison/seances.json</code>, cliquez sur le crayon et ajoutez cette ligne juste après le <code>[</code> du début (la plus récente en premier) :
+        <pre id="jsonOut"></pre></li>
+      <li>Envoyez au couple le lien <code id="urlOut"></code> et leur code.</li>
+    </ol>
+  </section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const enc = new TextEncoder();
+  const WORDS = ['RIDEAU', 'ECRAN', 'BOBINE', 'VELOURS', 'LUMIERE', 'PREMIERE', 'SEANCE', 'GENERIQUE', 'PELLICULE', 'TRAVELLING', 'AFFICHE', 'FAUTEUIL'];
+  const DEFAULT_AVIS = 'qm_outil_avis';
+  let slugTouched = false;
+
+  const slugify = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  const normalize = code => String(code).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const upper = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase();
+
+  function genCode() {
+    const n = crypto.getRandomValues(new Uint32Array(2));
+    return WORDS[n[0] % WORDS.length] + '-' + String(1000 + n[1] % 9000);
+  }
+
+  $('titre').addEventListener('input', () => {
+    if (!slugTouched) $('slug').value = slugify($('titre').value);
+    $('m2').value = upper($('titre').value);
+    $('slugOut').textContent = $('slug').value || '…';
+  });
+  $('lieu').addEventListener('input', () => { $('m3').value = upper($('lieu').value); });
+  $('noms').addEventListener('input', () => {
+    if (!$('salut').dataset.touched) $('salut').value = $('noms').value.replace(/\s*&\s*/, ', ') + ($('noms').value ? ',' : '');
+  });
+  $('salut').addEventListener('input', () => { $('salut').dataset.touched = '1'; });
+  $('slug').addEventListener('input', () => { slugTouched = true; $('slugOut').textContent = $('slug').value || '…'; });
+  $('gen').addEventListener('click', () => { $('code').value = genCode(); });
+  $('code').value = genCode();
+  try { $('avis').value = localStorage.getItem(DEFAULT_AVIS) || ''; } catch (e) {}
+
+  function videoId(host, v) {
+    v = v.trim();
+    if (host === 'youtube') {
+      const m = v.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/);
+      return m ? m[1] : v;
+    }
+    if (host === 'vimeo') {
+      const m = v.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+      return m ? m[1] : v.replace(/\D/g, '');
+    }
+    // Bunny : on accepte le lien d'intégration ou le code <div>…<iframe src="…"> copié tel quel ;
+    // on retire les réglages (autoplay, muted…) : la page gère la lecture elle-même
+    const m = v.match(/https:\/\/(?:iframe|player)\.mediadelivery\.net\/(?:embed|play)\/\d+\/[\w-]+/);
+    return m ? m[0].replace('/play/', '/embed/') : v;
+  }
+
+  async function seal(obj, code) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const base = await crypto.subtle.importKey('raw', enc.encode(normalize(code)), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 250000, hash: 'SHA-256' },
+      base, { name: 'AES-GCM', length: 256 }, false, ['encrypt']);
+    const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(JSON.stringify(obj))));
+    const all = new Uint8Array(28 + ct.length);
+    all.set(salt); all.set(iv, 16); all.set(ct, 28);
+    let bin = '';
+    for (let i = 0; i < all.length; i++) bin += String.fromCharCode(all[i]);
+    return 'v1:' + btoa(bin);
+  }
+
+  function loadImage(file) {
+    return new Promise((res, rej) => {
+      const img = new Image();
+      img.onload = () => res(img);
+      img.onerror = rej;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  function jpeg(img, maxW, q) {
+    const w = Math.min(maxW, img.naturalWidth), h = Math.round(img.naturalHeight * w / img.naturalWidth);
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const x = c.getContext('2d');
+    x.imageSmoothingQuality = 'high';
+    x.drawImage(img, 0, 0, w, h);
+    return new Promise(res => c.toBlob(res, 'image/jpeg', q));
+  }
+
+  const escAttr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
+  function pageHtml(pub) {
+    const en = pub.lang === 'en';
+    const privee = en ? 'Private screening' : 'Séance privée';
+    const json = JSON.stringify(pub, null, 2).replace(/</g, '\\u003c').replace(/\n/g, '\n  ');
+    return `<!DOCTYPE html>
+<html lang="${pub.lang}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>${escAttr(pub.titre)} — ${privee} · Qualimatic Production</title>
+<!-- Page privée : jamais indexée -->
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="theme-color" content="#0d0a09" />
+<meta property="og:title" content="${escAttr(pub.titre)} — ${privee}" />
+<meta property="og:image" content="https://www.qualimaticproduction.fr/livraison/${pub.slug}/affiche.jpg" />
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&family=Allura&display=swap" rel="stylesheet" />
+<link rel="preload" href="../cinema/frames/0000.webp" as="image" />
+<link rel="stylesheet" href="../cinema/cinema.css" />
+<script>
+  /* Généré par outils/cinema/nouvelle-seance.html — le « coffre » ne s'ouvre qu'avec le code du couple */
+  window.QM_SEANCE = ${json};
+<\/script>
+</head>
+<body>
+<main data-seance></main>
+<noscript><p style="color:#F5EFE8;padding:40px;text-align:center">${en ? 'Please enable JavaScript to enter the theatre.' : 'Activez JavaScript pour entrer dans la salle.'}</p></noscript>
+<script src="../cinema/cinema.js"><\/script>
+</body>
+</html>
+`;
+  }
+
+  function download(name, blob) {
+    const a = document.createElement('a');
+    a.className = 'dl';
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.textContent = '↓ ' + name;
+    return a;
+  }
+
+  $('f').addEventListener('submit', async e => {
+    e.preventDefault();
+    const err = $('err');
+    err.textContent = '';
+    const slug = slugify($('slug').value || $('titre').value);
+    const file = $('affiche').files[0];
+    if (!$('titre').value.trim() || !slug) { err.textContent = 'Indiquez le titre du film.'; return; }
+    if (!file) { err.textContent = 'Ajoutez l’affiche.'; return; }
+    if (!$('video').value.trim()) { err.textContent = 'Indiquez le lien du film.'; return; }
+    if (normalize($('code').value).length < 6) { err.textContent = 'Choisissez un code d’au moins 6 lettres ou chiffres.'; return; }
+    try { localStorage.setItem(DEFAULT_AVIS, $('avis').value.trim()); } catch (e2) {}
+
+    const lang = $('lang').value;
+    const en = lang === 'en';
+    const host = $('host').value;
+    const prive = {
+      film: { [host]: videoId(host, $('video').value) },
+      mot: {
+        salutation: $('salut').value.trim(),
+        paragraphes: $('mot').value.split(/\n\s*\n/).map(p => p.replace(/\s*\n\s*/g, ' ').trim()).filter(Boolean),
+        signature: $('signature').value.trim()
+      },
+      fichiers: [
+        { titre: en ? 'The film' : 'Le film', detail: en ? 'Full version · 4K' : 'Version intégrale · 4K', lien: $('dlFilm').value.trim() },
+        { titre: en ? 'The teaser' : 'Le teaser', detail: en ? 'Short cut, for sharing' : 'Format court, pour partager', lien: $('dlTeaser').value.trim() }
+      ],
+      avis: $('avis').value.trim()
+    };
+    const sousTitre = [$('noms').value.trim(), $('lieu').value.trim()].filter(Boolean).join(' · ');
+    const pub = {
+      slug, lang,
+      titre: $('titre').value.trim(),
+      sousTitre,
+      affiche: 'affiche.jpg',
+      afficheHD: 'affiche-hd.jpg',
+      marquise: [$('m1').value, $('m2').value, $('m3').value].map(s => upper(s.trim())).filter(Boolean),
+      realisateur: 'Charly Coulardot',
+      coffre: await seal(prive, $('code').value)
+    };
+
+    const img = await loadImage(file);
+    const [small, hd] = await Promise.all([jpeg(img, 720, 0.84), jpeg(img, 2480, 0.9)]);
+    const files = $('files');
+    files.innerHTML = '';
+    files.append(
+      download('index.html', new Blob([pageHtml(pub)], { type: 'text/html' })),
+      download('affiche.jpg', small),
+      download('affiche-hd.jpg', hd)
+    );
+
+    const entry = { slug, titre: pub.titre, noms: $('noms').value.trim(), lieu: $('lieu').value.trim(), annee: $('annee').value.trim(), lang };
+    $('jsonOut').textContent = '  ' + JSON.stringify(entry) + ',';
+    $('codeOut').textContent = upper($('code').value.trim());
+    $('dirOut').textContent = 'livraison/' + slug + '/';
+    document.querySelectorAll('.slugTxt').forEach(el => { el.textContent = slug; });
+    $('urlOut').textContent = 'https://www.qualimaticproduction.fr/livraison/' + slug + '/';
+    $('result').hidden = false;
+    $('result').scrollIntoView({ behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
