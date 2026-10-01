@@ -16,6 +16,12 @@ Vidéo de la démo : `outils/cinema/source/chateau-16x9.mp4` (720p, 30 s).
 5. `5-villa-allee-cypres` : allée de cyprès, parterres de buis, heure dorée → **l'arrivée en drone**.
 
 ### À ne pas oublier
+- [ ] **Rappeler à Charly de générer l'image du cachet de cire rouge avec son logo** (vue de dessus,
+      fond uni, haute définition) : il remplacera le cachet dessiné de la démo.
+- [ ] Nouveau prompt prêt : `outils/cinema/prompt-chateau-v2.md` (entrée plus rapide, cadres sobres,
+      couverture « Qualimatic · Tarifs 2027-2028 » + logo, deux pages qui tournent, livre qui se referme).
+- [ ] Code : raccourcir le scroll avant le hall ; le texte des pages s'efface pendant chaque page tournée
+      (impossible de le coller sur une page qui se courbe) et réapparaît quand elle est à plat.
 - [ ] **Retirer les raccourcis en haut à droite (Films · Tarifs · Avis · Contact) pendant l'expérience.**
       Sinon les visiteurs cliquent directement sur « Tarifs » et ratent la visite.
       Les afficher seulement une fois toute l'animation déroulée (et éventuellement dès l'arrivée
