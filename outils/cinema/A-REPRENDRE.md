@@ -8,6 +8,13 @@ Point d'étape du 29 septembre 2026. Tout le travail est sur la branche `claude/
 Démo : `outils/cinema/demos/mariage-chateau.html` (+ `demos/plume.html`, `demos/LISEZMOI.md`).
 Vidéo de la démo : `outils/cinema/source/chateau-16x9.mp4` (720p, 30 s).
 
+### Inspirations pour la nouvelle vidéo (`outils/cinema/inspiration/`)
+1. `1-salon-sauge-damier` : boiseries crème, lustre de cristal, sol en damier noir et blanc, velours vert sauge.
+2. `2-escalier-pierre-lanterne` : grand escalier de pierre, rampe en fer forgé et or, lanterne, damier → **le hall**.
+3. `3-boiserie-miroir-tableaux` : boiseries gris-bleu, cadres dorés éclairés par des lampes à tableau → **le mur des films**.
+4. `4-salon-bleu-fenetre-jardin` : soleil par une porte-fenêtre ouverte sur le jardin, lustre → **le salon au livre et le bureau**.
+5. `5-villa-allee-cypres` : allée de cyprès, parterres de buis, heure dorée → **l'arrivée en drone**.
+
 ### À ne pas oublier
 - [ ] **Retirer les raccourcis en haut à droite (Films · Tarifs · Avis · Contact) pendant l'expérience.**
       Sinon les visiteurs cliquent directement sur « Tarifs » et ratent la visite.
