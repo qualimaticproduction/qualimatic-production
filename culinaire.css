@@ -1,0 +1,488 @@
+/* =====================================================================
+   QUALIMATIC PRODUCTION · CULINAIRE (preview v11)
+   Un autre univers que le mariage : la cuisine en plein service.
+   Charbon, inox brossé, cuivre des lampes chauffantes, papier thermique
+   des bons de commande. Fraunces (titres), JetBrains Mono (bons), Inter.
+   Le film : « Signature du Chef », La Botte d'Asperges (Contres).
+   ===================================================================== */
+
+.page-culinaire {
+  --charbon: #121110;
+  --cuivre: #C27C47;
+  --cuivre-clair: #E3A877;
+  --ticket: #F4F1EA;
+  --encre-ticket: #1D1C1A;
+  --cuisine: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'Consolas', monospace;
+  --marqueur: 'Permanent Marker', 'Comic Sans MS', cursive;
+  background: var(--charbon);
+  color: var(--creme);
+}
+.page-culinaire ::selection { background: var(--cuivre); color: #fff; }
+.page-culinaire .fond {
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(194, 124, 71, .12), rgba(194, 124, 71, 0) 60%),
+    linear-gradient(rgba(10, 9, 8, .62), rgba(10, 9, 8, .62)),
+    url("assets/matieres/ardoise.jpg") center / cover,
+    var(--charbon);
+}
+.page-culinaire .entete.est-pleine { background: rgba(17, 16, 15, .94); box-shadow: 0 1px 0 rgba(194, 124, 71, .35); }
+.page-culinaire .menu { background: linear-gradient(rgba(14, 13, 12, .86), rgba(14, 13, 12, .86)), url("assets/matieres/ardoise.jpg") center / cover, var(--charbon); }
+.page-culinaire .menu__liens span, .page-culinaire .menu__liens .menu__sous a, .page-culinaire .pied__col h2 { color: var(--cuivre-clair); }
+
+/* ---------- typographie de l'univers ---------- */
+.cuisine-sur {
+  margin-bottom: clamp(14px, 1.6vw, 22px);
+  font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--cuivre-clair);
+}
+.cuisine-titre {
+  font-family: var(--cuisine); font-weight: 350; font-optical-sizing: auto;
+  font-size: clamp(36px, 4.6vw, 78px); line-height: 1.03; letter-spacing: -.012em;
+  color: var(--creme);
+  text-wrap: balance;
+}
+.cuisine-titre em { font-style: italic; font-weight: 300; color: var(--cuivre-clair); }
+.cuisine-titre--grand { font-size: clamp(50px, 7vw, 124px); line-height: .98; }
+.cuisine-titre--grand em { display: block; margin-top: .14em; font-size: .42em; line-height: 1.15; }
+
+.bouton-cuivre {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 0 30px;
+  border: 1px solid var(--cuivre-clair); border-radius: 999px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--cuivre-clair);
+  transition: background .5s var(--doux), color .5s var(--doux);
+}
+@media (hover: hover) { .bouton-cuivre:hover { background: var(--cuivre-clair); color: var(--charbon); } }
+
+/* =====================================================================
+   1. LE PASSE : le film en plein cadre
+   ===================================================================== */
+.passe { position: relative; height: calc(var(--ecran) * 2.6); }
+.passe__fixe { position: sticky; top: 0; height: var(--ecran); overflow: hidden; background: #0d0c0b; }
+.passe__film {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+  object-fit: cover;
+  /* le fichier porte un cadre blanc de 5 % : on le fait sortir du champ */
+  transform: scale(calc(1.12 + var(--p, 0) * .08));
+  filter: brightness(calc(.96 - var(--p, 0) * .34)) saturate(1.05);
+  will-change: transform;
+}
+.passe__ombre {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(10, 9, 8, .45), rgba(10, 9, 8, 0) 20%),
+    linear-gradient(rgba(10, 9, 8, 0) 52%, rgba(10, 9, 8, .82));
+}
+/* la lampe chauffante, au-dessus du passe */
+.passe__lampe {
+  position: absolute; left: 0; right: 0; top: 0; height: 60%;
+  background: radial-gradient(42% 70% at 50% -10%, rgba(255, 166, 92, .22), rgba(255, 166, 92, 0) 70%);
+  mix-blend-mode: screen;
+  animation: lampe 5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes lampe { 0%, 100% { opacity: .85; } 50% { opacity: 1; } }
+/* le titre de la page laisse la place au film : en bas à gauche, discret */
+.passe__titre {
+  position: absolute; left: var(--marge); bottom: 92px; z-index: 3;
+  max-width: min(620px, 46vw);
+  opacity: clamp(0, calc(1.4 - var(--p, 0) * 3), 1);
+  transform: translateY(calc(var(--p, 0) * -60px));
+  text-shadow: 0 2px 26px rgba(0, 0, 0, .6);
+}
+.passe .cuisine-titre--grand { font-size: clamp(34px, 4vw, 66px); line-height: 1; }
+.passe .cuisine-titre--grand em { font-size: .5em; }
+.passe__ligne { margin-top: clamp(12px, 1.4vw, 20px); max-width: 44ch; font-size: 14.5px; color: var(--creme-doux); }
+
+/* l'imprimante à bons : elle monte du bas de l'écran, puis imprime */
+.imprimante {
+  --bon-h: 470px;
+  --m: clamp(0, calc((var(--p, 0) - .1) * 5), 1);
+  position: absolute; right: clamp(24px, 7vw, 130px); bottom: calc(var(--ecran) * .1); z-index: 4;
+  width: 270px;
+  transform: translateY(calc((1 - var(--m)) * (var(--ecran) * .3 + 120px)));
+  will-change: transform;
+}
+.imprimante__corps {
+  position: relative; z-index: 2;
+  height: 66px;
+  border-radius: 12px 12px 8px 8px;
+  background: linear-gradient(#34322f, #1a1917 40%, #121110);
+  box-shadow: 0 26px 40px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .12);
+}
+.imprimante__corps::before {
+  /* la fente */
+  content: ""; position: absolute; left: 10px; right: 10px; top: 10px; height: 5px;
+  border-radius: 3px; background: #050505; box-shadow: inset 0 1px 2px rgba(0, 0, 0, .9);
+}
+.imprimante__voyant {
+  position: absolute; right: 18px; bottom: 16px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #6CE08A; box-shadow: 0 0 10px rgba(108, 224, 138, .8);
+}
+.bon {
+  position: absolute; left: 16px; right: 16px; bottom: 52px; z-index: 1;
+  height: calc(clamp(0, (var(--p, 0) - .3) * 1.7, 1) * var(--bon-h));
+  overflow: hidden;
+}
+.bon__papier {
+  position: absolute; left: 0; right: 0; top: 0;
+  height: var(--bon-h);
+  padding: 18px 16px 30px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, .04), rgba(0, 0, 0, 0) 12%, rgba(0, 0, 0, 0) 88%, rgba(0, 0, 0, .05)), var(--ticket);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+  font-family: var(--mono); font-size: 11.5px; line-height: 1.75; letter-spacing: .02em;
+  color: var(--encre-ticket);
+}
+.bon__papier p { display: flex; justify-content: space-between; gap: 10px; }
+.bon__centre { justify-content: center !important; text-align: center; }
+.bon__retrait { padding-left: 2ch; color: rgba(29, 28, 26, .7); }
+.bon__tirets { height: 0; margin: 9px 0; border-top: 1px dashed rgba(29, 28, 26, .45); }
+.bon__total { font-weight: 500; font-size: 13px; }
+.bon__envoyez { margin-top: 6px; letter-spacing: .2em; font-weight: 500; }
+.passe__indice { z-index: 5; opacity: clamp(0, calc(1 - var(--p, 0) * 6), 1); }
+.passe .bouton-son { opacity: clamp(0, calc(1.6 - var(--p, 0) * 3), 1); }
+
+/* =====================================================================
+   2. LA MISE EN PLACE, sur l'inox
+   ===================================================================== */
+.mise {
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center;
+  padding: clamp(100px, 11vw, 180px) clamp(24px, 6vw, 110px);
+  background:
+    linear-gradient(rgba(20, 18, 16, .1), rgba(20, 18, 16, .26)),
+    url("assets/matieres/inox.jpg") center / cover,
+    #9DA2A5;
+  color: var(--encre);
+  box-shadow: inset 0 30px 40px -30px rgba(0, 0, 0, .6), inset 0 -30px 40px -30px rgba(0, 0, 0, .6);
+}
+.mise__texte { grid-column: 1 / span 5; position: relative; z-index: 2; }
+.mise .cuisine-sur { color: #6B3A17; }
+.mise .cuisine-titre { color: var(--encre); font-size: clamp(34px, 3.8vw, 62px); }
+.mise .cuisine-titre em { color: #7E4520; }
+.mise__corps { margin-top: clamp(18px, 2vw, 28px); max-width: 44ch; color: rgba(20, 18, 16, .82); font-weight: 400; }
+.mise__bacs {
+  grid-column: 7 / span 6;
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(22px, 2.6vw, 40px) clamp(18px, 2vw, 30px);
+}
+.bac {
+  --e: clamp(0, calc(var(--p, 1) * 1.7 - var(--rang) * .2), 1);
+  position: relative; margin: 0;
+  transform:
+    translateX(calc((1 - var(--e)) * var(--sens) * 32vw))
+    rotate(calc(var(--r) + (1 - var(--e)) * var(--sens) * 10deg));
+  will-change: transform;
+}
+.bac:nth-child(even) { margin-top: 44px; }
+.bac img {
+  width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 26px 40px rgba(20, 16, 12, .42), 0 2px 4px rgba(20, 16, 12, .3);
+}
+.scotch {
+  position: absolute; left: 16px; top: -14px; z-index: 2;
+  padding: 3px 14px 2px;
+  background: rgba(238, 232, 214, .94);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .18);
+  font-family: var(--marqueur); font-size: 16px; line-height: 1.3;
+  color: #1c1b19;
+  rotate: -3deg;
+}
+
+/* =====================================================================
+   3. LE RAIL À BONS
+   ===================================================================== */
+.rail { position: relative; height: calc(var(--ecran) * 4); }
+.rail__fixe { position: sticky; top: 0; height: var(--ecran); overflow: hidden; }
+.rail__tete { position: absolute; left: var(--marge); top: calc(var(--entete) + 24px); z-index: 2; max-width: 520px; }
+.rail__barre {
+  position: absolute; left: 0; right: 0; top: calc(var(--entete) + var(--ecran) * .28); z-index: 3;
+  height: 16px;
+  background: linear-gradient(#f0f2f2, #a7adb0 45%, #6b7175 55%, #3d4245);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .55);
+}
+.rail__envois {
+  position: absolute; left: 0; top: calc(var(--entete) + var(--ecran) * .28 + 8px); z-index: 2;
+  display: flex; gap: clamp(40px, 6vw, 110px);
+  padding: 0 12vw 0 46vw;
+  transform: translateX(calc(var(--p, 0) * (-100% + 100vw)));
+  will-change: transform;
+}
+.envoi { flex: none; width: clamp(280px, 30vw, 460px); }
+.envoi:nth-child(odd) { --r: -1.4deg; }
+.envoi:nth-child(even) { --r: 1.2deg; }
+.envoi__bon {
+  position: relative;
+  padding: 26px 22px 24px;
+  background: var(--ticket);
+  color: var(--encre-ticket);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, .45);
+  rotate: var(--r);
+  transform-origin: 50% 0;
+}
+.envoi__num { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: #8A4B22; }
+.envoi__bon h3 { margin-top: 8px; font-family: var(--cuisine); font-weight: 400; font-size: clamp(26px, 2.4vw, 38px); line-height: 1; }
+.envoi__bon p:last-child { margin-top: 10px; font-size: 13.5px; line-height: 1.55; color: rgba(29, 28, 26, .78); }
+.envoi__image { margin: 22px 0 0; rotate: calc(var(--r) * -1.4); }
+.envoi__image img {
+  width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover;
+  box-shadow: 0 26px 46px rgba(0, 0, 0, .6);
+}
+
+/* =====================================================================
+   4. EN CUISINE : la photo s'ouvre
+   ===================================================================== */
+.coulisses { padding: clamp(60px, 7vw, 120px) 0; }
+.coulisses__cadre { position: relative; margin: 0; height: min(86vh, 56vw); overflow: hidden; }
+.coulisses__cadre img {
+  width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 40%;
+  clip-path: inset(max(0%, calc(16% - var(--p, 1) * 26%)) max(0%, calc(26% - var(--p, 1) * 42%)));
+  transform: scale(calc(1.18 - var(--p, 1) * .18));
+}
+.coulisses figcaption {
+  position: absolute; left: var(--marge); right: var(--marge); bottom: 22px;
+  display: flex; justify-content: space-between; gap: 20px;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--creme);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .7);
+  opacity: clamp(0, calc(var(--p, 1) * 2.2 - .8), 1);
+}
+
+/* =====================================================================
+   3. LE FILM, en grand (composant .cinema de refonte.css)
+   ===================================================================== */
+.cinema--chef { --cinema-accent: var(--cuivre-clair); --cinema-encre: var(--charbon); }
+.cinema--chef .cinema__ecran { --dy0: calc(var(--ecran) * .12); }
+.cinema--chef .cinema__tete > p:last-child { color: var(--creme-doux); }
+.cinema--chef .cinema__legende b { font-family: var(--cuisine); font-weight: 300; font-style: italic; }
+.cinema--chef .cinema__legende i { font-family: var(--mono); }
+
+/* =====================================================================
+   6. LE CHEF AU CENTRE : l'interview, sous-titrée au défilement
+   ===================================================================== */
+.parole { position: relative; height: calc(var(--ecran) * 3); }
+.parole__fixe { position: sticky; top: 0; height: var(--ecran); overflow: hidden; background: #0b0a09; }
+.parole__cadre { position: absolute; inset: 0; margin: 0; }
+.parole__cadre img {
+  width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 28%;
+  transform: scale(calc(1.02 + var(--p, 0) * .1));
+  filter: brightness(.86);
+}
+.parole__cadre::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(8, 7, 6, .5), rgba(8, 7, 6, 0) 30%, rgba(8, 7, 6, 0) 55%, rgba(8, 7, 6, .7)); }
+/* les deux bandes noires du format cinéma se referment */
+.parole__bande { position: absolute; left: 0; right: 0; z-index: 2; height: calc(clamp(0, var(--p, 1) * 6, 1) * var(--ecran) * .095); background: #050505; }
+.parole__bande--haut { top: 0; }
+.parole__bande--bas { bottom: 0; }
+.parole__tete { position: absolute; z-index: 3; left: var(--marge); top: calc(var(--entete) + var(--ecran) * .1); }
+.parole__sous-titres { position: absolute; z-index: 3; left: 8vw; right: 8vw; bottom: calc(var(--ecran) * .095 + 44px); display: grid; }
+.parole__sous-titres li {
+  grid-area: 1 / 1;
+  --o: clamp(0, min((var(--p, .1) - var(--a)) * 12, (var(--b) - var(--p, .1)) * 12), 1);
+  justify-self: center; max-width: 24em;
+  text-align: center;
+  font-family: var(--cuisine); font-weight: 350; font-style: italic;
+  font-size: clamp(24px, 3.1vw, 52px); line-height: 1.15;
+  color: #FFF6E6;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .8), 0 0 30px rgba(0, 0, 0, .7);
+  opacity: var(--o);
+  transform: translateY(calc((1 - var(--o)) * 14px));
+}
+html:not(.js) .parole__sous-titres li { opacity: 1; grid-area: auto; }
+
+/* =====================================================================
+   7. L'ADDITION
+   ===================================================================== */
+.addition {
+  --o: clamp(0, calc((var(--p, 1) - .2) * 2), 1);
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center;
+  padding: clamp(80px, 9vw, 150px) clamp(24px, 6vw, 110px) clamp(110px, 11vw, 180px);
+}
+.addition__texte { grid-column: 2 / span 4; }
+.addition__texte p:not(.cuisine-sur) { margin-top: 18px; max-width: 38ch; color: var(--creme-doux); }
+.porte-addition {
+  grid-column: 7 / span 5;
+  position: relative; justify-self: center;
+  width: min(380px, 80vw); aspect-ratio: 3 / 4.2;
+  perspective: 1600px;
+}
+.porte-addition__dos, .porte-addition__couverture {
+  position: absolute; inset: 0;
+  border-radius: 6px;
+  background: linear-gradient(rgba(0, 0, 0, .12), rgba(0, 0, 0, .3)), url("assets/matieres/cuir.jpg") center / cover;
+  box-shadow: 0 40px 70px rgba(0, 0, 0, .65), inset 0 0 0 1px rgba(255, 255, 255, .05);
+}
+.porte-addition__dos::after, .porte-addition__couverture::after {
+  /* la couture */
+  content: ""; position: absolute; inset: 12px; border-radius: 3px;
+  border: 1px dashed rgba(230, 190, 150, .35);
+}
+.porte-addition__couverture {
+  z-index: 3;
+  transform-origin: 0% 50%;
+  transform: rotateY(calc(var(--o) * -162deg));
+  display: grid; place-items: center;
+}
+.porte-addition__couverture span {
+  font-family: var(--cuisine); font-style: italic; font-size: 30px; letter-spacing: .04em;
+  color: rgba(0, 0, 0, .38);
+  text-shadow: 0 1px 0 rgba(255, 220, 190, .18);
+  backface-visibility: hidden;
+}
+.note {
+  position: absolute; inset: 8% 9%; z-index: 2;
+  display: flex; flex-direction: column;
+  padding: 26px 22px 20px;
+  background: var(--fond-papier-clair);
+  color: var(--encre);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+  rotate: -1.5deg;
+  transform: translateY(calc((1 - var(--o)) * 16px));
+}
+.note__maison { font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: #8A4B22; }
+.note__titre { margin-top: 6px; font-family: var(--cuisine); font-style: italic; font-size: 30px; line-height: 1; }
+.note__lignes { margin-top: 16px; border-top: 1px dotted rgba(28, 11, 15, .35); }
+.note__lignes li { padding: 7px 0; border-bottom: 1px dotted rgba(28, 11, 15, .35); font-size: 12.5px; line-height: 1.4; color: var(--encre-doux); }
+.note__total { display: flex; justify-content: space-between; align-items: baseline; margin-top: auto; padding-top: 14px; font-family: var(--cuisine); font-size: 22px; }
+.note__total span:last-child { font-size: 34px; }
+.note__total small { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; }
+.note__merci { margin-top: 6px; text-align: right; font-family: var(--marqueur); font-size: 18px; color: #8A4B22; rotate: -4deg; }
+
+/* =====================================================================
+   8. L'ARDOISE DU JOUR
+   ===================================================================== */
+.ardoise { padding: 0 clamp(18px, 6vw, 110px) clamp(90px, 10vw, 160px); }
+.ardoise__tableau {
+  max-width: 1080px; margin: 0 auto;
+  padding: clamp(40px, 5vw, 80px) clamp(26px, 5vw, 80px);
+  background: linear-gradient(rgba(16, 18, 17, .55), rgba(16, 18, 17, .55)), url("assets/matieres/ardoise.jpg") center / cover;
+  border: 16px solid #4a3122;
+  border-image: linear-gradient(135deg, #6b4630, #3b2619 40%, #5c3c29 70%, #2e1e14) 1;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, .55);
+  text-align: center;
+  color: rgba(240, 236, 228, .92);
+}
+.ardoise__haut { font-family: var(--marqueur); font-size: 18px; color: rgba(227, 168, 119, .9); rotate: -2deg; }
+.ardoise__titre { margin-top: 12px; font-family: var(--cuisine); font-weight: 300; font-size: clamp(34px, 4vw, 66px); line-height: 1.05; text-shadow: 0 0 1px rgba(255, 255, 255, .5); }
+.ardoise__titre em { display: block; font-style: italic; color: rgba(227, 168, 119, .95); }
+.ardoise__texte { max-width: 60ch; margin: 22px auto 0; color: rgba(240, 236, 228, .75); }
+.ardoise__lieux { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 0; margin-top: 30px; font-family: var(--marqueur); font-size: clamp(16px, 1.5vw, 21px); }
+.ardoise__lieux li:not(:last-child)::after { content: "·"; margin: 0 .6em; color: rgba(227, 168, 119, .8); }
+
+/* =====================================================================
+   9. QUESTIONS
+   ===================================================================== */
+.questions { max-width: 980px; margin: 0 auto; padding: 0 clamp(22px, 5vw, 60px) clamp(80px, 9vw, 140px); }
+.questions__liste { margin-top: clamp(30px, 3vw, 46px); border-top: 1px solid rgba(243, 231, 211, .16); }
+.question { border-bottom: 1px solid rgba(243, 231, 211, .16); }
+.question summary {
+  display: flex; align-items: baseline; gap: 22px;
+  padding: 24px 40px 24px 0;
+  font-family: var(--cuisine); font-size: clamp(19px, 1.7vw, 25px); line-height: 1.25;
+  cursor: pointer; list-style: none; position: relative;
+}
+.question summary::-webkit-details-marker { display: none; }
+.question summary::after {
+  content: "+"; position: absolute; right: 4px; top: 22px;
+  font-family: var(--mono); font-size: 20px; color: var(--cuivre-clair);
+  transition: transform .4s var(--doux);
+}
+.question[open] summary::after { transform: rotate(45deg); }
+.question__num { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--cuivre-clair); }
+.question p { padding: 0 0 26px 52px; max-width: 64ch; color: var(--creme-doux); }
+
+/* ---------- le carton, sur l'ardoise ---------- */
+.page-culinaire .appel { padding-top: clamp(60px, 7vw, 120px); }
+.page-culinaire .appel__coord { color: var(--creme-doux); }
+
+/* =====================================================================
+   TABLETTE
+   ===================================================================== */
+@media (max-width: 1100px) {
+  .imprimante { --bon-h: 430px; width: 240px; right: 4vw; }
+}
+
+/* =====================================================================
+   MOBILE
+   ===================================================================== */
+@media (max-width: 760px) {
+  .mise { display: flex; flex-direction: column; gap: 50px; padding: 80px 22px 90px; }
+  .mise .cuisine-titre { font-size: 32px; }
+  .mise__bacs { width: 100%; gap: 30px 14px; }
+  .bac:nth-child(even) { margin-top: 26px; }
+  .scotch { font-size: 12px; left: 8px; top: -11px; padding: 2px 8px 1px; }
+
+  .rail { height: calc(var(--ecran) * 3.4); }
+  .rail__tete { left: 22px; right: 22px; top: calc(var(--entete) + 14px); }
+  .rail__tete .cuisine-titre { font-size: 30px; }
+  .rail__barre { top: calc(var(--entete) + var(--ecran) * .2); height: 12px; }
+  .rail__envois { top: calc(var(--entete) + var(--ecran) * .2 + 6px); gap: 26px; padding: 0 10vw 0 12vw; }
+  .envoi { width: 74vw; }
+  .envoi__bon { padding: 18px 16px 18px; }
+  .envoi__bon p:last-child { font-size: 12.5px; }
+  .envoi__image { margin-top: 16px; }
+
+  .coulisses__cadre { height: 70vh; }
+  .coulisses figcaption { flex-direction: column; gap: 4px; font-size: 9px; }
+
+  .addition { display: flex; flex-direction: column; align-items: stretch; gap: 40px; padding: 70px 22px; }
+  .porte-addition { align-self: center; width: 78vw; }
+  .note { padding: 20px 16px 16px; }
+  .note__lignes li { font-size: 11.5px; padding: 5px 0; }
+
+  .ardoise__tableau { border-width: 10px; }
+  .question summary { gap: 14px; font-size: 18px; padding-right: 30px; }
+  .question p { padding-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .passe__lampe { animation: none; }
+}
+
+/* =====================================================================
+   10. LA RÉSERVATION : le serveur tend la carte
+   ===================================================================== */
+.appel--serveur { --vin: #8A4B22; --bordeaux: #1D1C1A; }
+.appel--serveur .appel__carton-image {
+  -webkit-mask: linear-gradient(#000 84%, transparent 99%) left top / 27.9% 100% no-repeat, linear-gradient(#000, #000) right top / 72.15% 100% no-repeat;
+          mask: linear-gradient(#000 84%, transparent 99%) left top / 27.9% 100% no-repeat, linear-gradient(#000, #000) right top / 72.15% 100% no-repeat;
+}
+.appel--serveur .appel__carton-texte {
+  width: calc(var(--l) * .7212);
+  margin: calc(var(--l) * -.535) 0 0 calc(var(--l) * .2788);
+  padding-top: calc(var(--l) * .012);
+  background:
+    linear-gradient(rgba(96, 74, 56, .16), rgba(96, 74, 56, .16)) left bottom / 100% 1px no-repeat,
+    linear-gradient(rgba(235, 227, 215, 0), #EBE3D7) left calc(var(--l) * .372 - 34px) / 100% 34px no-repeat,
+    linear-gradient(90deg, #EAE2D6, #EBE3D7 25%, #ECE4D8 75%, #EBE3D8) left calc(var(--l) * .372) / 100% 100% no-repeat;
+}
+.appel--serveur .appel__carton-texte .etiquette { font-family: var(--mono); letter-spacing: .2em; }
+.appel--serveur .duo__caps { font-family: var(--cuisine); font-weight: 350; text-transform: none; letter-spacing: -.01em; line-height: 1; }
+.appel--serveur .duo__script { margin-top: 0; font-family: var(--cuisine); font-style: italic; font-weight: 300; }
+.appel--serveur .appel__carton .duo__caps { font-size: clamp(32px, 4vw, 66px); }
+.appel--serveur .appel__carton .duo__script { font-size: clamp(26px, 3vw, 50px); }
+.appel--serveur .champ label, .appel--serveur .formulaire__choix legend { font-family: var(--mono); letter-spacing: .12em; }
+.appel--serveur .bouton { font-family: var(--mono); letter-spacing: .16em; }
+.appel--serveur .formulaire.est-envoye .formulaire__retour { font-family: var(--cuisine); font-style: italic; }
+.appel--serveur .appel__coord { width: calc(var(--l) * .7212); margin-left: calc(var(--l) * .2788); }
+
+@media (max-width: 760px) {
+  .passe { height: calc(var(--ecran) * 2.3); }
+  .passe__titre { left: 22px; right: 22px; top: auto; bottom: 74px; max-width: none; }
+  .passe .cuisine-titre--grand { font-size: 32px; }
+  .passe__ligne { display: none; }
+  .passe__ombre { background: linear-gradient(rgba(10, 9, 8, .5), rgba(10, 9, 8, 0) 22%), linear-gradient(rgba(10, 9, 8, 0) 45%, rgba(10, 9, 8, .88)); }
+  .imprimante { --bon-h: 380px; right: 50%; margin-right: -105px; width: 210px; bottom: 30px; }
+  .cinema--chef .cinema__ecran { --dy0: calc(var(--ecran) * .16); }
+  .parole { height: calc(var(--ecran) * 2.6); }
+  .parole__cadre img { object-position: 46% 30%; }
+  .parole__tete { left: 22px; top: calc(var(--entete) + var(--ecran) * .1 + 6px); }
+  .parole__sous-titres { left: 22px; right: 22px; }
+  .parole__sous-titres li { font-size: 25px; }
+  .appel--serveur .appel__carton .duo__caps { font-size: 36px; }
+  .appel--serveur .appel__carton .duo__script { font-size: 28px; }
+}
+.questions__plus { margin-top: 30px; }
+.questions__plus .lien { color: var(--cuivre-clair); }

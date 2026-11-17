@@ -1,0 +1,395 @@
+/* =====================================================================
+   QUALIMATIC PRODUCTION · CORPORATE (preview v14)
+   Version sobre : blanc cassé, noir, gris. Aucune couleur d'accent,
+   la couleur vient des films et des photographies. Une seule famille
+   de titres (Archivo, léger), des filets fins, beaucoup d'air.
+   Mouvement : le film qui s'agrandit, les mots qui s'encrent, le
+   reportage qui défile, les formules et leurs photos, les traits qui
+   se tracent, un compteur de temps discret dans le coin.
+   ===================================================================== */
+
+.page-corporate {
+  --clair: #F5F4F1;
+  --blanc: #FFFFFF;
+  --noir: #0E0F10;
+  --encre-atelier: #121314;
+  --gris: rgba(18, 19, 20, .62);
+  --gris-titre: #9D9E9F;
+  --filet-atelier: rgba(18, 19, 20, .14);
+  --atelier: 'Archivo', 'Helvetica Neue', 'Arial', sans-serif;
+  --air: clamp(130px, 15vw, 250px);
+  --cote: clamp(24px, 7vw, 130px);
+  background: var(--clair);
+  color: var(--encre-atelier);
+}
+.page-corporate ::selection { background: var(--encre-atelier); color: #fff; }
+.page-corporate .fond { background: var(--clair); }
+.page-corporate .grain { opacity: .05; }
+
+/* l'en-tête : encre sur clair, blanc quand le film remplit l'écran */
+.page-corporate .entete { color: var(--encre-atelier); }
+.page-corporate .entete__logo img { filter: brightness(0); transition: filter .4s; }
+.page-corporate .entete.est-pleine { background: rgba(245, 244, 241, .94); box-shadow: 0 1px 0 var(--filet-atelier); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.page-corporate .entete.entete--clair:not(.est-pleine), .page-corporate.menu-ouvert .entete { color: #fff; }
+.page-corporate .entete.entete--clair:not(.est-pleine) .entete__logo img, .page-corporate.menu-ouvert .entete__logo img { filter: none; }
+.page-corporate .entete__nav a { transition: opacity .3s; }
+.page-corporate .entete__nav a:hover { opacity: .55; }
+.page-corporate .menu { background: var(--noir); }
+.page-corporate .menu__liens span, .page-corporate .menu__liens .menu__sous a { color: rgba(255, 255, 255, .5); }
+.page-corporate .pied { background: var(--noir); border-top: 1px solid rgba(255, 255, 255, .12); color: #EDECE8; }
+.page-corporate .pied__col h2 { color: rgba(255, 255, 255, .5); }
+
+/* ---------- typographie de l'univers ---------- */
+.atelier-sur {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: clamp(18px, 2vw, 30px);
+  font-family: var(--texte); font-size: 10.5px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--gris);
+}
+.atelier-sur span { color: var(--encre-atelier); font-variant-numeric: tabular-nums; }
+.atelier-sur span::after { content: ""; display: inline-block; vertical-align: middle; width: 30px; height: 1px; margin-left: 14px; background: currentColor; opacity: .5; }
+.atelier-titre {
+  font-family: var(--atelier); font-stretch: 110%; font-weight: 300;
+  font-size: clamp(34px, 4.4vw, 80px); line-height: 1.02; letter-spacing: -.032em;
+  color: var(--encre-atelier);
+  text-wrap: balance;
+}
+.atelier-titre span { color: var(--gris-titre); }
+.atelier-titre--geant { font-size: clamp(42px, 5.8vw, 104px); line-height: .96; letter-spacing: -.04em; }
+.atelier-titre--geant span { display: block; }
+.atelier-titre--moyen { font-size: clamp(30px, 3vw, 50px); }
+
+/* le compteur de temps, dans le coin : il avance avec la page */
+.temps {
+  position: fixed; left: var(--marge); bottom: 22px; z-index: 40;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--atelier); font-size: 11px; font-weight: 400; letter-spacing: .12em; font-variant-numeric: tabular-nums;
+  color: #fff; mix-blend-mode: difference;
+  pointer-events: none;
+}
+.temps::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: temps-voyant 1.6s steps(1) infinite; }
+@keyframes temps-voyant { 0%, 60% { opacity: 1; } 61%, 100% { opacity: .2; } }
+.menu-ouvert .temps { display: none; }
+
+/* =====================================================================
+   1. LE FILM : Handy Trolley (composant .cinema de refonte.css)
+   ===================================================================== */
+.cinema--atelier { --cinema-accent: #fff; --cinema-encre: #121314; height: calc(var(--ecran) * 2.8); }
+.cinema--atelier .cinema__fixe { background: var(--clair); }
+.cinema--atelier .cinema__tete { top: calc(var(--entete) + 3vh); max-width: min(940px, 64vw); }
+.cinema--atelier .cinema__tete > p:last-child { margin-top: clamp(16px, 1.8vw, 26px); font-size: 15px; color: var(--gris); }
+.cinema--atelier .cinema__ecran { --l0: 52vw; --dx0: 20vw; --dy0: calc(var(--ecran) * .21); }
+.cinema--atelier .cinema__legende b { font-family: var(--atelier); font-stretch: 110%; font-weight: 300; letter-spacing: -.03em; }
+.cinema__defiler {
+  position: absolute; right: var(--marge); bottom: 24px;
+  display: flex; align-items: center; gap: 14px;
+  font-size: 10px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--gris);
+  opacity: clamp(0, calc(1 - var(--p, 0) * 8), 1);
+}
+.cinema__defiler::after { content: ""; width: 54px; height: 1px; background: currentColor; transform-origin: left; animation: tire 2.4s var(--doux) infinite; }
+@keyframes tire { 0% { transform: scaleX(0); } 60%, 100% { transform: scaleX(1); } }
+
+/* =====================================================================
+   2. LE PROPOS : la phrase s'encre mot à mot, les cinq temps du brief se posent
+   ===================================================================== */
+.propos {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end;
+  padding: var(--air) var(--cote);
+}
+.propos__texte { grid-column: 1 / span 7; }
+.propos__texte .atelier-titre { font-size: clamp(34px, 4.2vw, 76px); }
+.js .page-corporate .encre .mot { opacity: .14; transition: opacity .6s var(--doux); }
+.js .page-corporate .encre .mot.est-encre { opacity: 1; }
+.propos__corps { margin-top: clamp(26px, 3vw, 44px); max-width: 46ch; color: var(--gris); }
+.propos__etapes { grid-column: 9 / span 4; }
+.propos__etapes li {
+  --c: clamp(0, calc((var(--p, 1) - var(--seuil)) * 6), 1);
+  position: relative;
+  display: grid; grid-template-columns: 44px 1fr; align-items: baseline;
+  padding: 18px 0;
+  font-family: var(--atelier); font-stretch: 106%; font-weight: 300; font-size: clamp(16px, 1.35vw, 21px); line-height: 1.3; letter-spacing: -.01em;
+  opacity: calc(.12 + var(--c) * .88);
+  transform: translateY(calc((1 - var(--c)) * 14px));
+}
+.propos__etapes li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--encre-atelier); transform: scaleX(var(--c)); transform-origin: left; opacity: .35; }
+.propos__etapes span { font-family: var(--texte); font-size: 10.5px; font-weight: 500; letter-spacing: .16em; color: var(--gris); font-variant-numeric: tabular-nums; }
+.propos__etapes li:last-child { font-weight: 500; }
+
+/* =====================================================================
+   3. LA LIGNE : le reportage défile, un fil suit l'avancée
+   ===================================================================== */
+.ligne { position: relative; height: calc(var(--ecran) * 4.2); }
+.ligne__fixe { position: sticky; top: 0; height: var(--ecran); overflow: hidden; background: var(--blanc); }
+.ligne__tete { position: absolute; left: var(--cote); top: calc(var(--entete) + 30px); z-index: 2; }
+.ligne__tete .atelier-titre { font-size: clamp(30px, 3.4vw, 60px); }
+.ligne__compteur {
+  position: absolute; right: var(--cote); top: calc(var(--entete) + 34px); z-index: 2;
+  font-size: 10.5px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--gris);
+}
+.ligne__compteur b { margin: 0 .2em; font-family: var(--atelier); font-stretch: 110%; font-weight: 200; font-size: clamp(46px, 5vw, 86px); letter-spacing: -.05em; color: var(--encre-atelier); vertical-align: -.18em; font-variant-numeric: tabular-nums; }
+.convoyeur { position: absolute; left: 0; right: 0; bottom: calc(var(--ecran) * .09); }
+.convoyeur__pieces {
+  display: flex; align-items: flex-end; gap: clamp(60px, 8vw, 150px);
+  width: max-content;
+  padding: 0 22vw 0 56vw;
+  transform: translateX(calc(var(--p, 0) * (-100% + 100vw)));
+  filter: blur(var(--flou, 0px));
+  will-change: transform;
+}
+.convoyeur__pieces li { position: relative; flex: none; height: min(calc(var(--ecran) * .54), 41vw); }
+.convoyeur__pieces img { width: auto; height: 100%; max-width: none; }
+.etiquette-cq { position: absolute; left: 0; top: -28px; font-size: 10px; font-weight: 500; letter-spacing: .2em; font-variant-numeric: tabular-nums; color: var(--gris); }
+.convoyeur__fil { position: relative; height: 1px; margin: clamp(30px, 3.4vw, 50px) var(--cote) 0; background: var(--filet-atelier); }
+.convoyeur__fil::after { content: ""; position: absolute; inset: 0; background: var(--encre-atelier); transform: scaleX(var(--p, 0)); transform-origin: left; }
+
+/* =====================================================================
+   4. EN MOUVEMENT : une bande noire, le film de la campagne lunetterie
+   ===================================================================== */
+.mouvement { padding: var(--air) var(--cote); background: var(--noir); }
+.mouvement .atelier-sur, .contact-sobre .atelier-sur { color: rgba(255, 255, 255, .6); }
+.mouvement .atelier-sur span, .contact-sobre .atelier-sur span { color: #fff; }
+.mouvement .atelier-titre, .contact-sobre .atelier-titre { color: #fff; }
+.mouvement .atelier-titre span, .contact-sobre .atelier-titre span { color: rgba(255, 255, 255, .45); }
+.mouvement__tete { margin-bottom: clamp(50px, 5vw, 80px); }
+.mouvement__cadre {
+  --o: clamp(0, calc(var(--p, 1) * 2.6 - .35), 1);
+  position: relative; margin: 0 auto; max-width: 1500px;
+  aspect-ratio: 16 / 9; overflow: hidden;
+  background: #000;
+  clip-path: inset(calc((1 - var(--o)) * 43%) calc((1 - var(--o)) * 6%));
+}
+.mouvement__cadre video { width: 100%; height: 100%; max-width: none; object-fit: cover; transform: scale(calc(1.26 - var(--o) * .14)); }  /* 1,12 au repos : le film source a un liseré blanc */
+.mouvement__cadre figcaption {
+  position: absolute; left: 30px; right: 30px; bottom: 24px; z-index: 2;
+  display: flex; justify-content: space-between; gap: 16px;
+  font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: #fff; text-shadow: 0 2px 10px rgba(0, 0, 0, .8);
+}
+
+/* =====================================================================
+   5. QUATRE SUJETS : quatre lignes, rien d'autre
+   ===================================================================== */
+.sujets { padding: var(--air) var(--cote); }
+.sujets__liste { margin-top: clamp(60px, 7vw, 110px); border-bottom: 1px solid var(--filet-atelier); }
+.sujet {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: baseline;
+  padding: clamp(26px, 3vw, 46px) 0;
+  border-top: 1px solid var(--filet-atelier);
+  transition: border-color .5s;
+}
+.sujet__num { grid-column: 1; font-size: 10.5px; font-weight: 500; letter-spacing: .16em; color: var(--gris); font-variant-numeric: tabular-nums; }
+.sujet h3 {
+  grid-column: 2 / span 6;
+  font-family: var(--atelier); font-stretch: 110%; font-weight: 300; font-size: clamp(28px, 3.4vw, 60px); line-height: 1; letter-spacing: -.03em;
+  transition: transform .7s var(--doux);
+}
+.sujet p { grid-column: 9 / span 4; color: var(--gris); }
+@media (hover: hover) {
+  .sujet:hover { border-top-color: var(--encre-atelier); }
+  .sujet:hover h3 { transform: translateX(18px); }
+}
+.sujets__pour { margin-top: clamp(50px, 5vw, 80px); max-width: 60ch; margin-left: calc((100% + 24px) / 12); color: var(--gris); }
+
+/* =====================================================================
+   6. TROIS FORMULES : trois colonnes entre des filets
+   ===================================================================== */
+.formules { padding: 0 var(--cote) var(--air); }
+.formules__rangee { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(60px, 7vw, 110px); border-right: 1px solid var(--filet-atelier); }
+.formule {
+  --e: clamp(0, calc(var(--p, 1) * 2.4 - var(--n) * .3 - .2), 1);
+  display: flex; flex-direction: column;
+  padding: 4px clamp(22px, 2.6vw, 44px) 6px;
+  border-left: 1px solid var(--filet-atelier);
+  opacity: var(--e);
+  transform: translateY(calc((1 - var(--e)) * 60px));
+}
+.formule__num { font-size: 10.5px; font-weight: 500; letter-spacing: .16em; color: var(--gris); font-variant-numeric: tabular-nums; }
+.formule h3 { margin-top: 0; font-family: var(--atelier); font-stretch: 110%; font-weight: 300; font-size: clamp(26px, 2.6vw, 44px); line-height: 1.02; letter-spacing: -.03em; }
+.formule p:last-child { margin-top: 18px; max-width: 34ch; min-height: 6.4em; font-size: 14px; line-height: 1.6; color: var(--gris); }
+.formules__devis { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: baseline; margin-top: clamp(60px, 6vw, 100px); }
+.formules__devis b { grid-column: 1 / span 5; font-family: var(--atelier); font-stretch: 110%; font-weight: 300; font-size: clamp(34px, 4.4vw, 80px); line-height: 1; letter-spacing: -.035em; }
+.formules__devis span { grid-column: 7 / span 5; max-width: 44ch; color: var(--gris); }
+
+/* la photo de chaque formule : une image de la campagne lunetterie, qui se découvre de bas en haut */
+.formule__photo {
+  position: relative; overflow: hidden;
+  aspect-ratio: 4 / 5;
+  margin: 18px 0 clamp(24px, 2.4vw, 34px);
+  background: #E4E3DF;
+  clip-path: inset(calc((1 - var(--e)) * 30%) 0 0 0);
+}
+.formule__photo img { width: 100%; height: 100%; max-width: none; object-fit: cover; transform: scale(calc(1.12 - var(--e) * .12)); transition: transform 1.2s var(--doux); }
+@media (hover: hover) { .formule:hover .formule__photo img { transform: scale(1.04); } }
+
+/* =====================================================================
+   8. LE SECTEUR ET LA MÉTHODE : les traits se tracent
+   ===================================================================== */
+.repere { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(50px, 8vw, 150px); padding: var(--air) var(--cote); }
+.repere__secteur > p:not(.atelier-sur) { margin-top: 20px; max-width: 46ch; color: var(--gris); }
+.carte-plan { display: block; width: 100%; height: auto; margin-top: 30px; overflow: hidden; }
+.carte-plan__cercle {
+  --c: clamp(0, calc((var(--p, 1) - var(--seuil)) * 3), 1);
+  fill: none; stroke: var(--encre-atelier); stroke-width: 1;
+  stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--c));
+}
+.carte-plan__cercle--loin { stroke: rgba(18, 19, 20, .3); }
+.carte-plan__axe { fill: none; stroke: rgba(18, 19, 20, .2); stroke-width: 1; stroke-dasharray: 5 7; }
+.carte-plan__trait { --c: clamp(0, calc((var(--p, 1) - var(--seuil)) * 5), 1); fill: none; stroke: var(--encre-atelier); stroke-width: 1.4; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--c)); }
+.carte-plan__point, .carte-plan__nom { --c: clamp(0, calc((var(--p, 1) - var(--seuil, 0)) * 5), 1); opacity: var(--c); }
+.carte-plan__point { fill: var(--encre-atelier); }
+.carte-plan__point--base { opacity: 1; transform-box: fill-box; transform-origin: center; animation: battement 2.4s ease-in-out infinite; }
+@keyframes battement { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+.carte-plan__nom { font-family: var(--atelier); font-size: 15px; font-weight: 400; fill: var(--encre-atelier); }
+.carte-plan__nom--base { opacity: 1; font-weight: 500; }
+.carte-plan__nom--petit { font-size: 11px; fill: rgba(18, 19, 20, .45); opacity: 1; }
+
+.etapes { position: relative; margin-top: clamp(30px, 3.4vw, 50px); padding-left: 34px; }
+.etapes::before, .etapes::after { content: ""; position: absolute; left: 4px; top: 30px; bottom: 30px; width: 1px; background: var(--filet-atelier); }
+.etapes::after { background: var(--encre-atelier); transform: scaleY(clamp(0, calc((var(--p, 1) - .08) * 1.8), 1)); transform-origin: top; }
+.etapes li {
+  --c: clamp(0, calc((var(--p, 1) - var(--seuil)) * 5), 1);
+  position: relative;
+  padding: 22px 0;
+  border-top: 1px solid var(--filet-atelier);
+  opacity: calc(.2 + var(--c) * .8);
+  transform: translateX(calc((1 - var(--c)) * 22px));
+}
+.etapes li:last-child { border-bottom: 1px solid var(--filet-atelier); }
+.etapes li::before { content: ""; position: absolute; left: -34px; top: 29px; width: 9px; height: 9px; border-radius: 50%; background: var(--clair); border: 1px solid var(--encre-atelier); z-index: 1; transition: background .4s; }
+.etapes li::after { content: ""; position: absolute; left: -34px; top: 29px; width: 9px; height: 9px; border-radius: 50%; background: var(--encre-atelier); z-index: 2; opacity: var(--c); }
+.etapes h3 { font-family: var(--atelier); font-stretch: 108%; font-weight: 400; font-size: clamp(18px, 1.6vw, 24px); line-height: 1.15; letter-spacing: -.015em; }
+.etapes p { margin-top: 5px; font-size: 14px; line-height: 1.55; color: var(--gris); }
+
+/* =====================================================================
+   9. QUESTIONS
+   ===================================================================== */
+.questions-corpo { padding: clamp(40px, 5vw, 80px) var(--cote) var(--air); }
+.questions-corpo__liste { max-width: 1000px; margin-top: clamp(40px, 4vw, 60px); border-top: 1px solid var(--filet-atelier); }
+.q { border-bottom: 1px solid var(--filet-atelier); }
+.q summary {
+  position: relative; display: flex; align-items: baseline; gap: 26px;
+  padding: 26px 56px 26px 0;
+  font-family: var(--atelier); font-stretch: 108%; font-weight: 350; font-size: clamp(18px, 1.6vw, 24px); line-height: 1.25; letter-spacing: -.012em;
+  cursor: pointer; list-style: none;
+}
+.q summary::-webkit-details-marker { display: none; }
+.q summary span { flex: none; font-family: var(--texte); font-size: 10.5px; font-weight: 500; letter-spacing: .16em; color: var(--gris); font-variant-numeric: tabular-nums; }
+.q summary::after { content: ""; position: absolute; right: 8px; top: 50%; width: 15px; height: 15px; margin-top: -8px; background: linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat, linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat; transition: transform .5s var(--doux); }
+.q[open] summary::after { transform: rotate(45deg); }
+.q p { padding: 0 0 28px 50px; max-width: 70ch; color: var(--gris); }
+.questions-corpo__plus { margin-top: 34px; }
+
+/* =====================================================================
+   10. CONTACT : une bande noire, le formulaire en filets blancs
+   ===================================================================== */
+.contact-sobre {
+  --vin: #F5F4F1; --creme: #0E0F10; --encre: #F5F4F1; --encre-doux: rgba(245, 244, 241, .66); --bordeaux: #FFFFFF;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start;
+  padding: var(--air) var(--cote);
+  background: var(--noir); color: #F5F4F1;
+}
+.contact-sobre__texte { grid-column: 1 / span 5; position: sticky; top: calc(var(--entete) + 40px); }
+.contact-sobre__intro { margin-top: clamp(22px, 2.4vw, 36px); max-width: 38ch; color: rgba(245, 244, 241, .66); }
+.contact-sobre__coord { display: grid; gap: 6px; justify-items: start; margin-top: clamp(30px, 4vw, 60px); font-family: var(--atelier); font-stretch: 108%; font-weight: 300; font-size: clamp(18px, 1.6vw, 24px); letter-spacing: -.01em; }
+.contact-sobre__coord a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .5s var(--doux); padding-bottom: 2px; }
+@media (hover: hover) { .contact-sobre__coord a:hover { background-size: 100% 1px; } }
+.contact-sobre .formulaire { grid-column: 7 / span 6; margin-top: 6px; }
+.contact-sobre .formulaire__choix { justify-content: flex-start; }
+.contact-sobre .formulaire__choix legend { float: none; width: 100%; margin: 0 0 4px; color: rgba(245, 244, 241, .55); }
+.contact-sobre .formulaire__choix span { border-radius: 0; border-color: rgba(245, 244, 241, .3); color: #F5F4F1; }
+.contact-sobre .formulaire__choix input:checked + span { background: #F5F4F1; border-color: #F5F4F1; color: #0E0F10; }
+.contact-sobre .champ label { color: rgba(245, 244, 241, .55); }
+.contact-sobre .champ input, .contact-sobre .champ textarea { border-bottom-color: rgba(245, 244, 241, .28); color: #F5F4F1; }
+.contact-sobre .champ input::placeholder, .contact-sobre .champ textarea::placeholder { color: rgba(245, 244, 241, .32); }
+.contact-sobre .champ input:focus, .contact-sobre .champ textarea:focus { border-bottom-color: #fff; box-shadow: 0 1px 0 #fff; }
+.contact-sobre .formulaire:not(.veut-appel) .champ--tel label::after { color: rgba(245, 244, 241, .4); }
+.contact-sobre .formulaire__accord input { border-color: rgba(245, 244, 241, .5); border-radius: 0; }
+.contact-sobre .formulaire__accord input:checked { background: #F5F4F1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.4l3 3 6-6.6' fill='none' stroke='%230E0F10' stroke-width='1.6'/%3E%3C/svg%3E") center / 13px no-repeat; border-color: #F5F4F1; }
+.contact-sobre .bouton { border-radius: 0; }
+.contact-sobre .bouton--plein { background: #F5F4F1; color: #0E0F10; border-color: #F5F4F1; }
+@media (hover: hover) { .contact-sobre .bouton--plein:hover { background: transparent; color: #F5F4F1; } }
+.contact-sobre .formulaire__envoyer { margin-left: 0; }
+.contact-sobre .formulaire__retour { text-align: left; color: #F5F4F1; }
+.contact-sobre .formulaire.est-envoye .formulaire__retour { font-family: var(--atelier); font-stretch: 110%; font-weight: 300; letter-spacing: -.02em; }
+
+/* =====================================================================
+   TABLETTE
+   ===================================================================== */
+@media (max-width: 1100px) {
+  .cinema--atelier .cinema__tete { max-width: 80vw; }
+  .propos__texte { grid-column: 1 / span 12; }
+  .propos__etapes { grid-column: 1 / span 12; margin-top: 60px; }
+  .contact-sobre__texte { grid-column: 1 / span 12; position: static; }
+  .contact-sobre .formulaire { grid-column: 1 / span 12; margin-top: 50px; }
+}
+
+/* =====================================================================
+   MOBILE : les formules se font glisser de côté
+   ===================================================================== */
+@media (max-width: 760px) {
+  .page-corporate { --air: 100px; --cote: 22px; }
+  .temps { left: 22px; bottom: 14px; font-size: 10px; }
+  .cinema--atelier { height: calc(var(--ecran) * 2.3); }
+  .cinema--atelier .cinema__tete { max-width: none; top: calc(var(--entete) + 14px); }
+  .atelier-titre--geant { font-size: 40px; }
+  .cinema--atelier .cinema__tete > p:last-child { font-size: 13.5px; }
+  .cinema--atelier .cinema__ecran { --l0: calc(100vw - 44px); --dx0: 0px; --dy0: calc(var(--ecran) * .17); }
+  .cinema__defiler { right: 22px; bottom: 16px; }
+
+  .propos { display: block; }
+  .propos__texte .atelier-titre { font-size: 32px; }
+  .propos__etapes { margin-top: 50px; }
+  .propos__etapes li { grid-template-columns: 38px 1fr; font-size: 16px; }
+
+  .ligne { height: calc(var(--ecran) * 3.4); }
+  .ligne__tete { right: 22px; }
+  .ligne__tete .atelier-titre { font-size: 28px; }
+  .ligne__compteur { top: calc(var(--entete) + 124px); }
+  .ligne__compteur b { font-size: 40px; }
+  .convoyeur__pieces { padding: 0 14vw 0 22vw; gap: 44px; }
+  .convoyeur__pieces li { height: calc(var(--ecran) * .4); }
+
+  .mouvement { padding: var(--air) 16px; }
+  .mouvement__tete { padding: 0 6px; }
+  .mouvement__cadre figcaption { left: 14px; right: 14px; bottom: 12px; font-size: 8px; }
+
+  .sujet { display: block; padding: 26px 0; }
+  .sujet h3 { margin-top: 10px; font-size: 30px; }
+  .sujet p { margin-top: 10px; }
+  .sujets__pour { margin-left: 0; }
+
+  .formules { padding: 0 0 var(--air); }
+  .formules__tete, .formules__devis { padding: 0 22px; }
+  .formules__rangee {
+    display: flex; border-right: 0;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    padding: 0 22px; scroll-padding-inline: 22px;
+  }
+  .formules__rangee::-webkit-scrollbar { display: none; }
+  .formule { flex: 0 0 76vw; opacity: 1; transform: none; scroll-snap-align: start; }
+  .formule__photo { clip-path: none; }
+  .formule__photo img { transform: none; }
+  .formule:last-child { border-right: 1px solid var(--filet-atelier); }
+  .formules__devis { display: block; }
+  .formules__devis b { display: block; font-size: 38px; }
+  .formules__devis span { display: block; margin-top: 16px; }
+
+
+  .repere { grid-template-columns: 1fr; gap: 90px; }
+
+  .questions-corpo { padding: 20px 22px var(--air); }
+  .q summary { gap: 14px; font-size: 17px; padding-right: 40px; }
+  .q p { padding-left: 0; }
+
+  .contact-sobre { display: block; }
+  .contact-sobre .formulaire { margin-top: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carte-plan__point--base, .cinema__defiler::after, .temps::before { animation: none; }
+  .js .page-corporate .encre .mot { opacity: 1; }
+}
+
+.page-corporate .pied { --creme: #EDECE8; --creme-doux: rgba(237, 236, 232, .66); }

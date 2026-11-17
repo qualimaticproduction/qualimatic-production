@@ -1,0 +1,557 @@
+/* =====================================================================
+   QUALIMATIC PRODUCTION · ACCUEIL (preview v14)
+   La montagne de l'accueil actuel, animée : la brume se lève et devient
+   papier. Trois feuillets (mariage sur velours, culinaire sur ardoise,
+   corporate sur kraft) glissent l'un sur l'autre au défilement. Charly.
+   Le carton.
+   S'appuie sur refonte.css (couleurs, typos, en-tête, carton, pied).
+   ===================================================================== */
+
+/* =====================================================================
+   1. LA MONTAGNE
+   ===================================================================== */
+.ouverture { position: relative; height: calc(var(--ecran) * 1.75); }
+.ouverture__fixe {
+  position: sticky; top: 0;
+  height: var(--ecran);
+  overflow: hidden;
+  background: #2b2a25;
+}
+.ouverture__montagne {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; max-width: none;
+  object-fit: cover;
+  transform: scale(var(--zoom, 1.04)) translateY(var(--my, 0px));
+  filter: sepia(.2) saturate(.78) contrast(1.04) brightness(var(--lum, .9));
+  will-change: transform;
+}
+.ouverture__ombre {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(22, 14, 12, .38), rgba(22, 14, 12, 0) 26%),
+    radial-gradient(120% 90% at 50% 46%, rgba(22, 14, 12, 0) 38%, rgba(22, 14, 12, .5) 100%);
+}
+
+/* le logo, posé dans la brume, s'y perd au défilement */
+.ouverture__logo {
+  position: absolute; left: 50%; top: 47%; z-index: 3;
+  width: clamp(250px, 34vw, 600px);
+  transform: translate(-50%, -50%) scale(var(--ls, 1));
+  opacity: var(--lo, 1);
+  filter: blur(var(--lb, 0px)) drop-shadow(0 6px 34px rgba(0, 0, 0, .5));
+  will-change: transform, opacity, filter;
+}
+.ouverture__logo img { width: 100%; height: auto; }
+
+
+/* la brume monte du bas et recouvre tout, puis devient le papier */
+.ouverture__brume {
+  position: absolute; left: -10%; bottom: 0; z-index: 4;
+  width: 120%; height: 130%; max-width: none;
+  object-fit: cover;
+  mix-blend-mode: screen;
+  filter: sepia(.4) brightness(1.08);
+  opacity: var(--bo, 0);
+  transform: translateY(var(--by, 45%)) scale(var(--bs, 1));
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+.ouverture__voile {
+  position: absolute; inset: 0; z-index: 5;
+  background: var(--fond-papier);
+  opacity: var(--vo, 0);
+  pointer-events: none;
+}
+.ouverture__coin, .ouverture__indice { z-index: 6; opacity: var(--io, 1); }
+
+/* l'en-tête passe à l'encre quand la page devient papier */
+.entete.entete--encre:not(.est-pleine) { color: var(--encre); }
+.entete.entete--encre:not(.est-pleine) .entete__logo img { filter: brightness(0) opacity(.86); }
+
+/* =====================================================================
+   2. LE PAPIER : manifeste
+   ===================================================================== */
+/* le papier remonte dans la brume : son haut est fondu, sans bord visible */
+.papier { position: relative; z-index: 1; margin-top: calc(var(--ecran) * -.5); }
+.papier::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--fond-papier);
+  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), #000 calc(var(--ecran) * .4));
+          mask-image: linear-gradient(rgba(0, 0, 0, 0), #000 calc(var(--ecran) * .4));
+}
+
+.manifeste {
+  position: relative;
+  padding: calc(var(--ecran) * .34) var(--marge) clamp(70px, 8vw, 130px);
+  text-align: center;
+}
+.manifeste .etiquette { color: var(--vin); }
+.manifeste__texte {
+  position: relative; z-index: 2;
+  max-width: 12.5em; margin: 0 auto;
+  font-family: var(--titre); font-weight: 300; font-variation-settings: "opsz" 70;
+  font-size: clamp(32px, 4.7vw, 80px); line-height: 1.08;
+  color: var(--encre);
+}
+.manifeste__texte em {
+  font-family: var(--script); font-style: normal; font-weight: 400;
+  font-size: 1.14em; line-height: .9;
+  color: var(--vin);
+}
+/* chaque mot s'écrit à l'encre quand on arrive dessus */
+.js .encre .mot { opacity: .16; transition: opacity .7s var(--doux); }
+.js .encre .mot.est-encre { opacity: 1; }
+.manifeste__pied {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  margin-top: clamp(36px, 4vw, 60px);
+}
+.manifeste__corps { max-width: 50ch; color: var(--encre-doux); }
+.manifeste__signature {
+  margin-top: 10px;
+  font-family: var(--script); font-size: clamp(46px, 4.4vw, 70px); line-height: 1;
+  color: var(--vin);
+  rotate: -6deg;
+}
+
+/* les tirages qui dérivent autour du texte */
+.flottant {
+  position: absolute; z-index: 1;
+  margin: 0;
+  padding: 9px;
+  background: var(--fond-papier-clair);
+  box-shadow: 0 22px 44px rgba(40, 10, 18, .24);
+  translate: 0 var(--ty, 0px);
+}
+.flottant__image { overflow: hidden; }
+.flottant__image img { width: 100%; height: 100%; object-fit: cover; }
+.flottant--a { left: 4vw; top: calc(var(--ecran) * .2); width: clamp(130px, 13vw, 230px); rotate: -5deg; }
+.flottant--a .flottant__image { aspect-ratio: 3 / 4; }
+.flottant--b { right: 4.5vw; top: calc(var(--ecran) * .3); width: clamp(150px, 16vw, 280px); rotate: 4deg; }
+.flottant--b .flottant__image { aspect-ratio: 3 / 2; }
+.flottant--c { left: 7vw; bottom: 9%; width: clamp(140px, 14vw, 250px); rotate: 3deg; }
+.flottant--c .flottant__image { aspect-ratio: 3 / 2; }
+.flottant--d { right: 7vw; bottom: 5%; width: clamp(160px, 17vw, 300px); rotate: -3deg; }
+.flottant--d .flottant__image { aspect-ratio: 16 / 10; }
+
+/* =====================================================================
+   3. LES TROIS UNIVERS
+   ===================================================================== */
+.univers { position: relative; height: calc(var(--ecran) * 4.4); }
+.univers__fixe { position: sticky; top: 0; height: var(--ecran); overflow: hidden; }
+
+.feuillet {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px);
+  align-items: center;
+  padding: calc(var(--entete) + 12px) clamp(28px, 6vw, 110px) 92px;
+  transform:
+    translate3d(calc((1 - var(--e, 1)) * 104%), 0, 0)
+    rotate(calc((1 - var(--e, 1)) * 3deg))
+    scale(calc(1 - var(--recul, 0) * .07));
+  transform-origin: 50% 100%;
+  box-shadow: -40px 0 90px rgba(0, 0, 0, .42);
+  will-change: transform;
+}
+.js .feuillet[data-feuillet="1"], .js .feuillet[data-feuillet="2"] { --e: 0; }
+/* le feuillet recouvert s'assombrit */
+.feuillet::after {
+  content: ""; position: absolute; inset: 0; z-index: 20;
+  background: #0b0204;
+  opacity: calc(var(--recul, 0) * .55);
+  pointer-events: none;
+}
+.feuillet [data-profondeur] { translate: var(--dx, 0px) 0; will-change: translate; }
+
+.feuillet--sommaire { display: flex; align-items: center; justify-content: center; background: var(--fond-papier); box-shadow: none; }
+.feuillet--mariage {
+  color: var(--creme);
+  background:
+    radial-gradient(110% 90% at 30% 50%, rgba(0, 0, 0, 0) 40%, rgba(10, 0, 3, .5) 100%),
+    linear-gradient(rgba(48, 8, 19, .42), rgba(48, 8, 19, .42)),
+    url("assets/matieres/velours-cotele.jpg") center / cover,
+    var(--bordeaux);
+}
+.feuillet--culinaire {
+  color: var(--creme);
+  background: url("assets/matieres/ardoise.jpg") center / cover, #151413;
+}
+.feuillet--corporate {
+  color: var(--encre);
+  background:
+    linear-gradient(rgba(150, 128, 104, .34), rgba(150, 128, 104, .34)),
+    radial-gradient(120% 100% at 40% 50%, rgba(0, 0, 0, 0) 50%, rgba(60, 34, 10, .28) 100%),
+    url("assets/matieres/kraft.jpg") center / cover,
+    #b9894f;
+}
+
+/* ---------- le sommaire ---------- */
+.sommaire { text-align: center; }
+.sommaire .etiquette { color: var(--vin); }
+.sommaire .duo__caps { font-size: clamp(64px, 10vw, 170px); }
+.sommaire .duo__script { font-size: clamp(48px, 6.6vw, 112px); }
+.sommaire__liste {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 10px clamp(26px, 4vw, 64px);
+  margin-top: clamp(34px, 4vw, 56px);
+  font-family: var(--titre); font-variation-settings: "opsz" 100;
+  font-size: clamp(22px, 2.3vw, 36px); line-height: 1; text-transform: uppercase;
+  color: var(--bordeaux);
+}
+.sommaire__liste li { display: flex; align-items: baseline; gap: 10px; }
+.sommaire__liste span { font-family: var(--texte); font-size: 10.5px; font-weight: 500; letter-spacing: .22em; color: var(--vin); }
+.sommaire__indice {
+  display: inline-flex; align-items: center; gap: 12px;
+  margin-top: clamp(30px, 3.4vw, 48px);
+  font-size: 10px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--vin);
+}
+.sommaire__indice svg { width: 30px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1; animation: glisse 2.4s var(--doux) infinite; }
+
+/* ---------- le texte d'un feuillet ---------- */
+.feuillet__texte { position: relative; z-index: 2; }
+.feuillet__num {
+  font-family: var(--titre); font-weight: 300; font-variation-settings: "opsz" 100;
+  font-size: clamp(80px, 9vw, 150px); line-height: .8;
+  color: transparent;
+  -webkit-text-stroke: 1px currentColor;
+  opacity: .35;
+  margin-bottom: clamp(10px, 1.4vw, 22px);
+}
+.feuillet--mariage .feuillet__num, .feuillet--culinaire .feuillet__num { -webkit-text-stroke-color: var(--rose); color: transparent; opacity: .5; }
+.feuillet .etiquette { text-align: left; color: var(--rose); margin-bottom: clamp(12px, 1.4vw, 20px); }
+.feuillet--corporate .etiquette { color: var(--vin); }
+.feuillet .duo__caps { font-size: clamp(50px, 6.4vw, 110px); }
+.feuillet .duo__script { font-size: clamp(38px, 4.6vw, 80px); padding-left: .5em; }
+.feuillet__corps { max-width: 40ch; margin-top: clamp(18px, 2vw, 30px); font-size: 15px; color: var(--creme-doux); }
+.feuillet--corporate .feuillet__corps { color: var(--encre-doux); }
+.feuillet__faits {
+  display: flex; flex-wrap: wrap; gap: 8px 22px;
+  margin-top: clamp(16px, 1.8vw, 24px);
+  font-size: 10.5px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--rose);
+}
+.feuillet--corporate .feuillet__faits { color: var(--vin); }
+.feuillet__faits li { display: flex; align-items: center; gap: 10px; }
+.feuillet__faits li::before { content: ""; width: 14px; height: 1px; background: currentColor; opacity: .6; }
+.feuillet__faits b { font-family: var(--texte); font-weight: 500; letter-spacing: .06em; color: var(--creme); }
+.feuillet__liens { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 30px; margin-top: clamp(24px, 2.6vw, 38px); }
+.feuillet .bouton--clair { border-color: rgba(243, 231, 211, .7); }
+
+/* ---------- 01 · mariage ---------- */
+.feuillet--mariage .feuillet__visuel { grid-column: 1 / span 6; }
+.feuillet--mariage .feuillet__texte { grid-column: 8 / span 5; }
+.feuillet__visuel {
+  position: relative; z-index: 1;
+  height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.arche {
+  --arche-l: min(30vw, calc((var(--ecran) - var(--entete) - 170px) * .8));
+  width: var(--arche-l); aspect-ratio: 4 / 5;
+  rotate: -2deg;
+  filter: drop-shadow(0 34px 50px rgba(0, 0, 0, .5));
+}
+.arche .festons { --r: 7px; height: 100%; }
+.arche .festons__interieur { padding: 11px; }
+.feuillet--mariage .feuillet__visuel { --arche-l: min(30vw, calc((var(--ecran) - var(--entete) - 170px) * .8)); }
+.feuillet__cachet {
+  position: absolute; left: 50%; top: 50%; z-index: 3;
+  width: clamp(90px, 9vw, 150px);
+  margin: calc(var(--arche-l) * .5) 0 0 calc(var(--arche-l) * .5 - 70px);
+  rotate: 12deg;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .45));
+}
+.feuillet__legende {
+  position: absolute; left: 0; right: 0; bottom: 2.5%;
+  text-align: center;
+  font-size: 10px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--rose);
+}
+
+/* ---------- 02 · culinaire ---------- */
+.feuillet--culinaire .feuillet__texte { grid-column: 1 / span 5; }
+.feuillet--culinaire .feuillet__visuel { grid-column: 6 / span 7; }
+.assiette {
+  position: absolute; z-index: 1;
+  margin: 0; overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .65);
+}
+.assiette img { width: 100%; height: 100%; object-fit: cover; }
+.assiette--a { left: 0; top: 9%; width: 46%; aspect-ratio: 16 / 10; rotate: -4deg; }
+.assiette--b { right: 0; top: 5%; width: 34%; aspect-ratio: 4 / 5; rotate: 5deg; }
+.assiette--b img { object-position: 50% 50%; }
+.assiette--c { right: 5%; bottom: 7%; width: 44%; aspect-ratio: 16 / 10; rotate: -2deg; }
+
+/* la carte du menu, sur papier coton */
+.menu-carte {
+  position: absolute; inset: 0; z-index: 2;
+  width: min(24vw, 350px, calc((var(--ecran) - var(--entete) - 130px) * .668));
+  height: fit-content;
+  aspect-ratio: 900 / 1348;
+  margin: auto;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 13% 11% 12%;
+  background: url("assets/matieres/carte-coton-a.webp") center / 100% 100% no-repeat;
+  color: var(--encre);
+  text-align: center;
+  rotate: 1.5deg;
+  filter: drop-shadow(0 26px 34px rgba(0, 0, 0, .55));
+}
+.menu-carte__titre {
+  font-family: var(--titre); font-variation-settings: "opsz" 100;
+  font-size: clamp(26px, 2.6vw, 40px); line-height: .9; text-transform: uppercase;
+  color: var(--bordeaux);
+}
+.menu-carte__titre span { display: block; margin-top: -.1em; font-family: var(--script); font-size: 1.15em; text-transform: none; color: var(--vin); }
+.menu-carte__sous { margin-top: 6px; font-size: 8.5px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--vin); }
+.menu-carte__plats { width: 100%; margin-top: clamp(12px, 1.4vw, 22px); }
+.menu-carte__plats li {
+  display: flex; flex-direction: column; align-items: center;
+  padding: clamp(5px, .6vw, 9px) 0;
+  border-top: 1px dotted rgba(110, 25, 50, .35);
+}
+.menu-carte__plats span { font-family: var(--titre); font-variation-settings: "opsz" 60; font-size: clamp(14px, 1.2vw, 18px); line-height: 1.1; }
+.menu-carte__plats em { font-style: normal; font-size: 10px; letter-spacing: .04em; color: var(--encre-doux); }
+.menu-carte__prix {
+  margin-top: clamp(10px, 1.2vw, 18px);
+  font-family: var(--titre); font-variation-settings: "opsz" 100; font-size: clamp(24px, 2.2vw, 34px); line-height: 1;
+  color: var(--bordeaux);
+}
+.menu-carte__prix small { font-family: var(--texte); font-size: 9px; font-weight: 500; letter-spacing: .14em; color: var(--vin); }
+
+/* ---------- 03 · corporate ---------- */
+.feuillet--corporate .feuillet__visuel { grid-column: 1 / span 7; }
+.feuillet--corporate .feuillet__texte { grid-column: 9 / span 4; }
+.planche {
+  position: relative; z-index: 1;
+  width: min(36vw, 560px, calc((var(--ecran) - var(--entete) - 160px) * 1.1));
+  padding: 34px 16px 26px;
+  background: #171412;
+  box-shadow: 0 30px 60px rgba(50, 26, 6, .45), inset 0 0 0 1px rgba(255, 255, 255, .04);
+  rotate: -3deg;
+}
+.planche__pince { position: absolute; left: 50%; top: -58px; z-index: 3; width: 110px; margin-left: -55px; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .35)); }
+.planche__vues { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 8px; }
+.planche__vues li { position: relative; }
+.planche__vues img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; filter: contrast(1.04); }
+.planche__vues span { position: absolute; left: 2px; bottom: -14px; font-size: 8px; font-weight: 500; letter-spacing: .14em; color: #D58A3C; }
+/* le crayon gras rouge entoure les images retenues */
+.planche__cercle {
+  position: absolute; inset: -12px -10px; z-index: 2;
+  width: calc(100% + 20px); height: calc(100% + 24px);
+  overflow: visible; pointer-events: none;
+}
+.planche__cercle path {
+  fill: none; stroke: #C8231C; stroke-width: 3; stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--trace, 1));
+  opacity: .92;
+}
+.planche__note {
+  position: absolute; right: -14%; top: 4%;
+  font-family: var(--script); font-size: clamp(28px, 2.6vw, 42px); line-height: 1;
+  color: #C8231C;
+  rotate: -10deg;
+  opacity: var(--trace, 1);
+}
+.tirage-atelier {
+  position: absolute; right: 2%; bottom: 3%; z-index: 2;
+  width: clamp(150px, 14vw, 230px);
+  margin: 0; padding: 9px 9px 9px;
+  background: #F7F1E7;
+  box-shadow: 0 24px 40px rgba(50, 26, 6, .45);
+  rotate: 5deg;
+}
+.tirage-atelier::before {
+  content: ""; position: absolute; z-index: 2; top: -13px; left: 50%;
+  width: 90px; height: 28px; translate: -50% 0; rotate: -6deg;
+  background: var(--fibre) 0 0 / 300px 300px, rgba(226, 204, 176, .8);
+}
+.tirage-atelier img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+
+/* ---------- le repère ---------- */
+.univers__repere {
+  position: absolute; left: 0; right: 0; bottom: 26px; z-index: 30;
+  display: flex; justify-content: center; gap: clamp(18px, 2.4vw, 36px);
+  font-size: 10px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--creme);
+  opacity: var(--ro, 0);
+  transition: color .5s;
+  pointer-events: none;
+}
+.univers__repere li {
+  display: flex; gap: 8px;
+  padding-bottom: 6px;
+  opacity: .45;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: opacity .5s, background-size .7s var(--doux);
+}
+.univers__repere li.est-actif { opacity: 1; background-size: 100% 1px; }
+.univers__repere span { color: inherit; opacity: .7; }
+.univers__fixe[data-actif="2"] .univers__repere { color: var(--encre); }
+
+/* sans JavaScript : les feuillets s'empilent simplement */
+html:not(.js) .univers { height: auto; }
+html:not(.js) .univers__fixe { position: relative; height: auto; }
+html:not(.js) .feuillet { position: relative; min-height: var(--ecran); }
+html:not(.js) .univers__repere { display: none; }
+
+/* =====================================================================
+   4. ARRÊTS SUR IMAGE : la pellicule
+   ===================================================================== */
+.pellicule { position: relative; padding: clamp(110px, 12vw, 200px) 0 clamp(120px, 12vw, 200px); overflow: hidden; }
+.pellicule__titre { position: relative; z-index: 2; margin: clamp(46px, 5vw, 84px) 0; }
+.pellicule__titre .duo__caps { font-size: clamp(60px, 9.5vw, 160px); }
+.pellicule__titre .duo__script { font-size: clamp(46px, 6.2vw, 104px); }
+.pellicule__bande {
+  --h: clamp(130px, 15vw, 240px);
+  position: relative; left: 50%;
+  width: max-content;
+  padding: calc(var(--h) * .17) 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16'%3E%3Crect x='8' y='4' width='12' height='9' rx='2' fill='%23E6D7C1' fill-opacity='.88'/%3E%3C/svg%3E") 0 calc(var(--h) * .02) / 28px 16px repeat-x,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16'%3E%3Crect x='8' y='3' width='12' height='9' rx='2' fill='%23E6D7C1' fill-opacity='.88'/%3E%3C/svg%3E") 0 calc(100% - var(--h) * .02) / 28px 16px repeat-x,
+    #0f0c0c;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .45);
+  transform: translateX(calc(-50% + var(--px, 0px))) skewX(var(--sk, 0deg));
+  will-change: transform;
+}
+.pellicule__bande + .pellicule__titre + .pellicule__bande { rotate: 1.2deg; }
+.pellicule__bande:first-child { rotate: -1.4deg; }
+.pellicule__vues { display: flex; gap: 12px; padding: 0 12px; }
+.pellicule__vues li { position: relative; flex: none; height: var(--h); aspect-ratio: 3 / 2; overflow: hidden; background: #1b1716; }
+.pellicule__vues img, .pellicule__vues video { width: 100%; height: 100%; max-width: none; object-fit: cover; filter: saturate(.86) contrast(1.04); }
+
+/* =====================================================================
+   5. CHARLY
+   ===================================================================== */
+.feuille--charly { margin-top: clamp(30px, 4vw, 60px); }
+.charly {
+  position: relative;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px;
+  align-items: center;
+  padding: clamp(80px, 9vw, 150px) clamp(28px, 6vw, 100px) clamp(120px, 12vw, 190px);
+}
+.charly__photo { grid-column: 1 / span 6; margin: 0; }
+.tirage--paysage { rotate: -2.5deg; }
+.tirage--paysage .tirage__image { aspect-ratio: 5 / 4; }
+.tirage--paysage .tirage__image img { object-position: 50% 50%; }
+.charly__texte { grid-column: 8 / span 5; }
+.charly .etiquette { text-align: left; color: var(--vin); }
+.charly .duo__caps { font-size: clamp(50px, 6.2vw, 104px); }
+.charly .duo__script { font-size: clamp(38px, 4.4vw, 74px); padding-left: .4em; }
+.charly__corps { margin-top: clamp(20px, 2.2vw, 32px); max-width: 44ch; color: var(--encre-doux); }
+.charly .lien { margin-top: 24px; }
+
+.polaroid {
+  margin: 0;
+  padding: 10px 10px 46px;
+  background: #F8F3EB;
+  box-shadow: 0 18px 36px rgba(40, 10, 18, .26);
+}
+.polaroid { position: relative; }
+.polaroid img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.polaroid figcaption {
+  position: absolute; left: 0; right: 0; bottom: 12px;
+  text-align: center;
+  font-family: var(--script); font-size: 22px; line-height: 1;
+  color: var(--vin);
+}
+.charly__van {
+  position: absolute; right: clamp(20px, 7vw, 120px); bottom: -30px; z-index: 3;
+  width: clamp(150px, 14vw, 220px);
+  rotate: 6deg;
+  translate: 0 var(--ty, 0px);
+}
+
+/* =====================================================================
+   TABLETTE
+   ===================================================================== */
+@media (max-width: 1100px) {
+  .feuillet { padding-left: 4vw; padding-right: 4vw; }
+  .feuillet--corporate .feuillet__texte { grid-column: 8 / span 5; }
+  .flottant--a { left: 2vw; }
+  .flottant--b { right: 2vw; }
+}
+
+/* =====================================================================
+   MOBILE : les feuillets se lisent de haut en bas, mais glissent toujours de côté
+   ===================================================================== */
+@media (max-width: 760px) {
+  .ouverture { height: calc(var(--ecran) * 1.65); }
+  .ouverture__logo { width: 66vw; top: 45%; }
+
+  .manifeste { padding: calc(var(--ecran) * .34 + 120px) 22px 110px; }
+  .manifeste__texte { font-size: 30px; line-height: 1.12; }
+  .manifeste__corps { font-size: 14px; }
+  .flottant--a { left: 5vw; top: calc(var(--ecran) * .26); width: 30vw; }
+  .flottant--b { right: 5vw; top: calc(var(--ecran) * .3); width: 38vw; }
+  .flottant--c, .flottant--d { display: none; }
+
+  .univers { height: calc(var(--ecran) * 4); }
+  .feuillet {
+    display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch;
+    gap: 14px;
+    padding: calc(var(--entete) + 10px) 22px 58px;
+  }
+  .feuillet__visuel { order: -1; flex: none; height: 41%; }
+  .feuillet__texte { flex: none; }
+  .feuillet__num { display: none; }
+  .feuillet .etiquette { font-size: 9.5px; margin-bottom: 6px; }
+  .feuillet .duo__caps { font-size: 44px; }
+  .feuillet .duo__script { font-size: 34px; }
+  .feuillet__corps { margin-top: 10px; font-size: 13.5px; line-height: 1.55; }
+  .feuillet__faits { display: none; }
+  .feuillet__liens { margin-top: 16px; gap: 14px 22px; }
+  .feuillet__liens .bouton { min-height: 44px; padding: 0 22px; font-size: 10px; }
+
+  .feuillet--mariage .feuillet__visuel { --arche-l: min(56vw, calc(var(--ecran) * .41 * .78)); }
+  .arche { --arche-l: min(56vw, calc(var(--ecran) * .41 * .78)); }
+  .feuillet__cachet { width: 70px; margin: calc(var(--arche-l) * .46) 0 0 calc(var(--arche-l) * .5 - 40px); }
+  .feuillet__legende { display: none; }
+
+  .menu-carte { width: min(46vw, calc(var(--ecran) * .4 * .668)); padding: 13% 10% 11%; }
+  .menu-carte__titre { font-size: 22px; }
+  .menu-carte__sous { font-size: 6.5px; letter-spacing: .18em; }
+  .menu-carte__plats { margin-top: 8px; }
+  .menu-carte__plats li { padding: 3px 0; }
+  .menu-carte__plats span { font-size: 11.5px; }
+  .menu-carte__plats em { font-size: 7.5px; }
+  .menu-carte__prix { margin-top: 6px; font-size: 19px; }
+  .menu-carte__prix small { font-size: 7px; }
+  .assiette--a { left: -4%; top: 4%; width: 52%; }
+  .assiette--b { right: -4%; top: 0; width: 34%; }
+  .assiette--c { right: -2%; bottom: 0; width: 50%; }
+
+  .planche { width: 70vw; padding: 22px 10px 18px; }
+  .planche__vues { gap: 12px 5px; }
+  .planche__vues span { font-size: 6px; bottom: -11px; }
+  .planche__pince { width: 74px; top: -38px; margin-left: -37px; }
+  .planche__note { font-size: 26px; right: -8%; top: -6%; }
+  .tirage-atelier { width: 27vw; right: 0; bottom: -2%; padding: 5px; }
+
+  .univers__repere { bottom: 18px; gap: 14px; font-size: 8.5px; letter-spacing: .18em; }
+  .univers__repere span { display: none; }
+
+  .pellicule { padding: 90px 0; }
+  .pellicule__bande { --h: 118px; }
+  .pellicule__vues { gap: 8px; padding: 0 8px; }
+  .pellicule__titre { margin: 40px 0; }
+  .pellicule__titre .duo__caps { font-size: 50px; }
+  .pellicule__titre .duo__script { font-size: 40px; }
+
+  .charly { display: flex; flex-direction: column; align-items: stretch; gap: 40px; padding: 60px 22px 150px; }
+  .charly__photo { width: 86%; }
+  .charly .duo__caps { font-size: 46px; }
+  .charly .duo__script { font-size: 36px; }
+  .charly__van { right: auto; left: 18px; bottom: 10px; width: 36vw; rotate: -5deg; }
+  .charly .lien { align-self: flex-end; }
+}
+
+/* =====================================================================
+   MOUVEMENT RÉDUIT
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .js .encre .mot { opacity: 1; }
+}

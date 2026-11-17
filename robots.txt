@@ -1,0 +1,45 @@
+# ============================================
+# robots.txt — Qualimatic Production
+# https://www.qualimaticproduction.fr
+# ============================================
+
+User-agent: *
+Allow: /
+
+# Pages non indexables
+Disallow: /404.html
+Disallow: /uploads/
+Disallow: /seances/
+Disallow: /outils/
+Disallow: /assets/og-cover.jpg
+
+# Empêcher l'indexation des URLs de redirection / paramètres internes
+Disallow: /*?inscrit=
+Disallow: /*?sent=
+Disallow: /*?formule=
+
+# Crawl raisonnable pour bots indélicats
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+# Bots IA — autoriser uniquement les bots qui respectent l'usage légitime
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Sitemap
+Sitemap: https://www.qualimaticproduction.fr/sitemap.xml

@@ -1,0 +1,247 @@
+/* =====================================================================
+   QUALIMATIC PRODUCTION · page Tarifs (preview v7)
+   S'appuie sur refonte.css (couleurs, typographies, en-tête, pied).
+   Deux cartes en papier coton aux bords frangés, posées sur le velours.
+   ===================================================================== */
+
+.page-tarifs main { padding-top: var(--entete); }
+
+/* ---------- Les deux formules ---------- */
+.formules {
+  padding: clamp(70px, 8vw, 130px) var(--marge) clamp(90px, 10vw, 150px);
+  color: var(--creme);
+}
+.formules__tete { text-align: center; max-width: 760px; margin: 0 auto; }
+.formules__tete .etiquette { color: var(--rose); }
+.formules__intro { margin-top: clamp(22px, 2.4vw, 34px); color: var(--creme-doux); font-size: 15.5px; }
+
+.formules__cartes {
+  display: flex; justify-content: center; align-items: flex-start;
+  gap: clamp(24px, 4vw, 70px);
+  margin-top: clamp(56px, 6vw, 96px);
+}
+/* la carte garde les proportions du papier, et s'allonge si le contenu le demande */
+.formule {
+  position: relative;
+  display: flex; flex-direction: column;
+  width: min(470px, 44vw);
+  aspect-ratio: 900 / 1348;
+  transform: translateY(var(--ty, 0px)) rotate(var(--r, 0deg));
+  color: var(--encre);
+}
+.formule--elegance { --r: -1.6deg; margin-top: clamp(30px, 4vw, 70px); }
+.formule--signature { --r: 1.4deg; }
+.formule__papier {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; max-width: none;
+  object-fit: fill;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .45));
+}
+.formule__contenu {
+  position: relative; flex: 1;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 13% 11% 12%;
+}
+.formule__cachet {
+  position: absolute; z-index: 2; left: 50%; top: -3.2%;
+  width: 21%; height: auto;
+  transform: translateX(-50%) rotate(-8deg);
+  filter: drop-shadow(0 8px 10px rgba(30, 4, 10, .4));
+}
+.formule--signature .formule__contenu { padding-top: 16%; }
+.entete__nav a[aria-current="page"] { border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+
+.formule__label {
+  font-size: 10px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--vin);
+}
+.formule__nom {
+  margin-top: 4px;
+  font-family: var(--script); font-weight: 400;
+  font-size: clamp(50px, 5vw, 78px); line-height: 1;
+  color: var(--bordeaux);
+}
+.formule__prix {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-top: 4px;
+  font-family: var(--titre); font-variation-settings: "opsz" 100;
+  font-size: clamp(40px, 4.2vw, 62px); line-height: 1;
+  color: var(--bordeaux);
+}
+.formule__prix span { font-family: var(--texte); font-size: 12px; font-weight: 500; letter-spacing: .18em; color: var(--vin); }
+.formule__horaire {
+  margin-top: 10px;
+  font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--encre-doux);
+}
+.formule__liste {
+  width: 100%;
+  margin-top: clamp(14px, 1.6vw, 22px);
+  border-top: 1px solid var(--filet);
+}
+.formule__liste li {
+  padding: clamp(6px, .62vw, 9px) 0;
+  border-bottom: 1px solid var(--filet);
+  font-size: clamp(12px, .95vw, 13.5px); line-height: 1.4;
+  color: var(--encre-doux);
+}
+.formule__liens {
+  margin-top: auto;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding-top: 18px;
+}
+.formule__liens .bouton { min-height: 46px; padding: 0 26px; font-size: 10px; }
+.formule__liens .lien { font-size: 12.5px; }
+.bouton--plein { background: var(--vin); color: var(--creme); }
+@media (hover: hover) { .bouton--plein:hover { background: var(--bordeaux); border-color: var(--bordeaux); } }
+
+/* ---------- Le déplacement : un papier déchiré ---------- */
+.deplacement { padding: 0 var(--marge) clamp(110px, 12vw, 180px); }
+.deplacement__papier {
+  position: relative;
+  width: min(860px, 100%);
+  margin: 0 auto;
+  padding: clamp(34px, 4vw, 56px) clamp(26px, 5vw, 80px) clamp(26px, 3vw, 40px);
+  background: var(--fibre) 0 0 / 300px 300px, #EBDDC3;
+  text-align: center;
+  rotate: -.8deg;
+  filter: drop-shadow(0 24px 26px rgba(0, 0, 0, .38));
+}
+.deplacement__titre, .deplacement__texte { position: relative; z-index: 1; }
+.deplacement__titre {
+  font-family: var(--titre); font-variation-settings: "opsz" 60;
+  font-size: clamp(22px, 2.3vw, 34px); line-height: 1.15;
+  color: var(--bordeaux);
+}
+.deplacement__texte { margin-top: 16px; max-width: 58ch; margin-inline: auto; color: var(--encre-doux); }
+.deplacement__bord {
+  position: absolute; left: -2px; top: calc(100% - 60px);
+  width: calc(100% + 4px); max-width: none; height: clamp(110px, 12vw, 160px);
+  object-fit: cover; object-position: center bottom;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 60px);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 60px);
+  pointer-events: none;
+}
+
+/* ---------- À la carte et en pratique, épinglés sur un lin uni ---------- */
+.annexes {
+  display: flex; justify-content: center; align-items: flex-start;
+  gap: clamp(24px, 4vw, 64px);
+  padding: clamp(110px, 12vw, 180px) var(--marge) clamp(110px, 12vw, 180px);
+  background:
+    radial-gradient(120% 90% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(60, 30, 20, .22) 100%),
+    url("assets/matieres/lin-naturel.jpg") center / 900px auto;
+  box-shadow: inset 0 30px 40px -20px rgba(0, 0, 0, .45), inset 0 -30px 40px -20px rgba(0, 0, 0, .45);
+}
+.annexe {
+  position: relative;
+  width: min(480px, 46vw);
+  padding: clamp(40px, 4vw, 60px) clamp(26px, 3.4vw, 50px) clamp(34px, 3.4vw, 50px);
+  background: var(--fond-papier-clair);
+  box-shadow: 0 1px 2px rgba(60, 30, 20, .18), 0 22px 40px rgba(60, 30, 20, .28);
+  transform: translateY(var(--ty, 0px)) rotate(var(--r, 0deg));
+}
+.annexe--carte { --r: -1.4deg; }
+.annexe--pratique { --r: 1.6deg; margin-top: clamp(40px, 6vw, 110px); }
+.annexe::before {
+  content: ""; position: absolute; z-index: 2; top: -9px; left: 50%;
+  width: 18px; height: 18px; margin-left: -9px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f3d7c9 0 18%, #7a1d33 40%, #3a0612 100%);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, .4);
+}
+.annexe .duo__caps { font-size: clamp(44px, 5vw, 76px); }
+.annexe .duo__script { font-size: clamp(34px, 3.6vw, 56px); }
+
+.menu-carte { margin-top: clamp(22px, 2.4vw, 34px); }
+.menu-carte li {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 9px 0;
+  font-size: 14px; color: var(--encre);
+}
+.menu-carte i { flex: 1; border-bottom: 1px dotted rgba(110, 25, 50, .5); transform: translateY(-4px); }
+.menu-carte b { font-family: var(--titre); font-variation-settings: "opsz" 40; font-weight: 400; font-size: 18px; color: var(--bordeaux); white-space: nowrap; }
+.annexe__note { margin-top: 18px; font-size: 12.5px; line-height: 1.6; color: var(--encre-doux); text-align: center; }
+
+.pratique { margin-top: clamp(22px, 2.4vw, 34px); }
+.pratique li {
+  display: grid; gap: 2px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--filet);
+  font-size: 13.5px; line-height: 1.5; color: var(--encre-doux);
+  text-align: center;
+}
+.pratique li:first-child { border-top: 1px solid var(--filet); }
+.pratique b { font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--vin); }
+
+
+/* ---------- Tablette ---------- */
+@media (max-width: 1100px) {
+  .formules__cartes { gap: 28px; }
+  .formule { width: min(430px, 46vw); }
+  .formule__liste li { padding: 5px 0; font-size: 12px; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 760px) {
+  /* les deux formules côte à côte, à faire glisser : Signature d'abord, Élégance dépasse au bord */
+  .formules { padding: 60px 0 56px; }
+  .formules__tete { padding: 0 22px; }
+  .formules__cartes {
+    justify-content: flex-start; gap: 18px;
+    overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding: 0 22px;
+    margin-top: 26px; padding: 34px 22px 34px;
+    scrollbar-width: none;
+  }
+  .formules__cartes::-webkit-scrollbar { display: none; }
+  .formule { --ty: 0px !important; flex: none; width: 80vw; scroll-snap-align: center; }
+  .formule--elegance { margin-top: 0; order: 2; }
+  .formule--signature { order: 1; }
+  .formule__contenu { padding: 12% 10% 11%; }
+  .formule--signature .formule__contenu { padding-top: 15%; }
+  .formule__liste li { padding: 4px 0; font-size: 11.5px; }
+  .formule__liens { padding-top: 10px; gap: 8px; }
+
+  .deplacement { padding-bottom: 90px; }
+  .deplacement__papier { padding-bottom: 46px; }
+  /* options et infos pratiques : deux fiches côte à côte, à faire glisser */
+  .annexes {
+    justify-content: flex-start; align-items: flex-start; gap: 18px;
+    overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding: 0 22px;
+    padding: 64px 22px 60px;
+    scrollbar-width: none;
+  }
+  .annexes::-webkit-scrollbar { display: none; }
+  .annexe { --ty: 0px !important; flex: none; width: 82vw; scroll-snap-align: center; padding: 34px 20px 26px; }
+  .annexe--pratique { margin-top: 0; }
+  .annexe .duo__caps { font-size: 40px; }
+  .annexe .duo__script { font-size: 30px; }
+  .menu-carte li { padding: 7px 0; font-size: 13px; }
+  .menu-carte b { font-size: 16px; }
+  .pratique li { padding: 8px 0; font-size: 12.5px; }
+}
+
+/* ---------- Mode capture ---------- */
+.capture .page-tarifs .entete, .capture.page-tarifs .entete { position: absolute; }
+
+/* ---------- Vos questions (FAQ, reprise de la page Tarifs en ligne) ---------- */
+.faq-tarifs { padding: clamp(110px, 11vw, 180px) var(--marge) 0; color: var(--creme); }
+.faq-tarifs .duo__caps { font-size: clamp(56px, 7vw, 116px); }
+.faq-tarifs .duo__script { font-size: clamp(40px, 4.8vw, 80px); }
+.faq-tarifs__liste { max-width: 900px; margin: clamp(40px, 4vw, 64px) auto 0; border-top: 1px solid var(--filet-clair); }
+.faq-tarifs__q { border-bottom: 1px solid var(--filet-clair); }
+.faq-tarifs__q summary {
+  position: relative; padding: 24px 46px 24px 0;
+  font-family: var(--titre); font-variation-settings: "opsz" 60; font-size: clamp(21px, 1.9vw, 28px); line-height: 1.2;
+  cursor: pointer; list-style: none;
+}
+.faq-tarifs__q summary::-webkit-details-marker { display: none; }
+.faq-tarifs__q summary::after { content: "+"; position: absolute; right: 6px; top: 20px; font-size: 26px; font-weight: 300; color: var(--rose); transition: transform .4s var(--doux); }
+.faq-tarifs__q[open] summary::after { transform: rotate(45deg); }
+.faq-tarifs__q p { padding: 0 0 26px; max-width: 66ch; color: var(--creme-doux); }
+@media (max-width: 760px) {
+  .faq-tarifs { padding: 90px 22px 0; }
+  .faq-tarifs__q summary { font-size: 19px; }
+}
+.faq-tarifs__plus { display: flex; flex-wrap: wrap; gap: 14px 34px; max-width: 900px; margin: 32px auto 0; color: var(--rose); }
