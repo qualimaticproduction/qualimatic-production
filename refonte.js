@@ -434,13 +434,9 @@
     choisirFilm(borne(parseInt(parametres.get('film') || '0', 10), 0, 3), true);
   } else {
     choisirFilm(0, true);
-    if (!calme) window.requestAnimationFrame(animer);
-    else if (dechirure) {
-      // mouvement réduit : le papier reste ouvert, le film se lance avec le bouton
-      dechirure.style.setProperty('--ouv', '1');
-      dechirure.classList.add('est-ouverte');
-      majBouton();
-    }
+    // les effets suivent le doigt du visiteur, même avec « Réduire les animations » (iPhone) :
+    // sans eux, le rideau restait fermé et la brume vide, sur des écrans entiers
+    window.requestAnimationFrame(animer);
   }
 
   /* ---------- Vos mots : les cartes posées sur le plateau ---------- */

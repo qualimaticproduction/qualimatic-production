@@ -248,7 +248,7 @@
   width: 34px; height: 34px; margin: -17px 0 0 -17px;
   border-radius: 50%; border: 1.5px solid var(--creme);
   background: rgba(28, 11, 15, .35) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l-5 5 5 5M15 7l5 5-5 5' fill='none' stroke='%23F3E7D3' stroke-width='1.5'/%3E%3C/svg%3E") center / 18px no-repeat;
-  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
 }
 .etalonnage__mot {
   position: absolute; top: 12px; z-index: 3;

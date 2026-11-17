@@ -479,7 +479,7 @@ html:not(.js) .univers__repere { display: none; }
    MOBILE : les feuillets se lisent de haut en bas, mais glissent toujours de côté
    ===================================================================== */
 @media (max-width: 760px) {
-  .ouverture { height: calc(var(--ecran) * 1.65); }
+  .ouverture { height: calc(var(--ecran) * 1.35); }
   .ouverture__logo { width: 66vw; top: 45%; }
 
   .manifeste { padding: calc(var(--ecran) * .34 + 120px) 22px 110px; }

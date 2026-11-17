@@ -1027,12 +1027,12 @@ body.menu-ouvert .entete { z-index: 160; background: transparent; box-shadow: no
   .intro .duo__script { font-size: 34px; }
   .intro__portrait { width: 58%; margin: 40px 0 0 auto; }
 
-  .dechirure { height: calc(var(--ecran) * 2.2); }
+  .dechirure { height: calc(var(--ecran) * 1.9); }
   .dechirure__legende { left: 22px; bottom: 96px; }
   .dechirure__son { right: auto; left: 22px; bottom: 34px; }
 
   /* arrêts sur image : une bande qu'on fait glisser, la suivante dépasse au bord */
-  .arrets { padding: 60px 0 70px; }
+  .arrets { padding: 24px 0 70px; }
   .arrets__tete { margin-bottom: 14px; padding: 0 20px; }
   .arrets__grille {
     display: flex; justify-content: flex-start; align-items: center; gap: 24px;
