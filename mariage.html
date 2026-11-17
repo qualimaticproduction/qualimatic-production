@@ -109,7 +109,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,100..900&family=Imperial+Script&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="refonte.css?v=15s">
+<link rel="stylesheet" href="refonte.css?v=15t">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 
@@ -151,7 +151,7 @@
   <!-- ============ 1. LE RIDEAU ============ -->
   <section class="scene" id="top" aria-label="Qualimatic Production">
     <div class="scene__fixe">
-      <video class="scene__film" data-differe data-src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/3-mariage-ouverture-isabel-marshall_ancl0r.mp4" poster="assets/rush/scene-im-hd.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+      <video class="scene__film" data-differe data-src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/3-mariage-ouverture-isabel-marshall_ancl0r.mp4" data-src-etroit="assets/rush/ouverture-etroit.mp4" poster="assets/rush/scene-im-hd.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
       <div class="scene__ombre" aria-hidden="true"></div>
 
       <!-- la carte posée sur le film -->
@@ -170,10 +170,10 @@
 
       <!-- le rideau de velours, qui s'ouvre au défilement -->
       <div class="rideau rideau--g" aria-hidden="true">
-        <video src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/6-mariage-rideau_qmgwnk.mp4" poster="assets/rush/rideau-ondule.jpg" muted loop playsinline autoplay preload="auto"></video>
+        <video data-src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/6-mariage-rideau_qmgwnk.mp4" data-src-etroit="assets/rush/rideau-etroit.mp4" poster="assets/rush/rideau-ondule.jpg" muted loop playsinline autoplay preload="auto"></video>
       </div>
       <div class="rideau rideau--d" aria-hidden="true">
-        <video data-differe data-src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/6-mariage-rideau_qmgwnk.mp4" poster="assets/rush/rideau-ondule.jpg" muted loop playsinline autoplay preload="auto"></video>
+        <video data-differe data-src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/6-mariage-rideau_qmgwnk.mp4" data-src-etroit="assets/rush/rideau-etroit.mp4" poster="assets/rush/rideau-ondule.jpg" muted loop playsinline autoplay preload="auto"></video>
       </div>
 
       <div class="scene__titre" aria-hidden="true">
@@ -212,9 +212,9 @@
     <!-- La déchirure : le film du shooting de Sancerre, le son vient quand le papier s'ouvre -->
     <section class="dechirure" aria-label="Le film du shooting aux Hauts de Sancerre">
       <div class="dechirure__collant">
-        <video class="dechirure__film" poster="assets/rush/sancerre-film-4k.jpg"
+        <video class="dechirure__film"
                data-paysage="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926229/1-sancerre-film-paysage_ibzcbw.mp4" data-paysage-poster="assets/rush/sancerre-film-4k.jpg"
-               data-portrait="assets/rush/sancerre-film-720.mp4" data-portrait-poster="assets/rush/sancerre-film-4k.jpg"
+               data-portrait="assets/rush/sancerre-film-720.mp4" data-portrait-poster="assets/rush/sancerre-film-720.jpg"
                muted loop playsinline preload="none" aria-label="Film du shooting aux Hauts de Sancerre"></video>
         <p class="dechirure__legende">Les Hauts de Sancerre<span>le film du shooting</span></p>
         <div class="dechirure__pan dechirure__pan--haut" aria-hidden="true">
@@ -242,7 +242,7 @@
         <!-- Isabel & Marshall : tirage simple, filet fin -->
         <figure class="tuile tuile--a" data-vitesse="0.03">
           <div class="cadre cadre--simple leve">
-            <div class="cadre__image"><video src="assets/rush/tuile-huberdiere-voile.mp4" poster="assets/rush/tuile-huberdiere-voile.jpg" muted loop playsinline preload="none" role="img" aria-label="Isabel sous son voile, en noir et blanc"></video></div>
+            <div class="cadre__image"><video src="assets/rush/tuile-huberdiere-voile.mp4" data-poster="assets/rush/tuile-huberdiere-voile.jpg" muted loop playsinline preload="none" role="img" aria-label="Isabel sous son voile, en noir et blanc"></video></div>
           </div>
           <figcaption>Isabel &amp; Marshall</figcaption>
         </figure>
@@ -250,7 +250,7 @@
         <!-- Sancerre : arche -->
         <figure class="tuile tuile--b" data-vitesse="0.1">
           <div class="cadre cadre--arche leve">
-            <div class="cadre__image"><video src="assets/rush/tuile-sancerre-jardin.mp4" poster="assets/rush/tuile-sancerre-jardin.jpg" muted loop playsinline preload="none" role="img" aria-label="La mariée dans le jardin, une cape de tulle sur les épaules"></video></div>
+            <div class="cadre__image"><video src="assets/rush/tuile-sancerre-jardin.mp4" data-poster="assets/rush/tuile-sancerre-jardin.jpg" muted loop playsinline preload="none" role="img" aria-label="La mariée dans le jardin, une cape de tulle sur les épaules"></video></div>
           </div>
           <figcaption>Les Hauts de Sancerre</figcaption>
         </figure>
@@ -266,7 +266,7 @@
         <!-- Isabel & Marshall : tirage scotché -->
         <figure class="tuile tuile--d" data-vitesse="0.02">
           <div class="cadre cadre--tirage leve">
-            <div class="cadre__image"><video src="assets/rush/tuile-huberdiere-danse.mp4" poster="assets/rush/tuile-huberdiere-danse.jpg" muted loop playsinline preload="none" role="img" aria-label="Marshall embrasse Isabel dans le parc du château"></video></div>
+            <div class="cadre__image"><video src="assets/rush/tuile-huberdiere-danse.mp4" data-poster="assets/rush/tuile-huberdiere-danse.jpg" muted loop playsinline preload="none" role="img" aria-label="Marshall embrasse Isabel dans le parc du château"></video></div>
             <span class="cadre__main">Isabel &amp; Marshall</span>
           </div>
         </figure>
@@ -274,7 +274,7 @@
         <!-- Thorens : tirage simple, filet fin -->
         <figure class="tuile tuile--e" data-vitesse="0.12">
           <div class="cadre cadre--simple cadre--portrait leve">
-            <div class="cadre__image"><video src="assets/rush/tuile-thorens-bouquet.mp4" poster="assets/rush/tuile-thorens-bouquet.jpg" muted loop playsinline preload="none" role="img" aria-label="La mariée lève son bouquet en riant, entourée de ses amies"></video></div>
+            <div class="cadre__image"><video src="assets/rush/tuile-thorens-bouquet.mp4" data-poster="assets/rush/tuile-thorens-bouquet.jpg" muted loop playsinline preload="none" role="img" aria-label="La mariée lève son bouquet en riant, entourée de ses amies"></video></div>
           </div>
           <figcaption>Château de Thorens</figcaption>
         </figure>
@@ -282,7 +282,7 @@
         <!-- Sancerre : timbre -->
         <figure class="tuile tuile--f" data-vitesse="0.05">
           <div class="cadre cadre--timbre leve">
-            <div class="cadre__image"><video src="assets/rush/tuile-sancerre-escalier.mp4" poster="assets/rush/tuile-sancerre-escalier.jpg" muted loop playsinline preload="none" role="img" aria-label="Les mariés vus d’en haut dans un escalier, en noir et blanc"></video></div>
+            <div class="cadre__image"><video src="assets/rush/tuile-sancerre-escalier.mp4" data-poster="assets/rush/tuile-sancerre-escalier.jpg" muted loop playsinline preload="none" role="img" aria-label="Les mariés vus d’en haut dans un escalier, en noir et blanc"></video></div>
             <span class="timbre__legende" aria-hidden="true">Sancerre</span>
           </div>
         </figure>
@@ -299,7 +299,7 @@
         <!-- Thorens : papier déchiré -->
         <figure class="tuile tuile--h" data-vitesse="0.04">
           <div class="cadre cadre--dechire leve">
-            <div class="cadre__image"><video src="assets/rush/tuile-thorens-cheval.mp4" poster="assets/rush/tuile-thorens-cheval.jpg" muted loop playsinline preload="none" role="img" aria-label="La mariée et un cheval noir devant la tour du château"></video></div>
+            <div class="cadre__image"><video src="assets/rush/tuile-thorens-cheval.mp4" data-poster="assets/rush/tuile-thorens-cheval.jpg" muted loop playsinline preload="none" role="img" aria-label="La mariée et un cheval noir devant la tour du château"></video></div>
           </div>
           <figcaption>Château de Thorens</figcaption>
         </figure>
@@ -336,10 +336,10 @@
       </div>
 
       <div class="films__ecran">
-        <video class="est-actif" data-index="0" src="assets/rush/huberdiere-escalier.mp4" poster="assets/rush/huberdiere-escalier.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-        <video data-index="1" src="assets/rush/thorens-chevaux.mp4" poster="assets/rush/thorens-chevaux.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-        <video data-index="2" src="assets/rush/sancerre-drone.mp4" poster="assets/rush/sancerre-drone.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-        <video data-index="3" src="assets/rush/vibiches-sortie.mp4" poster="assets/rush/vibiches-sortie.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <video class="est-actif" data-index="0" src="assets/rush/huberdiere-escalier.mp4" data-poster="assets/rush/huberdiere-escalier.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <video data-index="1" src="assets/rush/thorens-chevaux.mp4" data-poster="assets/rush/thorens-chevaux.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <video data-index="2" src="assets/rush/sancerre-drone.mp4" data-poster="assets/rush/sancerre-drone.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <video data-index="3" src="assets/rush/vibiches-sortie.mp4" data-poster="assets/rush/vibiches-sortie.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
         <a class="films__jouer" href="https://www.youtube.com/watch?v=GiEygKSM9XM" data-film="GiEygKSM9XM" aria-label="Voir le film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Voir le film</span></a>
       </div>
 
@@ -428,7 +428,7 @@
   </section>
 
   <!-- ============ 5. OFFRE DUO : mes deux photographes partenaires, sur le coutil rayé ============ -->
-  <section class="duo-photo" id="duo" aria-labelledby="titre-duo">
+  <section class="duo-photo" id="duo" aria-labelledby="titre-duo" data-fond-differe>
     <div class="duo-photo__entete apparait">
       <img loading="lazy" decoding="async" class="duo-photo__cachet" src="assets/matieres/cachet-montagne.webp" alt="" aria-hidden="true">
       <p class="etiquette">Offre duo</p>
@@ -615,6 +615,6 @@
   <div class="lecteur__cadre"></div>
 </div>
 
-<script src="refonte.js?v=15s"></script>
+<script src="refonte.js?v=15t"></script>
 </body>
 </html>

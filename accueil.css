@@ -170,7 +170,7 @@
   background:
     radial-gradient(110% 90% at 30% 50%, rgba(0, 0, 0, 0) 40%, rgba(10, 0, 3, .5) 100%),
     linear-gradient(rgba(48, 8, 19, .42), rgba(48, 8, 19, .42)),
-    url("assets/matieres/velours-cotele.jpg") center / cover,
+    url("assets/matieres/velours-cotele.webp") center / cover,
     var(--bordeaux);
 }
 .feuillet--culinaire {

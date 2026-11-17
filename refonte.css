@@ -79,7 +79,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background:
     radial-gradient(120% 90% at 50% 40%, rgba(0, 0, 0, 0) 40%, rgba(10, 0, 3, .55) 100%),
     linear-gradient(rgba(48, 8, 19, .38), rgba(48, 8, 19, .38)),
-    url("assets/matieres/velours-cotele.jpg") center / cover,
+    url("assets/matieres/velours-cotele.webp") center / cover,
     var(--bordeaux);
 }
 .grain {
@@ -196,7 +196,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transition: transform .7s var(--doux), background .5s, box-shadow .5s;
 }
 .entete.est-pleine {
-  background: linear-gradient(rgba(48, 8, 19, .5), rgba(48, 8, 19, .5)), url("assets/matieres/velours-cotele.jpg") center / 700px auto, var(--bordeaux);
+  background: linear-gradient(rgba(48, 8, 19, .5), rgba(48, 8, 19, .5)), url("assets/matieres/velours-cotele.webp") center / 700px auto, var(--bordeaux);
   box-shadow: 0 1px 0 rgba(0, 0, 0, .3);
 }
 .entete.est-cachee { transform: translateY(-101%); }
@@ -930,7 +930,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: fixed; inset: 0; z-index: 150;
   display: flex; flex-direction: column; justify-content: space-between;
   padding: calc(var(--entete) + 30px) clamp(22px, 6vw, 60px) 34px;
-  background: linear-gradient(rgba(48, 8, 19, .55), rgba(48, 8, 19, .55)), url("assets/matieres/velours-cotele.jpg") center / cover, var(--bordeaux);
+  background: linear-gradient(rgba(48, 8, 19, .55), rgba(48, 8, 19, .55)), url("assets/matieres/velours-cotele.webp") center / cover, var(--bordeaux);
   color: var(--creme);
   overflow-y: auto;
   opacity: 0; visibility: hidden;
@@ -1292,3 +1292,6 @@ body.menu-ouvert .entete { z-index: 160; background: transparent; box-shadow: no
 @supports not (overflow: clip) {
   html { overflow-x: hidden; }
 }
+
+/* texture lourde d'une section du bas de page : posée quand on approche (refonte.js) */
+.js [data-fond-differe]:not(.fond-pret) { background-image: none; }

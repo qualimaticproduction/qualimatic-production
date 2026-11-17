@@ -189,18 +189,27 @@
      Safari ne charge une image « lazy » que lorsqu'elle est presque visible : elle apparaissait
      en retard, en blanc. Ici, chaque image part dès qu'elle est à deux écrans et demi.
      Dans une bande qu'on fait glisser de côté, toutes les images partent avec la bande. */
-  var differeesImg = tous('img[loading="lazy"]');
-  if (differeesImg.length && 'IntersectionObserver' in window && !capture) {
+  // les images d'attente des vidéos du bas de page (data-poster) suivent la même règle
+  var differeesImg = tous('img[loading="lazy"], video[data-poster], [data-fond-differe]');
+  function charger(el) {
+    if (el.tagName === 'VIDEO') { el.poster = el.getAttribute('data-poster'); el.removeAttribute('data-poster'); }
+    else if (el.tagName === 'IMG') el.loading = 'eager';
+    else el.classList.add('fond-pret');
+  }
+  if (capture || !('IntersectionObserver' in window)) tous('video[data-poster], [data-fond-differe]').forEach(charger);
+  else if (differeesImg.length) {
     var bandesImg = new Map();
     differeesImg.forEach(function (img) {
-      var cible = img.closest('.arrets__grille, .partenaires, .formules__cartes, .annexes, .pellicule__bande, .rail__envois, .convoyeur__pieces') || img;
+      // une image masquée par clip-path n'est jamais « visible » : on observe sa bande, son écran ou le parent du masque
+      var leve = img.closest('.leve');
+      var cible = img.closest('.arrets__grille, .partenaires, .formules__cartes, .annexes, .pellicule__bande, .rail__envois, .convoyeur__pieces, .films__ecran') || (leve ? leve.parentElement : img);
       if (!bandesImg.has(cible)) bandesImg.set(cible, []);
       bandesImg.get(cible).push(img);
     });
     var avance = new IntersectionObserver(function (entrees) {
       entrees.forEach(function (e) {
         if (!e.isIntersecting) return;
-        (bandesImg.get(e.target) || []).forEach(function (img) { img.loading = 'eager'; });
+        (bandesImg.get(e.target) || []).forEach(charger);
         avance.unobserve(e.target);
       });
     }, { rootMargin: '250% 0px 250% 0px' });
@@ -211,6 +220,12 @@
      Le rideau est seul visible à l'arrivée : il charge d'abord. Le film d'ouverture, la carte
      et la moitié droite du rideau (même fichier, alors pris dans le cache) viennent ensuite,
      dès que le rideau est prêt, au premier geste, ou au plus tard après 2,5 secondes. */
+  // écran en hauteur (téléphone) : on n'en voit que la bande centrale, d'où une version recadrée,
+  // identique à l'œil et deux à trois fois plus légère
+  var ecranEtroit = window.matchMedia('(max-aspect-ratio: 3/4)').matches;
+  function sourceDe(v) { return (ecranEtroit && v.getAttribute('data-src-etroit')) || v.getAttribute('data-src'); }
+  var rideauDabord = d.querySelector('.rideau--g video[data-src]');
+  if (rideauDabord && !rideauDabord.getAttribute('src')) rideauDabord.src = sourceDe(rideauDabord);
   var differees = tous('video[data-differe]');
   if (differees.length) {
     var lancees = false;
@@ -218,7 +233,7 @@
       if (lancees) return;
       lancees = true;
       differees.forEach(function (v) {
-        v.src = v.getAttribute('data-src');
+        v.src = sourceDe(v);
         if (!capture && videosScene.indexOf(v) < 0) lire(v);
       });
       // les vidéos de l'ouverture : c'est le rideau qui décide lesquelles tournent
