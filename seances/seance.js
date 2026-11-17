@@ -21,7 +21,7 @@
      le formulaire d'avis, coller ici le lien de la fiche Google Business Profile
      (Google Business Profile, « Demander des avis », de la forme https://g.page/r/…/review).
      En attendant, le lien ouvre la fiche Google de Qualimatic Production. */
-  var AVIS_GOOGLE = 'https://www.google.com/search?q=Qualimatic+Production+Romorantin-Lanthenay';
+  var AVIS_GOOGLE = 'https://g.page/r/CSqpltxsOMflEBM/review';   // lien direct « laisser un avis » de la fiche Google (Charly, 17/11/2026)
 
   var T = {
     fr: {
