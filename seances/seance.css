@@ -1,0 +1,251 @@
+/* =====================================================================
+   QUALIMATIC PRODUCTION · LA SALLE DE PROJECTION (livraison d'un film)
+   Le défilement fait avancer le plan-séquence : la façade de nuit, le
+   hall, la salle, le rideau qui s'ouvre, l'écran. Avant d'entrer, un
+   billet demande le code d'accès. Après la séance : le mot de Charly,
+   les fichiers, le partage. Feuille autonome (ne dépend pas de refonte.css).
+   ===================================================================== */
+
+:root {
+  --nuit: #0C0507;
+  --bordeaux: #300813;
+  --vin: #6E1932;
+  --rose: #E9CEC6;
+  --creme: #F3E7D3;
+  --creme-doux: rgba(243, 231, 211, .74);
+  --papier: #ECDCC1;
+  --papier-clair: #F6EDDD;
+  --ecran: #F6EFE3;
+  --encre: #1C0B0F;
+  --encre-doux: rgba(28, 11, 15, .74);
+  --filet: rgba(28, 11, 15, .18);
+
+  --titre: 'Imbue', 'Didot', 'Bodoni 72', 'Times New Roman', serif;
+  --script: 'Imperial Script', 'Pinyon Script', cursive;
+  --texte: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --doux: cubic-bezier(.22, .75, .2, 1);
+  --marge: clamp(20px, 5vw, 64px);
+  --fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .26 0 0 0 0 .18 0 0 0 .55 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--nuit); color: var(--encre);
+  font-family: var(--texte); font-weight: 300; font-size: 15px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+::selection { background: var(--vin); color: var(--creme); }
+:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+
+.etiquette { font-size: 10.5px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; }
+.duo__caps { display: block; font-family: var(--titre); font-weight: 400; font-variation-settings: "opsz" 100; line-height: .88; letter-spacing: .005em; text-transform: uppercase; }
+.duo__script { display: block; margin-top: -.18em; font-family: var(--script); font-weight: 400; line-height: 1.05; }
+
+/* ---------- La salle ---------- */
+.salle { position: relative; height: 1050vh; background: var(--nuit); }
+.salle__scene { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; color: var(--creme); }
+.salle__scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.4s var(--doux); }
+.salle__scene.est-prete canvas { opacity: 1; }
+.salle__charge { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(243, 231, 211, .55); transform: scaleX(0); transform-origin: left; transition: transform .3s linear, opacity .8s ease .4s; }
+.salle__scene.est-chargee .salle__charge { opacity: 0; }
+
+/* le titre, devant la façade */
+.affiche {
+  position: absolute; inset: 0; pointer-events: none;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center;
+  padding: 0 var(--marge) clamp(92px, 14vh, 130px);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, .7);
+}
+.affiche__bloc { opacity: 0; animation: monte 1.8s var(--doux) 1s forwards; }
+.affiche__presente { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: clamp(14px, 2.4vh, 24px); color: var(--creme-doux); }
+.affiche__presente img { width: clamp(150px, 15vw, 220px); height: auto; filter: drop-shadow(0 2px 14px rgba(0, 0, 0, .6)); }
+.affiche .duo__caps { font-size: clamp(46px, 8.4vw, 132px); color: var(--creme); }
+.affiche .duo__script { font-size: clamp(30px, 5vw, 80px); color: var(--rose); text-wrap: balance; }
+.salle__defiler {
+  position: absolute; left: 50%; bottom: clamp(20px, 3.6vh, 36px); transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  color: rgba(243, 231, 211, .78); white-space: nowrap; pointer-events: none;
+}
+.salle__defiler::after { content: ""; width: 1px; height: 34px; background: linear-gradient(rgba(243, 231, 211, .85), rgba(243, 231, 211, 0)); transform-origin: top; animation: coule 2.2s ease-in-out infinite; }
+.salle__legende {
+  position: absolute; left: 0; right: 0; bottom: clamp(70px, 14vh, 140px);
+  text-align: center; font-family: var(--script); font-size: clamp(40px, 5vw, 72px); line-height: 1;
+  color: rgba(243, 231, 211, .94); text-shadow: 0 2px 24px rgba(0, 0, 0, .8);
+  opacity: 0; pointer-events: none;
+}
+
+/* aller directement au film */
+.raccourci {
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + clamp(14px, 2.4vh, 24px)); right: clamp(14px, 2.4vw, 28px); z-index: 10;
+  padding: 10px 18px; border: 1px solid rgba(243, 231, 211, .32); border-radius: 999px;
+  background: rgba(12, 5, 7, .4); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  color: rgba(243, 231, 211, .82);
+  transition: opacity .5s, color .3s, border-color .3s;
+}
+.raccourci:hover, .raccourci.est-revenu { color: var(--creme); border-color: rgba(243, 231, 211, .75); }
+.raccourci.est-cache { opacity: 0; pointer-events: none; }
+
+/* l'écran : le carton d'ouverture, puis le film */
+.ecran {
+  --u: 1;
+  position: absolute; opacity: 0; visibility: hidden;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  color: var(--encre); pointer-events: none;
+  container-type: size;
+}
+.ecran.est-actif { pointer-events: auto; }
+.carton { display: flex; flex-direction: column; align-items: center; transition: opacity .6s; }
+.ecran.est-en-lecture .carton { opacity: 0; pointer-events: none; }
+.carton__sur { font-size: max(8.5px, calc(var(--u) * 12px)); font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--vin); }
+.carton .duo__caps { margin-top: calc(var(--u) * 16px); font-size: max(26px, calc(var(--u) * 92px)); color: var(--bordeaux); }
+.carton .duo__script { font-size: max(20px, calc(var(--u) * 52px)); color: var(--vin); }
+.carton__lancer {
+  display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 14px);
+  margin-top: calc(var(--u) * 26px);
+  font-size: max(8.5px, calc(var(--u) * 11.5px)); font-weight: 500; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--bordeaux);
+}
+.carton__disque {
+  display: grid; place-items: center;
+  width: max(46px, calc(var(--u) * 88px)); height: max(46px, calc(var(--u) * 88px));
+  border-radius: 50%; background: var(--vin); color: var(--creme);
+  box-shadow: 0 0 0 0 rgba(110, 25, 50, .45);
+  animation: appel 2.6s ease-out infinite;
+  transition: background .4s var(--doux), transform .5s var(--doux);
+}
+.carton__disque svg { width: 30%; height: 30%; margin-left: 8%; fill: currentColor; }
+.carton__lancer:hover .carton__disque, .carton__lancer:focus-visible .carton__disque { background: var(--bordeaux); transform: scale(1.06); }
+.carton__de { margin-top: calc(var(--u) * 16px); font-family: var(--script); font-size: max(17px, calc(var(--u) * 30px)); line-height: 1; color: var(--encre-doux); }
+@container (max-height: 230px) {
+  .carton__sur, .carton__de { display: none; }
+  .carton .duo__caps { margin-top: 0; }
+  .carton .duo__script { display: none; }
+  .carton__lancer { margin-top: 10px; gap: 7px; }
+}
+.projection { position: absolute; inset: 0; display: none; place-items: center; background: #000; }
+.ecran.est-en-lecture .projection { display: grid; }
+.projection iframe, .projection video { width: min(100cqw, calc(100cqh * 16 / 9)); aspect-ratio: 16 / 9; border: 0; display: block; background: #000; }
+
+.salle__tourner {
+  position: absolute; left: 0; right: 0; bottom: clamp(60px, 14vh, 120px);
+  text-align: center; color: rgba(243, 231, 211, .66);
+  opacity: 0; transition: opacity .8s; pointer-events: none; display: none;
+}
+@media (orientation: portrait) and (max-width: 700px) {
+  .salle__tourner { display: block; }
+  .salle__scene.est-devant-ecran .salle__tourner { opacity: 1; }
+}
+
+/* ---------- Le guichet : le billet et le code d'accès ---------- */
+html.est-ferme, html.est-ferme body { overflow: hidden; }
+html.est-ferme .affiche, html.est-ferme .salle__defiler { visibility: hidden; }
+.guichet {
+  position: fixed; inset: 0; z-index: 20;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  padding: 24px var(--marge);
+  background: radial-gradient(ellipse at 50% 40%, rgba(12, 5, 7, .3), rgba(12, 5, 7, .86) 72%);
+  overflow-y: auto; overscroll-behavior: contain;
+  transition: opacity .9s var(--doux);
+}
+@media (max-height: 600px) { .guichet { justify-content: flex-start; } }
+.guichet.est-ouvert { opacity: 0; pointer-events: none; }
+.guichet.est-ouvert .billet { transform: translateY(-16px) rotate(-1.5deg) scale(.98); }
+.billet {
+  --encoche: 12px;
+  position: relative; width: min(100%, 400px);
+  padding: 38px 36px 30px; text-align: center; color: var(--encre);
+  background:
+    radial-gradient(circle at 0 62%, transparent var(--encoche), var(--papier-clair) calc(var(--encoche) + .5px)) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 62%, transparent var(--encoche), var(--papier-clair) calc(var(--encoche) + .5px)) right / 51% 100% no-repeat;
+  filter: drop-shadow(0 26px 50px rgba(0, 0, 0, .55));
+  transition: transform .9s var(--doux);
+  animation: monte 1.2s var(--doux) both;
+}
+.billet::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(110, 25, 50, .34); pointer-events: none; }
+.billet::after { content: ""; position: absolute; inset: 0; background: var(--fibre) 0 0 / 300px 300px; mix-blend-mode: multiply; opacity: .5; pointer-events: none; -webkit-mask: radial-gradient(circle at 0 62%, transparent var(--encoche), #000 calc(var(--encoche) + .5px)) left / 51% 100% no-repeat, radial-gradient(circle at 100% 62%, transparent var(--encoche), #000 calc(var(--encoche) + .5px)) right / 51% 100% no-repeat; mask: radial-gradient(circle at 0 62%, transparent var(--encoche), #000 calc(var(--encoche) + .5px)) left / 51% 100% no-repeat, radial-gradient(circle at 100% 62%, transparent var(--encoche), #000 calc(var(--encoche) + .5px)) right / 51% 100% no-repeat; }
+.billet > * { position: relative; z-index: 1; }
+.billet.tremble { animation: tremble .45s ease; }
+.billet .etiquette { color: var(--vin); }
+.billet .duo__caps { margin-top: 14px; font-size: clamp(38px, 11vw, 54px); color: var(--bordeaux); }
+.billet .duo__script { font-size: clamp(26px, 7.4vw, 36px); color: var(--vin); }
+.billet__champ { display: block; margin-top: 26px; padding-top: 22px; border-top: 1px dashed rgba(28, 11, 15, .32); font-size: 9.5px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--vin); }
+.billet__code {
+  display: block; width: 100%; margin-top: 10px; padding: 12px 10px;
+  border: 0; border-bottom: 1px solid var(--encre); border-radius: 0; background: transparent; outline: none;
+  font: 400 18px/1.2 var(--texte); letter-spacing: .22em; text-align: center; text-transform: uppercase; color: var(--encre);
+}
+.billet__code:focus { border-bottom-color: var(--vin); box-shadow: 0 1px 0 var(--vin); }
+.billet__erreur { min-height: 1.6em; margin-top: 10px; font-size: 12.5px; color: var(--vin); }
+.billet__entrer {
+  width: 100%; margin-top: 6px; min-height: 52px; padding: 0 20px;
+  border-radius: 999px; background: var(--vin); color: var(--creme);
+  font-size: 11px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  transition: background .4s var(--doux);
+}
+.billet__entrer:hover, .billet__entrer:focus-visible { background: var(--bordeaux); }
+.billet__entrer:disabled { opacity: .7; cursor: wait; }
+.billet__aide { margin-top: 16px; font-size: 12.5px; line-height: 1.55; color: var(--encre-doux); }
+.guichet__retour { font-size: 10.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: rgba(243, 231, 211, .72); }
+.guichet__retour:hover { color: var(--creme); }
+
+/* ---------- Après la séance ---------- */
+.apres { position: relative; background: var(--fibre) 0 0 / 300px 300px, var(--papier); }
+.apres::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 24vh; background: linear-gradient(var(--nuit), rgba(12, 5, 7, 0)); pointer-events: none; }
+.apres__dedans { position: relative; max-width: 780px; margin: 0 auto; padding: clamp(150px, 26vh, 240px) var(--marge) clamp(90px, 12vh, 130px); }
+.bloc + .bloc { margin-top: clamp(84px, 13vh, 130px); }
+.bloc h2 { margin-bottom: 24px; }
+.bloc .duo__caps { font-size: clamp(44px, 6.6vw, 84px); color: var(--bordeaux); }
+.bloc .duo__script { font-size: clamp(32px, 4.4vw, 56px); color: var(--vin); padding-left: .5em; }
+.bloc p { color: var(--encre-doux); }
+.bloc p + p { margin-top: 1em; }
+.lettre p { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.8; color: var(--encre); }
+.lettre .lettre__signature { margin-top: 20px; font-family: var(--script); font-size: clamp(44px, 5vw, 60px); line-height: 1; color: var(--vin); }
+.fichiers { margin-top: 30px; border-top: 1px solid var(--filet); }
+.fichiers li { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--filet); }
+.fichiers strong { display: block; font-family: var(--titre); font-weight: 400; font-variation-settings: "opsz" 50; font-size: 24px; line-height: 1.15; color: var(--encre); }
+.fichiers span { display: block; margin-top: 2px; font-size: 13px; color: var(--encre-doux); }
+.bouton {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 26px;
+  border: 1px solid var(--vin); border-radius: 999px;
+  font-size: 10.5px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--vin);
+  transition: background .5s var(--doux), color .5s var(--doux);
+}
+.bouton:hover, .bouton:focus-visible { background: var(--vin); color: var(--creme); }
+.bouton.est-a-venir { color: var(--encre-doux); border-color: var(--filet); pointer-events: none; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+
+.bas { padding: 64px var(--marge) 56px; background: var(--bordeaux); color: var(--creme-doux); text-align: center; font-size: 12px; }
+.bas img { width: clamp(180px, 20vw, 260px); height: auto; margin: 0 auto; }
+.bas a.bas__toutes { display: inline-block; margin-top: 26px; font-size: 10px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; }
+.bas a.bas__toutes:hover { color: var(--creme); }
+
+.vient { opacity: 0; transform: translateY(20px); transition: opacity 1.1s var(--doux), transform 1.1s var(--doux); }
+.vient.est-vu { opacity: 1; transform: none; }
+
+@media (max-width: 560px) {
+  .fichiers li { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .billet { padding: 34px 28px 26px; }
+}
+
+@keyframes monte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes coule { 0% { transform: scaleY(0); opacity: 1; } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+@keyframes tremble { 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
+@keyframes appel { 0% { box-shadow: 0 0 0 0 rgba(110, 25, 50, .4); } 80%, 100% { box-shadow: 0 0 0 22px rgba(110, 25, 50, 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .salle { height: 460vh; }
+  .affiche__bloc { animation: none; opacity: 1; }
+  .salle__defiler::after, .carton__disque { animation: none; }
+  .vient { opacity: 1; transform: none; }
+}

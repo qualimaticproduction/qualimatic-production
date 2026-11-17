@@ -97,6 +97,16 @@
 }
 .suite__texte { font-family: var(--script); font-size: clamp(40px, 4.4vw, 72px); line-height: 1; color: var(--rose); }
 
+/* pages « vidéaste de mariage [lieu] » et guides */
+.chapeau--lieu .duo__caps { font-size: clamp(42px, 5.8vw, 98px); }
+.chapeau--lieu .duo__script { font-size: clamp(36px, 4.6vw, 78px); }
+.chapeau__accroche { max-width: 56ch; margin: 30px auto 0; font-size: clamp(16px, 1.25vw, 18.5px); line-height: 1.6; color: var(--creme-doux); }
+.reperes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(20px, 3vw, 40px); margin-top: 16px; border-top: 1px solid var(--filet); }
+.reperes div { display: grid; gap: 4px; padding: 15px 0; border-bottom: 1px solid var(--filet); }
+.reperes b { font-family: var(--titre); font-weight: 400; font-variation-settings: "opsz" 60; font-size: clamp(21px, 1.8vw, 26px); line-height: 1.1; color: var(--bordeaux); }
+.reperes span { font-size: 14px; line-height: 1.5; color: var(--encre-doux); }
+.suite__boutons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
 /* page 404 */
 .coupe {
   min-height: var(--ecran);
@@ -119,7 +129,8 @@
 .coupe__liens { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
 
 @media (max-width: 900px) {
-  .texte { grid-template-columns: 1fr; gap: 34px; }
+  /* minmax(0, …) : la bande du sommaire ne doit pas élargir la colonne au-delà de l'écran */
+  .texte { grid-template-columns: minmax(0, 1fr); gap: 34px; }
   /* le sommaire devient une bande à faire glisser */
   .texte__sommaire { position: static; margin: 0 calc(clamp(26px, 6vw, 100px) * -1); }
   .texte__sommaire .etiquette { padding: 0 clamp(26px, 6vw, 100px); }
@@ -137,7 +148,9 @@
   .texte__sommaire .etiquette, .texte__sommaire ol { padding-left: 22px; padding-right: 22px; }
   .texte__corps h2 { font-size: 30px; gap: 12px; }
   .fiche-legale div { grid-template-columns: 1fr; gap: 2px; }
-  .lieux { grid-template-columns: 1fr; }
+  .lieux, .reperes { grid-template-columns: 1fr; }
+  .chapeau--lieu .duo__caps { font-size: 40px; }
+  .chapeau--lieu .duo__script { font-size: 34px; }
   .bareme tbody th { padding-right: 12px; }
   .suite { padding: 130px 22px 80px; }
 }
