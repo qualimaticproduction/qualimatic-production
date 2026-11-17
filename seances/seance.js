@@ -54,7 +54,7 @@
       apres: ['Et', 'maintenant'],
       apresTexte: 'Si le film vous a touchés, quelques mots de votre part comptent beaucoup. Ils aident d’autres couples à me trouver.',
       avis: 'Laisser un avis sur Google',
-      site: '../../index.html',
+      site: '/',
       siteNom: 'Retour au site'
     },
     en: {
@@ -87,7 +87,7 @@
       apres: ['And', 'now'],
       apresTexte: 'If the film moved you, a few words from you mean a lot. They help other couples find me.',
       avis: 'Leave a Google review',
-      site: '../../index.html',
+      site: '/',
       siteNom: 'Back to the website'
     }
   }[lang];
