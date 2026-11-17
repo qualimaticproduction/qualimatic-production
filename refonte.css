@@ -1278,3 +1278,17 @@ body.menu-ouvert .entete { z-index: 160; background: transparent; box-shadow: no
 
 /* texte lu par Google et les lecteurs d'écran, invisible à l'écran (titres faits d'une image) */
 .texte-cache { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* écrans tactiles (iPhone…) : pas de grain. Son mode de fusion obligeait Safari à recalculer
+   tout l'écran à chaque image du défilement ; sans fusion, il aurait voilé le bordeaux.
+   Sur un écran de téléphone, il est de toute façon à peine perceptible. */
+@media (hover: none) and (pointer: coarse) {
+  .grain { display: none; }
+  /* les cadres de la mosaïque gardent leur vignettage, sans grain fusionné sur leurs vidéos */
+  .cadre__image::after { background-image: none; mix-blend-mode: normal; opacity: 1; box-shadow: inset 0 0 70px rgba(20, 4, 8, .08); }
+}
+
+/* iPhone sous iOS 15 ou avant : « overflow: clip » n'existe pas, la page pouvait glisser de côté */
+@supports not (overflow: clip) {
+  html { overflow-x: hidden; }
+}

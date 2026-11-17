@@ -12,6 +12,22 @@
   function deux(n) { return (n < 10 ? '0' : '') + n; }
   function lire(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
 
+  /* écritures groupées : on mesure tout, puis on écrit une seule fois, et seulement ce qui change */
+  var memoire = new WeakMap();
+  var aEcrire = [];
+  function ecrire(el, prop, val) {
+    var m = memoire.get(el);
+    if (!m) { m = {}; memoire.set(el, m); }
+    if (m[prop] === val) return;
+    m[prop] = val;
+    aEcrire.push(el, prop, val);
+  }
+  function vider() {
+    for (var i = 0; i < aEcrire.length; i += 3) aEcrire[i].style.setProperty(aEcrire[i + 1], aEcrire[i + 2]);
+    aEcrire.length = 0;
+  }
+  function texte(el, txt) { if (el.textContent !== txt) el.textContent = txt; }
+
   var entete = d.getElementById('entete');
   var vitesse = 0;               // vitesse de défilement lissée (px par image)
   var dernierY = window.scrollY;
@@ -63,31 +79,31 @@
   function majOuverture(h) {
     var r = ouverture.getBoundingClientRect();
     if (r.bottom <= 0) {
-      entete.style.setProperty('--logo-o', '1');
+      ecrire(entete, '--logo-o', '1');
       entete.classList.remove('entete--encre');
       return;
     }
     var p = borne(-r.top / (r.height - h), 0, 1);
-    var s = oFixe.style;
-    s.setProperty('--zoom', (1.04 + p * .2).toFixed(4));
-    s.setProperty('--my', (-p * h * .05).toFixed(1) + 'px');
-    s.setProperty('--lum', (.9 - p * .14).toFixed(3));
+    var s = oFixe;
+    ecrire(s, '--zoom', (1.04 + p * .2).toFixed(4));
+    ecrire(s, '--my', (-p * h * .05).toFixed(1) + 'px');
+    ecrire(s, '--lum', (.9 - p * .14).toFixed(3));
 
     var l = borne(p / .34, 0, 1);
-    s.setProperty('--lo', (1 - adoucir(l)).toFixed(3));
-    s.setProperty('--ls', (1 + l * .24).toFixed(4));
-    s.setProperty('--lb', (l * 12).toFixed(2) + 'px');
+    ecrire(s, '--lo', (1 - adoucir(l)).toFixed(3));
+    ecrire(s, '--ls', (1 + l * .24).toFixed(4));
+    ecrire(s, '--lb', (l * 12).toFixed(2) + 'px');
 
     // plus de mots sur la forêt : la brume monte tout de suite et ouvre sur les trois univers
     var b = borne((p - .12) / .72, 0, 1);
-    s.setProperty('--bo', borne(b * 1.7, 0, 1).toFixed(3));
-    s.setProperty('--by', ((1 - adoucir(b)) * 58 - 2).toFixed(2) + '%');
-    s.setProperty('--bs', (1 + b * .3).toFixed(3));
+    ecrire(s, '--bo', borne(b * 1.7, 0, 1).toFixed(3));
+    ecrire(s, '--by', ((1 - adoucir(b)) * 58 - 2).toFixed(2) + '%');
+    ecrire(s, '--bs', (1 + b * .3).toFixed(3));
 
     // la brume claire couvre tout : l'en-tête passe à l'encre pour rester lisible
-    s.setProperty('--io', borne(1 - p * 6, 0, 1).toFixed(3));
+    ecrire(s, '--io', borne(1 - p * 6, 0, 1).toFixed(3));
 
-    entete.style.setProperty('--logo-o', p > .32 ? '1' : '0');
+    ecrire(entete, '--logo-o', p > .32 ? '1' : '0');
     entete.classList.toggle('entete--encre', b > .86);
   }
 
@@ -114,18 +130,18 @@
       var ei = e[i];
       var suivant = i + 1 < e.length ? e[i + 1] : 0;
       if (ei > .5) actif = i;
-      f.style.setProperty('--e', ei.toFixed(4));
-      f.style.setProperty('--recul', suivant.toFixed(4));
-      f.style.visibility = (ei <= 0 || suivant >= 1) ? 'hidden' : 'visible';
+      ecrire(f, '--e', ei.toFixed(4));
+      ecrire(f, '--recul', suivant.toFixed(4));
+      ecrire(f, 'visibility', (ei <= 0 || suivant >= 1) ? 'hidden' : 'visible');
       // une fois posé, le feuillet dérive encore un peu jusqu'à l'arrivée du suivant
       var fin = i ? plages[i - 1][1] : 0;
       var prochain = i < plages.length ? plages[i][0] : 1;
       var tenue = borne((p - fin) / (prochain - fin), 0, 1);
       profondeurs[i].forEach(function (el) {
         var k = parseFloat(el.dataset.profondeur);
-        el.style.setProperty('--dx', ((1 - ei) * k * w * .16 - tenue * k * w * .018).toFixed(1) + 'px');
+        ecrire(el, '--dx', ((1 - ei) * k * w * .16 - tenue * k * w * .018).toFixed(1) + 'px');
       });
-      if (i === feuillets.length - 1) f.style.setProperty('--trace', adoucir(borne((p - .8) / .12, 0, 1)).toFixed(3));
+      if (i === feuillets.length - 1) ecrire(f, '--trace', adoucir(borne((p - .8) / .12, 0, 1)).toFixed(3));
     });
     if (actif !== actifUnivers) {
       actifUnivers = actif;
@@ -135,7 +151,7 @@
         liste.forEach(function (v) { if (i === actif) { v.preload = 'auto'; lire(v); } else v.pause(); });
       });
     }
-    uFixe.style.setProperty('--ro', p < .995 ? '1' : '0');
+    ecrire(uFixe, '--ro', p < .995 ? '1' : '0');
   }
 
   /* =====================================================================
@@ -151,8 +167,8 @@
     bandes.forEach(function (b) {
       var sens = Number(b.dataset.sens);
       var portee = Math.max(0, (b.offsetWidth - w) / 2);
-      b.style.setProperty('--px', ((p - .5) * 2 * portee * .9 * sens).toFixed(1) + 'px');
-      b.style.setProperty('--sk', borne(-vitesse * .14 * sens, -7, 7).toFixed(2) + 'deg');
+      ecrire(b, '--px', ((p - .5) * 2 * portee * .9 * sens).toFixed(1) + 'px');
+      ecrire(b, '--sk', borne(-vitesse * .14 * sens, -7, 7).toFixed(2) + 'deg');
     });
   }
 
@@ -165,23 +181,23 @@
   var timecode = d.querySelector('[data-timecode]');
   function majCouverture(h, w) {
     var r = couverture.getBoundingClientRect();
-    if (r.bottom <= 0) { entete.style.setProperty('--logo-o', '1'); return; }
+    if (r.bottom <= 0) { ecrire(entete, '--logo-o', '1'); return; }
     var p = borne(-r.top / (r.height - h), 0, 1);
-    var s = cFixe.style;
+    var s = cFixe;
     var milieu = (lettres.length - 1) / 2;
     lettres.forEach(function (l, i) {
-      l.style.setProperty('--lx', ((i - milieu) * p * w * .07).toFixed(1) + 'px');
-      l.style.setProperty('--ly', (-Math.abs(i - milieu) * p * h * .04).toFixed(1) + 'px');
+      ecrire(l, '--lx', ((i - milieu) * p * w * .07).toFixed(1) + 'px');
+      ecrire(l, '--ly', (-Math.abs(i - milieu) * p * h * .04).toFixed(1) + 'px');
     });
-    s.setProperty('--cp', p.toFixed(4));
-    s.setProperty('--cz', (1 + p * .1).toFixed(4));
-    s.setProperty('--vz', (1 + p * .12).toFixed(4));
-    s.setProperty('--co', borne(1 - (p - .6) / .4, 0, 1).toFixed(3));
-    entete.style.setProperty('--logo-o', p > .5 ? '1' : '0');
+    ecrire(s, '--cp', p.toFixed(4));
+    ecrire(s, '--cz', (1 + p * .1).toFixed(4));
+    ecrire(s, '--vz', (1 + p * .12).toFixed(4));
+    ecrire(s, '--co', borne(1 - (p - .6) / .4, 0, 1).toFixed(3));
+    ecrire(entete, '--logo-o', p > .5 ? '1' : '0');
     if (timecode) {
       var images = Math.floor(window.scrollY / 3) + 12;
       var sec = Math.floor(images / 25);
-      timecode.textContent = '00:' + deux(Math.floor(sec / 60) % 60) + ':' + deux(sec % 60) + ':' + deux(images % 25);
+      texte(timecode, '00:' + deux(Math.floor(sec / 60) % 60) + ':' + deux(sec % 60) + ':' + deux(images % 25));
     }
   }
 
@@ -224,11 +240,11 @@
     var r = route.getBoundingClientRect();
     if (r.bottom < -h || r.top > 2 * h || !longueur) return;
     var p = borne((h * .62 - r.top) / r.height, 0, 1);
-    trace.style.strokeDashoffset = (longueur * (1 - p)).toFixed(1);
+    ecrire(trace, 'stroke-dashoffset', (longueur * (1 - p)).toFixed(1));
     var pt = trace.getPointAtLength(longueur * p);
     var avant = trace.getPointAtLength(Math.max(0, longueur * p - 6));
     if (Math.abs(pt.x - avant.x) > .4) sensVan = pt.x < avant.x ? 1 : -1; // le van regarde vers la gauche
-    van.style.transform = 'translate(' + pt.x.toFixed(1) + 'px, ' + pt.y.toFixed(1) + 'px) translate(-50%, -88%) scaleX(' + sensVan + ') rotate(' + borne(vitesse * .25, -4, 4).toFixed(2) + 'deg)';
+    ecrire(van, 'transform', 'translate(' + pt.x.toFixed(1) + 'px, ' + pt.y.toFixed(1) + 'px) translate(-50%, -88%) scaleX(' + sensVan + ') rotate(' + borne(vitesse * .25, -4, 4).toFixed(2) + 'deg)');
     etapes.forEach(function (et) {
       var re = et.getBoundingClientRect();
       if (re.top < h * .78) et.classList.add('est-atteinte');
@@ -255,7 +271,7 @@
       var r = e.el.getBoundingClientRect();
       if (r.bottom < 0 || r.top > h) return;
       var p = adoucir(borne((h * .85 - r.top) / (h * .7), 0, 1));
-      e.el.style.setProperty('--coupe', (94 - p * 88).toFixed(2) + '%');
+      ecrire(e.el, '--coupe', (94 - p * 88).toFixed(2) + '%');
     });
   }
 
@@ -268,15 +284,15 @@
       var r = el.getBoundingClientRect();
       if (r.bottom < -50 || r.top > h + 50) return;
       var b = borne((h * .82 - r.top) / (h * .3), 0, 1);
-      el.style.setProperty('--b', b.toFixed(3));
-      el.style.setProperty('--o', adoucir(borne((b - .55) / .45, 0, 1)).toFixed(3));
+      ecrire(el, '--b', b.toFixed(3));
+      ecrire(el, '--o', adoucir(borne((b - .55) / .45, 0, 1)).toFixed(3));
     });
   }
 
   /* ---------- la corde à linge balance avec la vitesse du défilement ---------- */
   var cordes = tous('.corde');
   function majCordes() {
-    cordes.forEach(function (c) { c.style.setProperty('--vent', borne(vitesse * .5, -9, 9).toFixed(2) + 'deg'); });
+    cordes.forEach(function (c) { ecrire(c, '--vent', borne(vitesse * .5, -9, 9).toFixed(2) + 'deg'); });
   }
 
   /* =====================================================================
@@ -301,10 +317,10 @@
       if (o.seuilEntete !== null) entete.classList.toggle('entete--clair', r.top <= 4 && r.bottom > 70 && p > o.seuilEntete);
       if (Math.abs(o.p - p) < .0004) return;
       o.p = p;
-      o.el.style.setProperty('--p', p.toFixed(4));
+      ecrire(o.el, '--p', p.toFixed(4));
       o.compteurs.forEach(function (c) {
         var total = parseInt(c.dataset.total, 10) || 1;
-        c.textContent = deux(Math.min(total, Math.floor(p * total) + 1));
+        texte(c, deux(Math.min(total, Math.floor(p * total) + 1)));
       });
     });
   }
@@ -318,9 +334,11 @@
     return { c: c, ctx: c.getContext('2d'), parts: parts, w: 0, h: 0 };
   });
   function majPoussiere(t) {
+    poussiereActive = false;
     poussieres.forEach(function (o) {
       var r = o.c.getBoundingClientRect();
       if (r.bottom < 0 || r.top > window.innerHeight) return;
+      if (!calme) poussiereActive = true;
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       var w = o.c.clientWidth, h = o.c.clientHeight;
       if (o.w !== w || o.h !== h) { o.w = w; o.h = h; o.c.width = w * dpr; o.c.height = h * dpr; o.ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
@@ -344,8 +362,8 @@
   /* ---------- corporate : le convoyeur file, les photos filent avec la vitesse ---------- */
   var lignes = tous('.ligne');
   function majLignes() {
-    var flou = Math.min(Math.abs(vitesse) * .1, 5).toFixed(2) + 'px';
-    lignes.forEach(function (l) { l.style.setProperty('--flou', flou); });
+    var flou = (Math.round(Math.min(Math.abs(vitesse) * .1, 5) * 2) / 2).toFixed(1) + 'px';
+    lignes.forEach(function (l) { ecrire(l, '--flou', flou); });
   }
 
   /* ---------- corporate : la loupe passe sur la table lumineuse ---------- */
@@ -366,15 +384,15 @@
       if (!o.loupe.offsetWidth) return;  // masquée sur mobile
       var pl = o.plateau.getBoundingClientRect();
       if (pl.bottom < 0 || pl.top > window.innerHeight) return;
-      var p = parseFloat(o.section.style.getPropertyValue('--p')) || 0;
+      var mp = memoire.get(o.section); var p = mp && mp['--p'] ? parseFloat(mp['--p']) : 0;
       var q = adoucir(borne((p - .22) / .5, 0, 1));
       var dr = o.diapos.getBoundingClientRect();
       var dx0 = dr.left - pl.left, dy0 = dr.top - pl.top;
       var cx = dx0 + dr.width * (.06 + q * .88), cy = dy0 + dr.height * .5;
       var t = o.loupe.offsetWidth, s = 2.3;
-      o.loupe.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px)';
-      o.clone.style.width = dr.width + 'px';
-      o.clone.style.transform = 'translate(' + (t / 2 - (cx - dx0) * s).toFixed(1) + 'px,' + (t / 2 - (cy - dy0) * s).toFixed(1) + 'px) scale(' + s + ')';
+      ecrire(o.loupe, 'transform', 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px)');
+      ecrire(o.clone, 'width', dr.width + 'px');
+      ecrire(o.clone, 'transform', 'translate(' + (t / 2 - (cx - dx0) * s).toFixed(1) + 'px,' + (t / 2 - (cy - dy0) * s).toFixed(1) + 'px) scale(' + s + ')');
     });
   }
 
@@ -425,8 +443,23 @@
     if (loupes.length) majLoupes();
     if (temps.length) majTemps(h);
     if (poussieres.length) majPoussiere(window.performance ? window.performance.now() : Date.now());
+    vider();
   }
-  function boucle() { tout(); window.requestAnimationFrame(boucle); }
+  var poussiereActive = false, enCours = false, dernierEtat = '';
+  function boucle() {
+    tout();
+    var etat = window.scrollY + ':' + window.innerHeight + ':' + window.innerWidth;
+    var bouge = etat !== dernierEtat;
+    dernierEtat = etat;
+    // on continue tant que la page bouge, que l'élan retombe, ou que la poussière vole
+    if (bouge || Math.abs(vitesse) > .05 || poussiereActive) window.requestAnimationFrame(boucle);
+    else { enCours = false; vitesse = 0; }
+  }
+  function planifier() {
+    if (enCours) return;
+    enCours = true;
+    window.requestAnimationFrame(boucle);
+  }
 
   dessinerRoute();
   var minuterieRoute = null;
@@ -444,11 +477,12 @@
     window.addEventListener('scroll', figer, { passive: true });
     window.addEventListener('load', function () { window.setTimeout(figer, 500); window.setTimeout(figer, 1200); });
     figer();
-  } else if (calme) {
-    tous('.encre .mot').forEach(function (m) { m.classList.add('est-encre'); });
-    window.addEventListener('scroll', tout, { passive: true });
-    tout();
   } else {
-    window.requestAnimationFrame(boucle);
+    if (calme) tous('.encre .mot').forEach(function (m) { m.classList.add('est-encre'); });
+    planifier();
+    window.addEventListener('scroll', planifier, { passive: true });
+    window.addEventListener('resize', planifier);
+    window.addEventListener('load', planifier);
+    if ('ResizeObserver' in window) new ResizeObserver(planifier).observe(d.body);
   }
 })();

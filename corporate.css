@@ -393,3 +393,9 @@
 }
 
 .page-corporate .pied { --creme: #EDECE8; --creme-doux: rgba(237, 236, 232, .66); }
+
+/* écrans tactiles : pas de flou de vitesse sur la bande de photos (le recalculer à chaque image
+   du défilement faisait saccader l'iPhone) ; les photos restent nettes */
+@media (hover: none) and (pointer: coarse) {
+  .convoyeur__pieces { filter: none; }
+}

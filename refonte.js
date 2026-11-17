@@ -19,6 +19,29 @@
   function borne(v, min, max) { return Math.max(min, Math.min(max, v)); }
   function tous(sel) { return Array.prototype.slice.call(d.querySelectorAll(sel)); }
 
+  /* écritures groupées : on mesure tout, puis on écrit une seule fois, et seulement ce qui change
+     (sans ça, chaque écriture suivie d'une mesure oblige le téléphone à tout recalculer) */
+  var memoire = new WeakMap();
+  var aEcrire = [];
+  function ecrire(el, prop, val) {
+    var m = memoire.get(el);
+    if (!m) { m = {}; memoire.set(el, m); }
+    if (m[prop] === val) return;
+    m[prop] = val;
+    aEcrire.push(el, prop, val);
+  }
+  function vider() {
+    for (var i = 0; i < aEcrire.length; i += 3) aEcrire[i].style.setProperty(aEcrire[i + 1], aEcrire[i + 2]);
+    aEcrire.length = 0;
+  }
+  // la boucle ne tourne que quand la page bouge
+  var enCours = false, dernierEtat = '', encore = false;
+  function planifier() {
+    if (enCours) return;
+    enCours = true;
+    window.requestAnimationFrame(animer);
+  }
+
   /* ---------- Mesure d'audience (Google Analytics 4), seulement après accord ----------
      Le bandeau propose Refuser et Accepter, avec la même simplicité (règles de la CNIL).
      Le choix est gardé 13 mois au plus dans le navigateur, puis redemandé. Le lien
@@ -134,10 +157,15 @@
 
   /* ---------- Vidéos : lecture seulement à l'écran ---------- */
   var videos = tous('video');
+  var videosScene = tous('.scene__fixe video');   // l'ouverture de Mariage : pilotées par le rideau
   videos.forEach(function (v) { v.muted = true; v.playsInline = true; });
   // ?poster : tests de mise en page, les vidéos restent sur leur image d'attente
   if (parametres.has('poster')) videos.forEach(function (v) { v.removeAttribute('src'); v.preload = 'none'; v.load(); });
   function lire(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  function jouer(v, oui) {
+    if (!v.getAttribute('src')) return;
+    if (oui) { if (v.paused) lire(v); } else if (!v.paused) v.pause();
+  }
   var ecranFilms = tous('.films__ecran video');
 
   if (capture) {
@@ -150,11 +178,33 @@
     var veilleVideo = new IntersectionObserver(function (entrees) {
       entrees.forEach(function (e) {
         var v = e.target;
-        if (ecranFilms.indexOf(v) > -1 || v === filmDechirure) return; // gérées par leur section
+        if (ecranFilms.indexOf(v) > -1 || v === filmDechirure || videosScene.indexOf(v) > -1) return; // gérées par leur section
         if (e.isIntersecting) lire(v); else v.pause();
       });
     }, { rootMargin: '200px 0px' });
     videos.forEach(function (v) { veilleVideo.observe(v); });
+  }
+
+  /* ---------- Images différées : demandées bien avant d'arriver à l'écran ----------
+     Safari ne charge une image « lazy » que lorsqu'elle est presque visible : elle apparaissait
+     en retard, en blanc. Ici, chaque image part dès qu'elle est à deux écrans et demi.
+     Dans une bande qu'on fait glisser de côté, toutes les images partent avec la bande. */
+  var differeesImg = tous('img[loading="lazy"]');
+  if (differeesImg.length && 'IntersectionObserver' in window && !capture) {
+    var bandesImg = new Map();
+    differeesImg.forEach(function (img) {
+      var cible = img.closest('.arrets__grille, .partenaires, .formules__cartes, .annexes, .pellicule__bande, .rail__envois, .convoyeur__pieces') || img;
+      if (!bandesImg.has(cible)) bandesImg.set(cible, []);
+      bandesImg.get(cible).push(img);
+    });
+    var avance = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        (bandesImg.get(e.target) || []).forEach(function (img) { img.loading = 'eager'; });
+        avance.unobserve(e.target);
+      });
+    }, { rootMargin: '250% 0px 250% 0px' });
+    bandesImg.forEach(function (liste, cible) { avance.observe(cible); });
   }
 
   /* ---------- Vidéos différées (Mariage) ----------
@@ -169,8 +219,10 @@
       lancees = true;
       differees.forEach(function (v) {
         v.src = v.getAttribute('data-src');
-        if (!capture) lire(v);
+        if (!capture && videosScene.indexOf(v) < 0) lire(v);
       });
+      // les vidéos de l'ouverture : c'est le rideau qui décide lesquelles tournent
+      if (!capture) planifier();
     };
     var premierRideau = d.querySelector('.rideau--g video');
     if (capture || !premierRideau) lancer();
@@ -323,6 +375,7 @@
     else if (!ouvert && !filmDechirure.paused) filmDechirure.pause();
     var cible = ouvert && sonActif() ? Math.pow(ouv, 1.4) : 0;
     volume += (cible - volume) * 0.12;
+    if (Math.abs(cible - volume) > 0.003) encore = true;
     if (cible === 0 && volume < 0.015) { volume = 0; if (!filmDechirure.muted) filmDechirure.muted = true; }
     else if (cible > 0 && filmDechirure.muted) filmDechirure.muted = false;
     try { filmDechirure.volume = borne(volume, 0, 1); } catch (e) {}
@@ -335,6 +388,7 @@
     var geste = function () {
       if (sonDonne) return;
       sonDonne = true;
+      planifier();
       if (ouvertureFilm > 0.02) {
         filmDechirure.muted = false;
         if (filmDechirure.paused) lireFilm();
@@ -373,16 +427,26 @@
         var p = borne(-rs.top / (rs.height - h), 0, 1);
         var o = adoucir(borne(p / 0.5, 0, 1));
         var k = adoucir(borne((p - 0.66) / 0.34, 0, 1));
-        sceneFixe.style.setProperty('--o', o.toFixed(4));
-        sceneFixe.style.setProperty('--to', borne(1 - o * 2.4, 0, 1).toFixed(3));
-        sceneFixe.style.setProperty('--io', borne(1 - p * 10, 0, 1).toFixed(3));
-        sceneFixe.style.setProperty('--fz', (1.1 - o * 0.06 + k * 0.05).toFixed(4));
-        sceneFixe.style.setProperty('--cy', (-k * h * 0.42).toFixed(1) + 'px');
-        sceneFixe.style.setProperty('--co', borne(1 - k * 1.15, 0, 1).toFixed(3));
-        sceneFixe.style.setProperty('--cs', (1 - k * 0.06).toFixed(4));
-        entete.style.setProperty('--logo-o', p > 0.92 ? '1' : '0');
+        ecrire(sceneFixe, '--o', o.toFixed(4));
+        ecrire(sceneFixe, '--to', borne(1 - o * 2.4, 0, 1).toFixed(3));
+        ecrire(sceneFixe, '--io', borne(1 - p * 10, 0, 1).toFixed(3));
+        ecrire(sceneFixe, '--fz', (1.1 - o * 0.06 + k * 0.05).toFixed(4));
+        ecrire(sceneFixe, '--cy', (-k * h * 0.42).toFixed(1) + 'px');
+        ecrire(sceneFixe, '--co', borne(1 - k * 1.15, 0, 1).toFixed(3));
+        ecrire(sceneFixe, '--cs', (1 - k * 0.06).toFixed(4));
+        ecrire(entete, '--logo-o', p > 0.92 ? '1' : '0');
+        // seules tournent les vidéos qu'on voit : le film et la carte quand le rideau s'ouvre,
+        // le rideau tant qu'il n'est pas tout à fait ouvert (un iPhone décode moins à la fois)
+        if (!capture) videosScene.forEach(function (v) {
+          var oui;
+          if (v.parentNode.classList.contains('rideau')) oui = o < 0.985;
+          else if (v.classList.contains('scene__film')) oui = o > 0.02;
+          else oui = o > 0.02 && k < 0.95;
+          jouer(v, oui);
+        });
       } else {
-        entete.style.setProperty('--logo-o', '1');
+        ecrire(entete, '--logo-o', '1');
+        videosScene.forEach(function (v) { jouer(v, false); });
       }
     }
 
@@ -395,8 +459,8 @@
         // progression pendant que la déchirure est collée à l'écran : s'ouvre, reste ouverte, se referme
         var dp = borne(-rd.top / (rd.height - h), 0, 1);
         var ouv = adoucir(borne(dp / 0.3, 0, 1)) * (1 - adoucir(borne((dp - 0.8) / 0.2, 0, 1)));
-        dechirure.style.setProperty('--ouv', ouv.toFixed(4));
-        dechirure.style.setProperty('--dz', (1.06 - dp * 0.05).toFixed(4));
+        ecrire(dechirure, '--ouv', ouv.toFixed(4));
+        ecrire(dechirure, '--dz', (1.06 - dp * 0.05).toFixed(4));
         reglerFilm(ouv);
       } else {
         reglerFilm(0);
@@ -408,7 +472,7 @@
       var c = centreSansTranslation(el);
       if (c === null || c < -h || c > 2 * h) return;
       var ty = borne(-(c - h / 2) * parseFloat(el.dataset.vitesse), -150, 150);
-      el.style.setProperty('--ty', ty.toFixed(1) + 'px');
+      ecrire(el, '--ty', ty.toFixed(1) + 'px');
     });
 
     // 4. titres dont les mots glissent en sens contraire
@@ -416,7 +480,7 @@
       var r = ligne.parentElement.getBoundingClientRect();
       if (r.bottom < -100 || r.top > h + 100) return;
       var gp = borne((h - r.top) / (h + r.height), 0, 1);
-      ligne.style.setProperty('--gx', ((gp - 0.5) * Number(ligne.dataset.glisse) * w * 0.12).toFixed(1) + 'px');
+      ecrire(ligne, '--gx', ((gp - 0.5) * Number(ligne.dataset.glisse) * w * 0.12).toFixed(1) + 'px');
     });
 
     // 6. la main gantée entre par la gauche et pose le carton « Réserver un appel »
@@ -425,9 +489,9 @@
       if (rb.top > h + 80 || rb.bottom < -80) return;
       var pa = adoucir(borne((h - rb.top) / (h * 0.7), 0, 1));
       var carton = bloc.firstElementChild;
-      carton.style.setProperty('--ax', ((1 - pa) * -Math.min(w * 0.75, 1000)).toFixed(1) + 'px');
-      carton.style.setProperty('--ay', ((1 - pa) * 140).toFixed(1) + 'px');
-      carton.style.setProperty('--ar', ((1 - pa) * -11).toFixed(2) + 'deg');
+      ecrire(carton, '--ax', ((1 - pa) * -Math.min(w * 0.75, 1000)).toFixed(1) + 'px');
+      ecrire(carton, '--ay', ((1 - pa) * 140).toFixed(1) + 'px');
+      ecrire(carton, '--ar', ((1 - pa) * -11).toFixed(2) + 'deg');
     });
 
     // 5. la main gantée présente chaque film
@@ -437,12 +501,16 @@
         if (!filmsEnVue) { filmsEnVue = true; if (ecranFilms[indexFilm]) lire(ecranFilms[indexFilm]); }
         var q = borne(-rf.top / (rf.height - h), 0, 1);
         var monte = adoucir(borne((q + 0.02) / 0.1, 0, 1));
-        filmsMain.style.setProperty('--hy', ((1 - monte) * 60).toFixed(2) + '%');
+        ecrire(filmsMain, '--hy', ((1 - monte) * 60).toFixed(2) + '%');
         choisirFilm(borne(Math.floor(q * 4), 0, 3));
       }
     }
 
-    window.requestAnimationFrame(animer);
+    vider();
+    // on continue tant que la page bouge (ou que le son du film finit de monter)
+    var etat = window.scrollY + ':' + h + ':' + w;
+    if (etat !== dernierEtat || encore) { dernierEtat = etat; encore = false; window.requestAnimationFrame(animer); }
+    else enCours = false;
   }
 
   if (capture) {
@@ -464,7 +532,11 @@
     choisirFilm(0, true);
     // les effets suivent le doigt du visiteur, même avec « Réduire les animations » (iPhone) :
     // sans eux, le rideau restait fermé et la brume vide, sur des écrans entiers
-    window.requestAnimationFrame(animer);
+    planifier();
+    window.addEventListener('scroll', planifier, { passive: true });
+    window.addEventListener('resize', planifier);
+    window.addEventListener('load', planifier);
+    if ('ResizeObserver' in window) new ResizeObserver(planifier).observe(d.body);
   }
 
   /* ---------- Vos mots : les cartes posées sur le plateau ---------- */
