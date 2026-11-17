@@ -409,6 +409,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   object-fit: cover;
   transform: scale(var(--dz, 1.06));
 }
+/* écran en hauteur : le film horizontal en entier, bandes noires dessus et dessous */
+@media (orientation: portrait) {
+  .dechirure__film { object-fit: contain; transform: none; }
+}
 .dechirure__legende {
   position: absolute; left: clamp(28px, 5vw, 80px); bottom: clamp(30px, 8%, 70px); z-index: 1;
   font-size: 10.5px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase;

@@ -110,7 +110,8 @@
   var ecranDebout = window.matchMedia('(orientation: portrait)');
   function choisirVersion() {
     if (!filmDechirure) return;
-    var cle = ecranDebout.matches ? 'portrait' : 'paysage';
+    // choix de Charly (17/11/2026) : la version horizontale partout, aussi sur téléphone
+    var cle = 'paysage';
     if (filmDechirure.getAttribute('data-version') === cle) return;
     var instant = filmDechirure.currentTime || 0;
     var enLecture = !filmDechirure.paused;
@@ -299,6 +300,20 @@
     try { filmDechirure.volume = borne(volume, 0, 1); } catch (e) {}
     dechirure.classList.toggle('est-ouverte', ouv > 0.55);
     majBouton();
+  }
+  // sans bouton : le premier geste du visiteur (où qu'il soit sur la page) autorise le son ;
+  // si le papier est déjà ouvert, le son part dans ce geste même
+  if (filmDechirure && !boutonSon) {
+    var geste = function () {
+      if (sonDonne) return;
+      sonDonne = true;
+      if (ouvertureFilm > 0.02) {
+        filmDechirure.muted = false;
+        if (filmDechirure.paused) lireFilm();
+      }
+      ['pointerdown', 'keydown', 'touchend'].forEach(function (t) { window.removeEventListener(t, geste, true); });
+    };
+    ['pointerdown', 'keydown', 'touchend'].forEach(function (t) { window.addEventListener(t, geste, true); });
   }
   if (boutonSon && filmDechirure) {
     boutonSon.addEventListener('click', function () {
