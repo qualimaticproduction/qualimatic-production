@@ -108,7 +108,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,100..900&family=Imperial+Script&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="refonte.css?v=15k">
+<link rel="stylesheet" href="refonte.css?v=15l">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 
@@ -187,7 +187,7 @@
 
   <!-- ============ 2. LA FEUILLE ============ -->
   <div class="feuille">
-    <img class="feuille__bord feuille__bord--haut" src="assets/matieres/papier-dechire.webp" alt="" aria-hidden="true">
+    <img loading="lazy" decoding="async" class="feuille__bord feuille__bord--haut" src="assets/matieres/papier-dechire.webp" alt="" aria-hidden="true">
 
     <!-- Présentation -->
     <section class="intro" aria-labelledby="titre-intro">
@@ -202,7 +202,7 @@
 
       <figure class="intro__portrait">
         <div class="tirage leve" data-vitesse="0.08">
-          <div class="tirage__image"><img src="assets/charly-escalier.jpg" alt="Charly Coulardot, caméra à la main, dans l’escalier d’honneur d’un château" width="1600" height="2400"></div>
+          <div class="tirage__image"><img loading="lazy" decoding="async" src="assets/charly-escalier.jpg" alt="Charly Coulardot, caméra à la main, dans l’escalier d’honneur d’un château" width="1600" height="2400"></div>
           <figcaption class="tirage__main">Charly</figcaption>
         </div>
       </figure>
@@ -213,15 +213,15 @@
       <div class="dechirure__collant">
         <video class="dechirure__film" poster="assets/rush/sancerre-film-4k.jpg"
                data-paysage="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926229/1-sancerre-film-paysage_ibzcbw.mp4" data-paysage-poster="assets/rush/sancerre-film-4k.jpg"
-               data-portrait="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/2-sancerre-film-vertical_uf1szn.mp4" data-portrait-poster="assets/rush/sancerre-film-vertical-hd.jpg"
+               data-portrait="assets/rush/sancerre-film-720.mp4" data-portrait-poster="assets/rush/sancerre-film-4k.jpg"
                muted loop playsinline preload="none" aria-label="Film du shooting aux Hauts de Sancerre"></video>
         <p class="dechirure__legende">Les Hauts de Sancerre<span>le film du shooting</span></p>
         <div class="dechirure__pan dechirure__pan--haut" aria-hidden="true">
           <div class="dechirure__aplat"></div>
-          <img src="assets/matieres/papier-dechire.webp" alt="">
+          <img loading="lazy" decoding="async" src="assets/matieres/papier-dechire.webp" alt="">
         </div>
         <div class="dechirure__pan dechirure__pan--bas" aria-hidden="true">
-          <img src="assets/matieres/papier-dechire.webp" alt="">
+          <img loading="lazy" decoding="async" src="assets/matieres/papier-dechire.webp" alt="">
           <div class="dechirure__aplat"></div>
         </div>
       </div>
@@ -290,7 +290,7 @@
         <figure class="tuile tuile--g" data-vitesse="0.09">
           <div class="cadre cadre--passe leve">
             <div class="cadre__image"><img src="assets/images/grape-mariage-cinematographique.jpg" alt="La mariée dans un salon tendu de damas rouge, éclairé aux bougies" width="1400" height="2100" loading="lazy" style="object-position: 50% 42%"></div>
-            <img class="cadre__cachet" src="assets/matieres/cachet-montagne.webp" alt="" aria-hidden="true">
+            <img loading="lazy" decoding="async" class="cadre__cachet" src="assets/matieres/cachet-montagne.webp" alt="" aria-hidden="true">
           </div>
           <figcaption>Grape · photo Anaëlle Échantillon</figcaption>
         </figure>
@@ -306,7 +306,7 @@
       <p class="glisser" aria-hidden="true">Faites glisser<svg viewBox="0 0 34 10"><path d="M0 5h32M28 1l4 4-4 4"/></svg></p>
     </section>
 
-    <img class="feuille__bord feuille__bord--bas" src="assets/matieres/papier-dechire.webp" alt="" aria-hidden="true">
+    <img loading="lazy" decoding="async" class="feuille__bord feuille__bord--bas" src="assets/matieres/papier-dechire.webp" alt="" aria-hidden="true">
   </div>
 
   <!-- ============ 3. LES FILMS : la main gantée présente chaque film ============ -->
@@ -343,7 +343,7 @@
       </div>
 
       <div class="films__main">
-        <img class="films__gant" src="assets/matieres/main-gantee.webp" alt="" aria-hidden="true" width="1414" height="2580">
+        <img loading="lazy" decoding="async" class="films__gant" src="assets/matieres/main-gantee.webp" alt="" aria-hidden="true" width="1414" height="2580">
         <div class="films__carte">
           <div class="carte-film est-actif" data-index="0">
             <span class="carte-film__genre">Château de la Huberdière</span>
@@ -374,7 +374,7 @@
     </h2>
 
     <div class="plateau apparait">
-      <img class="plateau__argent" src="assets/matieres/plateau-argent.webp" alt="" aria-hidden="true" width="1500" height="1105">
+      <img loading="lazy" decoding="async" class="plateau__argent" src="assets/matieres/plateau-argent.webp" alt="" aria-hidden="true" width="1500" height="1105">
       <div class="plateau__cartes">
         <blockquote class="carte-mot est-actif">
           <p>«&nbsp;Au premier visionnage nous avons eu des frissons et des larmes. Tous nos proches ont été bluffés par la qualité.&nbsp;»</p>
@@ -429,7 +429,7 @@
   <!-- ============ 5. OFFRE DUO : mes deux photographes partenaires, sur le coutil rayé ============ -->
   <section class="duo-photo" id="duo" aria-labelledby="titre-duo">
     <div class="duo-photo__entete apparait">
-      <img class="duo-photo__cachet" src="assets/matieres/cachet-montagne.webp" alt="" aria-hidden="true">
+      <img loading="lazy" decoding="async" class="duo-photo__cachet" src="assets/matieres/cachet-montagne.webp" alt="" aria-hidden="true">
       <p class="etiquette">Offre duo</p>
       <h2 class="duo duo--centre" id="titre-duo">
         <span class="duo__caps">Photo</span>
@@ -477,12 +477,12 @@
   <!-- ============ 6. CONTACT : le téléphone tombe, la main tend le carton ============ -->
   <section class="appel" id="contact" aria-labelledby="titre-appel">
     <div class="telephone apparait" aria-hidden="true">
-      <img src="assets/matieres/telephone.webp" alt="" width="302" height="1400">
+      <img loading="lazy" decoding="async" src="assets/matieres/telephone.webp" alt="" width="302" height="1400">
     </div>
 
     <div class="appel__bloc">
       <div class="appel__carton">
-        <img class="appel__carton-image" src="assets/matieres/carton-main.webp" alt="" aria-hidden="true" width="1300" height="812">
+        <img loading="lazy" decoding="async" class="appel__carton-image" src="assets/matieres/carton-main.webp" alt="" aria-hidden="true" width="1300" height="812">
         <div class="appel__carton-texte">
           <p class="etiquette">Prochaine étape</p>
           <h2 class="duo duo--centre" id="titre-appel">
@@ -614,6 +614,6 @@
   <div class="lecteur__cadre"></div>
 </div>
 
-<script src="refonte.js?v=15k"></script>
+<script src="refonte.js?v=15l"></script>
 </body>
 </html>

@@ -110,8 +110,9 @@
   var ecranDebout = window.matchMedia('(orientation: portrait)');
   function choisirVersion() {
     if (!filmDechirure) return;
-    // choix de Charly (17/11/2026) : la version horizontale partout, aussi sur téléphone
-    var cle = 'paysage';
+    // le film est toujours horizontal (choix de Charly, 17/11/2026) ; sur téléphone et petit écran,
+    // une version 720p, aussi nette à cette taille et bien plus légère à charger
+    var cle = (ecranDebout.matches || window.innerWidth < 900) ? 'portrait' : 'paysage';
     if (filmDechirure.getAttribute('data-version') === cle) return;
     var instant = filmDechirure.currentTime || 0;
     var enLecture = !filmDechirure.paused;
