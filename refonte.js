@@ -157,6 +157,32 @@
     videos.forEach(function (v) { veilleVideo.observe(v); });
   }
 
+  /* ---------- Vidéos différées (Mariage) ----------
+     Le rideau est seul visible à l'arrivée : il charge d'abord. Le film d'ouverture, la carte
+     et la moitié droite du rideau (même fichier, alors pris dans le cache) viennent ensuite,
+     dès que le rideau est prêt, au premier geste, ou au plus tard après 2,5 secondes. */
+  var differees = tous('video[data-differe]');
+  if (differees.length) {
+    var lancees = false;
+    var lancer = function () {
+      if (lancees) return;
+      lancees = true;
+      differees.forEach(function (v) {
+        v.src = v.getAttribute('data-src');
+        if (!capture) lire(v);
+      });
+    };
+    var premierRideau = d.querySelector('.rideau--g video');
+    if (capture || !premierRideau) lancer();
+    else {
+      if (premierRideau.readyState >= 3) lancer();
+      premierRideau.addEventListener('canplay', lancer, { once: true });
+      window.addEventListener('scroll', lancer, { once: true, passive: true });
+      window.addEventListener('touchstart', lancer, { once: true, passive: true });
+      window.setTimeout(lancer, 2500);
+    }
+  }
+
   /* ---------- En-tête ---------- */
   var entete = d.getElementById('entete');
   // l'ouverture de la page : rideau (mariage), montagne (accueil) ou couverture (à propos)
@@ -226,6 +252,7 @@
   var jouerFilm = d.querySelector('.films__jouer');
   var blocsAppel = tous('.appel__bloc');
   var indexFilm = -1;
+  var filmsEnVue = false;   // les extraits ne se chargent qu'à l'approche de la section
   var inclinaisons = [-2, 1.5, -1, 2.2];
 
   function choisirFilm(i, sansAnimation) {
@@ -235,7 +262,7 @@
     cartesFilms.forEach(function (c, k) { c.classList.toggle('est-actif', k === i); });
     ecranFilms.forEach(function (v, k) {
       v.classList.toggle('est-actif', k === i);
-      if (!capture) { if (k === i) lire(v); else v.pause(); }
+      if (!capture) { if (k === i && filmsEnVue) lire(v); else v.pause(); }
     });
     if (numFilm) numFilm.textContent = deux(i + 1);
     // le bouton posé sur l'écran ouvre le film du mariage affiché
@@ -407,6 +434,7 @@
     if (films && filmsMain) {
       var rf = films.getBoundingClientRect();
       if (rf.bottom > 0 && rf.top < h) {
+        if (!filmsEnVue) { filmsEnVue = true; if (ecranFilms[indexFilm]) lire(ecranFilms[indexFilm]); }
         var q = borne(-rf.top / (rf.height - h), 0, 1);
         var monte = adoucir(borne((q + 0.02) / 0.1, 0, 1));
         filmsMain.style.setProperty('--hy', ((1 - monte) * 60).toFixed(2) + '%');

@@ -279,7 +279,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .carte-scene__cote--d { right: 6%; transform: translateY(-50%); }
 
 /* les deux pans du rideau */
-.rideau {
+.rideau { background-color: #3a0610;
   position: absolute; top: 0; bottom: 0; z-index: 5;
   width: 50.4%;
   overflow: hidden;

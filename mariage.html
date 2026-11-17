@@ -22,7 +22,8 @@
 <meta property="og:image" content="https://www.qualimaticproduction.fr/assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="preload" as="image" href="assets/rush/scene-im-hd.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/rush/rideau-ondule.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/rush/scene-im-hd.jpg">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/montagne-noir.png">
 
@@ -108,7 +109,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,100..900&family=Imperial+Script&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="refonte.css?v=15n">
+<link rel="stylesheet" href="refonte.css?v=15p">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 
@@ -150,7 +151,7 @@
   <!-- ============ 1. LE RIDEAU ============ -->
   <section class="scene" id="top" aria-label="Qualimatic Production">
     <div class="scene__fixe">
-      <video class="scene__film" src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/3-mariage-ouverture-isabel-marshall_ancl0r.mp4" poster="assets/rush/scene-im-hd.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+      <video class="scene__film" data-differe data-src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/3-mariage-ouverture-isabel-marshall_ancl0r.mp4" poster="assets/rush/scene-im-hd.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
       <div class="scene__ombre" aria-hidden="true"></div>
 
       <!-- la carte posée sur le film -->
@@ -160,7 +161,7 @@
           <img src="assets/logo-noir.png" alt="Qualimatic Production" width="3400" height="987">
         </h1>
         <div class="carte-scene__photo">
-          <div class="festons"><div class="festons__interieur"><video src="assets/rush/carte-sancerre-regard.mp4" poster="assets/rush/carte-sancerre-regard.jpg" muted loop playsinline autoplay preload="auto" role="img" aria-label="Le regard de la mariée au-dessus de son bouquet, aux Hauts de Sancerre"></video></div></div>
+          <div class="festons"><div class="festons__interieur"><video data-differe data-src="assets/rush/carte-sancerre-regard.mp4" poster="assets/rush/carte-sancerre-regard.jpg" muted loop playsinline autoplay preload="auto" role="img" aria-label="Le regard de la mariée au-dessus de son bouquet, aux Hauts de Sancerre"></video></div></div>
           <p class="carte-scene__script" aria-hidden="true">vidéaste de mariage</p>
         </div>
         <p class="carte-scene__cote carte-scene__cote--g">Vallée de la Loire</p>
@@ -172,7 +173,7 @@
         <video src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/6-mariage-rideau_qmgwnk.mp4" poster="assets/rush/rideau-ondule.jpg" muted loop playsinline autoplay preload="auto"></video>
       </div>
       <div class="rideau rideau--d" aria-hidden="true">
-        <video src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/6-mariage-rideau_qmgwnk.mp4" poster="assets/rush/rideau-ondule.jpg" muted loop playsinline autoplay preload="auto"></video>
+        <video data-differe data-src="https://res.cloudinary.com/dsw6hs2g8/video/upload/v1794926241/6-mariage-rideau_qmgwnk.mp4" poster="assets/rush/rideau-ondule.jpg" muted loop playsinline autoplay preload="auto"></video>
       </div>
 
       <div class="scene__titre" aria-hidden="true">
@@ -335,10 +336,10 @@
       </div>
 
       <div class="films__ecran">
-        <video class="est-actif" data-index="0" src="assets/rush/huberdiere-escalier.mp4" poster="assets/rush/huberdiere-escalier.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video>
-        <video data-index="1" src="assets/rush/thorens-chevaux.mp4" poster="assets/rush/thorens-chevaux.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video>
-        <video data-index="2" src="assets/rush/sancerre-drone.mp4" poster="assets/rush/sancerre-drone.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video>
-        <video data-index="3" src="assets/rush/vibiches-sortie.mp4" poster="assets/rush/vibiches-sortie.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="est-actif" data-index="0" src="assets/rush/huberdiere-escalier.mp4" poster="assets/rush/huberdiere-escalier.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <video data-index="1" src="assets/rush/thorens-chevaux.mp4" poster="assets/rush/thorens-chevaux.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <video data-index="2" src="assets/rush/sancerre-drone.mp4" poster="assets/rush/sancerre-drone.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <video data-index="3" src="assets/rush/vibiches-sortie.mp4" poster="assets/rush/vibiches-sortie.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
         <a class="films__jouer" href="https://www.youtube.com/watch?v=GiEygKSM9XM" data-film="GiEygKSM9XM" aria-label="Voir le film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Voir le film</span></a>
       </div>
 
@@ -614,6 +615,6 @@
   <div class="lecteur__cadre"></div>
 </div>
 
-<script src="refonte.js?v=15n"></script>
+<script src="refonte.js?v=15p"></script>
 </body>
 </html>
