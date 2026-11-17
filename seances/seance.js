@@ -662,7 +662,7 @@
     var src = null;
     if (film.vimeo) src = 'https://player.vimeo.com/video/' + encodeURIComponent(film.vimeo) + '?autoplay=1&title=0&byline=0&portrait=0&dnt=1';
     else if (film.bunny) src = film.bunny + (film.bunny.indexOf('?') >= 0 ? '&' : '?') + 'autoplay=true&preload=true';
-    else if (film.youtube) src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(film.youtube) + '?autoplay=1&rel=0&playsinline=1';
+    else if (film.youtube) src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(film.youtube) + '?autoplay=1&mute=0&cc_load_policy=0&iv_load_policy=3&rel=0&playsinline=1';
     if (!src) return null;
     var cadre = document.createElement('iframe');
     cadre.src = src;

@@ -486,7 +486,7 @@
   var retourFocus = null;
   function ouvrirFilm(id) {
     var iframe = d.createElement('iframe');
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&mute=0&cc_load_policy=0&iv_load_policy=3&rel=0&modestbranding=1&playsinline=1';
     iframe.title = 'Film Qualimatic Production';
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen = true;
