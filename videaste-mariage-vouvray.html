@@ -36,58 +36,98 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Vouvray" },
-        { "@type": "City", "name": "Montlouis-sur-Loire" },
-        { "@type": "AdministrativeArea", "name": "Indre-et-Loire" },
-        { "@type": "Place", "name": "Vallée de la Loire" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Vouvray",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Vouvray", "item": "https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Vouvray"
+        },
+        {
+          "@type" : "City",
+          "name" : "Montlouis-sur-Loire"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Indre-et-Loire"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Vallée de la Loire"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Vouvray",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-vouvray.html",
+          "name" : "Vidéaste mariage Vouvray",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Peut-on se marier dans un domaine viticole à Vouvray&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Plusieurs domaines et châteaux du vignoble de Vouvray et de Montlouis-sur-Loire reçoivent des mariages, souvent avec des caves de tuffeau pour le vin d'honneur. Le mariage civil se tient en mairie ; chaque domaine a ses propres conditions de privatisation, à vérifier directement avec lui." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. Plusieurs domaines et châteaux du vignoble de Vouvray et de Montlouis-sur-Loire reçoivent des mariages, souvent avec des caves de tuffeau pour le vin d'honneur. Le mariage civil se tient en mairie ; chaque domaine a ses propres conditions de privatisation, à vérifier directement avec lui."
+          },
+          "name" : "Peut-on se marier dans un domaine viticole à Vouvray&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Vouvray est-il loin de Tours&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Non. Vouvray est à une dizaine de kilomètres à l'est de Tours, sur la rive nord de la Loire ; Montlouis lui fait face sur la rive sud. Comptez un quart d'heure de route depuis Tours, environ une heure depuis Paris en TGV jusqu'à Tours puis voiture." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Non. Vouvray est à une dizaine de kilomètres à l'est de Tours, sur la rive nord de la Loire ; Montlouis lui fait face sur la rive sud. Comptez un quart d'heure de route depuis Tours, environ une heure depuis Paris en TGV jusqu'à Tours puis voiture."
+          },
+          "name" : "Vouvray est-il loin de Tours&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Intervenez-vous sans frais de déplacement&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Vouvray et Montlouis sont en Indre-et-Loire, au cœur de ma zone. Aucun frais de déplacement n'est ajouté pour un mariage en Touraine." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. Vouvray et Montlouis sont en Indre-et-Loire, au cœur de ma zone. Aucun frais de déplacement n'est ajouté pour un mariage en Touraine."
+          },
+          "name" : "Intervenez-vous sans frais de déplacement&nbsp;?"
         }
       ]
     }

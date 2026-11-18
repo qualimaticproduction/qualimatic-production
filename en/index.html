@@ -52,66 +52,118 @@
 <!-- JSON-LD -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": ["LocalBusiness", "ProfessionalService"],
-      "@id": "https://www.qualimaticproduction.fr/#business",
-      "name": "Qualimatic Production",
-      "alternateName": "Qualimatic",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "logo": "https://www.qualimaticproduction.fr/assets/logo-noir.png",
-      "url": "https://www.qualimaticproduction.fr/",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "foundingDate": "2018",
-      "description": "Cinematic wedding videographer based in Loire Valley, France. Bespoke, timeless author films for international couples planning a destination wedding in French châteaux.",
-      "founder": { "@id": "https://www.qualimaticproduction.fr/#charly" },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
-      },
-      "geo": { "@type": "GeoCoordinates", "latitude": 47.358, "longitude": 1.7414 },
-      "areaServed": [
-        { "@type": "Place", "name": "Loire Valley" },
-        { "@type": "AdministrativeArea", "name": "Centre-Val de Loire" },
-        { "@type": "Country", "name": "France" },
-        { "@type": "Place", "name": "Europe" }
+      "@id" : "https://www.qualimaticproduction.fr/#business",
+      "@type" : [
+        "LocalBusiness",
+        "ProfessionalService"
       ],
-      "serviceType": ["Wedding Videographer", "Cinematic Film", "Destination Wedding Videographer"],
-      "knowsLanguage": ["en", "fr"],
-      "sameAs": [
+      "address" : {
+        "@type" : "PostalAddress",
+        "addressCountry" : "FR",
+        "addressLocality" : "Romorantin-Lanthenay",
+        "addressRegion" : "Centre-Val de Loire",
+        "postalCode" : "41200",
+        "streetAddress" : "BP 20"
+      },
+      "alternateName" : "Qualimatic",
+      "areaServed" : [
+        {
+          "@type" : "Place",
+          "name" : "Loire Valley"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Centre-Val de Loire"
+        },
+        {
+          "@type" : "Country",
+          "name" : "France"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Europe"
+        }
+      ],
+      "contactPoint" : {
+        "@type" : "ContactPoint",
+        "availableLanguage" : [
+          "fr",
+          "en"
+        ],
+        "contactType" : "customer service",
+        "email" : "qualimatic.production@gmail.com",
+        "telephone" : "+33771063218"
+      },
+      "description" : "Cinematic wedding videographer based in Loire Valley, France. Bespoke, timeless author films for international couples planning a destination wedding in French châteaux.",
+      "email" : "qualimatic.production@gmail.com",
+      "founder" : {
+        "@id" : "https://www.qualimaticproduction.fr/#charly"
+      },
+      "foundingDate" : "2018",
+      "geo" : {
+        "@type" : "GeoCoordinates",
+        "latitude" : 47.358,
+        "longitude" : 1.7414
+      },
+      "hasMap" : "https://g.page/r/CSqpltxsOMflEBM",
+      "image" : "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
+      "knowsLanguage" : [
+        "fr",
+        "en"
+      ],
+      "logo" : "https://www.qualimaticproduction.fr/assets/logo-noir.png",
+      "name" : "Qualimatic Production",
+      "priceRange" : "€€€",
+      "sameAs" : [
         "https://www.instagram.com/qualimatic_production",
-        "https://www.youtube.com/@qualimatic9324"
-      ]
+        "https://www.youtube.com/@qualimatic9324",
+        "https://g.page/r/CSqpltxsOMflEBM"
+      ],
+      "serviceType" : [
+        "Wedding Videographer",
+        "Cinematic Film",
+        "Destination Wedding Videographer"
+      ],
+      "telephone" : "+33771063218",
+      "url" : "https://www.qualimaticproduction.fr/"
     },
     {
-      "@type": "Person",
-      "@id": "https://www.qualimaticproduction.fr/#charly",
-      "name": "Charly Coulardot",
-      "jobTitle": "Director & Cinematic Wedding Videographer",
-      "worksFor": { "@id": "https://www.qualimaticproduction.fr/#business" },
-      "image": "https://www.qualimaticproduction.fr/assets/charly-portrait.jpg",
-      "url": "https://www.qualimaticproduction.fr/en/about.html",
-      "knowsLanguage": ["French", "English"]
+      "@id" : "https://www.qualimaticproduction.fr/#charly",
+      "@type" : "Person",
+      "image" : "https://www.qualimaticproduction.fr/assets/charly-portrait.jpg",
+      "jobTitle" : "Director & Cinematic Wedding Videographer",
+      "knowsLanguage" : [
+        "French",
+        "English"
+      ],
+      "name" : "Charly Coulardot",
+      "url" : "https://www.qualimaticproduction.fr/en/about.html",
+      "worksFor" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      }
     },
     {
-      "@type": "WebSite",
-      "@id": "https://www.qualimaticproduction.fr/#website-en",
-      "url": "https://www.qualimaticproduction.fr/en/",
-      "name": "Qualimatic Production",
-      "inLanguage": "en",
-      "publisher": { "@id": "https://www.qualimaticproduction.fr/#business" }
+      "@id" : "https://www.qualimaticproduction.fr/#website-en",
+      "@type" : "WebSite",
+      "inLanguage" : "en",
+      "name" : "Qualimatic Production",
+      "publisher" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "url" : "https://www.qualimaticproduction.fr/en/"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.qualimaticproduction.fr/en/" }
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/",
+          "name" : "Home",
+          "position" : 1
+        }
       ]
     }
   ]

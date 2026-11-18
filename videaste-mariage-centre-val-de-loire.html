@@ -36,49 +36,115 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "AdministrativeArea", "name": "Centre-Val de Loire" },
-        { "@type": "AdministrativeArea", "name": "Indre-et-Loire" },
-        { "@type": "AdministrativeArea", "name": "Loir-et-Cher" },
-        { "@type": "AdministrativeArea", "name": "Loiret" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste mariage en Centre-Val de Loire",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Centre-Val de Loire", "item": "https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Centre-Val de Loire"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Indre-et-Loire"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Loir-et-Cher"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Loiret"
+        }
+      ],
+      "name" : "Vidéaste mariage en Centre-Val de Loire",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-centre-val-de-loire.html",
+          "name" : "Centre-Val de Loire",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Intervenez-vous dans tout le Centre-Val de Loire ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Indre-et-Loire, Loir-et-Cher, Loiret : je couvre l'ensemble du territoire, de Tours à Orléans en passant par Blois et Chambord. Au-delà, je me déplace aussi en Île-de-France ou dans les Alpes, sans frais de déplacement en formule Signature." } },
-        { "@type": "Question", "name": "Peut-on filmer un mariage à l'intérieur d'un château ?", "acceptedAnswer": { "@type": "Answer", "text": "Ça dépend du château : certains sont des propriétés privées qui reçoivent des mariages, d'autres des monuments nationaux qui n'accueillent que des visites. Je vérifie systématiquement les conditions du lieu avant le tournage, drone compris." } },
-        { "@type": "Question", "name": "Le drone est-il autorisé au-dessus des monuments historiques ?", "acceptedAnswer": { "@type": "Answer", "text": "Le survol y est très encadré par la réglementation française. Je suis télépilote certifié et je demande les autorisations nécessaires site par site — jamais d'improvisation au-dessus d'un château." } },
-        { "@type": "Question", "name": "Quand réserver pour un mariage en Val de Loire ?", "acceptedAnswer": { "@type": "Answer", "text": "La saison haute court d'avril à octobre, avec un pic entre juin et septembre. Pour ces mois-là, mieux vaut réserver six à douze mois à l'avance : les week-ends de printemps et d'été partent vite." } },
-        { "@type": "Question", "name": "Filmez-vous aussi les mariages en dehors des châteaux ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, largement. Domaines viticoles, longères tourangelles, mairies de village, guinguettes sur la Loire : la même exigence s'applique partout, château ou non." } }
+      "@type" : "FAQPage",
+      "mainEntity" : [
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. Indre-et-Loire, Loir-et-Cher, Loiret : je couvre l'ensemble du territoire, de Tours à Orléans en passant par Blois et Chambord. Au-delà, je me déplace aussi en Île-de-France ou dans les Alpes, sans frais de déplacement en formule Signature."
+          },
+          "name" : "Intervenez-vous dans tout le Centre-Val de Loire ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Ça dépend du château : certains sont des propriétés privées qui reçoivent des mariages, d'autres des monuments nationaux qui n'accueillent que des visites. Je vérifie systématiquement les conditions du lieu avant le tournage, drone compris."
+          },
+          "name" : "Peut-on filmer un mariage à l'intérieur d'un château ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Le survol y est très encadré par la réglementation française. Je suis télépilote certifié et je demande les autorisations nécessaires site par site — jamais d'improvisation au-dessus d'un château."
+          },
+          "name" : "Le drone est-il autorisé au-dessus des monuments historiques ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "La saison haute court d'avril à octobre, avec un pic entre juin et septembre. Pour ces mois-là, mieux vaut réserver six à douze mois à l'avance : les week-ends de printemps et d'été partent vite."
+          },
+          "name" : "Quand réserver pour un mariage en Val de Loire ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui, largement. Domaines viticoles, longères tourangelles, mairies de village, guinguettes sur la Loire : la même exigence s'applique partout, château ou non."
+          },
+          "name" : "Filmez-vous aussi les mariages en dehors des châteaux ?"
+        }
       ]
     }
   ]

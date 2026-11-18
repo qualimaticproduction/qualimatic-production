@@ -36,57 +36,94 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Val-d'Isère" },
-        { "@type": "AdministrativeArea", "name": "Savoie" },
-        { "@type": "Place", "name": "Alpes" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Val d'Isère",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Val d'Isère", "item": "https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Val-d'Isère"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Savoie"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Alpes"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Val d'Isère",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-val-d-isere.html",
+          "name" : "Vidéaste mariage Val d'Isère",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Se marier à Val d'Isère, est-ce plutôt l'été ou l'hiver&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Les deux se filment très bien, mais ce sont deux ambiances opposées. L'hiver, c'est la neige, la lumière vive et les contraintes du froid sur le matériel et les invités. L'été, la station retrouve ses alpages verts, ses lacs d'altitude et des journées longues. Le choix dépend du film que vous voulez garder." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Les deux se filment très bien, mais ce sont deux ambiances opposées. L'hiver, c'est la neige, la lumière vive et les contraintes du froid sur le matériel et les invités. L'été, la station retrouve ses alpages verts, ses lacs d'altitude et des journées longues. Le choix dépend du film que vous voulez garder."
+          },
+          "name" : "Se marier à Val d'Isère, est-ce plutôt l'été ou l'hiver&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Comment rejoint-on Val d'Isère&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "La gare la plus proche est Bourg-Saint-Maurice, à une trentaine de kilomètres, puis la route de montagne. Côté aéroports : Chambéry et Lyon-Saint-Exupéry sont les plus directs, Genève reste une option. Prévoyez toujours une marge l'hiver, la météo commande." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "La gare la plus proche est Bourg-Saint-Maurice, à une trentaine de kilomètres, puis la route de montagne. Côté aéroports : Chambéry et Lyon-Saint-Exupéry sont les plus directs, Genève reste une option. Prévoyez toujours une marge l'hiver, la météo commande."
+          },
+          "name" : "Comment rejoint-on Val d'Isère&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Vous déplacez-vous depuis la Loire jusqu'en Savoie&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui, je me déplace pour les mariages de destination, sans frais de déplacement en formule Signature. Je n'ai jamais travaillé à Val d'Isère ; ce que j'apporte, c'est ma manière de filmer et un repérage sérieux avant le jour J." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui, je me déplace pour les mariages de destination, sans frais de déplacement en formule Signature. Je n'ai jamais travaillé à Val d'Isère ; ce que j'apporte, c'est ma manière de filmer et un repérage sérieux avant le jour J."
+          },
+          "name" : "Vous déplacez-vous depuis la Loire jusqu'en Savoie&nbsp;?"
         }
       ]
     }

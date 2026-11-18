@@ -36,69 +36,94 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Chamonix-Mont-Blanc" },
-        { "@type": "Place", "name": "Vallée de Chamonix" },
-        { "@type": "AdministrativeArea", "name": "Haute-Savoie" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": {
-        "@type": "Person",
-        "name": "Charly Coulardot"
-      }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Chamonix",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Chamonix", "item": "https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Chamonix-Mont-Blanc"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Vallée de Chamonix"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Haute-Savoie"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Chamonix",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-chamonix.html",
+          "name" : "Vidéaste mariage Chamonix",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Comment vient-on à Chamonix&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L'aéroport le plus proche est Genève, à environ 88 km, soit 1h de route par l'Autoroute Blanche (A40). En train, on rejoint Saint-Gervais-les-Bains (Le Fayet) depuis Genève par le Léman Express, puis on prend le Mont-Blanc Express qui dessert toute la vallée jusqu'à Chamonix."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "L'aéroport le plus proche est Genève, à environ 88 km, soit 1h de route par l'Autoroute Blanche (A40). En train, on rejoint Saint-Gervais-les-Bains (Le Fayet) depuis Genève par le Léman Express, puis on prend le Mont-Blanc Express qui dessert toute la vallée jusqu'à Chamonix."
+          },
+          "name" : "Comment vient-on à Chamonix&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Quelle saison pour un mariage à Chamonix&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L'été donne une vallée verte, des journées longues et des sommets dégagés, c'est la fenêtre la plus souple pour les invités. L'hiver donne la haute montagne sous la neige, plus exigeant côté accès. Le décor du Mont-Blanc reste présent toute l'année."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "L'été donne une vallée verte, des journées longues et des sommets dégagés, c'est la fenêtre la plus souple pour les invités. L'hiver donne la haute montagne sous la neige, plus exigeant côté accès. Le décor du Mont-Blanc reste présent toute l'année."
+          },
+          "name" : "Quelle saison pour un mariage à Chamonix&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Le drone est-il autorisé à Chamonix&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La haute montagne et la vallée de Chamonix sont très réglementées pour le survol. Tout vol par drone demande une vérification préalable et, selon les zones, une autorisation. Je suis télépilote certifié et je n'engage jamais de vol sans accord en règle."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "La haute montagne et la vallée de Chamonix sont très réglementées pour le survol. Tout vol par drone demande une vérification préalable et, selon les zones, une autorisation. Je suis télépilote certifié et je n'engage jamais de vol sans accord en règle."
+          },
+          "name" : "Le drone est-il autorisé à Chamonix&nbsp;?"
         }
       ]
     }

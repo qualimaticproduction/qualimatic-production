@@ -29,75 +29,134 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "Service",
-      "@id": "https://www.qualimaticproduction.fr/mariage.html#service",
-      "name": "Film de mariage",
-      "serviceType": "Vidéaste de mariage",
-      "provider": { "@id": "https://www.qualimaticproduction.fr/#business" },
-      "areaServed": [
-        { "@type": "Place", "name": "Vallée de la Loire" },
-        { "@type": "AdministrativeArea", "name": "Centre-Val de Loire" },
-        { "@type": "AdministrativeArea", "name": "Bourgogne-Franche-Comté" },
-        { "@type": "Country", "name": "France" }
+      "@id" : "https://www.qualimaticproduction.fr/mariage.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage en Vallée de la Loire",
+      "url" : "https://www.qualimaticproduction.fr/mariage.html"
+    },
+    {
+      "@id" : "https://www.qualimaticproduction.fr/mariage.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "Place",
+          "name" : "Vallée de la Loire"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Centre-Val de Loire"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Bourgogne-Franche-Comté"
+        },
+        {
+          "@type" : "Country",
+          "name" : "France"
+        }
       ],
-      "description": "Films de mariage cinématographiques : la journée filmée au plus près des émotions, une séance couple guidée et éclairée, des plans drone selon la réglementation et la météo.",
-      "offers": [
-        { "@type": "Offer", "name": "Formule Élégance", "price": "2650", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html" },
-        { "@type": "Offer", "name": "Formule Signature", "price": "4000", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html" }
-      ]
+      "description" : "Films de mariage cinématographiques : la journée filmée au plus près des émotions, une séance couple guidée et éclairée, des plans drone selon la réglementation et la météo.",
+      "name" : "Film de mariage",
+      "offers" : [
+        {
+          "@type" : "Offer",
+          "availability" : "https://schema.org/InStock",
+          "name" : "Formule Élégance",
+          "price" : "2650",
+          "priceCurrency" : "EUR",
+          "url" : "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html"
+        },
+        {
+          "@type" : "Offer",
+          "availability" : "https://schema.org/InStock",
+          "name" : "Formule Signature",
+          "price" : "4000",
+          "priceCurrency" : "EUR",
+          "url" : "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html"
+        }
+      ],
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage"
     },
     {
-      "@type": "VideoObject",
-      "name": "Film des Vibiches, Chloé & Victor",
-      "description": "Film de mariage de Chloé et Victor, « les Vibiches », réalisé par Qualimatic Production.",
-      "thumbnailUrl": "https://i.ytimg.com/vi/7OEqLbjnlPQ/hqdefault.jpg",
-      "uploadDate": "2026-09-25T04:51:23-07:00",
-      "duration": "PT4M54S",
-      "contentUrl": "https://www.youtube.com/watch?v=7OEqLbjnlPQ",
-      "embedUrl": "https://www.youtube.com/embed/7OEqLbjnlPQ",
-      "publisher": { "@id": "https://www.qualimaticproduction.fr/#business" }
+      "@type" : "VideoObject",
+      "contentUrl" : "https://www.youtube.com/watch?v=7OEqLbjnlPQ",
+      "description" : "Film de mariage de Chloé et Victor, « les Vibiches », réalisé par Qualimatic Production.",
+      "duration" : "PT4M54S",
+      "embedUrl" : "https://www.youtube.com/embed/7OEqLbjnlPQ",
+      "name" : "Film des Vibiches, Chloé & Victor",
+      "publisher" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "thumbnailUrl" : "https://i.ytimg.com/vi/7OEqLbjnlPQ/hqdefault.jpg",
+      "uploadDate" : "2026-09-25T04:51:23-07:00"
     },
     {
-      "@type": "VideoObject",
-      "name": "Isabel & Marshall / Château de la Huberdière",
-      "description": "Film de mariage d’Isabel et Marshall au Château de la Huberdière, en Touraine, réalisé par Qualimatic Production.",
-      "thumbnailUrl": "https://i.ytimg.com/vi/GiEygKSM9XM/hqdefault.jpg",
-      "uploadDate": "2026-11-15T04:11:17-08:00",
-      "duration": "PT1M29S",
-      "contentUrl": "https://www.youtube.com/watch?v=GiEygKSM9XM",
-      "embedUrl": "https://www.youtube.com/embed/GiEygKSM9XM",
-      "publisher": { "@id": "https://www.qualimaticproduction.fr/#business" }
+      "@type" : "VideoObject",
+      "contentUrl" : "https://www.youtube.com/watch?v=GiEygKSM9XM",
+      "description" : "Film de mariage d’Isabel et Marshall au Château de la Huberdière, en Touraine, réalisé par Qualimatic Production.",
+      "duration" : "PT1M29S",
+      "embedUrl" : "https://www.youtube.com/embed/GiEygKSM9XM",
+      "name" : "Isabel & Marshall / Château de la Huberdière",
+      "publisher" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "thumbnailUrl" : "https://i.ytimg.com/vi/GiEygKSM9XM/hqdefault.jpg",
+      "uploadDate" : "2026-11-15T04:11:17-08:00"
     },
     {
-      "@type": "VideoObject",
-      "name": "Sophia & James / Château de Thorens",
-      "description": "Film de mariage de Sophia et James au Château de Thorens, en Haute-Savoie, réalisé par Qualimatic Production.",
-      "thumbnailUrl": "https://i.ytimg.com/vi/g4jRh9dpPVo/hqdefault.jpg",
-      "uploadDate": "2026-11-15T04:12:52-08:00",
-      "duration": "PT3M39S",
-      "contentUrl": "https://www.youtube.com/watch?v=g4jRh9dpPVo",
-      "embedUrl": "https://www.youtube.com/embed/g4jRh9dpPVo",
-      "publisher": { "@id": "https://www.qualimaticproduction.fr/#business" }
+      "@type" : "VideoObject",
+      "contentUrl" : "https://www.youtube.com/watch?v=g4jRh9dpPVo",
+      "description" : "Film de mariage de Sophia et James au Château de Thorens, en Haute-Savoie, réalisé par Qualimatic Production.",
+      "duration" : "PT3M39S",
+      "embedUrl" : "https://www.youtube.com/embed/g4jRh9dpPVo",
+      "name" : "Sophia & James / Château de Thorens",
+      "publisher" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "thumbnailUrl" : "https://i.ytimg.com/vi/g4jRh9dpPVo/hqdefault.jpg",
+      "uploadDate" : "2026-11-15T04:12:52-08:00"
     },
     {
-      "@type": "VideoObject",
-      "name": "Mouna & Charles Henri / Les Hauts de Sancerre",
-      "description": "Film tourné aux Hauts de Sancerre, dans le Sancerrois, réalisé par Qualimatic Production.",
-      "thumbnailUrl": "https://i.ytimg.com/vi/Sm5xBx7q46Y/hqdefault.jpg",
-      "uploadDate": "2026-11-15T04:13:42-08:00",
-      "duration": "PT1M23S",
-      "contentUrl": "https://www.youtube.com/watch?v=Sm5xBx7q46Y",
-      "embedUrl": "https://www.youtube.com/embed/Sm5xBx7q46Y",
-      "publisher": { "@id": "https://www.qualimaticproduction.fr/#business" }
+      "@type" : "VideoObject",
+      "contentUrl" : "https://www.youtube.com/watch?v=Sm5xBx7q46Y",
+      "description" : "Film tourné aux Hauts de Sancerre, dans le Sancerrois, réalisé par Qualimatic Production.",
+      "duration" : "PT1M23S",
+      "embedUrl" : "https://www.youtube.com/embed/Sm5xBx7q46Y",
+      "name" : "Mouna & Charles Henri / Les Hauts de Sancerre",
+      "publisher" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "thumbnailUrl" : "https://i.ytimg.com/vi/Sm5xBx7q46Y/hqdefault.jpg",
+      "uploadDate" : "2026-11-15T04:13:42-08:00"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" }
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        }
       ]
     }
   ]

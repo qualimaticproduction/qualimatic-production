@@ -36,46 +36,95 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Toulouse" },
-        { "@type": "AdministrativeArea", "name": "Haute-Garonne" },
-        { "@type": "Place", "name": "Occitanie" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Toulouse",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Toulouse", "item": "https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Toulouse"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Haute-Garonne"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Occitanie"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Toulouse",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-toulouse.html",
+          "name" : "Vidéaste mariage Toulouse",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Où se marier autour de Toulouse ?", "acceptedAnswer": { "@type": "Answer", "text": "L'Occitanie offre des domaines et châteaux dans le Lauragais et le Gers, des propriétés viticoles (Fronton, Gaillac) et des lieux plus urbains à Toulouse même. Le mariage civil se tient en mairie ; chaque domaine a ses propres conditions." } },
-        { "@type": "Question", "name": "Vous déplacez-vous à Toulouse depuis la Loire ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, je me déplace pour les mariages de destination. Toulouse est loin de la Loire, mais la formule Signature est sans frais de déplacement. Je ne connais pas chaque domaine de la région par cœur ; ce que j'apporte, c'est ma manière de filmer et un repérage sérieux avant le jour J." } },
-        { "@type": "Question", "name": "Comment rejoint-on Toulouse ?", "acceptedAnswer": { "@type": "Answer", "text": "Toulouse est reliée à Paris par avion (aéroport Toulouse-Blagnac) et par le train (gare Matabiau). Pour des invités venus de loin, l'avion reste le plus simple." } }
+      "@type" : "FAQPage",
+      "mainEntity" : [
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "L'Occitanie offre des domaines et châteaux dans le Lauragais et le Gers, des propriétés viticoles (Fronton, Gaillac) et des lieux plus urbains à Toulouse même. Le mariage civil se tient en mairie ; chaque domaine a ses propres conditions."
+          },
+          "name" : "Où se marier autour de Toulouse ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui, je me déplace pour les mariages de destination. Toulouse est loin de la Loire, mais la formule Signature est sans frais de déplacement. Je ne connais pas chaque domaine de la région par cœur ; ce que j'apporte, c'est ma manière de filmer et un repérage sérieux avant le jour J."
+          },
+          "name" : "Vous déplacez-vous à Toulouse depuis la Loire ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Toulouse est reliée à Paris par avion (aéroport Toulouse-Blagnac) et par le train (gare Matabiau). Pour des invités venus de loin, l'avion reste le plus simple."
+          },
+          "name" : "Comment rejoint-on Toulouse ?"
+        }
       ]
     }
   ]

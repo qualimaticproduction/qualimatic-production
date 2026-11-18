@@ -36,57 +36,94 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-loches.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-loches.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Loches" },
-        { "@type": "AdministrativeArea", "name": "Indre-et-Loire" },
-        { "@type": "Place", "name": "Vallée de la Loire" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-loches.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Loches",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-loches.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Loches", "item": "https://www.qualimaticproduction.fr/videaste-mariage-loches.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-loches.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Loches"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Indre-et-Loire"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Vallée de la Loire"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Loches",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-loches.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-loches.html",
+          "name" : "Vidéaste mariage Loches",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Peut-on se marier à la Cité royale de Loches&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Le mariage civil se tient en mairie. La Cité royale de Loches est un monument qui ouvre certains de ses espaces à des événements privés, sous conditions. La réception se fait le plus souvent dans un domaine des environs ; le donjon et le logis royal restent un décor possible pour les images." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Le mariage civil se tient en mairie. La Cité royale de Loches est un monument qui ouvre certains de ses espaces à des événements privés, sous conditions. La réception se fait le plus souvent dans un domaine des environs ; le donjon et le logis royal restent un décor possible pour les images."
+          },
+          "name" : "Peut-on se marier à la Cité royale de Loches&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Comment rejoindre Loches&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Loches a sa propre gare, reliée à Tours en TER en une heure environ. En voiture, Tours est à 45 km. Pour des invités venus de Paris, le plus simple est le TGV jusqu'à Tours ou Saint-Pierre-des-Corps, puis la route ou le train régional." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Loches a sa propre gare, reliée à Tours en TER en une heure environ. En voiture, Tours est à 45 km. Pour des invités venus de Paris, le plus simple est le TGV jusqu'à Tours ou Saint-Pierre-des-Corps, puis la route ou le train régional."
+          },
+          "name" : "Comment rejoindre Loches&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Intervenez-vous à Loches sans frais de déplacement&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Loches est en Touraine, au cœur de ma zone. Depuis mon atelier de Romorantin, je compte un peu plus d'une heure de route. Aucun frais de déplacement n'est ajouté pour un mariage en Indre-et-Loire." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. Loches est en Touraine, au cœur de ma zone. Depuis mon atelier de Romorantin, je compte un peu plus d'une heure de route. Aucun frais de déplacement n'est ajouté pour un mariage en Indre-et-Loire."
+          },
+          "name" : "Intervenez-vous à Loches sans frais de déplacement&nbsp;?"
         }
       ]
     }

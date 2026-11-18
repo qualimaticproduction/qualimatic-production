@@ -36,46 +36,95 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-lyon.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-lyon.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Lyon" },
-        { "@type": "AdministrativeArea", "name": "Rhône" },
-        { "@type": "Place", "name": "Beaujolais" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-lyon.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Lyon",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-lyon.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Lyon", "item": "https://www.qualimaticproduction.fr/videaste-mariage-lyon.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-lyon.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Lyon"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Rhône"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Beaujolais"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Lyon",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-lyon.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-lyon.html",
+          "name" : "Vidéaste mariage Lyon",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Où se marier autour de Lyon ?", "acceptedAnswer": { "@type": "Answer", "text": "La région lyonnaise offre des domaines viticoles dans le Beaujolais et les Coteaux du Lyonnais, des châteaux, des orangeries, ainsi que des lieux plus urbains à Lyon même. Le mariage civil se tient en mairie ; chaque domaine a ses propres conditions." } },
-        { "@type": "Question", "name": "Vous déplacez-vous à Lyon depuis la Loire ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, je me déplace pour les mariages de destination. Depuis Romorantin, Lyon est à environ 3h30 de route, et la formule Signature est sans frais de déplacement. Je ne connais pas chaque domaine du Beaujolais par cœur ; ce que j'apporte, c'est ma manière de filmer et un repérage sérieux." } },
-        { "@type": "Question", "name": "Lyon est-il pratique pour un mariage dans les Alpes ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Lyon est la grande porte d'entrée des Alpes : Annecy est à environ 1h30, Chamonix et les stations de Savoie un peu au-delà. Beaucoup de couples combinent une cérémonie en région lyonnaise et une séance en montagne." } }
+      "@type" : "FAQPage",
+      "mainEntity" : [
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "La région lyonnaise offre des domaines viticoles dans le Beaujolais et les Coteaux du Lyonnais, des châteaux, des orangeries, ainsi que des lieux plus urbains à Lyon même. Le mariage civil se tient en mairie ; chaque domaine a ses propres conditions."
+          },
+          "name" : "Où se marier autour de Lyon ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui, je me déplace pour les mariages de destination. Depuis Romorantin, Lyon est à environ 3h30 de route, et la formule Signature est sans frais de déplacement. Je ne connais pas chaque domaine du Beaujolais par cœur ; ce que j'apporte, c'est ma manière de filmer et un repérage sérieux."
+          },
+          "name" : "Vous déplacez-vous à Lyon depuis la Loire ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. Lyon est la grande porte d'entrée des Alpes : Annecy est à environ 1h30, Chamonix et les stations de Savoie un peu au-delà. Beaucoup de couples combinent une cérémonie en région lyonnaise et une séance en montagne."
+          },
+          "name" : "Lyon est-il pratique pour un mariage dans les Alpes ?"
+        }
       ]
     }
   ]

@@ -26,34 +26,114 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "Service",
-      "@id": "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html#service",
-      "name": "Film de mariage",
-      "serviceType": "Vidéaste de mariage",
-      "provider": { "@id": "https://www.qualimaticproduction.fr/#business" },
-      "offers": [
-        { "@type": "Offer", "name": "Formule Élégance", "price": "2650", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "description": "Des préparatifs à la première danse, de 9 h à 1 h. Cérémonie, séance couple, plans drone selon la réglementation et la météo, film de mariage de 6 à 8 minutes. Déplacement offert en Centre-Val de Loire et en Bourgogne-Franche-Comté." },
-        { "@type": "Offer", "name": "Formule Signature", "price": "4000", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "description": "Journée complète de 9 h à 1 h, cérémonie et discours en intégralité, film de mariage de 6 à 8 minutes, film long de 20 à 25 minutes, teaser d’une minute sous 7 jours, plans drone, livraison prioritaire sous 5 semaines, coffret USB offert. Aucun frais de déplacement en France métropolitaine." }
+      "@id" : "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Tarif vidéaste mariage, deux formules affichées",
+      "url" : "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html"
+    },
+    {
+      "@id" : "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html#service",
+      "@type" : "Service",
+      "name" : "Film de mariage",
+      "offers" : [
+        {
+          "@type" : "Offer",
+          "availability" : "https://schema.org/InStock",
+          "description" : "Des préparatifs à la première danse, de 9 h à 1 h. Cérémonie, séance couple, plans drone selon la réglementation et la météo, film de mariage de 6 à 8 minutes. Déplacement offert en Centre-Val de Loire et en Bourgogne-Franche-Comté.",
+          "name" : "Formule Élégance",
+          "price" : "2650",
+          "priceCurrency" : "EUR"
+        },
+        {
+          "@type" : "Offer",
+          "availability" : "https://schema.org/InStock",
+          "description" : "Journée complète de 9 h à 1 h, cérémonie et discours en intégralité, film de mariage de 6 à 8 minutes, film long de 20 à 25 minutes, teaser d’une minute sous 7 jours, plans drone, livraison prioritaire sous 5 semaines, coffret USB offert. Aucun frais de déplacement en France métropolitaine.",
+          "name" : "Formule Signature",
+          "price" : "4000",
+          "priceCurrency" : "EUR"
+        }
+      ],
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage"
+    },
+    {
+      "@type" : "FAQPage",
+      "mainEntity" : [
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Élégance suit la journée des préparatifs jusqu’à la première danse et livre un film de 6 à 8 minutes. Signature couvre toute la journée, avec la cérémonie et les discours en intégralité, et ajoute un film long de 20 à 25 minutes, un teaser d’une minute sous 7 jours, une livraison prioritaire sous 5 semaines et un coffret USB offert. En Élégance, le déplacement est offert en Centre-Val de Loire et en Bourgogne-Franche-Comté. En Signature, il l’est partout en France métropolitaine."
+          },
+          "name" : "Quelle différence entre Élégance et Signature ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. La réservation est confirmée à la signature du contrat, avec un acompte de 30 %, qui engage fermement les deux parties. Le solde se règle au plus tard le jour du mariage, et le paiement en plusieurs fois est possible."
+          },
+          "name" : "Faut-il verser un acompte ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui, dans les deux formules, selon la réglementation du lieu et la météo. Je suis télépilote certifié et je vérifie les autorisations de vol lieu par lieu, notamment sur les sites classés."
+          },
+          "name" : "Le drone est-il toujours inclus dans le tarif ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Les options à la carte, comme une cérémonie décalée ou une soirée prolongée jusqu’à 2 h, affichées avec leur prix sur cette page. Les déplacements sont inclus partout en France métropolitaine en formule Signature. En Élégance, ils sont offerts en Centre-Val de Loire et en Bourgogne-Franche-Comté, et annoncés au coût réel ailleurs. Pour un mariage à l’étranger, le transport et l’hébergement sont annoncés au coût réel avant signature."
+          },
+          "name" : "Qu’est-ce qui n’est jamais inclus dans le prix ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Non. Le tarif dépend de la durée et de la formule choisie, pas du nombre de convives. Un mariage de 200 invités et un mariage de 40 personnes suivent la même grille à durée équivalente."
+          },
+          "name" : "Le prix change-t-il selon le nombre d’invités ?"
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Faut-il verser un acompte ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. La réservation est confirmée à la signature du contrat, avec un acompte de 30 %, qui engage fermement les deux parties. Le solde se règle au plus tard le jour du mariage, et le paiement en plusieurs fois est possible." } },
-        { "@type": "Question", "name": "Le drone est-il toujours inclus dans le tarif ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, dans les deux formules, selon la réglementation du lieu et la météo. Je suis télépilote certifié et je vérifie les autorisations de vol lieu par lieu, notamment sur les sites classés." } },
-        { "@type": "Question", "name": "Qu’est-ce qui n’est jamais inclus dans le prix ?", "acceptedAnswer": { "@type": "Answer", "text": "Les options à la carte, comme une cérémonie décalée ou une soirée prolongée jusqu’à 2 h, affichées avec leur prix sur cette page. Les déplacements sont inclus partout en France métropolitaine en formule Signature. En Élégance, ils sont offerts en Centre-Val de Loire et en Bourgogne-Franche-Comté, et annoncés au coût réel ailleurs. Pour un mariage à l’étranger, le transport et l’hébergement sont annoncés au coût réel avant signature." } },
-        { "@type": "Question", "name": "Le prix change-t-il selon le nombre d’invités ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Le tarif dépend de la durée et de la formule choisie, pas du nombre de convives. Un mariage de 200 invités et un mariage de 40 personnes suivent la même grille à durée équivalente." } }
-      ]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Tarifs", "item": "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html" }
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html",
+          "name" : "Tarifs",
+          "position" : 3
+        }
       ]
     }
   ]
@@ -221,6 +301,10 @@
       <span class="duo__script apparait">questions</span>
     </h2>
     <div class="faq-tarifs__liste">
+      <details class="faq-tarifs__q">
+        <summary>Quelle différence entre Élégance et Signature&nbsp;?</summary>
+        <p>Élégance suit la journée des préparatifs jusqu’à la première danse et livre un film de 6 à 8&nbsp;minutes. Signature couvre toute la journée, avec la cérémonie et les discours en intégralité, et ajoute un film long de 20 à 25&nbsp;minutes, un teaser d’une minute sous 7&nbsp;jours, une livraison prioritaire sous 5&nbsp;semaines et un coffret USB offert. En Élégance, le déplacement est offert en Centre-Val de Loire et en Bourgogne-Franche-Comté. En Signature, il l’est partout en France métropolitaine.</p>
+      </details>
       <details class="faq-tarifs__q">
         <summary>Faut-il verser un acompte&nbsp;?</summary>
         <p>Oui. La réservation est confirmée à la signature du contrat, avec un acompte de 30&nbsp;%, qui engage fermement les deux parties. Le solde se règle au plus tard le jour du mariage, et le paiement en plusieurs fois est possible.</p>

@@ -37,80 +37,137 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "Service",
-      "@id": "https://www.qualimaticproduction.fr/en/wedding.html#elegance",
-      "name": "Elegance, cinematic wedding film package",
-      "serviceType": "Wedding Videography",
-      "provider": { "@id": "https://www.qualimaticproduction.fr/#business" },
-      "areaServed": [
-        { "@type": "Place", "name": "Loire Valley" },
-        { "@type": "Country", "name": "France" }
-      ],
-      "description": "From getting ready to the first dance, 9am to 1am. Secular or religious ceremony, editorial couple session, drone shots (weather and regulations permitting), wedding film of 6 to 8 minutes, graded cinematic edit. Travel included in Centre-Val de Loire and Burgundy-Franche-Comté.",
-      "offers": {
-        "@type": "Offer",
-        "price": "2650",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock"
-      }
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "inLanguage" : "en",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Wedding Videography in the Loire Valley & French Châteaux",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding.html"
     },
     {
-      "@type": "Service",
-      "@id": "https://www.qualimaticproduction.fr/en/wedding.html#signature",
-      "name": "Signature, full-day cinematic wedding film package",
-      "serviceType": "Wedding Videography",
-      "provider": { "@id": "https://www.qualimaticproduction.fr/#business" },
-      "areaServed": [
-        { "@type": "Place", "name": "Loire Valley" },
-        { "@type": "Country", "name": "France" },
-        { "@type": "Place", "name": "Europe" }
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding.html#elegance",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "Place",
+          "name" : "Loire Valley"
+        },
+        {
+          "@type" : "Country",
+          "name" : "France"
+        }
       ],
-      "description": "Full day from 9am to 1am. Full coverage from getting ready to the evening party, ceremony and speeches filmed in full, editorial couple session, drone shots (weather and regulations permitting), wedding film of 6 to 8 minutes, long-form film of 20 to 25 minutes, one-minute teaser within 7 days, priority delivery within 5 weeks, personalised USB box included. No travel fees in mainland France.",
-      "offers": {
-        "@type": "Offer",
-        "price": "4000",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock"
-      }
+      "description" : "From getting ready to the first dance, 9am to 1am. Secular or religious ceremony, editorial couple session, drone shots (weather and regulations permitting), wedding film of 6 to 8 minutes, graded cinematic edit. Travel included in Centre-Val de Loire and Burgundy-Franche-Comté.",
+      "name" : "Elegance, cinematic wedding film package",
+      "offers" : {
+        "@type" : "Offer",
+        "availability" : "https://schema.org/InStock",
+        "price" : "2650",
+        "priceCurrency" : "EUR"
+      },
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Wedding Videography"
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding.html#signature",
+      "@type" : "Service",
+      "areaServed" : [
         {
-          "@type": "Question",
-          "name": "Do you speak English on the wedding day?",
-          "acceptedAnswer": { "@type": "Answer", "text": "I work with your wedding planner as the bilingual intermediary, ensuring smooth, high-quality production. This is the most efficient setup for destination weddings." }
+          "@type" : "Place",
+          "name" : "Loire Valley"
         },
         {
-          "@type": "Question",
-          "name": "Do you travel for international destinations?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. With the Signature package there are no travel fees anywhere in mainland France, whether you marry in the Loire Valley, Provence, Burgundy or the French Alps. With Elegance, travel is included in Centre-Val de Loire and Burgundy-Franche-Comté, and quoted upfront at real cost elsewhere. For weddings abroad, travel and accommodation are quoted upfront, at real cost, with no hidden margin." }
+          "@type" : "Country",
+          "name" : "France"
         },
         {
-          "@type": "Question",
-          "name": "Can you coordinate with American or British wedding planners?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. When you work with a planner, they usually handle communication in English while I focus on filming. Without a planner, we keep things simple, directly between us." }
+          "@type" : "Place",
+          "name" : "Europe"
+        }
+      ],
+      "description" : "Full day from 9am to 1am. Full coverage from getting ready to the evening party, ceremony and speeches filmed in full, editorial couple session, drone shots (weather and regulations permitting), wedding film of 6 to 8 minutes, long-form film of 20 to 25 minutes, one-minute teaser within 7 days, priority delivery within 5 weeks, personalised USB box included. No travel fees in mainland France.",
+      "name" : "Signature, full-day cinematic wedding film package",
+      "offers" : {
+        "@type" : "Offer",
+        "availability" : "https://schema.org/InStock",
+        "price" : "4000",
+        "priceCurrency" : "EUR"
+      },
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Wedding Videography"
+    },
+    {
+      "@type" : "FAQPage",
+      "mainEntity" : [
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "I work with your wedding planner as the bilingual intermediary, ensuring smooth, high-quality production. This is the most efficient setup for destination weddings."
+          },
+          "name" : "Do you speak English on the wedding day?"
         },
         {
-          "@type": "Question",
-          "name": "What about visa/travel costs for international weddings?",
-          "acceptedAnswer": { "@type": "Answer", "text": "With the Signature package, there are no travel fees anywhere in mainland France. For weddings abroad, travel and accommodation are quoted transparently, at cost. As an EU-based supplier there are no visa issues for weddings in Europe." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Yes. With the Signature package there are no travel fees anywhere in mainland France, whether you marry in the Loire Valley, Provence, Burgundy or the French Alps. With Elegance, travel is included in Centre-Val de Loire and Burgundy-Franche-Comté, and quoted upfront at real cost elsewhere. For weddings abroad, travel and accommodation are quoted upfront, at real cost, with no hidden margin."
+          },
+          "name" : "Do you travel for international destinations?"
         },
         {
-          "@type": "Question",
-          "name": "How early should I book?",
-          "acceptedAnswer": { "@type": "Answer", "text": "I recommend booking 12-18 months in advance for château weddings in Loire Valley as iconic venues fill up quickly." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Yes. When you work with a planner, they usually handle communication in English while I focus on filming. Without a planner, we keep things simple, directly between us."
+          },
+          "name" : "Can you coordinate with American or British wedding planners?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "With the Signature package, there are no travel fees anywhere in mainland France. For weddings abroad, travel and accommodation are quoted transparently, at cost. As an EU-based supplier there are no visa issues for weddings in Europe."
+          },
+          "name" : "What about visa/travel costs for international weddings?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "I recommend booking 12-18 months in advance for château weddings in Loire Valley as iconic venues fill up quickly."
+          },
+          "name" : "How early should I book?"
         }
       ]
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.qualimaticproduction.fr/en/" },
-        { "@type": "ListItem", "position": 2, "name": "Wedding", "item": "https://www.qualimaticproduction.fr/en/wedding.html" }
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/",
+          "name" : "Home",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/wedding.html",
+          "name" : "Wedding",
+          "position" : 2
+        }
       ]
     }
   ]

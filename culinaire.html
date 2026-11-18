@@ -37,55 +37,127 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "Service",
-      "@id": "https://www.qualimaticproduction.fr/culinaire.html#service",
-      "name": "Signature Chef, film culinaire de 60 secondes",
-      "serviceType": "Film culinaire pour chefs et restaurants",
-      "provider": { "@id": "https://www.qualimaticproduction.fr/#business" },
-      "areaServed": [
-        { "@type": "Place", "name": "Vallée de la Loire" },
-        { "@type": "Place", "name": "Sologne" },
-        { "@type": "Place", "name": "Touraine" },
-        { "@type": "Country", "name": "France" }
+      "@id" : "https://www.qualimaticproduction.fr/culinaire.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Film culinaire pour chefs et restaurants",
+      "url" : "https://www.qualimaticproduction.fr/culinaire.html"
+    },
+    {
+      "@id" : "https://www.qualimaticproduction.fr/culinaire.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "Place",
+          "name" : "Vallée de la Loire"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Sologne"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Touraine"
+        },
+        {
+          "@type" : "Country",
+          "name" : "France"
+        }
       ],
-      "description": "Film cinématographique de 60 secondes pour chefs et restaurants gastronomiques : tournage sur site (cuisine, salle, interview), interview du chef dirigée, mise en scène du plat signature, montage, étalonnage et sound design.",
-      "offers": {
-        "@type": "Offer",
-        "price": "1200",
-        "priceCurrency": "EUR",
-        "priceSpecification": { "@type": "PriceSpecification", "price": "1200", "priceCurrency": "EUR", "valueAddedTaxIncluded": true },
-        "availability": "https://schema.org/InStock",
-        "url": "https://www.qualimaticproduction.fr/culinaire.html#tarif"
-      }
+      "description" : "Film cinématographique de 60 secondes pour chefs et restaurants gastronomiques : tournage sur site (cuisine, salle, interview), interview du chef dirigée, mise en scène du plat signature, montage, étalonnage et sound design.",
+      "name" : "Signature Chef, film culinaire de 60 secondes",
+      "offers" : {
+        "@type" : "Offer",
+        "availability" : "https://schema.org/InStock",
+        "price" : "1200",
+        "priceCurrency" : "EUR",
+        "priceSpecification" : {
+          "@type" : "PriceSpecification",
+          "price" : "1200",
+          "priceCurrency" : "EUR",
+          "valueAddedTaxIncluded" : true
+        },
+        "url" : "https://www.qualimaticproduction.fr/culinaire.html#tarif"
+      },
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Film culinaire pour chefs et restaurants"
     },
     {
-      "@type": "VideoObject",
-      "name": "SIGNATURE du Chef | La Botte d'Asperges",
-      "description": "Film culinaire Signature Chef tourné par Qualimatic Production au restaurant La Botte d'Asperges, à Contres (Loir-et-Cher).",
-      "thumbnailUrl": "https://i.ytimg.com/vi/1VdhH7SxYQ8/hqdefault.jpg",
-      "uploadDate": "2026-05-20T05:08:35-07:00",
-      "duration": "PT1M35S",
-      "contentUrl": "https://www.youtube.com/watch?v=1VdhH7SxYQ8",
-      "embedUrl": "https://www.youtube.com/embed/1VdhH7SxYQ8",
-      "publisher": { "@id": "https://www.qualimaticproduction.fr/#business" }
+      "@type" : "VideoObject",
+      "contentUrl" : "https://www.youtube.com/watch?v=1VdhH7SxYQ8",
+      "description" : "Film culinaire Signature Chef tourné par Qualimatic Production au restaurant La Botte d'Asperges, à Contres (Loir-et-Cher).",
+      "duration" : "PT1M35S",
+      "embedUrl" : "https://www.youtube.com/embed/1VdhH7SxYQ8",
+      "name" : "SIGNATURE du Chef | La Botte d'Asperges",
+      "publisher" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "thumbnailUrl" : "https://i.ytimg.com/vi/1VdhH7SxYQ8/hqdefault.jpg",
+      "uploadDate" : "2026-05-20T05:08:35-07:00"
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Combien coûte un film culinaire Signature Chef ?", "acceptedAnswer": { "@type": "Answer", "text": "1 200 € TTC, prix fixe : un film de 60 secondes, le tournage sur place (cuisine, salle, interview), l'interview du chef, la mise en scène du plat signature, le montage, l'étalonnage et le sound design." } },
-        { "@type": "Question", "name": "Faut-il préparer l'interview ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Je vous guide pendant toute la prise. Vous parlez simplement de votre métier et de ce qui vous anime." } },
-        { "@type": "Question", "name": "Où sera diffusé le film ?", "acceptedAnswer": { "@type": "Answer", "text": "Vous recevez une vidéo prête à être diffusée, pensée pour votre site et vos réseaux." } },
-        { "@type": "Question", "name": "Où vous déplacez-vous ?", "acceptedAnswer": { "@type": "Answer", "text": "En Vallée de la Loire d'abord, en Sologne et en Touraine, et partout en France sur demande : Île-de-France, Provence, Côte d'Azur, Bordeaux, Bourgogne." } }
+      "@type" : "FAQPage",
+      "mainEntity" : [
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "1 200 € TTC, prix fixe : un film de 60 secondes, le tournage sur place (cuisine, salle, interview), l'interview du chef, la mise en scène du plat signature, le montage, l'étalonnage et le sound design."
+          },
+          "name" : "Combien coûte un film culinaire Signature Chef ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Non. Je vous guide pendant toute la prise. Vous parlez simplement de votre métier et de ce qui vous anime."
+          },
+          "name" : "Faut-il préparer l'interview ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Vous recevez une vidéo prête à être diffusée, pensée pour votre site et vos réseaux."
+          },
+          "name" : "Où sera diffusé le film ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "En Vallée de la Loire d'abord, en Sologne et en Touraine, et partout en France sur demande : Île-de-France, Provence, Côte d'Azur, Bordeaux, Bourgogne."
+          },
+          "name" : "Où vous déplacez-vous ?"
+        }
       ]
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Culinaire", "item": "https://www.qualimaticproduction.fr/culinaire.html" }
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/culinaire.html",
+          "name" : "Culinaire",
+          "position" : 2
+        }
       ]
     }
   ]

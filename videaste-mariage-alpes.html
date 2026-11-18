@@ -37,70 +37,98 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-alpes.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-alpes.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "AdministrativeArea", "name": "Savoie" },
-        { "@type": "AdministrativeArea", "name": "Haute-Savoie" },
-        { "@type": "Place", "name": "Alpes" },
-        { "@type": "Place", "name": "Rhône-Alpes" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-alpes.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": {
-        "@type": "Person",
-        "name": "Charly Coulardot"
-      }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage dans les Alpes",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-alpes.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Alpes", "item": "https://www.qualimaticproduction.fr/videaste-mariage-alpes.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-alpes.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Savoie"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Haute-Savoie"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Alpes"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Rhône-Alpes"
+        }
+      ],
+      "name" : "Vidéaste de mariage dans les Alpes",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-alpes.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-alpes.html",
+          "name" : "Vidéaste mariage Alpes",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Vous filmez des mariages dans les Alpes alors que vous êtes en Vallée de la Loire&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui. Je suis vidéaste de mariage à Romorantin-Lanthenay, en Vallée de la Loire, et je me déplace pour les mariages de destination, dans les Alpes comme ailleurs. En formule Signature, aucun frais de déplacement ne s'ajoute. En Élégance, le déplacement et l'hébergement sont annoncés en amont, au coût réel."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. Je suis vidéaste de mariage à Romorantin-Lanthenay, en Vallée de la Loire, et je me déplace pour les mariages de destination, dans les Alpes comme ailleurs. En formule Signature, aucun frais de déplacement ne s'ajoute. En Élégance, le déplacement et l'hébergement sont annoncés en amont, au coût réel."
+          },
+          "name" : "Vous filmez des mariages dans les Alpes alors que vous êtes en Vallée de la Loire&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Quelle saison choisir pour un mariage en montagne&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Deux fenêtres très différentes. L'été, de juin à septembre, donne des alpages verts, des lacs et des journées longues. L'hiver, en pleine saison de ski, donne la neige et une lumière franche. Le choix dépend du décor que vous voulez à l'image, et des contraintes d'accès pour vos invités."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Deux fenêtres très différentes. L'été, de juin à septembre, donne des alpages verts, des lacs et des journées longues. L'hiver, en pleine saison de ski, donne la neige et une lumière franche. Le choix dépend du décor que vous voulez à l'image, et des contraintes d'accès pour vos invités."
+          },
+          "name" : "Quelle saison choisir pour un mariage en montagne&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Le drone est-il autorisé pour filmer en montagne&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La montagne est très réglementée : certaines zones, comme le cœur du Parc national de la Vanoise, interdisent le survol motorisé sans dérogation, à demander en amont. Je suis télépilote certifié et je vérifie chaque vol avant de l'engager. Jamais de drone sans autorisation en règle."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "La montagne est très réglementée : certaines zones, comme le cœur du Parc national de la Vanoise, interdisent le survol motorisé sans dérogation, à demander en amont. Je suis télépilote certifié et je vérifie chaque vol avant de l'engager. Jamais de drone sans autorisation en règle."
+          },
+          "name" : "Le drone est-il autorisé pour filmer en montagne&nbsp;?"
         }
       ]
     }

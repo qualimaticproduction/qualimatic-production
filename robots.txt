@@ -27,18 +27,22 @@ Crawl-delay: 10
 User-agent: MJ12bot
 Disallow: /
 
-# Bots IA — autoriser uniquement les bots qui respectent l'usage légitime
+# Robots des moteurs IA : invités partout, sauf les espaces privés (un groupe nommé
+# ne reprend pas les règles de « * », d'où la répétition)
 User-agent: GPTBot
-Allow: /
-
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
 User-agent: PerplexityBot
-Allow: /
-
+User-agent: Perplexity-User
 User-agent: Google-Extended
-Allow: /
-
 User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Applebot-Extended
 Allow: /
+Disallow: /404.html
+Disallow: /seances/
+Disallow: /outils/
 
 # Sitemap
 Sitemap: https://www.qualimaticproduction.fr/sitemap.xml

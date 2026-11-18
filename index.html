@@ -28,65 +28,172 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": ["LocalBusiness", "ProfessionalService"],
-      "@id": "https://www.qualimaticproduction.fr/#business",
-      "name": "Qualimatic Production",
-      "alternateName": "Qualimatic",
-      "url": "https://www.qualimaticproduction.fr/",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "logo": "https://www.qualimaticproduction.fr/assets/logo-noir.png",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€",
-      "foundingDate": "2018",
-      "identifier": { "@type": "PropertyValue", "propertyID": "SIRET", "value": "90460672000012" },
-      "description": "Vidéaste en Vallée de la Loire, originaire de Besançon : films de mariage, films culinaires pour chefs et restaurants, films d’entreprise et reportages photo. Lumière travaillée, couleurs pensées pour durer.",
-      "founder": { "@id": "https://www.qualimaticproduction.fr/#charly" },
-      "address": { "@type": "PostalAddress", "streetAddress": "BP 20", "postalCode": "41200", "addressLocality": "Romorantin-Lanthenay", "addressRegion": "Centre-Val de Loire", "addressCountry": "FR" },
-      "geo": { "@type": "GeoCoordinates", "latitude": 47.358, "longitude": 1.7414 },
-      "areaServed": [
-        { "@type": "Place", "name": "Vallée de la Loire" },
-        { "@type": "AdministrativeArea", "name": "Centre-Val de Loire" },
-        { "@type": "AdministrativeArea", "name": "Loir-et-Cher" },
-        { "@type": "AdministrativeArea", "name": "Bourgogne-Franche-Comté" },
-        { "@type": "City", "name": "Besançon" },
-        { "@type": "Country", "name": "France" }
+      "@id" : "https://www.qualimaticproduction.fr/#business",
+      "@type" : [
+        "LocalBusiness",
+        "ProfessionalService"
       ],
-      "knowsLanguage": ["fr", "en"],
-      "sameAs": ["https://www.instagram.com/qualimatic_production", "https://www.youtube.com/@qualimatic9324"],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Films",
-        "itemListElement": [
-          { "@type": "Offer", "name": "Film de mariage, formule Élégance", "price": "2650", "priceCurrency": "EUR", "url": "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html", "itemOffered": { "@type": "Service", "name": "Film de mariage, formule Élégance" } },
-          { "@type": "Offer", "name": "Film de mariage, formule Signature", "price": "4000", "priceCurrency": "EUR", "url": "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html", "itemOffered": { "@type": "Service", "name": "Film de mariage, formule Signature" } },
-          { "@type": "Offer", "name": "Signature Chef, film culinaire de 60 secondes", "price": "1200", "priceCurrency": "EUR", "url": "https://www.qualimaticproduction.fr/culinaire.html", "itemOffered": { "@type": "Service", "name": "Film culinaire pour chefs et restaurants" } },
-          { "@type": "Offer", "name": "Film d’entreprise et reportage photo, sur devis", "url": "https://www.qualimaticproduction.fr/corporate.html", "itemOffered": { "@type": "Service", "name": "Film d’entreprise et film de marque" } }
-        ]
+      "address" : {
+        "@type" : "PostalAddress",
+        "addressCountry" : "FR",
+        "addressLocality" : "Romorantin-Lanthenay",
+        "addressRegion" : "Centre-Val de Loire",
+        "postalCode" : "41200",
+        "streetAddress" : "BP 20"
+      },
+      "alternateName" : "Qualimatic",
+      "areaServed" : [
+        {
+          "@type" : "Place",
+          "name" : "Vallée de la Loire"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Centre-Val de Loire"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Loir-et-Cher"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Bourgogne-Franche-Comté"
+        },
+        {
+          "@type" : "City",
+          "name" : "Besançon"
+        },
+        {
+          "@type" : "Country",
+          "name" : "France"
+        }
+      ],
+      "contactPoint" : {
+        "@type" : "ContactPoint",
+        "availableLanguage" : [
+          "fr",
+          "en"
+        ],
+        "contactType" : "customer service",
+        "email" : "qualimatic.production@gmail.com",
+        "telephone" : "+33771063218"
+      },
+      "description" : "Vidéaste en Vallée de la Loire, originaire de Besançon : films de mariage, films culinaires pour chefs et restaurants, films d’entreprise et reportages photo. Lumière travaillée, couleurs pensées pour durer.",
+      "email" : "qualimatic.production@gmail.com",
+      "founder" : {
+        "@id" : "https://www.qualimaticproduction.fr/#charly"
+      },
+      "foundingDate" : "2018",
+      "geo" : {
+        "@type" : "GeoCoordinates",
+        "latitude" : 47.358,
+        "longitude" : 1.7414
+      },
+      "hasMap" : "https://g.page/r/CSqpltxsOMflEBM",
+      "hasOfferCatalog" : {
+        "@type" : "OfferCatalog",
+        "itemListElement" : [
+          {
+            "@type" : "Offer",
+            "itemOffered" : {
+              "@type" : "Service",
+              "name" : "Film de mariage, formule Élégance"
+            },
+            "name" : "Film de mariage, formule Élégance",
+            "price" : "2650",
+            "priceCurrency" : "EUR",
+            "url" : "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html"
+          },
+          {
+            "@type" : "Offer",
+            "itemOffered" : {
+              "@type" : "Service",
+              "name" : "Film de mariage, formule Signature"
+            },
+            "name" : "Film de mariage, formule Signature",
+            "price" : "4000",
+            "priceCurrency" : "EUR",
+            "url" : "https://www.qualimaticproduction.fr/tarif-videaste-mariage.html"
+          },
+          {
+            "@type" : "Offer",
+            "itemOffered" : {
+              "@type" : "Service",
+              "name" : "Film culinaire pour chefs et restaurants"
+            },
+            "name" : "Signature Chef, film culinaire de 60 secondes",
+            "price" : "1200",
+            "priceCurrency" : "EUR",
+            "url" : "https://www.qualimaticproduction.fr/culinaire.html"
+          },
+          {
+            "@type" : "Offer",
+            "itemOffered" : {
+              "@type" : "Service",
+              "name" : "Film d’entreprise et film de marque"
+            },
+            "name" : "Film d’entreprise et reportage photo, sur devis",
+            "url" : "https://www.qualimaticproduction.fr/corporate.html"
+          }
+        ],
+        "name" : "Films"
+      },
+      "identifier" : {
+        "@type" : "PropertyValue",
+        "propertyID" : "SIRET",
+        "value" : "90460672000012"
+      },
+      "image" : "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
+      "knowsLanguage" : [
+        "fr",
+        "en"
+      ],
+      "logo" : "https://www.qualimaticproduction.fr/assets/logo-noir.png",
+      "name" : "Qualimatic Production",
+      "priceRange" : "€€€",
+      "sameAs" : [
+        "https://www.instagram.com/qualimatic_production",
+        "https://www.youtube.com/@qualimatic9324",
+        "https://g.page/r/CSqpltxsOMflEBM"
+      ],
+      "telephone" : "+33771063218",
+      "url" : "https://www.qualimaticproduction.fr/"
+    },
+    {
+      "@id" : "https://www.qualimaticproduction.fr/#charly",
+      "@type" : "Person",
+      "birthPlace" : {
+        "@type" : "Place",
+        "name" : "Besançon, Franche-Comté"
+      },
+      "homeLocation" : {
+        "@type" : "Place",
+        "name" : "Romorantin-Lanthenay, Vallée de la Loire"
+      },
+      "image" : "https://www.qualimaticproduction.fr/assets/charly-portrait.jpg",
+      "jobTitle" : "Réalisateur et vidéaste",
+      "name" : "Charly Coulardot",
+      "sameAs" : [
+        "https://www.instagram.com/qualimatic_production",
+        "https://www.youtube.com/@qualimatic9324"
+      ],
+      "url" : "https://www.qualimaticproduction.fr/about.html",
+      "worksFor" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       }
     },
     {
-      "@type": "Person",
-      "@id": "https://www.qualimaticproduction.fr/#charly",
-      "name": "Charly Coulardot",
-      "jobTitle": "Réalisateur et vidéaste",
-      "worksFor": { "@id": "https://www.qualimaticproduction.fr/#business" },
-      "birthPlace": { "@type": "Place", "name": "Besançon, Franche-Comté" },
-      "homeLocation": { "@type": "Place", "name": "Romorantin-Lanthenay, Vallée de la Loire" },
-      "image": "https://www.qualimaticproduction.fr/assets/charly-portrait.jpg",
-      "url": "https://www.qualimaticproduction.fr/about.html",
-      "sameAs": ["https://www.instagram.com/qualimatic_production", "https://www.youtube.com/@qualimatic9324"]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.qualimaticproduction.fr/#website",
-      "url": "https://www.qualimaticproduction.fr/",
-      "name": "Qualimatic Production",
-      "inLanguage": "fr-FR",
-      "publisher": { "@id": "https://www.qualimaticproduction.fr/#business" }
+      "@id" : "https://www.qualimaticproduction.fr/#website",
+      "@type" : "WebSite",
+      "inLanguage" : "fr-FR",
+      "name" : "Qualimatic Production",
+      "publisher" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "url" : "https://www.qualimaticproduction.fr/"
     }
   ]
 }

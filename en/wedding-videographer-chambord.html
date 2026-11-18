@@ -32,57 +32,90 @@
 <link rel="stylesheet" href="../styles-geo.css?v=20260707" />
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/en/wedding-videographer-chambord.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/en/wedding-videographer-chambord.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "knowsLanguage": ["en", "fr"],
-      "areaServed": [
-        { "@type": "Place", "name": "Château de Chambord" },
-        { "@type": "Place", "name": "Loire Valley" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chambord.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "en",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Wedding videographer at Château de Chambord .",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chambord.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.qualimaticproduction.fr/en/" },
-        { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://www.qualimaticproduction.fr/en/loire-valley-wedding-videographer.html" },
-        { "@type": "ListItem", "position": 3, "name": "Chambord", "item": "https://www.qualimaticproduction.fr/en/wedding-videographer-chambord.html" }
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chambord.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "Place",
+          "name" : "Château de Chambord"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Loire Valley"
+        }
+      ],
+      "name" : "Wedding videographer at Château de Chambord .",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Wedding videography",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chambord.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/",
+          "name" : "Home",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/loire-valley-wedding-videographer.html",
+          "name" : "Locations",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chambord.html",
+          "name" : "Chambord",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Can you get married at Château de Chambord?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The civil ceremony takes place at a town hall. The Domaine national de Chambord does host certain private events and shoots within its grounds, by prior agreement and under conditions. Spaces, terms and fees change from year to year, so the safest route is to contact their events office directly." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "The civil ceremony takes place at a town hall. The Domaine national de Chambord does host certain private events and shoots within its grounds, by prior agreement and under conditions. Spaces, terms and fees change from year to year, so the safest route is to contact their events office directly."
+          },
+          "name" : "Can you get married at Château de Chambord?"
         },
         {
-          "@type": "Question",
-          "name": "Are drones allowed for filming at Chambord?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Chambord is a protected site and any flight is strictly regulated, requiring a permit. I am a licensed drone pilot and handle the request in advance; I never fly without proper authorisation." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Chambord is a protected site and any flight is strictly regulated, requiring a permit. I am a licensed drone pilot and handle the request in advance; I never fly without proper authorisation."
+          },
+          "name" : "Are drones allowed for filming at Chambord?"
         },
         {
-          "@type": "Question",
-          "name": "When is the best season to film at Chambord?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Late spring and early autumn give the most cinematic light: soft sun, the park still green, and quieter crowds late in the day. Winter, rarer, gives images of great restraint." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Late spring and early autumn give the most cinematic light: soft sun, the park still green, and quieter crowds late in the day. Winter, rarer, gives images of great restraint."
+          },
+          "name" : "When is the best season to film at Chambord?"
         }
       ]
     }

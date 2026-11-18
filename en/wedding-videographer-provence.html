@@ -32,59 +32,98 @@
 <link rel="stylesheet" href="../styles-geo.css?v=20260707" />
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/en/wedding-videographer-provence.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/en/wedding-videographer-provence.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "knowsLanguage": ["en", "fr"],
-      "areaServed": [
-        { "@type": "Place", "name": "Provence" },
-        { "@type": "Place", "name": "Luberon" },
-        { "@type": "AdministrativeArea", "name": "Var" },
-        { "@type": "Country", "name": "France" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding-videographer-provence.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "en",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Provence wedding videographer .",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding-videographer-provence.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.qualimaticproduction.fr/en/" },
-        { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://www.qualimaticproduction.fr/en/loire-valley-wedding-videographer.html" },
-        { "@type": "ListItem", "position": 3, "name": "Provence", "item": "https://www.qualimaticproduction.fr/en/wedding-videographer-provence.html" }
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding-videographer-provence.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "Place",
+          "name" : "Provence"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Luberon"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Var"
+        },
+        {
+          "@type" : "Country",
+          "name" : "France"
+        }
+      ],
+      "name" : "Provence wedding videographer .",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Wedding videography",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding-videographer-provence.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/",
+          "name" : "Home",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/loire-valley-wedding-videographer.html",
+          "name" : "Locations",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/wedding-videographer-provence.html",
+          "name" : "Provence",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "When is the best time for a wedding in Provence?",
-          "acceptedAnswer": { "@type": "Answer", "text": "For lavender, mid-June to late July. To avoid the peak heat, May–June or September–October are gentler on guests while keeping beautiful light. August is stunning on screen but demanding for visitors travelling from the north." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "For lavender, mid-June to late July. To avoid the peak heat, May–June or September–October are gentler on guests while keeping beautiful light. August is stunning on screen but demanding for visitors travelling from the north."
+          },
+          "name" : "When is the best time for a wedding in Provence?"
         },
         {
-          "@type": "Question",
-          "name": "Do you travel to Provence from the Loire Valley?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. I am based in the Loire Valley and travel to Provence for destination weddings. The Signature package comes with no travel fees anywhere in mainland France. I won't pretend to know every domain in the Vaucluse by heart; what I bring is my craft and serious scouting before the day." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Yes. I am based in the Loire Valley and travel to Provence for destination weddings. The Signature package comes with no travel fees anywhere in mainland France. I won't pretend to know every domain in the Vaucluse by heart; what I bring is my craft and serious scouting before the day."
+          },
+          "name" : "Do you travel to Provence from the Loire Valley?"
         },
         {
-          "@type": "Question",
-          "name": "How do guests reach Provence?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Avignon TGV station is about 2h40 from Paris, with the Luberon roughly an hour's drive beyond. Marseille-Provence airport connects to Avignon by a short train, which suits guests flying in from abroad." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Avignon TGV station is about 2h40 from Paris, with the Luberon roughly an hour's drive beyond. Marseille-Provence airport connects to Avignon by a short train, which suits guests flying in from abroad."
+          },
+          "name" : "How do guests reach Provence?"
         }
       ]
     }

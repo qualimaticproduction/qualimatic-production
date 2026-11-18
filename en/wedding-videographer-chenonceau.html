@@ -32,58 +32,94 @@
 <link rel="stylesheet" href="../styles-geo.css?v=20260707" />
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/en/wedding-videographer-chenonceau.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/en/wedding-videographer-chenonceau.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "knowsLanguage": ["en", "fr"],
-      "areaServed": [
-        { "@type": "Place", "name": "Château de Chenonceau" },
-        { "@type": "AdministrativeArea", "name": "Indre-et-Loire" },
-        { "@type": "Place", "name": "Loire Valley" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chenonceau.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "en",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Wedding videographer at Château de Chenonceau .",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chenonceau.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.qualimaticproduction.fr/en/" },
-        { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://www.qualimaticproduction.fr/en/loire-valley-wedding-videographer.html" },
-        { "@type": "ListItem", "position": 3, "name": "Chenonceau", "item": "https://www.qualimaticproduction.fr/en/wedding-videographer-chenonceau.html" }
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chenonceau.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "Place",
+          "name" : "Château de Chenonceau"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Indre-et-Loire"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Loire Valley"
+        }
+      ],
+      "name" : "Wedding videographer at Château de Chenonceau .",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Wedding videography",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chenonceau.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/",
+          "name" : "Home",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/loire-valley-wedding-videographer.html",
+          "name" : "Locations",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/wedding-videographer-chenonceau.html",
+          "name" : "Chenonceau",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Can you get married at Château de Chenonceau?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The civil ceremony takes place at a town hall. Chenonceau is a privately owned château that opens certain spaces to private events under its own conditions. Receptions are often held in a nearby Touraine estate, with the château as a setting for the film. Confirm terms directly with the château's events team." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "The civil ceremony takes place at a town hall. Chenonceau is a privately owned château that opens certain spaces to private events under its own conditions. Receptions are often held in a nearby Touraine estate, with the château as a setting for the film. Confirm terms directly with the château's events team."
+          },
+          "name" : "Can you get married at Château de Chenonceau?"
         },
         {
-          "@type": "Question",
-          "name": "Where is Chenonceau and how do guests reach it?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Chenonceau is in Indre-et-Loire, in the Touraine, between Tours and Amboise. The village has its own small station (Chenonceaux), and the fastest route from Paris is the TGV to Saint-Pierre-des-Corps (about an hour), then a short drive. From my studio in Romorantin it is roughly an hour by road." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Chenonceau is in Indre-et-Loire, in the Touraine, between Tours and Amboise. The village has its own small station (Chenonceaux), and the fastest route from Paris is the TGV to Saint-Pierre-des-Corps (about an hour), then a short drive. From my studio in Romorantin it is roughly an hour by road."
+          },
+          "name" : "Where is Chenonceau and how do guests reach it?"
         },
         {
-          "@type": "Question",
-          "name": "What makes Chenonceau special to film?",
-          "acceptedAnswer": { "@type": "Answer", "text": "It is the only Loire château built across a river: the Grande Galerie spans the Cher itself. Reflections in the water, the formal gardens and the long tree-lined approach give a film a natural rhythm — you simply follow the place." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "It is the only Loire château built across a river: the Grande Galerie spans the Cher itself. Reflections in the water, the formal gardens and the long tree-lined approach give a film a natural rhythm — you simply follow the place."
+          },
+          "name" : "What makes Chenonceau special to film?"
         }
       ]
     }

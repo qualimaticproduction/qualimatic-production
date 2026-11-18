@@ -33,40 +33,99 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-sancerre.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-sancerre.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Sancerre" },
-        { "@type": "City", "name": "Bourges" },
-        { "@type": "AdministrativeArea", "name": "Cher" },
-        { "@type": "Place", "name": "Vallée de la Loire" }
-      ],
-      "address": { "@type": "PostalAddress", "streetAddress": "BP 20", "postalCode": "41200", "addressLocality": "Romorantin-Lanthenay", "addressRegion": "Centre-Val de Loire", "addressCountry": "FR" },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-sancerre.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Sancerre",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-sancerre.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Sancerre et Cher", "item": "https://www.qualimaticproduction.fr/videaste-mariage-sancerre.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-sancerre.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Sancerre"
+        },
+        {
+          "@type" : "City",
+          "name" : "Bourges"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Cher"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Vallée de la Loire"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Sancerre",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-sancerre.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-sancerre.html",
+          "name" : "Vidéaste mariage Sancerre et Cher",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Avez-vous déjà filmé à Sancerre ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. J’ai tourné un shooting de mariage aux Hauts de Sancerre. Le film est visible sur la page Mariage du site." } },
-        { "@type": "Question", "name": "Le déplacement est-il facturé pour un mariage dans le Cher ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Le Cher est en Centre-Val de Loire, ma région : le déplacement est offert dans les deux formules, Élégance comme Signature." } },
-        { "@type": "Question", "name": "Peut-on faire voler un drone au-dessus du vignoble ?", "acceptedAnswer": { "@type": "Answer", "text": "Souvent, mais jamais sans vérifier. Je suis télépilote certifié : je contrôle les zones de vol et je demande les autorisations en amont, avec l’accord du lieu de réception." } }
+      "@type" : "FAQPage",
+      "mainEntity" : [
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. J’ai tourné un shooting de mariage aux Hauts de Sancerre. Le film est visible sur la page Mariage du site."
+          },
+          "name" : "Avez-vous déjà filmé à Sancerre ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Non. Le Cher est en Centre-Val de Loire, ma région : le déplacement est offert dans les deux formules, Élégance comme Signature."
+          },
+          "name" : "Le déplacement est-il facturé pour un mariage dans le Cher ?"
+        },
+        {
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Souvent, mais jamais sans vérifier. Je suis télépilote certifié : je contrôle les zones de vol et je demande les autorisations en amont, avec l’accord du lieu de réception."
+          },
+          "name" : "Peut-on faire voler un drone au-dessus du vignoble ?"
+        }
       ]
     }
   ]

@@ -36,70 +36,98 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Courchevel" },
-        { "@type": "Place", "name": "Les Trois Vallées" },
-        { "@type": "Place", "name": "Tarentaise" },
-        { "@type": "AdministrativeArea", "name": "Savoie" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": {
-        "@type": "Person",
-        "name": "Charly Coulardot"
-      }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Courchevel",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Courchevel", "item": "https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Courchevel"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Les Trois Vallées"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Tarentaise"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Savoie"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Courchevel",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-courchevel.html",
+          "name" : "Vidéaste mariage Courchevel",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Comment vient-on à Courchevel&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La gare la plus proche est Moûtiers-Salins-Brides-les-Bains, à environ 25 km, soit 30 minutes de route. Côté aéroports : Chambéry est à environ 100 km, Genève à 130 km et Lyon à 180 km, soit environ 2h. La station dispose aussi d'un altiport en altitude, réservé aux pilotes expérimentés."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "La gare la plus proche est Moûtiers-Salins-Brides-les-Bains, à environ 25 km, soit 30 minutes de route. Côté aéroports : Chambéry est à environ 100 km, Genève à 130 km et Lyon à 180 km, soit environ 2h. La station dispose aussi d'un altiport en altitude, réservé aux pilotes expérimentés."
+          },
+          "name" : "Comment vient-on à Courchevel&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Courchevel est-il plutôt une destination d'hiver&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "C'est surtout connu comme station de ski, et l'hiver donne la neige et la lumière d'altitude. Mais Courchevel vit aussi l'été, dans un décor d'alpages plus vert et plus calme. Le choix dépend du décor souhaité et de l'accès pour les invités, plus simple à la belle saison."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "C'est surtout connu comme station de ski, et l'hiver donne la neige et la lumière d'altitude. Mais Courchevel vit aussi l'été, dans un décor d'alpages plus vert et plus calme. Le choix dépend du décor souhaité et de l'accès pour les invités, plus simple à la belle saison."
+          },
+          "name" : "Courchevel est-il plutôt une destination d'hiver&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Le drone est-il autorisé à Courchevel&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La montagne est très réglementée, et la présence d'un altiport ajoute des contraintes aériennes locales. Tout vol par drone demande une vérification préalable et, selon les zones, une autorisation. Je suis télépilote certifié et n'engage aucun vol sans accord en règle."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "La montagne est très réglementée, et la présence d'un altiport ajoute des contraintes aériennes locales. Tout vol par drone demande une vérification préalable et, selon les zones, une autorisation. Je suis télépilote certifié et n'engage aucun vol sans accord en règle."
+          },
+          "name" : "Le drone est-il autorisé à Courchevel&nbsp;?"
         }
       ]
     }

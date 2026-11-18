@@ -37,47 +37,70 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "Person",
-      "@id": "https://www.qualimaticproduction.fr/#charly",
-      "name": "Charly Coulardot",
-      "givenName": "Charly",
-      "familyName": "Coulardot",
-      "jobTitle": "Director & Cinematic Wedding Videographer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Qualimatic Production",
-        "url": "https://www.qualimaticproduction.fr/",
-        "@id": "https://www.qualimaticproduction.fr/#business"
+      "@id" : "https://www.qualimaticproduction.fr/en/about.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "image": "https://www.qualimaticproduction.fr/assets/charly-portrait.jpg",
-      "url": "https://www.qualimaticproduction.fr/en/about.html",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "inLanguage" : "en",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
       },
-      "knowsLanguage": ["French", "English"],
-      "knowsAbout": [
+      "name" : "About Charly Coulardot, wedding videographer",
+      "url" : "https://www.qualimaticproduction.fr/en/about.html"
+    },
+    {
+      "@id" : "https://www.qualimaticproduction.fr/#charly",
+      "@type" : "Person",
+      "address" : {
+        "@type" : "PostalAddress",
+        "addressCountry" : "FR",
+        "addressLocality" : "Romorantin-Lanthenay",
+        "addressRegion" : "Centre-Val de Loire"
+      },
+      "familyName" : "Coulardot",
+      "givenName" : "Charly",
+      "image" : "https://www.qualimaticproduction.fr/assets/charly-portrait.jpg",
+      "jobTitle" : "Director & Cinematic Wedding Videographer",
+      "knowsAbout" : [
         "Cinematic Wedding Videography",
         "Cinematic Wedding Films",
         "Color Grading",
         "Drone Cinematography",
         "Destination Wedding Films"
       ],
-      "sameAs": [
+      "knowsLanguage" : [
+        "French",
+        "English"
+      ],
+      "name" : "Charly Coulardot",
+      "sameAs" : [
         "https://www.instagram.com/qualimatic_production",
         "https://www.youtube.com/@qualimatic9324"
-      ]
+      ],
+      "url" : "https://www.qualimaticproduction.fr/en/about.html",
+      "worksFor" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      }
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.qualimaticproduction.fr/en/" },
-        { "@type": "ListItem", "position": 2, "name": "About", "item": "https://www.qualimaticproduction.fr/en/about.html" }
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/",
+          "name" : "Home",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/about.html",
+          "name" : "About",
+          "position" : 2
+        }
       ]
     }
   ]

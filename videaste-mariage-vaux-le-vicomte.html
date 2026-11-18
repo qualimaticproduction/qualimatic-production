@@ -36,57 +36,94 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-vaux-le-vicomte.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-vaux-le-vicomte.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "LandmarksOrHistoricalBuildings", "name": "Château de Vaux-le-Vicomte" },
-        { "@type": "AdministrativeArea", "name": "Seine-et-Marne" },
-        { "@type": "Place", "name": "Île-de-France" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-vaux-le-vicomte.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Vaux-le-Vicomte",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-vaux-le-vicomte.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Vaux-le-Vicomte", "item": "https://www.qualimaticproduction.fr/videaste-mariage-vaux-le-vicomte.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-vaux-le-vicomte.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "LandmarksOrHistoricalBuildings",
+          "name" : "Château de Vaux-le-Vicomte"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Seine-et-Marne"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Île-de-France"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Vaux-le-Vicomte",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-vaux-le-vicomte.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-vaux-le-vicomte.html",
+          "name" : "Vidéaste mariage Vaux-le-Vicomte",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Peut-on se marier à Vaux-le-Vicomte&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Le château de Vaux-le-Vicomte se privatise pour des événements et reçoit des mariages, avec ses jardins et ses dépendances. Le mariage civil se tient en mairie ; les conditions de privatisation, les capacités et les tarifs sont à voir directement avec le domaine." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. Le château de Vaux-le-Vicomte se privatise pour des événements et reçoit des mariages, avec ses jardins et ses dépendances. Le mariage civil se tient en mairie ; les conditions de privatisation, les capacités et les tarifs sont à voir directement avec le domaine."
+          },
+          "name" : "Peut-on se marier à Vaux-le-Vicomte&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Qu'est-ce que les soirées aux chandelles&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Pendant la belle saison, le château organise des soirées où les jardins et les façades sont éclairés à la bougie. C'est une lumière très particulière, douce et mouvante, qui change tout pour un film de fin de journée." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Pendant la belle saison, le château organise des soirées où les jardins et les façades sont éclairés à la bougie. C'est une lumière très particulière, douce et mouvante, qui change tout pour un film de fin de journée."
+          },
+          "name" : "Qu'est-ce que les soirées aux chandelles&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Vous déplacez-vous depuis la Loire&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui, je me déplace pour les mariages de destination. Vaux-le-Vicomte est à environ 2h30 de mon atelier de Romorantin, et la formule Signature est sans frais de déplacement." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui, je me déplace pour les mariages de destination. Vaux-le-Vicomte est à environ 2h30 de mon atelier de Romorantin, et la formule Signature est sans frais de déplacement."
+          },
+          "name" : "Vous déplacez-vous depuis la Loire&nbsp;?"
         }
       ]
     }

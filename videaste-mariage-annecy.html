@@ -36,69 +36,94 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-annecy.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-annecy.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "City", "name": "Annecy" },
-        { "@type": "Place", "name": "Lac d'Annecy" },
-        { "@type": "AdministrativeArea", "name": "Haute-Savoie" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-annecy.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": {
-        "@type": "Person",
-        "name": "Charly Coulardot"
-      }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage à Annecy",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-annecy.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Annecy", "item": "https://www.qualimaticproduction.fr/videaste-mariage-annecy.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-annecy.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Annecy"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Lac d'Annecy"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Haute-Savoie"
+        }
+      ],
+      "name" : "Vidéaste de mariage à Annecy",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-annecy.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-annecy.html",
+          "name" : "Vidéaste mariage Annecy",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Annecy est-il facile d'accès pour les invités&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, c'est l'une des destinations alpines les plus simples. Annecy a une gare TGV reliée à Paris en environ 3h45, l'aéroport de Genève est à 45 km (environ 45 min en voiture), et le Léman Express met Genève à 1h30 en train. Lyon est à environ 2h en train."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui, c'est l'une des destinations alpines les plus simples. Annecy a une gare TGV reliée à Paris en environ 3h45, l'aéroport de Genève est à 45 km (environ 45 min en voiture), et le Léman Express met Genève à 1h30 en train. Lyon est à environ 2h en train."
+          },
+          "name" : "Annecy est-il facile d'accès pour les invités&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Quelle saison pour un mariage au lac d'Annecy&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L'été et le début de l'automne. De juin à septembre, le lac, ses rives et les montagnes autour offrent les plus belles lumières, et les journées sont longues. C'est la fenêtre la plus demandée pour un mariage au bord de l'eau."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "L'été et le début de l'automne. De juin à septembre, le lac, ses rives et les montagnes autour offrent les plus belles lumières, et les journées sont longues. C'est la fenêtre la plus demandée pour un mariage au bord de l'eau."
+          },
+          "name" : "Quelle saison pour un mariage au lac d'Annecy&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Venez-vous de la Vallée de la Loire jusqu'à Annecy&nbsp;?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui. Je suis vidéaste de mariage en Vallée de la Loire et je me déplace au lac d'Annecy pour les couples qui ont choisi cette destination. En formule Signature, aucun frais de déplacement ne s'ajoute. En Élégance, le déplacement et l'hébergement sont annoncés en amont, au coût réel."
-          }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui. Je suis vidéaste de mariage en Vallée de la Loire et je me déplace au lac d'Annecy pour les couples qui ont choisi cette destination. En formule Signature, aucun frais de déplacement ne s'ajoute. En Élégance, le déplacement et l'hébergement sont annoncés en amont, au coût réel."
+          },
+          "name" : "Venez-vous de la Vallée de la Loire jusqu'à Annecy&nbsp;?"
         }
       ]
     }

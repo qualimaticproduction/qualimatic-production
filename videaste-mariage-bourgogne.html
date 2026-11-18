@@ -36,58 +36,98 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "areaServed": [
-        { "@type": "AdministrativeArea", "name": "Bourgogne" },
-        { "@type": "City", "name": "Beaune" },
-        { "@type": "City", "name": "Dijon" },
-        { "@type": "Country", "name": "France" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "fr-FR",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Vidéaste de mariage en Bourgogne",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.qualimaticproduction.fr/" },
-        { "@type": "ListItem", "position": 2, "name": "Mariage", "item": "https://www.qualimaticproduction.fr/mariage.html" },
-        { "@type": "ListItem", "position": 3, "name": "Vidéaste mariage Bourgogne", "item": "https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html" }
+      "@id" : "https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Bourgogne"
+        },
+        {
+          "@type" : "City",
+          "name" : "Beaune"
+        },
+        {
+          "@type" : "City",
+          "name" : "Dijon"
+        },
+        {
+          "@type" : "Country",
+          "name" : "France"
+        }
+      ],
+      "name" : "Vidéaste de mariage en Bourgogne",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Vidéaste de mariage",
+      "url" : "https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/",
+          "name" : "Accueil",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/mariage.html",
+          "name" : "Mariage",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/videaste-mariage-bourgogne.html",
+          "name" : "Vidéaste mariage Bourgogne",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Où se marier en Bourgogne&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "La Bourgogne offre surtout des domaines viticoles et des châteaux, le long de la Côte de Nuits et de la Côte de Beaune, ainsi que quelques abbayes et demeures historiques. Le mariage civil se tient en mairie ; chaque domaine a ses propres conditions de privatisation, à voir directement avec lui." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "La Bourgogne offre surtout des domaines viticoles et des châteaux, le long de la Côte de Nuits et de la Côte de Beaune, ainsi que quelques abbayes et demeures historiques. Le mariage civil se tient en mairie ; chaque domaine a ses propres conditions de privatisation, à voir directement avec lui."
+          },
+          "name" : "Où se marier en Bourgogne&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Comment rejoindre la Bourgogne viticole&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Dijon est à environ 1h40 de Paris en TGV ; Beaune, cœur du vignoble, est juste au sud. Pour des invités venus de loin, l'aéroport de Lyon-Saint-Exupéry est à un peu plus d'une heure de route au sud de Beaune." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Dijon est à environ 1h40 de Paris en TGV ; Beaune, cœur du vignoble, est juste au sud. Pour des invités venus de loin, l'aéroport de Lyon-Saint-Exupéry est à un peu plus d'une heure de route au sud de Beaune."
+          },
+          "name" : "Comment rejoindre la Bourgogne viticole&nbsp;?"
         },
         {
-          "@type": "Question",
-          "name": "Vous déplacez-vous depuis la Loire&nbsp;?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui, je me déplace pour les mariages de destination, sans frais de déplacement. Je ne prétends pas connaître chaque climat de la Côte ; ce que j'apporte, c'est ma manière de filmer et un repérage sérieux avant le jour J." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Oui, je me déplace pour les mariages de destination, sans frais de déplacement. Je ne prétends pas connaître chaque climat de la Côte ; ce que j'apporte, c'est ma manière de filmer et un repérage sérieux avant le jour J."
+          },
+          "name" : "Vous déplacez-vous depuis la Loire&nbsp;?"
         }
       ]
     }

@@ -32,58 +32,94 @@
 <link rel="stylesheet" href="../styles-geo.css?v=20260707" />
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context" : "https://schema.org",
+  "@graph" : [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://www.qualimaticproduction.fr/en/wedding-videographer-amboise.html#business",
-      "name": "Qualimatic Production",
-      "image": "https://www.qualimaticproduction.fr/assets/og-cover.jpg",
-      "url": "https://www.qualimaticproduction.fr/en/wedding-videographer-amboise.html",
-      "email": "qualimatic.production@gmail.com",
-      "telephone": "+33771063218",
-      "priceRange": "€€€€",
-      "knowsLanguage": ["en", "fr"],
-      "areaServed": [
-        { "@type": "City", "name": "Amboise" },
-        { "@type": "AdministrativeArea", "name": "Indre-et-Loire" },
-        { "@type": "Place", "name": "Loire Valley" }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "BP 20",
-        "postalCode": "41200",
-        "addressLocality": "Romorantin-Lanthenay",
-        "addressRegion": "Centre-Val de Loire",
-        "addressCountry": "FR"
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding-videographer-amboise.html#page",
+      "@type" : "WebPage",
+      "about" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
       },
-      "founder": { "@type": "Person", "name": "Charly Coulardot" }
+      "inLanguage" : "en",
+      "isPartOf" : {
+        "@id" : "https://www.qualimaticproduction.fr/#website"
+      },
+      "name" : "Wedding videographer in Amboise .",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding-videographer-amboise.html"
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.qualimaticproduction.fr/en/" },
-        { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://www.qualimaticproduction.fr/en/loire-valley-wedding-videographer.html" },
-        { "@type": "ListItem", "position": 3, "name": "Amboise", "item": "https://www.qualimaticproduction.fr/en/wedding-videographer-amboise.html" }
+      "@id" : "https://www.qualimaticproduction.fr/en/wedding-videographer-amboise.html#service",
+      "@type" : "Service",
+      "areaServed" : [
+        {
+          "@type" : "City",
+          "name" : "Amboise"
+        },
+        {
+          "@type" : "AdministrativeArea",
+          "name" : "Indre-et-Loire"
+        },
+        {
+          "@type" : "Place",
+          "name" : "Loire Valley"
+        }
+      ],
+      "name" : "Wedding videographer in Amboise .",
+      "provider" : {
+        "@id" : "https://www.qualimaticproduction.fr/#business"
+      },
+      "serviceType" : "Wedding videography",
+      "url" : "https://www.qualimaticproduction.fr/en/wedding-videographer-amboise.html"
+    },
+    {
+      "@type" : "BreadcrumbList",
+      "itemListElement" : [
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/",
+          "name" : "Home",
+          "position" : 1
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/loire-valley-wedding-videographer.html",
+          "name" : "Locations",
+          "position" : 2
+        },
+        {
+          "@type" : "ListItem",
+          "item" : "https://www.qualimaticproduction.fr/en/wedding-videographer-amboise.html",
+          "name" : "Amboise",
+          "position" : 3
+        }
       ]
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@type" : "FAQPage",
+      "mainEntity" : [
         {
-          "@type": "Question",
-          "name": "Can you get married at the Royal Château of Amboise?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The Royal Château of Amboise is run by a foundation and does not host private weddings in the usual sense, though it opens certain spaces to events and shoots under conditions. The wedding itself takes place at a town hall, with the reception in a nearby private estate; the château remains a setting for the film." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "The Royal Château of Amboise is run by a foundation and does not host private weddings in the usual sense, though it opens certain spaces to events and shoots under conditions. The wedding itself takes place at a town hall, with the reception in a nearby private estate; the château remains a setting for the film."
+          },
+          "name" : "Can you get married at the Royal Château of Amboise?"
         },
         {
-          "@type": "Question",
-          "name": "How do guests reach Amboise from Paris?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Amboise has its own station, about twenty minutes from Tours by regional train. The fastest route is the TGV to Saint-Pierre-des-Corps, roughly an hour from Paris-Montparnasse, then a short connection. Some services link Amboise directly to Paris." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "Amboise has its own station, about twenty minutes from Tours by regional train. The fastest route is the TGV to Saint-Pierre-des-Corps, roughly an hour from Paris-Montparnasse, then a short connection. Some services link Amboise directly to Paris."
+          },
+          "name" : "How do guests reach Amboise from Paris?"
         },
         {
-          "@type": "Question",
-          "name": "Is there a travel fee for Amboise?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. Amboise is in the Touraine, within my home region. From my studio in Romorantin it is about an hour by road, and no travel fee applies for a wedding in the Loire Valley." }
+          "@type" : "Question",
+          "acceptedAnswer" : {
+            "@type" : "Answer",
+            "text" : "No. Amboise is in the Touraine, within my home region. From my studio in Romorantin it is about an hour by road, and no travel fee applies for a wedding in the Loire Valley."
+          },
+          "name" : "Is there a travel fee for Amboise?"
         }
       ]
     }
